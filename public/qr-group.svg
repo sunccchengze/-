@@ -1,0 +1,14 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="招新群二维码占位符">
+  <rect width="120" height="120" rx="8" fill="#FAF8F5"/>
+  <rect x="12" y="12" width="28" height="28" fill="#3E3E3E"/>
+  <rect x="18" y="18" width="16" height="16" fill="#FAF8F5"/>
+  <rect x="22" y="22" width="8" height="8" fill="#3E3E3E"/>
+  <rect x="80" y="12" width="28" height="28" fill="#3E3E3E"/>
+  <rect x="86" y="18" width="16" height="16" fill="#FAF8F5"/>
+  <rect x="90" y="22" width="8" height="8" fill="#3E3E3E"/>
+  <rect x="12" y="80" width="28" height="28" fill="#3E3E3E"/>
+  <rect x="18" y="86" width="16" height="16" fill="#FAF8F5"/>
+  <rect x="22" y="90" width="8" height="8" fill="#3E3E3E"/>
+  <path d="M50 14H66V22H50V14ZM70 14H78V30H70V14ZM50 30H58V38H50V30ZM62 34H78V42H62V34ZM46 46H62V54H46V46ZM66 46H74V62H66V46ZM78 46H86V54H78V46ZM94 46H106V54H94V46ZM50 62H58V78H50V62ZM62 66H70V74H62V66ZM78 62H86V78H78V62ZM90 62H106V70H90V62ZM46 86H54V94H46V86ZM58 82H74V90H58V82ZM78 86H94V94H78V86ZM98 82H106V90H98V82ZM50 102H66V110H50V102ZM70 98H78V110H70V98ZM82 102H90V110H82V102ZM94 98H106V110H94V98Z" fill="#8A6A2E"/>
+  <circle cx="60" cy="60" r="16" fill="#D4A5A5" fill-opacity="0.24"/>
+</svg>

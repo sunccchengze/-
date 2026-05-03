@@ -1,0 +1,14 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="报名表二维码占位符">
+  <rect width="120" height="120" rx="8" fill="#FAF8F5"/>
+  <rect x="12" y="12" width="28" height="28" fill="#3E3E3E"/>
+  <rect x="18" y="18" width="16" height="16" fill="#FAF8F5"/>
+  <rect x="22" y="22" width="8" height="8" fill="#3E3E3E"/>
+  <rect x="80" y="12" width="28" height="28" fill="#3E3E3E"/>
+  <rect x="86" y="18" width="16" height="16" fill="#FAF8F5"/>
+  <rect x="90" y="22" width="8" height="8" fill="#3E3E3E"/>
+  <rect x="12" y="80" width="28" height="28" fill="#3E3E3E"/>
+  <rect x="18" y="86" width="16" height="16" fill="#FAF8F5"/>
+  <rect x="22" y="90" width="8" height="8" fill="#3E3E3E"/>
+  <path d="M50 14H58V22H50V14ZM62 14H70V22H62V14ZM50 26H70V34H50V26ZM46 46H54V54H46V46ZM58 46H66V54H58V46ZM70 46H78V54H70V46ZM86 50H94V58H86V50ZM98 50H106V58H98V50ZM46 62H62V70H46V62ZM66 62H74V78H66V62ZM82 66H90V74H82V66ZM94 66H106V74H94V66ZM50 82H58V90H50V82ZM62 82H70V90H62V82ZM74 82H82V106H74V82ZM86 82H94V90H86V82ZM98 82H106V106H98V82ZM46 98H54V106H46V98ZM58 98H70V106H58V98Z" fill="#8A6A2E"/>
+  <rect x="45" y="45" width="30" height="30" rx="6" fill="#E09F5C" fill-opacity="0.18"/>
+</svg>
