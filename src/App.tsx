@@ -1225,9 +1225,9 @@ function Footer() {
           </div>
         </div>
         <div className="mt-16 space-y-2 border-t border-white/10 pt-8 text-center text-xs text-white/60">
-          <p>© 2025 西安交通大学英仔爱心社 · 校级五星级公益社团 · 保留所有权利</p>
+          <p>© 2026 西安交通大学英仔爱心社 · 校级五星级公益社团 · 保留所有权利</p>
           <p>有任何问题欢迎随时在微信公众号与我们沟通！</p>
-          <p>西安交通大学 英仔爱心社 宣传部 孙承泽 制作</p>
+          <p>宣传部制作 SCZ的demo版本</p>
         </div>
       </div>
     </footer>
