@@ -15,4 +15,5 @@ export { FAQ } from "./FAQ";
 export { Footer } from "./Footer";
 export { FloatingChrome } from "./FloatingChrome";
 export { ScrollProgress } from "./ScrollProgress";
+export { EagleMascot } from "./EagleMascot";
 export { HonorMarquee } from "./HonorMarquee";

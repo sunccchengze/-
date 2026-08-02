@@ -204,6 +204,10 @@ export const IMG_第11页背景 = "/images/第3页背景.jpg";
 //  后续大合影和第十六届社长团合影按 QUESTIONS.md 的文件名替换即可。
 // ─────────────────────────────────────────────────────────────
 
+export const IMG_小鹰正面 = "/images/mascot/eagle-front.png";
+export const IMG_小鹰侧面 = "/images/mascot/eagle-side.png";
+export const IMG_小鹰背面 = "/images/mascot/eagle-back.png";
+
 export const HERO_V2PRO_SLIDES = [
   { src: IMG_暑期_玉树, title: "雪域相逢", line: "雪域相逢，共绽格桑", detail: "玉树支教团 · 高原课堂" },
   { src: IMG_暑期_知行秦川, title: "知行秦川", line: "文浸秦川，笃学寻光", detail: "周至 / 彬州 · 暑期课堂" },

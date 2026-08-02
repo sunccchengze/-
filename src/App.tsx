@@ -1,6 +1,7 @@
 import {
   About,
   Departments,
+  EagleMascot,
   FAQ,
   FloatingChrome,
   Footer,
@@ -54,6 +55,7 @@ export default function App() {
         <FAQ />
       </main>
       <Footer />
+      <EagleMascot />
       <FloatingChrome />
     </>
   );

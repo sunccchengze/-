@@ -677,3 +677,65 @@ button {
     background: rgba(250, 246, 243, 0.8);
   }
 }
+
+/* —— 英仔小鹰网页宠物 —— */
+.eagle-mascot {
+  pointer-events: none;
+}
+
+.eagle-mascot > * {
+  pointer-events: auto;
+}
+
+.eagle-pet {
+  animation: eagleFloat 3.6s ease-in-out infinite;
+  filter: drop-shadow(0 10px 12px rgba(54, 31, 17, 0.2));
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+.eagle-pet:hover {
+  animation-play-state: paused;
+  filter: drop-shadow(0 14px 18px rgba(54, 31, 17, 0.28));
+  transform: translateY(-3px) rotate(-2deg);
+}
+
+.eagle-pet-image {
+  transform-origin: bottom center;
+}
+
+.eagle-speech::after {
+  position: absolute;
+  right: -7px;
+  bottom: 24px;
+  width: 14px;
+  height: 14px;
+  content: "";
+  border-right: 1px solid rgba(178, 90, 85, 0.15);
+  border-top: 1px solid rgba(178, 90, 85, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+  transform: rotate(45deg);
+}
+
+@keyframes eagleFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@media (max-width: 639px) {
+  .eagle-speech::after {
+    right: 17px;
+    bottom: -7px;
+    transform: rotate(135deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eagle-pet {
+    animation: none !important;
+  }
+}
