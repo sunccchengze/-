@@ -5,15 +5,21 @@ import { joinCta, joinSteps } from "../content";
 
 export function JoinCTA() {
   const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState("");
 
   const copyGroupNumber = async () => {
     try {
       await navigator.clipboard.writeText(QQ_招新群号);
       setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
+      setCopyStatus("招新 QQ 群号已复制");
+      window.setTimeout(() => {
+        setCopied(false);
+        setCopyStatus("");
+      }, 1800);
     } catch {
       // 浏览器不允许剪贴板时，群号仍以可见文本方式呈现，用户可手动复制。
       setCopied(false);
+      setCopyStatus("未能自动复制，可长按群号手动复制");
     }
   };
 
@@ -94,7 +100,10 @@ export function JoinCTA() {
           </motion.div>
         </div>
 
-        <p className="mt-10 text-sm text-white/70">{joinCta.footnote}</p>
+        <p className="mt-4 min-h-5 text-sm text-white/80" aria-live="polite" role="status">
+          {copyStatus}
+        </p>
+        <p className="mt-6 text-sm text-white/70">{joinCta.footnote}</p>
       </div>
     </section>
   );

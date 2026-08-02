@@ -11,18 +11,12 @@ export function FlippingQRBlock({ qrSrc, label }: { qrSrc: string; label: string
   const [flipped, setFlipped] = useState(false);
 
   return (
-    <div
-      className="perspective-1000 relative h-[164px] w-[120px] cursor-pointer"
-      onClick={() => setFlipped(!flipped)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          setFlipped((v) => !v);
-        }
-      }}
-      role="button"
-      tabIndex={0}
+    <button
+      type="button"
+      className="focus-ring perspective-1000 relative h-[164px] w-[120px] cursor-pointer rounded-xl text-left"
+      onClick={() => setFlipped((v) => !v)}
       aria-label="点击翻转查看QQ招新群号"
+      aria-pressed={flipped}
     >
       <motion.div
         className="preserve-3d relative h-full w-full"
@@ -59,7 +53,7 @@ export function FlippingQRBlock({ qrSrc, label }: { qrSrc: string; label: string
           </p>
         </div>
       </motion.div>
-    </div>
+    </button>
   );
 }
 
