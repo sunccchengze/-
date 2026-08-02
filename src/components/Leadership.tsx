@@ -4,7 +4,7 @@ import { leadership } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
 export function Leadership() {
-  const { presidentMessage, advisor, core } = leadership;
+  const { presidentMessage, advisor, core, coreTitle, advisorNote } = leadership;
 
   return (
     <section id="team" className="bg-shell section-block">
@@ -43,7 +43,7 @@ export function Leadership() {
             </footer>
           </motion.article>
 
-          {/* 指导老师 + 骨干 */}
+          {/* 指导老师 + 社长团 */}
           <div className="flex flex-col gap-6">
             <motion.div
               className="glass-panel rounded-[24px] p-6 md:p-7"
@@ -63,6 +63,7 @@ export function Leadership() {
               </div>
               <p className="mt-5 font-serif-cn text-2xl font-bold text-rouge-deep">{advisor.name}</p>
               <p className="mt-1 text-sm text-muted">{advisor.title}</p>
+              {advisorNote ? <p className="mt-3 text-xs leading-5 text-muted">{advisorNote}</p> : null}
             </motion.div>
 
             <motion.div
@@ -72,19 +73,23 @@ export function Leadership() {
               viewport={{ once: true }}
               transition={{ delay: 0.14, duration: 0.55 }}
             >
-              <p className="text-xs font-bold tracking-[0.2em] text-rouge">CORE TEAM · 本届骨干</p>
-              <ul className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+              <p className="text-xs font-bold tracking-[0.2em] text-rouge">
+                TEAM · {coreTitle ?? "社长团成员"}
+              </p>
+              <ul className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 {core.map((person) => (
                   <li
                     key={`${person.name}-${person.role}`}
-                    className="rounded-xl bg-white/70 px-3 py-2.5 ring-1 ring-rouge/10"
+                    className="flex items-baseline justify-between gap-2 rounded-xl bg-white/70 px-3 py-2.5 ring-1 ring-rouge/10"
                   >
-                    <p className="font-serif-cn text-sm font-bold text-ink">{person.name}</p>
-                    <p className="mt-0.5 text-[11px] leading-4 text-muted">{person.role}</p>
+                    <span className="shrink-0 text-xs leading-4 text-muted">{person.role}</span>
+                    <span className="font-serif-cn text-sm font-bold text-ink">{person.name}</span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-xs leading-5 text-muted">名单摘自本学年材料 · 不展示私人联系方式</p>
+              <p className="mt-4 text-xs leading-5 text-muted">
+                第十六届社长团 · 换届推送定稿 · 不展示私人联系方式
+              </p>
             </motion.div>
           </div>
         </div>

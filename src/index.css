@@ -211,27 +211,29 @@ button {
   transform: scaleX(1);
 }
 
-/* —— Hero 毛玻璃高亮 —— */
+/* —— Hero 信息胶囊：更克制、正式（弱化「产品标签」感） —— */
 .glass-highlight {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  min-height: 48px;
-  padding: 16px 32px;
+  min-height: 44px;
+  padding: 12px 22px;
   color: rgba(255, 255, 255, 0.96);
-  font-size: 17px;
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  border-radius: 9999px; /* 极致圆角，设计感强，类似高端产品标签 */
-  background: rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(14px) saturate(1.1);
-  -webkit-backdrop-filter: blur(14px) saturate(1.1);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  transition: transform 0.3s ease, background 0.3s ease;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 12px;
+  background: rgba(20, 12, 10, 0.42);
+  backdrop-filter: blur(12px) saturate(1.05);
+  -webkit-backdrop-filter: blur(12px) saturate(1.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
 
 .glass-highlight:hover {
-  transform: translateY(-3px);
-  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(28, 16, 14, 0.55);
 }
 
 /* —— 通用毛玻璃面板 —— */
@@ -475,12 +477,7 @@ button {
   border: 1px solid rgba(178, 90, 85, 0.16);
 }
 
-/* 信任条在 Hero 上的悬浮层次 */
-#top + section .glass-panel {
-  box-shadow:
-    0 16px 48px rgba(40, 20, 20, 0.12),
-    0 1px 0 rgba(255, 255, 255, 0.85) inset;
-}
+
 
 
 

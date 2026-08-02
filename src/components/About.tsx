@@ -1,9 +1,26 @@
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 import { IMG_第2页背景, IMG_公益活动剪影 as galleryImages } from "../config";
 import { about } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
 const fadeUp = { hidden: { opacity: 0, y: 36 }, visible: { opacity: 1, y: 0 } };
+
+/** 将 **关键词** 渲染为强调样式 */
+function renderEmphasized(text: string): ReactNode[] {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    const m = part.match(/^\*\*([^*]+)\*\*$/);
+    if (m) {
+      return (
+        <strong key={i} className="font-serif-cn font-bold text-rouge-deep">
+          {m[1]}
+        </strong>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
 
 export function About() {
   return (
@@ -25,9 +42,7 @@ export function About() {
           transition={{ duration: 0.75 }}
         >
           {about.paragraphs.map((p, i) => (
-            <p key={i} className={i === 0 ? "first-letter:font-serif-cn first-letter:text-rouge-deep" : undefined}>
-              {p}
-            </p>
+            <p key={i}>{renderEmphasized(p)}</p>
           ))}
         </motion.div>
 

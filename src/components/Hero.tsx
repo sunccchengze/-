@@ -26,8 +26,8 @@ export function Hero() {
           src={heroSlides[currentSlide]}
           alt=""
           className="absolute inset-0 -z-[3] h-full w-full object-cover"
-          initial={{ opacity: 0, scale: 1.04 }}
-          animate={{ opacity: 0.92, scale: 1 }}
+          initial={{ opacity: 0, scale: 1.03 }}
+          animate={{ opacity: 0.78, scale: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.1, ease: "easeInOut" }}
           fetchPriority={currentSlide === 0 ? "high" : "auto"}
@@ -35,8 +35,11 @@ export function Hero() {
         />
       </AnimatePresence>
 
-      <div className="absolute inset-0 -z-[1] bg-[linear-gradient(180deg,rgba(33,20,18,0.15)_0%,rgba(33,20,18,0.2)_35%,rgba(51,28,24,0.55)_66%,rgba(30,18,16,0.82)_100%)]" />
-      <div className="absolute inset-0 -z-[1] bg-[radial-gradient(circle_at_50%_-10%,rgba(0,0,0,0.28),transparent_42%),radial-gradient(circle_at_-10%_50%,rgba(0,0,0,0.22),transparent_38%),radial-gradient(circle_at_110%_50%,rgba(0,0,0,0.22),transparent_38%)]" />
+      {/* 加深蒙版：压住轮播杂讯，保证标题与按钮清晰可读、观感更正式 */}
+      <div className="absolute inset-0 -z-[1] bg-[linear-gradient(180deg,rgba(28,16,14,0.55)_0%,rgba(28,16,14,0.42)_28%,rgba(36,20,18,0.62)_58%,rgba(22,12,10,0.88)_100%)]" />
+      <div className="absolute inset-0 -z-[1] bg-[radial-gradient(circle_at_50%_40%,rgba(0,0,0,0.12),transparent_55%),radial-gradient(circle_at_50%_-10%,rgba(0,0,0,0.45),transparent_48%),radial-gradient(circle_at_-10%_50%,rgba(0,0,0,0.32),transparent_40%),radial-gradient(circle_at_110%_50%,rgba(0,0,0,0.32),transparent_40%)]" />
+      {/* 轻微暗角 + 底部过渡到下一屏，避免信任条卡在「图/图交界」 */}
+      <div className="absolute inset-x-0 bottom-0 -z-[1] h-40 bg-gradient-to-t from-[#FAF6F3] via-[#FAF6F3]/85 to-transparent" />
 
       <div
         className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 gap-2"
@@ -117,7 +120,7 @@ export function Hero() {
         </motion.p>
 
         <motion.div
-          className="mx-auto mt-12 flex max-w-4xl flex-col items-center justify-center gap-4 md:flex-row md:gap-6"
+          className="mx-auto mt-12 flex max-w-4xl flex-col items-center justify-center gap-3 md:flex-row md:gap-4"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.75 }}
@@ -161,7 +164,7 @@ export function Hero() {
         className="absolute bottom-16 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-xs tracking-[0.2em] text-white/70"
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-        aria-label="向下滚动到关于我们"
+        aria-label="向下滚动了解更多"
       >
         <span aria-hidden="true">SCROLL</span>
         <ArrowDown className="h-4 w-4" aria-hidden="true" />
