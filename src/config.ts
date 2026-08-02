@@ -1,6 +1,6 @@
 /**
  * ============================================================
- *  英仔爱心社 2025 招新官网 —— 统一配置文件
+ *  英仔爱心社招新官网 —— 统一配置文件
  * ============================================================
  *
  *  ✅ 所有图片路径和链接都集中在这个文件里
@@ -15,6 +15,9 @@
 // ─────────────────────────────────────────────
 //  一、核心链接
 // ─────────────────────────────────────────────
+
+/** 正式上线域名（Cloudflare Pages）—— 分享/OG/JSON-LD 用 */
+export const SITE_URL = "https://yzaxs-1.pages.dev";
 
 /** 立即报名链接（出现在：顶部导航、封面页主按钮、加入我们模块、移动端菜单） */
 export const LINK_报名 = "https://f.wps.cn/g/1AxxMyao/";
@@ -76,8 +79,11 @@ export const IMG_报名二维码 = "/images/报名二维码.png";
 /** 招新群二维码（用于：页脚翻转卡片正面） */
 export const IMG_招新群二维码 = "/images/招新群二维码.png";
 
-/** 招新群QQ群号（用于：翻转卡片反面显示的群号文字） */
-export const QQ_招新群号 = "123456789";
+/**
+ * 招新群QQ群号（用于：翻转卡片反面）
+ * 更新：2026-08 招新季
+ */
+export const QQ_招新群号 = "712079220";
 
 // ─────────────────────────────────────────────
 //  五、封面页轮播背景图（共5张）
@@ -160,15 +166,34 @@ export const IMG_四大理由 = [
 ];
 
 // ─────────────────────────────────────────────
-//  九、各部门卡片封面图（共9张）
+//  九、各部门卡片封面图
+//  替换真实照片时保持文件名即可生效
 // ─────────────────────────────────────────────
 
 export const IMG_常务部 = "/images/常务部.jpg";
 export const IMG_交流部 = "/images/交流部.jpg";
 export const IMG_宣传部 = "/images/宣传部.jpg";
+/** @deprecated 品牌线旧图；前卫/洩湖可分别替换 */
 export const IMG_大手拉小手 = "/images/大手拉小手.jpg";
+export const IMG_前卫部 = "/images/前卫部.jpg";
+export const IMG_洩湖部 = "/images/洩湖部.jpg";
+/** @deprecated 品牌线旧图；向日葵/常青藤可分别替换 */
 export const IMG_青春伴夕阳 = "/images/青春伴夕阳.jpg";
+export const IMG_向日葵 = "/images/向日葵.jpg";
+export const IMG_常青藤 = "/images/常青藤.jpg";
 export const IMG_启明星 = "/images/启明星.jpg";
 export const IMG_心项目 = "/images/心项目.jpg";
 export const IMG_陕博部 = "/images/陕博部.jpg";
 export const IMG_萤火部 = "/images/萤火部.jpg";
+
+// ─────────────────────────────────────────────
+//  十、暑期实践 Spotlight 封面（请换成真实成片截帧）
+// ─────────────────────────────────────────────
+
+export const IMG_暑期_玉树 = "/images/暑期_玉树.jpg";
+export const IMG_暑期_知行秦川 = "/images/暑期_知行秦川.jpg";
+export const IMG_暑期_秦岭 = "/images/暑期_秦岭.jpg";
+export const IMG_暑期_萤火 = "/images/暑期_萤火.jpg";
+
+/** 第11页背景（暑期实践专区，可与第3页共用或单独替换） */
+export const IMG_第11页背景 = "/images/第3页背景.jpg";
