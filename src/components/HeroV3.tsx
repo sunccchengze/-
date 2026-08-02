@@ -12,7 +12,7 @@ export function HeroV3() {
     <section id="top" className="relative min-h-screen bg-shell">
       <div className="grid min-h-screen lg:grid-cols-2">
         {/* 左侧 - 文字 */}
-        <div className="flex flex-col justify-center bg-cream px-12 py-20 lg:px-16">
+        <div className="flex flex-col justify-center bg-cream px-6 pb-12 pt-28 sm:px-8 sm:pb-16 lg:px-16 lg:py-20">
           {/* 品牌标识已由全局导航承担；这里直接进入招新信息，避免首屏重复出现 Logo。 */}
           <motion.p
             className="font-serif-cn text-sm tracking-[0.3em] text-rouge"
@@ -90,7 +90,7 @@ export function HeroV3() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-black/20" />
           
           {/* 浮动卡片 */}
-          <div className="absolute bottom-10 left-10 right-10 rounded-2xl bg-white/95 p-6 backdrop-blur-sm shadow-xl">
+          <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/95 p-5 backdrop-blur-sm shadow-xl sm:bottom-6 sm:left-6 sm:right-6 sm:p-6 md:bottom-10 md:left-10 md:right-10">
             <p className="font-serif-cn text-sm font-bold text-rouge">2026 暑期实践</p>
             <p className="mt-2 font-serif-cn text-lg font-bold text-ink">玉树第十七届 · 知行秦川双线</p>
             <p className="mt-1 text-sm text-muted">支教 · 敬老 · 文博 · 环保 · 病房陪伴</p>
