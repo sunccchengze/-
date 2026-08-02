@@ -5,7 +5,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { LINK_报名 as joinLink, IMG_首页轮播 as heroSlides } from "../config";
-import { brand, hero } from "../content";
+import { hero } from "../content";
 
 export function HeroV3() {
   return (
