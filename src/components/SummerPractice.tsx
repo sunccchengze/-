@@ -111,6 +111,10 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
           <h3 className="mt-3 font-serif-cn text-2xl font-bold leading-snug text-ink md:text-[30px]">{card.title}</h3>
           <p className="mt-3 font-serif-cn text-base italic leading-7 text-rouge md:text-lg">{card.poetic}</p>
           <p className="mt-4 text-[15px] leading-[1.85] text-muted">{card.story}</p>
+          <p className="mt-5 rounded-xl bg-gold-soft/[0.10] px-4 py-3 text-sm leading-6 text-ink">
+            <span className="font-serif-cn font-bold text-gold">新生可以从这里开始 · </span>
+            {card.newcomerEntry}
+          </p>
 
           <ul className="mt-5 space-y-2.5 border-l-2 border-rouge/25 pl-4">
             {card.beats.map((beat) => (
@@ -166,6 +170,9 @@ function SummerSupportCard({ card, index }: { card: SummerCard; index: number })
         <h3 className="mt-2 font-serif-cn text-xl font-bold text-ink">{card.title}</h3>
         <p className="mt-1 font-serif-cn text-sm italic text-rouge">{card.poetic}</p>
         <p className="mt-3 text-sm leading-7 text-muted">{card.story}</p>
+        <p className="mt-4 rounded-xl bg-gold-soft/[0.10] px-3 py-2 text-xs leading-5 text-ink/85">
+          <span className="font-bold text-gold">从这里开始 · </span>{card.newcomerEntry}
+        </p>
         <ul className="mt-4 flex-1 space-y-2 border-t border-rouge/10 pt-4">
           {card.beats.map((beat) => (
             <li key={beat} className="flex gap-2 text-xs leading-5 text-ink/75">
