@@ -1,6 +1,7 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useDragControls } from "framer-motion";
 import { ChevronDown, Heart, MessageCircle, Palette, Sparkles, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 import {
   IMG_小鹰爱心,
   IMG_小鹰背面,
@@ -60,10 +61,30 @@ export function EagleMascot() {
   const [actionPose, setActionPose] = useState<EaglePose | null>("wave");
   const [heartBurst, setHeartBurst] = useState(false);
   const [paintBurst, setPaintBurst] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [dragBounds, setDragBounds] = useState({ top: -640, right: 0, bottom: 0, left: -320 });
+  const dragControls = useDragControls();
+  const pointerStart = useRef<{ x: number; y: number } | null>(null);
+  const initiatedDrag = useRef(false);
 
   useEffect(() => {
     const waveTimer = window.setTimeout(() => setActionPose(null), 1800);
     return () => window.clearTimeout(waveTimer);
+  }, []);
+
+  useEffect(() => {
+    const updateBounds = () => {
+      setDragBounds({
+        top: -Math.max(window.innerHeight - 180, 180),
+        right: 0,
+        bottom: 0,
+        left: -Math.max(window.innerWidth - 110, 120),
+      });
+    };
+
+    updateBounds();
+    window.addEventListener("resize", updateBounds);
+    return () => window.removeEventListener("resize", updateBounds);
   }, []);
 
   useEffect(() => {
@@ -128,8 +149,42 @@ export function EagleMascot() {
   const pose: EaglePose = open ? (actionPose ?? basePose) : "back";
   const message = sectionMessages[section] ?? sectionMessages.top;
 
+  const startPointer = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    pointerStart.current = { x: event.clientX, y: event.clientY };
+    initiatedDrag.current = false;
+  };
+
+  const movePointer = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    if (!pointerStart.current || initiatedDrag.current) return;
+    const distance = Math.hypot(event.clientX - pointerStart.current.x, event.clientY - pointerStart.current.y);
+    if (distance > 7) {
+      initiatedDrag.current = true;
+      dragControls.start(event);
+    }
+  };
+
+  const endPointer = () => {
+    pointerStart.current = null;
+  };
+
   return (
-    <aside className="eagle-mascot fixed bottom-5 right-3 z-40 flex items-end gap-2 sm:bottom-7 sm:right-5" aria-label="英仔小鹰引导员">
+    <motion.aside
+      className={`eagle-mascot fixed bottom-5 right-3 z-40 flex items-end gap-2 sm:bottom-7 sm:right-5 ${dragging ? "cursor-grabbing" : ""}`}
+      aria-label="英仔小鹰引导员"
+      drag
+      dragControls={dragControls}
+      dragListener={false}
+      dragMomentum
+      dragElastic={0.14}
+      dragConstraints={dragBounds}
+      onDragStart={() => setDragging(true)}
+      onDragEnd={() =>
+        window.setTimeout(() => {
+          setDragging(false);
+          initiatedDrag.current = false;
+        }, 180)
+      }
+    >
       <AnimatePresence initial={false}>
         {open ? (
           <motion.div
@@ -193,7 +248,18 @@ export function EagleMascot() {
         ) : null}
       </AnimatePresence>
 
-      <button type="button" onClick={() => setOpen((value) => !value)} className="focus-ring eagle-pet relative flex h-20 w-16 shrink-0 items-end justify-center rounded-[28px] bg-white/10 p-0 text-left sm:h-28 sm:w-24" aria-expanded={open} aria-label={open ? "收起英仔小鹰" : "打开英仔小鹰对话"}>
+      <button
+        type="button"
+        onPointerDown={startPointer}
+        onPointerMove={movePointer}
+        onPointerUp={endPointer}
+        onClick={() => {
+          if (!initiatedDrag.current && !dragging) setOpen((value) => !value);
+        }}
+        className="focus-ring eagle-pet relative flex h-20 w-16 shrink-0 cursor-grab items-end justify-center rounded-[28px] bg-white/10 p-0 text-left active:cursor-grabbing sm:h-28 sm:w-24"
+        aria-expanded={open}
+        aria-label={open ? "收起英仔小鹰" : "打开英仔小鹰对话"}
+      >
         <AnimatePresence mode="wait" initial={false}>
           <motion.img key={pose} src={eagleImages[pose]} alt="" className="eagle-pet-image h-[108px] max-w-[150px] object-contain sm:h-[150px] sm:max-w-[190px]" initial={{ opacity: 0, x: pose === "side" || pose === "fly" ? -8 : 0, scale: 0.96 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: 5, scale: 0.96 }} transition={{ duration: 0.22 }} />
         </AnimatePresence>
@@ -203,6 +269,6 @@ export function EagleMascot() {
           <span className="absolute -right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-rouge shadow-sm" aria-hidden="true"><ChevronDown className="h-3.5 w-3.5" /></span>
         )}
       </button>
-    </aside>
+    </motion.aside>
   );
 }

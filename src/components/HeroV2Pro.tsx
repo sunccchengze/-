@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowDown, ArrowRight, ChevronRight, Images } from "lucide-react";
+import { ArrowDown, ArrowRight, ChevronRight, Images, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { HERO_V2PRO_SLIDES, IMG_LOGO, LINK_报名 as joinLink } from "../config";
 import { brand, hero } from "../content";
@@ -106,6 +106,28 @@ export function HeroV2Pro() {
             <span className="inline-flex rounded-full border border-white/30 bg-white/12 px-3 py-1.5 font-serif-cn text-xs font-bold tracking-wide text-white backdrop-blur-sm">
               2026 秋季招新 · 校级五星级公益社团
             </span>
+          </motion.div>
+
+          <motion.div
+            className="mt-5 flex items-center gap-2"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.12, duration: 0.5 }}
+            aria-label="校级五星级社团"
+          >
+            <span className="flex items-center gap-1" aria-hidden="true">
+              {[0, 1, 2, 3, 4].map((star) => (
+                <motion.span
+                  key={star}
+                  animate={{ opacity: [0.55, 1, 0.55], scale: [0.92, 1.12, 0.92] }}
+                  transition={{ duration: 2.8, delay: star * 0.16, repeat: Infinity, ease: "easeInOut" }}
+                  className="inline-flex text-gold-soft drop-shadow-[0_0_8px_rgba(201,168,118,0.55)]"
+                >
+                  <Star className="h-4 w-4 fill-current" strokeWidth={1.5} />
+                </motion.span>
+              ))}
+            </span>
+            <span className="text-xs font-bold tracking-[0.16em] text-white/75">校级五星级社团</span>
           </motion.div>
 
           <motion.h1

@@ -17,8 +17,8 @@ function DepartmentCard({
   const Icon = department.icon;
   return (
     <motion.article
-      className={`card-hover card-outline-gradient flex h-full flex-col overflow-hidden rounded-[24px] ${
-        suggested ? "ring-2 ring-rouge/55 ring-offset-4 ring-offset-cream" : ""
+      className={`card-hover card-outline-gradient relative flex h-full flex-col overflow-hidden rounded-[24px] ${
+        suggested ? "dept-recommended z-10" : ""
       }`}
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -38,6 +38,11 @@ function DepartmentCard({
         {department.brandNote ? (
           <div className="absolute bottom-4 left-4 z-10 rounded-full bg-black/45 px-3 py-1 text-[11px] text-white backdrop-blur-sm">
             {department.brandNote}
+          </div>
+        ) : null}
+        {suggested ? (
+          <div className="absolute right-4 top-4 z-10 rounded-full border border-white/40 bg-rouge-deep px-3 py-1.5 text-xs font-bold tracking-wide text-white shadow-lg shadow-rouge/30">
+            为你推荐
           </div>
         ) : null}
       </div>
