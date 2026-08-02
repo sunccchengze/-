@@ -73,6 +73,31 @@
 按你的要求：**不加**百度统计 / Google Analytics / 任何埋点。
 ---
 
+### Q-023｜荣誉典藏墙的真实奖状/奖杯图片
+
+已新增“打开荣誉典藏墙”全屏展陈：12 个重点奖项都有独立图片槽位。
+
+**请按以下路径上传真实证书、奖状、奖杯照片或官方获奖截图：**
+
+```text
+public/images/honors/HONOR-01.jpg  榜样100全国优秀大学生社团
+public/images/honors/HONOR-02.jpg  榜样100 · 玉树支教团
+public/images/honors/HONOR-03.jpg  榜样100 · 知行秦川
+public/images/honors/HONOR-04.jpg  立邦支教奖
+public/images/honors/HONOR-05.jpg  西门子爱绿教育计划
+public/images/honors/HONOR-06.jpg  省级优秀团队
+public/images/honors/HONOR-07.jpg  五星级社团
+public/images/honors/HONOR-08.jpg  文明社团
+public/images/honors/HONOR-09.jpg  最佳团日一等奖
+public/images/honors/HONOR-10.jpg  红旗团支部
+public/images/honors/HONOR-11.jpg  学雷锋优秀组织
+public/images/honors/HONOR-12.jpg  学雷锋优秀项目
+```
+
+建议：竖版证书优先，保持原始比例，不要压字；奖杯照片可保留背景但要避免反光。当前未上传时会显示明确的“荣誉证明待替换”典藏占位，不会伪造证书。
+
+---
+
 ### Q-022｜V2 Pro 轮播的两张指定真实照片
 
 你要求 V2 Pro 首页轮播必须包含：

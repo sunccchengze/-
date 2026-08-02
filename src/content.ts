@@ -397,6 +397,22 @@ export const honors = [
 export const honorsNote =
   "自 2010 年以来荣誉远不止这一页。这里只摘本学年高光——完整故事，在每一次出发与归来里。";
 
+/** 荣誉典藏墙：证书图片由宣传部按 IMAGE-SLOTS.md 的 HONOR 编号替换。 */
+export const honorVault = [
+  { level: "国家级", title: "榜样100全国优秀大学生社团", detail: "TOP100 教育类社团 · 2025.12", image: "/images/honors/HONOR-01.jpg" },
+  { level: "国家级", title: "榜样100全国优秀大学生团队", detail: "梦绽格桑原 · 玉树支教团 · 2025.12", image: "/images/honors/HONOR-02.jpg" },
+  { level: "国家级", title: "榜样100全国优秀大学生团队", detail: "知行秦川，梦启今夏 · 2025.12", image: "/images/honors/HONOR-03.jpg" },
+  { level: "国家级", title: "立邦“为爱上色”农村支教奖", detail: "玉树支教团 · 奖项等级以证书最终核验为准", image: "/images/honors/HONOR-04.jpg" },
+  { level: "国家级", title: "西门子爱绿教育计划全国优秀奖", detail: "知行秦川，梦启今夏 · 2025.10", image: "/images/honors/HONOR-05.jpg" },
+  { level: "省级", title: "“小我融入大我”优秀团队", detail: "梦绽格桑原 · 玉树支教团 · 2025", image: "/images/honors/HONOR-06.jpg" },
+  { level: "校级", title: "西安交通大学五星级社团", detail: "2024—2025 学年", image: "/images/honors/HONOR-07.jpg" },
+  { level: "校级", title: "西安交通大学文明社团", detail: "2024—2025 学年", image: "/images/honors/HONOR-08.jpg" },
+  { level: "校级", title: "第四十届“最佳团日”一等奖", detail: "2025.11", image: "/images/honors/HONOR-09.jpg" },
+  { level: "校级", title: "五四评优“红旗团支部”", detail: "2026.04", image: "/images/honors/HONOR-10.jpg" },
+  { level: "校级", title: "学雷锋志愿服务优秀组织", detail: "2025 年度", image: "/images/honors/HONOR-11.jpg" },
+  { level: "校级", title: "学雷锋志愿服务优秀项目", detail: "薪火传史·文博 / 萤火聚爱·童梦护航", image: "/images/honors/HONOR-12.jpg" },
+] as const;
+
 /* ───────── Departments ───────── */
 
 export type Department = {
