@@ -39,8 +39,8 @@ Hero · Navigation · TrustBar · About · Statistics · SummerPractice · Membe
 
 ## 页面结构（自上而下）
 
-1. Hero 轮播 + 主 CTA  
-2. **信任条**（五星级 · 工时可认证 · 仲英指导）  
+1. Hero 主视觉 + 主 CTA（内部方案比较器仅在 `?preview=hero` 显示）
+2. **信任条**（五星级 · 活动丰富 · 仲英指导）
 3. 关于我们 + 剪影画廊  
 4. Impact 体感数据  
 5. **暑期实践**（玉树主卡 · 知行秦川双线 · 萤火/秦岭辅卡）  

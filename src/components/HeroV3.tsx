@@ -4,7 +4,7 @@
  */
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
-import { LINK_报名 as joinLink, IMG_LOGO, IMG_首页轮播 as heroSlides } from "../config";
+import { LINK_报名 as joinLink, IMG_首页轮播 as heroSlides } from "../config";
 import { brand, hero } from "../content";
 
 export function HeroV3() {
@@ -13,15 +13,9 @@ export function HeroV3() {
       <div className="grid min-h-screen lg:grid-cols-2">
         {/* 左侧 - 文字 */}
         <div className="flex flex-col justify-center bg-cream px-12 py-20 lg:px-16">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <img src={IMG_LOGO} alt="" className="h-16 w-16 rounded-2xl object-contain" />
-          </motion.div>
-
+          {/* 品牌标识已由全局导航承担；这里直接进入招新信息，避免首屏重复出现 Logo。 */}
           <motion.p
-            className="mt-8 font-serif-cn text-sm tracking-[0.3em] text-rouge"
+            className="font-serif-cn text-sm tracking-[0.3em] text-rouge"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
