@@ -1,8 +1,82 @@
 import { motion } from "framer-motion";
-import { MapPin } from "lucide-react";
+import { Image as ImageIcon, MapPin } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { IMG_第11页背景 } from "../config";
 import { summerCards, summerMore, summerSection, type SummerCard } from "../content";
 import { SectionHeader } from "./SectionHeader";
+
+/**
+ * 暑期活动图集：预加载成功的图片才加入轮播，未上传的命名槽位自动跳过。
+ * 用户按 docs/SUMMER-GALLERY-SLOTS.md 上传后，无需修改组件即可加入轮播。
+ */
+function SummerImageCarousel({ images, alt, compact = false }: { images: readonly string[]; alt: string; compact?: boolean }) {
+  const [loaded, setLoaded] = useState<Set<number>>(() => new Set([0]));
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    let active = true;
+    images.forEach((src, index) => {
+      const image = new Image();
+      image.onload = () => {
+        if (!active) return;
+        setLoaded((previous) => new Set(previous).add(index));
+      };
+      image.src = src;
+    });
+    return () => {
+      active = false;
+    };
+  }, [images]);
+
+  const available = useMemo(() => [...loaded].filter((index) => images[index]).sort((a, b) => a - b), [images, loaded]);
+
+  useEffect(() => {
+    if (!available.includes(current)) setCurrent(available[0] ?? 0);
+  }, [available, current]);
+
+  useEffect(() => {
+    if (available.length < 2) return;
+    const timer = window.setInterval(() => {
+      setCurrent((previous) => {
+        const position = available.indexOf(previous);
+        return available[(position + 1) % available.length] ?? available[0];
+      });
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [available]);
+
+  return (
+    <div className="image-shell relative h-full w-full">
+      <motion.img
+        key={current}
+        src={images[current] ?? images[0]}
+        alt={alt}
+        className="h-full w-full object-cover"
+        initial={{ opacity: 0, scale: 1.02 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.55 }}
+        loading="lazy"
+      />
+      {available.length > 1 ? (
+        <div className={`absolute bottom-3 right-3 z-10 flex items-center gap-1.5 rounded-full bg-black/35 px-2 py-1.5 backdrop-blur-sm ${compact ? "scale-90" : ""}`} aria-label="活动图片轮播">
+          <ImageIcon className="h-3 w-3 text-white/80" aria-hidden="true" />
+          {available.map((index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => setCurrent(index)}
+              aria-label={`查看第 ${available.indexOf(index) + 1} 张活动图片`}
+              aria-current={current === index}
+              className="focus-ring flex h-5 w-4 items-center justify-center rounded-full"
+            >
+              <span className={`h-1.5 rounded-full transition-all ${current === index ? "w-3 bg-white" : "w-1.5 bg-white/55"}`} />
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
   return (
@@ -18,8 +92,8 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
           index % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
         }`}
       >
-        <div className="image-shell relative min-h-[260px] md:min-h-[480px]">
-          <img src={card.image} alt={card.title} className="h-full w-full object-cover" loading="lazy" />
+        <div className="relative min-h-[260px] overflow-hidden md:min-h-[480px]">
+          <SummerImageCarousel images={card.images} alt={card.title} />
           <div className="absolute left-5 top-5 z-10 flex flex-col items-start gap-2">
             <span className="rounded-full bg-white/92 px-3 py-1.5 text-xs font-bold tracking-wide text-rouge-deep backdrop-blur-md">
               {card.badge}
@@ -77,8 +151,8 @@ function SummerSupportCard({ card, index }: { card: SummerCard; index: number })
       viewport={{ once: true, amount: 0.2 }}
       transition={{ delay: 0.1 * index, duration: 0.6 }}
     >
-      <div className="image-shell h-48 shrink-0">
-        <img src={card.image} alt={card.title} className="h-full w-full object-cover" loading="lazy" />
+      <div className="relative h-48 shrink-0 overflow-hidden">
+        <SummerImageCarousel images={card.images} alt={card.title} compact />
         <div className="absolute left-4 top-4 z-10 flex flex-col items-start gap-1.5">
           <span className="rounded-full bg-white/92 px-2.5 py-1 text-[11px] font-bold text-rouge-deep">{card.badge}</span>
           <span className="rounded-full bg-rouge-deep/90 px-2.5 py-0.5 text-[10px] text-white">{card.dept}</span>

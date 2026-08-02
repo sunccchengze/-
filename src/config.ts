@@ -233,3 +233,46 @@ export const HERO_V2PRO_SLIDES = [
   { src: IMG_公益活动剪影[0], title: "英仔大合影", line: "英为爱，仔一起", detail: "待替换为全社大合影" },
   { src: IMG_公益活动剪影[1], title: "新一届英仔", line: "薪火相传，下一站由你加入", detail: "待替换为第十六届社长团合影" },
 ] as const;
+
+// ─────────────────────────────────────────────────────────────
+//  十二、暑期实践图集轮播
+//  完整命名规范见 docs/SUMMER-GALLERY-SLOTS.md。
+//  每组首图为现有回退图；其余文件未上传时组件会自动跳过。
+// ─────────────────────────────────────────────────────────────
+
+export const SUMMER_GALLERIES = {
+  yushu: [
+    IMG_暑期_玉树,
+    "/images/summer/01-yushu/01-assembly.jpg",
+    "/images/summer/01-yushu/02-journey.jpg",
+    "/images/summer/01-yushu/03-icebreak.jpg",
+    "/images/summer/01-yushu/04-classroom.jpg",
+    "/images/summer/01-yushu/05-culture.jpg",
+    "/images/summer/01-yushu/06-group.jpg",
+  ],
+  qinchuan: [
+    IMG_暑期_知行秦川,
+    "/images/summer/02-qinchuan/01-jiufeng-opening.jpg",
+    "/images/summer/02-qinchuan/02-jiufeng-classroom.jpg",
+    "/images/summer/02-qinchuan/03-jiufeng-farewell.jpg",
+    "/images/summer/02-qinchuan/04-binzhou-opening.jpg",
+    "/images/summer/02-qinchuan/05-binzhou-classroom.jpg",
+    "/images/summer/02-qinchuan/06-binzhou-farewell.jpg",
+  ],
+  yinghuo: [
+    IMG_暑期_萤火,
+    "/images/summer/03-yinghuo/01-hospital-art.jpg",
+    "/images/summer/03-yinghuo/02-qianqianai-class.jpg",
+    "/images/summer/03-yinghuo/03-special-olympics.jpg",
+    "/images/summer/03-yinghuo/04-community-group.jpg",
+    "/images/summer/03-yinghuo/05-team.jpg",
+  ],
+  qinling: [
+    IMG_暑期_秦岭,
+    "/images/summer/04-qinling/01-ziwu-cleanup.jpg",
+    "/images/summer/04-qinling/02-eco-talk.jpg",
+    "/images/summer/04-qinling/03-nature-study.jpg",
+    "/images/summer/04-qinling/04-zhujiwan-interview.jpg",
+    "/images/summer/04-qinling/05-group.jpg",
+  ],
+} as const;

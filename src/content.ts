@@ -42,10 +42,7 @@ import {
   IMG_心项目,
   IMG_陕博部,
   IMG_萤火部,
-  IMG_暑期_玉树,
-  IMG_暑期_知行秦川,
-  IMG_暑期_秦岭,
-  IMG_暑期_萤火,
+  SUMMER_GALLERIES,
 } from "./config";
 
 /* ───────── 通用 ───────── */
@@ -190,7 +187,8 @@ export type SummerCard = {
   title: string;
   poetic: string;
   place: string;
-  image: string;
+  /** 该活动的图片轮播；首图为已有回退图，其余按命名规范上传后自动加入。 */
+  images: readonly string[];
   stats: { value: string; label: string }[];
   /** 结构化看点，避免把不同活动糊成一段 */
   beats: string[];
@@ -214,7 +212,7 @@ export const summerCards: SummerCard[] = [
     title: "梦绽格桑原，玉树支教团",
     poetic: "十七载薪火再赴称多——把美育、科学与陪伴写在雪域讲台上",
     place: "2026.7 · 青海玉树 · 称多县文乐中心寄宿学校",
-    image: IMG_暑期_玉树,
+    images: SUMMER_GALLERIES.yushu,
     stats: [
       { value: "17", label: "届接力" },
       { value: "230+", label: "破冰同学" },
@@ -239,7 +237,7 @@ export const summerCards: SummerCard[] = [
     title: "知行秦川，梦启今夏",
     poetic: "九峰 11 名志愿者陪伴 45 名营员；彬州 6 名志愿者走进约 60 名同学的教室",
     place: "2026.7 · 周至九峰中学 · 咸阳彬州中学",
-    image: IMG_暑期_知行秦川,
+    images: SUMMER_GALLERIES.qinchuan,
     stats: [
       { value: "11/45", label: "九峰 志愿/营员" },
       { value: "6/60", label: "彬州 志愿/同学" },
@@ -264,7 +262,7 @@ export const summerCards: SummerCard[] = [
     title: "萤火微光，向阳而生",
     poetic: "病房里的画笔，特教中心的课桌，社区里的情绪课",
     place: "2026.7 · 西北妇幼 · 千千爱 · 菊花园 / 香胡湾",
-    image: IMG_暑期_萤火,
+    images: SUMMER_GALLERIES.yinghuo,
     stats: [
       { value: "3", label: "服务场景" },
       { value: "多日", label: "连续陪伴" },
@@ -287,7 +285,7 @@ export const summerCards: SummerCard[] = [
     title: "踏峪寻青，青护秦岭",
     poetic: "净山、研学、问村——把两山理念走成脚印",
     place: "2026.7 · 子午峪 · 秦岭野生动物园 · 朱家湾",
-    image: IMG_暑期_秦岭,
+    images: SUMMER_GALLERIES.qinling,
     stats: [
       { value: "净峪", label: "徒步清山" },
       { value: "研学", label: "自然博物馆" },
