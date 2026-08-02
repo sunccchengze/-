@@ -72,7 +72,7 @@ export function JoinCTA() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          报名后会有对应方向的学长学姐联系你；先问清楚、先体验，再决定自己的参与方式。
+          填报第一、第二志愿后等待面试安排；录取结果将通过报名联系方式通知，通过后学长学姐会加你微信并带你进入部门。
         </motion.p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-5 sm:flex-row sm:gap-8">
