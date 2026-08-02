@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Award, MoreHorizontal, Trophy, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { IMG_第5页背景, VIDEO_荣誉历程 } from "../config";
 import { honors, honorsNote, honorVault } from "../content";
 import { SectionHeader } from "./SectionHeader";
@@ -50,13 +51,19 @@ function HonorVaultCard({ item, index }: { item: VaultItem; index: number }) {
 function HonorVault({ onClose }: { onClose: () => void }) {
   useEffect(() => {
     const previous = document.body.style.overflow;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
     document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKeyDown);
     };
-  }, []);
+  }, [onClose]);
 
-  return (
+  return createPortal(
     <motion.div
       className="fixed inset-0 z-[90] overflow-y-auto bg-[#1d100f]/[0.97] px-4 py-5 text-white sm:px-8 sm:py-8"
       role="dialog"
@@ -81,10 +88,11 @@ function HonorVault({ onClose }: { onClose: () => void }) {
           <button
             type="button"
             onClick={onClose}
-            className="focus-ring flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition hover:bg-white hover:text-rouge-deep"
+            className="focus-ring inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 text-sm font-bold text-white transition hover:bg-white hover:text-rouge-deep"
             aria-label="关闭荣誉典藏墙"
           >
-            <X className="h-5 w-5" aria-hidden="true" />
+            <X className="h-4 w-4" aria-hidden="true" />
+            关闭
           </button>
         </div>
 
@@ -94,7 +102,8 @@ function HonorVault({ onClose }: { onClose: () => void }) {
           ))}
         </div>
       </div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }
 

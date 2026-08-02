@@ -7,9 +7,17 @@ type EagleMood = "front" | "side" | "back";
 
 const sectionMessages: Record<string, string> = {
   top: "你好呀！我是英仔小鹰，带你认识英仔。",
+  about: "英仔今年 16 岁啦，我们把善意做成一次次真的出发。",
+  impact: "每一个数字背后，都是被认真记录的陪伴。",
   summer: "今年夏天，我们去了玉树、周至、彬州，还有更多地方。",
+  voices: "听听英仔们的故事，也许下一句就会是你写下的。",
+  team: "有老师指导，也有一届届英仔把事情做下去。",
+  why: "公益路上，你会收获技能，也会遇见很好的同伴。",
+  honors: "荣誉是结果，认真把项目做长才是我们的日常。",
   departments: "不知道怎么选？先想想你最想陪伴谁吧。",
+  social: "想先了解我们？公众号、B站和抖音都在等你。",
   join: "准备好了吗？英仔在招新群等你！",
+  faq: "有顾虑很正常，点开问题慢慢看，我陪你选。",
 };
 
 const eagleImages: Record<EagleMood, string> = {
@@ -29,36 +37,33 @@ export function EagleMascot() {
   const [heartBurst, setHeartBurst] = useState(false);
 
   useEffect(() => {
-    const ids = ["top", "summer", "departments", "join"];
+    const ids = ["top", "about", "impact", "summer", "voices", "team", "why", "honors", "departments", "social", "join", "faq"];
     const nodes = ids
       .map((id) => document.getElementById(id))
       .filter((node): node is HTMLElement => Boolean(node));
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const mostVisible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (mostVisible?.target.id) setSection(mostVisible.target.id);
-      },
-      { rootMargin: "-38% 0px -44% 0px", threshold: [0.08, 0.25, 0.45] },
-    );
-
-    nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
     let stopTimer: number | undefined;
-    const onScroll = () => {
+
+    const updateGuide = () => {
+      const guideLine = window.innerHeight * 0.42;
+      const nearest = nodes.reduce<HTMLElement | null>((current, node) => {
+        if (!current) return node;
+        return Math.abs(node.getBoundingClientRect().top - guideLine) < Math.abs(current.getBoundingClientRect().top - guideLine)
+          ? node
+          : current;
+      }, null);
+
+      if (nearest?.id) setSection(nearest.id);
       setMoving(true);
       if (stopTimer) window.clearTimeout(stopTimer);
       stopTimer = window.setTimeout(() => setMoving(false), 650);
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    updateGuide();
+    window.addEventListener("scroll", updateGuide, { passive: true });
+    window.addEventListener("resize", updateGuide);
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", updateGuide);
+      window.removeEventListener("resize", updateGuide);
       if (stopTimer) window.clearTimeout(stopTimer);
     };
   }, []);
@@ -87,7 +92,17 @@ export function EagleMascot() {
             transition={{ duration: 0.28 }}
             aria-live="polite"
           >
-            <p>{message}</p>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.p
+                key={section}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.2 }}
+              >
+                {message}
+              </motion.p>
+            </AnimatePresence>
             <div className="mt-2 flex flex-wrap gap-2">
               <button
                 type="button"
