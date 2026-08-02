@@ -213,7 +213,11 @@ export function Departments() {
             </div>
           ))}
         </div>
-        <p className="mt-10 text-center font-serif-cn text-base text-muted md:text-lg">{departmentsIntro.footer}</p>
+        <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-gold-soft/30 bg-gold-soft/[0.08] px-5 py-4 text-left">
+          <p className="font-serif-cn text-sm font-bold text-gold">旁听制度 · 多一种体验</p>
+          <p className="mt-2 text-sm leading-7 text-muted">{departmentsIntro.observerNote}</p>
+        </div>
+        <p className="mt-6 text-center font-serif-cn text-base text-muted md:text-lg">{departmentsIntro.footer}</p>
       </div>
     </section>
   );

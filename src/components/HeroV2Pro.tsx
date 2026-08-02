@@ -165,7 +165,7 @@ export function HeroV2Pro() {
           >
             {[
               { value: "16", label: "岁公益社团" },
-              { value: "199", label: "名在社成员" },
+              { value: "199", label: "2025—2026年度社员" },
               { value: "8", label: "个项目部门" },
             ].map((item, index) => (
               <div

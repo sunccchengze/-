@@ -771,3 +771,48 @@ button {
     animation: none !important;
   }
 }
+
+/* 全站微循环：只让光与空气感缓慢流动，不引入高频廉价动画。 */
+.bg-shell > .bg-veil {
+  animation: ambientVeil 18s ease-in-out infinite alternate;
+}
+
+.gradient-divider {
+  background-size: 180% 100%;
+  animation: dividerFlow 6s ease-in-out infinite;
+}
+
+.card-hover::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(115deg, transparent 28%, rgba(255, 255, 255, 0.3) 48%, transparent 68%);
+  transform: translateX(-130%);
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.card-hover:hover::after {
+  transform: translateX(130%);
+}
+
+@keyframes ambientVeil {
+  0% { filter: saturate(0.98) brightness(0.99); }
+  100% { filter: saturate(1.04) brightness(1.02); }
+}
+
+@keyframes dividerFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-shell > .bg-veil,
+  .gradient-divider {
+    animation: none !important;
+  }
+  .card-hover::after {
+    display: none;
+  }
+}
