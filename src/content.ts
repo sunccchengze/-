@@ -428,7 +428,7 @@ export const honorVault = [
   { level: "国家级", title: "榜样100全国优秀大学生社团", detail: "TOP100 教育类社团 · 2025.12", image: "/images/honors/HONOR-01.jpg" },
   { level: "国家级", title: "榜样100全国优秀大学生团队", detail: "梦绽格桑原 · 玉树支教团 · 2025.12", image: "/images/honors/HONOR-02.jpg" },
   { level: "国家级", title: "榜样100全国优秀大学生团队", detail: "知行秦川，梦启今夏 · 2025.12", image: "/images/honors/HONOR-03.jpg" },
-  { level: "国家级", title: "立邦“为爱上色”农村支教奖", detail: "玉树支教团 · 奖项等级以证书最终核验为准", image: "/images/honors/HONOR-04.jpg" },
+  { level: "国家级", title: "立邦“为爱上色”农村支教奖", detail: "玉树支教团 · 全国铜奖 · 2025", image: "/images/honors/HONOR-04.jpg" },
   { level: "国家级", title: "西门子爱绿教育计划全国优秀奖", detail: "知行秦川，梦启今夏 · 2025.10", image: "/images/honors/HONOR-05.jpg" },
   { level: "省级", title: "“小我融入大我”优秀团队", detail: "梦绽格桑原 · 玉树支教团 · 2025", image: "/images/honors/HONOR-06.jpg" },
   { level: "校级", title: "西安交通大学五星级社团", detail: "2024—2025 学年", image: "/images/honors/HONOR-07.jpg" },
@@ -719,7 +719,7 @@ export const faqs = [
   {
     question: "报名后需要面试吗？",
     answer:
-      "需要。请先填写电子报名表，填报第一志愿、第二志愿部门并留下联系方式；之后等待面试安排。录取结果会通过报名联系方式通知，通过后可能进入第一或第二志愿部门。",
+      "需要。请填写电子 WPS 报名表：第一志愿、第二志愿、姓名、班级、学号、个人自我介绍、技能特长、微信号和手机号。面试通知以短信发送；录取后可能进入第一或第二志愿部门。",
   },
   {
     question: "每周大概要花多少时间？",
@@ -765,7 +765,7 @@ export const faqs = [
 /** 降低报名焦虑：路径清晰 */
 export const joinSteps = [
   { step: "01", title: "填表报名", desc: "两三分钟写意向，选你心动的方向即可。" },
-  { step: "02", title: "参加面试", desc: "等待面试安排，认真说说你的第一、第二志愿和想法。" },
+  { step: "02", title: "参加面试", desc: "填写 WPS 表单：第一、第二志愿、基本信息、技能特长与自我介绍。" },
   { step: "03", title: "进入部门", desc: "录取后从干事开始，在部长和副社带领下参与部门活动。" },
 ];
 

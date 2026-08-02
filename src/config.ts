@@ -19,7 +19,10 @@
 /** 正式上线域名（Cloudflare Pages）—— 分享/OG/JSON-LD 用 */
 export const SITE_URL = "https://yzaxs-1.pages.dev";
 
-/** 立即报名链接（出现在：顶部导航、封面页主按钮、加入我们模块、移动端菜单） */
+/**
+ * 立即报名链接（出现在：顶部导航、封面页主按钮、加入我们模块）
+ * 当前为临时 WPS 链接；2026 正式报名表发布后替换本行即可。
+ */
 export const LINK_报名 = "https://f.wps.cn/g/1AxxMyao/";
 
 /** 微信公众号链接 */
