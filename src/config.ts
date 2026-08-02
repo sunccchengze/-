@@ -207,6 +207,12 @@ export const IMG_第11页背景 = "/images/第3页背景.jpg";
 export const IMG_小鹰正面 = "/images/mascot/eagle-front.png";
 export const IMG_小鹰侧面 = "/images/mascot/eagle-side.png";
 export const IMG_小鹰背面 = "/images/mascot/eagle-back.png";
+export const IMG_小鹰挥手 = "/images/mascot/eagle-wave.png";
+export const IMG_小鹰爱心 = "/images/mascot/eagle-heart.png";
+export const IMG_小鹰报名 = "/images/mascot/eagle-join.png";
+export const IMG_小鹰画画 = "/images/mascot/eagle-paint.png";
+export const IMG_小鹰飞行 = "/images/mascot/eagle-fly.png";
+export const IMG_小鹰相机 = "/images/mascot/eagle-camera.png";
 
 export const HERO_V2PRO_SLIDES = [
   { src: IMG_暑期_玉树, title: "雪域相逢", line: "雪域相逢，共绽格桑", detail: "玉树支教团 · 高原课堂" },
