@@ -10,6 +10,7 @@ import {
   Leadership,
   MemberVoices,
   Navigation,
+  NewcomerPath,
   ScrollProgress,
   SocialMedia,
   Statistics,
@@ -41,6 +42,7 @@ export default function App() {
         {isHeroPreview ? <HeroPreview /> : <HeroV2Pro />}
         <TrustBar />
         <About />
+        <NewcomerPath />
         <Statistics />
         <HonorMarquee />
         <SummerPractice />

@@ -2,6 +2,7 @@ export { Navigation } from "./Navigation";
 export { Hero } from "./Hero";
 export { TrustBar } from "./TrustBar";
 export { About } from "./About";
+export { NewcomerPath } from "./NewcomerPath";
 export { Statistics } from "./Statistics";
 export { SummerPractice } from "./SummerPractice";
 export { MemberVoices } from "./MemberVoices";

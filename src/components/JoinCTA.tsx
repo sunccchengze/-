@@ -66,7 +66,16 @@ export function JoinCTA() {
           {joinCta.subtitle}
         </motion.p>
 
-        <div className="mt-12 flex flex-col items-center justify-center gap-5 sm:flex-row sm:gap-8">
+        <motion.p
+          className="mt-5 max-w-2xl text-sm leading-6 text-white/75"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          报名后会有对应方向的学长学姐联系你；先问清楚、先体验，再决定自己的参与方式。
+        </motion.p>
+
+        <div className="mt-10 flex flex-col items-center justify-center gap-5 sm:flex-row sm:gap-8">
           <motion.a
             href={joinLink}
             target="_blank"

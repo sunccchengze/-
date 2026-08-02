@@ -195,10 +195,18 @@ export function HeroV2Pro() {
           </motion.div>
 
           <motion.p
-            className="mt-8 max-w-xl text-xs leading-5 text-white/65"
+            className="mt-8 max-w-xl font-serif-cn text-sm leading-6 text-white/82"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.56, duration: 0.5 }}
+          >
+            先认识、先体验，再选择你的方向。
+          </motion.p>
+          <motion.p
+            className="mt-2 max-w-xl text-xs leading-5 text-white/58"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.62, duration: 0.5 }}
           >
             {hero.seasonNote}
           </motion.p>
