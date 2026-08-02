@@ -5,6 +5,7 @@ export { About } from "./About";
 export { NewcomerPath } from "./NewcomerPath";
 export { Statistics } from "./Statistics";
 export { SummerPractice } from "./SummerPractice";
+export { SummerFilms } from "./SummerFilms";
 export { MemberVoices } from "./MemberVoices";
 export { Leadership } from "./Leadership";
 export { WhyJoin } from "./WhyJoin";

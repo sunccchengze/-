@@ -276,3 +276,10 @@ export const SUMMER_GALLERIES = {
     "/images/summer/04-qinling/05-group.jpg",
   ],
 } as const;
+
+// ─────────────────────────────────────────────────────────────
+//  十三、暑期实践影像
+//  知行视频由宣传部按此路径上传；玉树同名路径预留。
+// ─────────────────────────────────────────────────────────────
+export const VIDEO_知行秦川总结 = "/videos/summer/2026-qinchuan-recap.mp4";
+export const VIDEO_玉树总结 = "/videos/summer/2026-yushu-recap.mp4";

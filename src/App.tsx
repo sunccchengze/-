@@ -15,6 +15,7 @@ import {
   SocialMedia,
   Statistics,
   SummerPractice,
+  SummerFilms,
   TrustBar,
   WhyJoin,
 } from "./components";
@@ -46,6 +47,7 @@ export default function App() {
         <Statistics />
         <HonorMarquee />
         <SummerPractice />
+        <SummerFilms />
         <MemberVoices />
         <Leadership />
         <WhyJoin />
