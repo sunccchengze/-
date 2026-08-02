@@ -235,10 +235,15 @@ export function SummerPractice() {
             {summerMore.map((item) => (
               <li
                 key={item.name}
-                className="rounded-2xl bg-white/70 px-4 py-4 ring-1 ring-rouge/10 transition hover:ring-rouge/25"
+                className="card-hover group overflow-hidden rounded-2xl bg-white/70 ring-1 ring-rouge/10"
               >
-                <p className="font-serif-cn text-base font-bold text-ink">{item.name}</p>
-                <p className="mt-2 text-sm leading-6 text-muted">{item.desc}</p>
+                <div className="image-shell aspect-[16/7] overflow-hidden">
+                  <img src={item.image} alt={`${item.name}活动影像`} loading="lazy" className="h-full w-full object-cover" />
+                </div>
+                <div className="px-4 pb-4 pt-3">
+                  <p className="font-serif-cn text-base font-bold text-ink">{item.name}</p>
+                  <p className="mt-2 text-sm leading-6 text-muted">{item.desc}</p>
+                </div>
               </li>
             ))}
           </ul>

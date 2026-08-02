@@ -98,36 +98,25 @@ export function HeroV2Pro() {
           </motion.div>
 
           <motion.div
-            className="flex flex-wrap items-center gap-2"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.08, duration: 0.55 }}
-          >
-            <span className="inline-flex rounded-full border border-white/30 bg-white/12 px-3 py-1.5 font-serif-cn text-xs font-bold tracking-wide text-white backdrop-blur-sm">
-              2026 秋季招新 · 校级五星级公益社团
-            </span>
-          </motion.div>
-
-          <motion.div
-            className="mt-5 flex items-center gap-2"
+            className="flex items-center gap-3"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.12, duration: 0.5 }}
             aria-label="校级五星级社团"
           >
-            <span className="flex items-center gap-1" aria-hidden="true">
+            <span className="flex items-center gap-1.5" aria-hidden="true">
               {[0, 1, 2, 3, 4].map((star) => (
                 <motion.span
                   key={star}
-                  animate={{ opacity: [0.55, 1, 0.55], scale: [0.92, 1.12, 0.92] }}
-                  transition={{ duration: 2.8, delay: star * 0.16, repeat: Infinity, ease: "easeInOut" }}
-                  className="inline-flex text-gold-soft drop-shadow-[0_0_8px_rgba(201,168,118,0.55)]"
+                  animate={{ opacity: [0.58, 1, 0.58], scale: [0.9, 1.16, 0.9], rotate: [-3, 3, -3] }}
+                  transition={{ duration: 3.2, delay: star * 0.16, repeat: Infinity, ease: "easeInOut" }}
+                  className="inline-flex text-gold-soft drop-shadow-[0_0_12px_rgba(201,168,118,0.7)]"
                 >
-                  <Star className="h-4 w-4 fill-current" strokeWidth={1.5} />
+                  <Star className="h-6 w-6 fill-current sm:h-7 sm:w-7" strokeWidth={1.35} />
                 </motion.span>
               ))}
             </span>
-            <span className="text-xs font-bold tracking-[0.16em] text-white/75">校级五星级社团</span>
+            <span className="font-serif-cn text-sm font-bold tracking-[0.16em] text-white/85 sm:text-base">校级五星级社团</span>
           </motion.div>
 
           <motion.h1
@@ -213,12 +202,12 @@ export function HeroV2Pro() {
         </div>
 
         <div className="relative hidden min-h-[100svh] lg:block" aria-hidden="true">
-          <div className="absolute bottom-14 right-10 flex w-[min(470px,calc(100%-5rem))] items-center justify-between gap-7 rounded-2xl border border-white/25 bg-black/20 px-6 py-4 backdrop-blur-md xl:right-16">
-            <div className="min-w-0">
-              <p className="font-serif-cn text-xl font-bold tracking-wide text-white">{activeSlide.line}</p>
-              <p className="mt-1 text-xs text-white/65">{activeSlide.detail}</p>
+          <div className="absolute bottom-16 right-10 flex w-[min(500px,calc(100%-5rem))] items-end justify-between gap-7 px-2 py-3 xl:right-16">
+            <div className="min-w-0 bg-gradient-to-r from-black/0 via-black/18 to-black/0 px-4 py-2 backdrop-blur-[2px]">
+              <p className="font-serif-cn text-2xl font-bold tracking-[0.08em] text-white text-shadow-soft">{activeSlide.line}</p>
+              <p className="mt-2 text-xs tracking-[0.08em] text-white/70">{activeSlide.detail}</p>
             </div>
-            <div className="flex shrink-0 items-center gap-2 text-[11px] tracking-[0.16em] text-white/65">
+            <div className="mb-1 flex shrink-0 items-center gap-2 text-[11px] tracking-[0.16em] text-white/60">
               <Images className="h-4 w-4" />
               影像
             </div>

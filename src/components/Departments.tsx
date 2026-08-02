@@ -136,13 +136,13 @@ export function Departments() {
         </div>
 
         <div className="mx-auto mt-7 max-w-5xl">
-          <p className="text-center text-sm font-bold text-ink">也可以按你想练的本事看</p>
-          <div className="mt-3 grid gap-3 md:grid-cols-3">
+          <p className="text-center font-serif-cn text-base font-bold text-ink">也可以按你想练的本事看</p>
+          <div className="mt-5 grid gap-3 md:grid-cols-3">
             {skillRoutes.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-rouge/10 bg-white/55 px-4 py-3 text-left backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-white/85">
-                <p className="font-serif-cn text-sm font-bold text-rouge-deep">{item.title}</p>
-                <p className="mt-1 text-xs leading-5 text-muted">{item.detail}</p>
-                <p className="mt-2 text-[11px] font-medium tracking-wide text-rouge">{item.routes}</p>
+              <div key={item.title} className="rounded-2xl border border-rouge/10 bg-white/70 px-5 py-4 text-left backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-rouge/35 hover:bg-white/90">
+                <p className="font-serif-cn text-base font-bold text-rouge-deep">{item.title}</p>
+                <p className="mt-1 text-sm leading-6 text-muted">{item.detail}</p>
+                <p className="mt-2 text-xs font-medium tracking-wide text-rouge">{item.routes}</p>
               </div>
             ))}
           </div>

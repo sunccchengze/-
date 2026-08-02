@@ -29,7 +29,7 @@ export function Leadership() {
               <Quote className="h-16 w-16" strokeWidth={1.2} />
             </div>
             <p className="text-xs font-bold tracking-[0.22em] text-rouge">PRESIDENT · 社长寄语</p>
-            <blockquote className="relative mt-6 font-serif-cn text-lg leading-[1.9] text-ink md:text-xl">
+            <blockquote className="relative mt-7 max-w-3xl font-serif-cn text-xl leading-[2] text-ink md:text-2xl">
               “{presidentMessage.quote}”
             </blockquote>
             <footer className="mt-8 flex flex-wrap items-end justify-between gap-3 border-t border-rouge/10 pt-6">
@@ -46,7 +46,7 @@ export function Leadership() {
           {/* 指导老师 + 社长团 */}
           <div className="flex flex-col gap-6">
             <motion.div
-              className="glass-panel rounded-[24px] p-6 md:p-7"
+              className="card-hover glass-panel rounded-[24px] p-6 md:p-7"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -66,7 +66,7 @@ export function Leadership() {
             </motion.div>
 
             <motion.div
-              className="glass-panel flex-1 rounded-[24px] p-6 md:p-7"
+              className="card-hover glass-panel flex-1 rounded-[24px] p-6 md:p-7"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

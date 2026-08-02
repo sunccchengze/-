@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Compass, HandHeart, Route, UsersRound } from "lucide-react";
+import { IMG_第2页背景 } from "../config";
 import { newcomerPath } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
@@ -9,7 +10,9 @@ const icons = [Compass, HandHeart, UsersRound, Route];
 export function NewcomerPath() {
   return (
     <section id="first-step" className="bg-shell section-block">
-      <div className="bg-veil veil-paper" />
+      <img src={IMG_第2页背景} alt="" aria-hidden="true" className="bg-image" loading="lazy" decoding="async" />
+      <div className="bg-veil veil-paper opacity-95" />
+      <div className="absolute inset-0 -z-[1] bg-[radial-gradient(circle_at_18%_28%,rgba(201,168,118,0.15),transparent_36%),radial-gradient(circle_at_82%_78%,rgba(178,90,85,0.12),transparent_40%)]" />
       <div className="section-container relative z-10">
         <SectionHeader eyebrow={newcomerPath.eyebrow} title={newcomerPath.title} subtitle={newcomerPath.subtitle} />
 
