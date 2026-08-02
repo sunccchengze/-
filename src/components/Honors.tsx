@@ -29,7 +29,7 @@ function HonorVaultCard({ item, index }: { item: VaultItem; index: number }) {
         animate={{ rotateY: flipped ? 180 : 0 }}
         transition={{ duration: 0.62, ease: [0.2, 0.7, 0.2, 1] }}
       >
-        <div className="backface-hidden absolute inset-0 overflow-hidden rounded-2xl border border-gold-soft/45 bg-[radial-gradient(circle_at_20%_15%,rgba(255,244,210,0.25),transparent_28%),linear-gradient(145deg,#201310_0%,#5a3920_45%,#c9a876_100%)] p-5 shadow-[0_16px_42px_rgba(0,0,0,0.28)]">
+        <div className="backface-hidden absolute inset-0 overflow-hidden rounded-2xl border border-gold-soft/45 bg-[radial-gradient(circle_at_22%_16%,rgba(255,248,218,0.16),transparent_30%),linear-gradient(145deg,#12100c_0%,#302514_44%,#b98b38_100%)] p-5 shadow-[0_16px_42px_rgba(0,0,0,0.28)]">
           <div className="absolute inset-3 rounded-xl border border-gold-soft/45" aria-hidden="true" />
           <div className="relative flex h-full flex-col items-center justify-center text-center">
             <span className="rounded-full border border-gold-soft/60 bg-black/15 px-2.5 py-1 text-[10px] font-bold tracking-[0.16em] text-[#f6e5ba]">

@@ -189,7 +189,7 @@ export function HeroV2Pro() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.56, duration: 0.5 }}
           >
-            先认真了解，填报志愿；面试通过后，从干事开始。
+            先慢慢认识英仔，把心动写进志愿；若在面试中相遇，就从干事开始。
           </motion.p>
           <motion.p
             className="mt-2 max-w-xl text-xs leading-5 text-white/58"

@@ -215,7 +215,7 @@ export function Departments() {
         </AnimatePresence>
 
         <div className="mx-auto mt-12 grid max-w-3xl gap-3 sm:grid-cols-2">
-          {/* 品牌线说明：为新生解释「大手拉小手」和「青春伴夕阳」。 */}
+          {/* 助学线 / 敬老线说明。 */}
           {departmentsIntro.legend.map((item) => (
             <div
               key={item.name}

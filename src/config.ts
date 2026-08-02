@@ -173,11 +173,11 @@ export const IMG_四大理由 = [
 export const IMG_常务部 = "/images/departments/01-administration.jpg";
 export const IMG_交流部 = "/images/departments/02-community.jpg";
 export const IMG_宣传部 = "/images/departments/03-media.jpg";
-/** @deprecated 品牌线旧图；前卫/洩湖可分别替换 */
+/** @deprecated 历史共用图；前卫/洩湖可分别替换 */
 export const IMG_大手拉小手 = "/images/legacy/hand-in-hand.jpg";
 export const IMG_前卫部 = "/images/departments/04-qianwei.jpg";
 export const IMG_洩湖部 = "/images/departments/05-xiehu.jpg";
-/** @deprecated 品牌线旧图；向日葵/常青藤可分别替换 */
+/** @deprecated 历史共用图；向日葵/常青藤可分别替换 */
 export const IMG_青春伴夕阳 = "/images/legacy/youth-with-sunset.jpg";
 export const IMG_向日葵 = "/images/departments/07-sunflower.jpg";
 export const IMG_常青藤 = "/images/departments/08-ivy.jpg";
