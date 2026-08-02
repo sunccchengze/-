@@ -4,7 +4,24 @@ import { LINK_报名 as joinLink, QQ_招新群号, IMG_第8页背景 } from "../
 import { joinCta, joinSteps } from "../content";
 
 export function JoinCTA() {
-  const [isGroupFlipped, setIsGroupFlipped] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState("");
+
+  const copyGroupNumber = async () => {
+    try {
+      await navigator.clipboard.writeText(QQ_招新群号);
+      setCopied(true);
+      setCopyStatus("招新 QQ 群号已复制");
+      window.setTimeout(() => {
+        setCopied(false);
+        setCopyStatus("");
+      }, 1800);
+    } catch {
+      // 浏览器不允许剪贴板时，群号仍以可见文本方式呈现，用户可手动复制。
+      setCopied(false);
+      setCopyStatus("未能自动复制，可长按群号手动复制");
+    }
+  };
 
   return (
     <section id="join" className="bg-shell relative py-24 text-white md:py-36">
@@ -49,7 +66,16 @@ export function JoinCTA() {
           {joinCta.subtitle}
         </motion.p>
 
-        <div className="mt-12 flex flex-col items-center justify-center gap-5 sm:flex-row sm:gap-8">
+        <motion.p
+          className="mt-5 max-w-2xl text-sm leading-6 text-white/75"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          填报第一、第二志愿后等待面试安排；录取结果将通过报名联系方式通知，通过后学长学姐会加你微信并带你进入部门。
+        </motion.p>
+
+        <div className="mt-10 flex flex-col items-center justify-center gap-5 sm:flex-row sm:gap-8">
           <motion.a
             href={joinLink}
             target="_blank"
@@ -63,38 +89,30 @@ export function JoinCTA() {
           </motion.a>
 
           <motion.div
-            className="perspective-1000 relative h-[64px] w-[220px] cursor-pointer font-serif-cn text-lg font-bold"
-            onClick={() => setIsGroupFlipped(!isGroupFlipped)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setIsGroupFlipped((v) => !v);
-              }
-            }}
-            role="button"
-            tabIndex={0}
-            aria-label="点击翻转查看QQ招新群号"
+            className="flex h-[64px] min-w-[220px] items-center justify-between gap-3 rounded-xl border-2 border-white/90 bg-white/10 px-4 font-serif-cn text-white backdrop-blur-md"
             initial={{ opacity: 0, x: 16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <motion.div
-              className="preserve-3d relative h-full w-full"
-              animate={{ rotateY: isGroupFlipped ? 180 : 0 }}
-              transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+            <span className="min-w-0 text-left">
+              <span className="block text-xs font-medium text-white/70">招新 QQ 群</span>
+              <span className="select-all font-data text-base font-bold tracking-wide">{QQ_招新群号}</span>
+            </span>
+            <button
+              type="button"
+              onClick={copyGroupNumber}
+              className="focus-ring shrink-0 rounded-lg bg-white px-3 py-2 text-xs font-bold text-rouge-deep transition hover:bg-cream"
+              aria-label={`复制招新QQ群号 ${QQ_招新群号}`}
             >
-              <div className="backface-hidden absolute inset-0 flex items-center justify-center rounded-xl border-2 border-white/90 bg-white/10 text-white backdrop-blur-md transition-all hover:bg-white hover:text-rouge-deep">
-                {joinCta.secondary}
-              </div>
-              <div className="backface-hidden rotate-y-180 absolute inset-0 flex items-center justify-center rounded-xl bg-paper px-3 text-center text-rouge-deep shadow-lg">
-                <span className="mr-1.5 font-sans text-xs font-medium text-muted">群号:</span>
-                <span className="select-all font-data font-bold tracking-wide">{QQ_招新群号}</span>
-              </div>
-            </motion.div>
+              {copied ? "已复制" : "复制群号"}
+            </button>
           </motion.div>
         </div>
 
-        <p className="mt-10 text-sm text-white/70">{joinCta.footnote}</p>
+        <p className="mt-4 min-h-5 text-sm text-white/80" aria-live="polite" role="status">
+          {copyStatus}
+        </p>
+        <p className="mt-6 text-sm text-white/70">{joinCta.footnote}</p>
       </div>
     </section>
   );

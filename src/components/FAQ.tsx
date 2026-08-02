@@ -38,6 +38,7 @@ export function FAQ() {
                   className="focus-ring flex w-full items-center justify-between gap-6 p-6 text-left font-serif-cn text-lg font-medium text-ink md:text-xl"
                   onClick={() => setOpenIndex(open ? -1 : index)}
                   aria-expanded={open}
+                  aria-controls={`faq-a-${index}`}
                   id={`faq-q-${index}`}
                 >
                   {item.question}

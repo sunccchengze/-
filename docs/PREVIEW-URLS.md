@@ -1,4 +1,13 @@
-# 预览地址（不要 merge main 也能看）
+# 预览地址
+
+## 首页方案比较器
+
+只在带参数时展示 5 个内部候选首页；不会出现在新生正式访问页面：
+
+`https://arena-019fbe18-repo.yzaxs-1.pages.dev/?preview=hero`
+
+当前正式候选为 **V3 分屏叙事**：左侧保证信息可读，右侧只保留一张主视觉，避免整屏轮播造成杂乱。
+（不要 merge main 也能看）
 
 > 原则：**不要为了预览去 merge PR**。Arena 会话绑在分支 `arena/019fbe18-repo` 上，合进 `main` 可能导致会话结束。
 

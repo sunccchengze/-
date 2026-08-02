@@ -73,6 +73,60 @@
 按你的要求：**不加**百度统计 / Google Analytics / 任何埋点。
 ---
 
+### Q-024｜项目部门排序中的“萤火”重复提及
+
+你提出的排序文字中“萤火”出现两次。为避免等待，我先按下列逻辑实施：
+
+```text
+前卫 → 洩湖 → 萤火（儿童） → 向日葵 → 常青藤（长者） → 陕博 → 启明星 → 心项目（公共空间）
+```
+
+如果你希望第二个“萤火”其实是其他部门，后续告诉我即可调整。
+
+---
+
+### Q-023｜荣誉典藏墙的真实奖状/奖杯图片
+
+已新增“打开荣誉典藏墙”全屏展陈：12 个重点奖项都有独立图片槽位。
+
+**请按以下路径上传真实证书、奖状、奖杯照片或官方获奖截图：**
+
+```text
+public/images/honors/HONOR-01.jpg  榜样100全国优秀大学生社团
+public/images/honors/HONOR-02.jpg  榜样100 · 玉树支教团
+public/images/honors/HONOR-03.jpg  榜样100 · 知行秦川
+public/images/honors/HONOR-04.jpg  立邦支教奖
+public/images/honors/HONOR-05.jpg  西门子爱绿教育计划
+public/images/honors/HONOR-06.jpg  省级优秀团队
+public/images/honors/HONOR-07.jpg  五星级社团
+public/images/honors/HONOR-08.jpg  文明社团
+public/images/honors/HONOR-09.jpg  最佳团日一等奖
+public/images/honors/HONOR-10.jpg  红旗团支部
+public/images/honors/HONOR-11.jpg  学雷锋优秀组织
+public/images/honors/HONOR-12.jpg  学雷锋优秀项目
+```
+
+建议：竖版证书优先，保持原始比例，不要压字；奖杯照片可保留背景但要避免反光。当前未上传时会显示明确的“荣誉证明待替换”典藏占位，不会伪造证书。
+
+---
+
+### Q-022｜V2 Pro 轮播的两张指定真实照片
+
+你要求 V2 Pro 首页轮播必须包含：
+
+1. **社团大合影**；
+2. **第十六届新任社长团合影**。
+
+当前仓库中没有能从文件名可靠确认对应身份的专用素材。我已先建立轮播槽位和诗意文案，但不会把普通活动图冒充为社长团合影。
+
+**请后续上传/告诉我文件名：**
+- `首页_大合影.jpg`（建议横图，活动后全社合影）
+- `首页_第十六届社长团.jpg`（建议横图，现任社长团与指导老师或成员合影）
+
+收到后我会直接替换 `src/config.ts` 对应路径。
+
+---
+
 ### 其它仍开放
 
 | 编号 | 内容 |

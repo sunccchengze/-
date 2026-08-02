@@ -1,16 +1,16 @@
 import {
   About,
   Departments,
+  EagleMascot,
   FAQ,
-  FloatingChrome,
   Footer,
-  Hero,
   HonorMarquee,
   Honors,
   JoinCTA,
   Leadership,
   MemberVoices,
   Navigation,
+  NewcomerPath,
   ScrollProgress,
   SocialMedia,
   Statistics,
@@ -18,6 +18,14 @@ import {
   TrustBar,
   WhyJoin,
 } from "./components";
+import { HeroPreview } from "./components/HeroPreview";
+import { HeroV2Pro } from "./components/HeroV2Pro";
+
+/**
+ * 正常访问只展示正式首页；仅在 ?preview=hero 时开放 5 版首屏比较器。
+ * 避免内部设计工具误出现在面向新生的招新页面。
+ */
+const isHeroPreview = new URLSearchParams(window.location.search).get("preview") === "hero";
 
 export default function App() {
   return (
@@ -31,9 +39,10 @@ export default function App() {
       <ScrollProgress />
       <Navigation />
       <main id="main-content">
-        <Hero />
+        {isHeroPreview ? <HeroPreview /> : <HeroV2Pro />}
         <TrustBar />
         <About />
+        <NewcomerPath />
         <Statistics />
         <HonorMarquee />
         <SummerPractice />
@@ -47,7 +56,7 @@ export default function App() {
         <FAQ />
       </main>
       <Footer />
-      <FloatingChrome />
+      <EagleMascot />
     </>
   );
 }

@@ -59,7 +59,7 @@ export function Navigation() {
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || open
           ? "border-b border-white/10 bg-[#2a1816]/90 shadow-lg shadow-black/15 backdrop-blur-xl"
-          : "bg-transparent"
+          : "border-b border-white/10 bg-[#2a1816]/78 shadow-sm shadow-black/10 backdrop-blur-md"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 md:h-[72px] md:px-6">
@@ -72,7 +72,7 @@ export function Navigation() {
           <span className="flex flex-col items-start leading-tight">
             <span className="font-serif-cn text-lg font-bold tracking-wide">{brand.name}</span>
             <span className="hidden text-[10px] tracking-[0.14em] text-white/55 sm:inline">
-              校级五星级 · 2026 秋招
+              校级五星级 · 2026 招新
             </span>
           </span>
         </a>

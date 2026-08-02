@@ -2,14 +2,24 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { IMG_第6页背景 } from "../config";
-import { departmentsIntro, functionalDepartments, projectDepartments, type Department } from "../content";
+import { departmentFinder, departmentsIntro, functionalDepartments, projectDepartments, skillRoutes, type Department } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
-function DepartmentCard({ department, index }: { department: Department; index: number }) {
+function DepartmentCard({
+  department,
+  index,
+  suggested,
+}: {
+  department: Department;
+  index: number;
+  suggested: boolean;
+}) {
   const Icon = department.icon;
   return (
     <motion.article
-      className="card-hover card-outline-gradient flex h-full flex-col overflow-hidden rounded-[24px]"
+      className={`card-hover card-outline-gradient relative flex h-full flex-col overflow-hidden rounded-[24px] ${
+        suggested ? "dept-recommended z-10" : ""
+      }`}
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
@@ -28,6 +38,11 @@ function DepartmentCard({ department, index }: { department: Department; index: 
         {department.brandNote ? (
           <div className="absolute bottom-4 left-4 z-10 rounded-full bg-black/45 px-3 py-1 text-[11px] text-white backdrop-blur-sm">
             {department.brandNote}
+          </div>
+        ) : null}
+        {suggested ? (
+          <div className="absolute right-4 top-4 z-10 rounded-full border border-white/40 bg-rouge-deep px-3 py-1.5 text-xs font-bold tracking-wide text-white shadow-lg shadow-rouge/30">
+            为你推荐
           </div>
         ) : null}
       </div>
@@ -71,7 +86,17 @@ function DepartmentCard({ department, index }: { department: Department; index: 
 
 export function Departments() {
   const [activeTab, setActiveTab] = useState<"functional" | "project">("project");
+  const [suggestedRoute, setSuggestedRoute] = useState<string | null>(null);
   const departments = activeTab === "functional" ? functionalDepartments : projectDepartments;
+  const suggestedNames = departmentFinder.find((item) => item.title === suggestedRoute)?.departments ?? [];
+
+  const chooseRoute = (title: string) => {
+    setSuggestedRoute(title);
+    setActiveTab("project");
+    window.setTimeout(() => {
+      document.getElementById("dept-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 0);
+  };
 
   return (
     <section id="departments" className="bg-shell section-block">
@@ -84,7 +109,46 @@ export function Departments() {
           subtitle={departmentsIntro.subtitle}
         />
 
-        <div className="mt-14 flex justify-center">
+        <div className="mx-auto mt-12 max-w-5xl">
+          <p className="text-center font-serif-cn text-base font-bold text-ink">还不知道部门名？先按你想走近的人和场景选。</p>
+          <div className="mt-5 grid gap-3 md:grid-cols-3">
+            {departmentFinder.map((item) => {
+              const selected = suggestedRoute === item.title;
+              return (
+                <button
+                  key={item.title}
+                  type="button"
+                  className={`focus-ring rounded-2xl border px-5 py-4 text-left backdrop-blur-sm transition ${
+                    selected
+                      ? "border-rouge bg-rouge/[0.09] shadow-md shadow-rouge/10"
+                      : "border-rouge/10 bg-white/70 hover:border-rouge/35 hover:bg-white/90"
+                  }`}
+                  onClick={() => chooseRoute(item.title)}
+                  aria-pressed={selected}
+                >
+                  <p className="font-serif-cn text-base font-bold text-rouge-deep">{item.title}</p>
+                  <p className="mt-1 text-sm leading-6 text-muted">{item.detail}</p>
+                  <p className="mt-2 text-xs font-medium tracking-wide text-rouge">{item.routes}</p>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="mx-auto mt-7 max-w-5xl">
+          <p className="text-center font-serif-cn text-base font-bold text-ink">也可以按你想练的本事看</p>
+          <div className="mt-5 grid gap-3 md:grid-cols-3">
+            {skillRoutes.map((item) => (
+              <div key={item.title} className="rounded-2xl border border-rouge/10 bg-white/70 px-5 py-4 text-left backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-rouge/35 hover:bg-white/90">
+                <p className="font-serif-cn text-base font-bold text-rouge-deep">{item.title}</p>
+                <p className="mt-1 text-sm leading-6 text-muted">{item.detail}</p>
+                <p className="mt-2 text-xs font-medium tracking-wide text-rouge">{item.routes}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10 flex justify-center">
           <div className="glass-panel relative flex h-14 w-[280px] rounded-full bg-white/50 p-1.5 md:w-[320px]" role="tablist" aria-label="部门类型">
             <motion.div
               className="absolute inset-y-1.5 rounded-full bg-warm-gradient shadow-md"
@@ -111,13 +175,22 @@ export function Departments() {
                 className={`relative z-10 flex flex-1 items-center justify-center font-serif-cn text-base font-bold transition-colors duration-300 md:text-lg ${
                   activeTab === tab.id ? "text-white" : "text-muted hover:text-rouge"
                 }`}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => {
+                  setActiveTab(tab.id);
+                  setSuggestedRoute(null);
+                }}
               >
                 {tab.label}
               </button>
             ))}
           </div>
         </div>
+
+        {suggestedRoute && activeTab === "project" ? (
+          <p className="mt-8 text-center text-sm text-muted" aria-live="polite">
+            已为你优先标出「{suggestedRoute}」相关方向；其余部门也仍可继续浏览。
+          </p>
+        ) : null}
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -131,13 +204,18 @@ export function Departments() {
             transition={{ duration: 0.35 }}
           >
             {departments.map((department, index) => (
-              <DepartmentCard key={department.name} department={department} index={index} />
+              <DepartmentCard
+                key={department.name}
+                department={department}
+                index={index}
+                suggested={activeTab === "project" && suggestedNames.includes(department.name)}
+              />
             ))}
           </motion.div>
         </AnimatePresence>
 
         <div className="mx-auto mt-12 grid max-w-3xl gap-3 sm:grid-cols-2">
-          /* brand legend */
+          {/* 助学线 / 敬老线说明。 */}
           {departmentsIntro.legend.map((item) => (
             <div
               key={item.name}
@@ -148,7 +226,11 @@ export function Departments() {
             </div>
           ))}
         </div>
-        <p className="mt-10 text-center font-serif-cn text-base text-muted md:text-lg">{departmentsIntro.footer}</p>
+        <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-gold-soft/30 bg-gold-soft/[0.08] px-5 py-4 text-left">
+          <p className="font-serif-cn text-sm font-bold text-gold">旁听制度 · 多一种体验</p>
+          <p className="mt-2 text-sm leading-7 text-muted">{departmentsIntro.observerNote}</p>
+        </div>
+        <p className="mt-6 text-center font-serif-cn text-base text-muted md:text-lg">{departmentsIntro.footer}</p>
       </div>
     </section>
   );

@@ -31,7 +31,7 @@ export function About() {
         <SectionHeader
           eyebrow={about.eyebrow}
           title={about.title}
-          subtitle="2026 秋季招新 · 五星级 · 十七载玉树 · 全国唯一非唐奖生组成的唐仲英爱心社"
+          subtitle="2026 招新 · 五星级 · 十七载玉树 · 全国唯一非唐奖生组成的唐仲英爱心社"
         />
         <motion.div
           className="glass-panel mx-auto mt-12 max-w-4xl space-y-6 rounded-3xl p-8 text-justify text-base leading-[2] text-muted md:p-14 md:text-lg"
