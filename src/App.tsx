@@ -18,7 +18,7 @@ import {
   WhyJoin,
 } from "./components";
 import { HeroPreview } from "./components/HeroPreview";
-import { HeroV3 } from "./components/HeroV3";
+import { HeroV2Pro } from "./components/HeroV2Pro";
 
 /**
  * 正常访问只展示正式首页；仅在 ?preview=hero 时开放 5 版首屏比较器。
@@ -38,7 +38,7 @@ export default function App() {
       <ScrollProgress />
       <Navigation />
       <main id="main-content">
-        {isHeroPreview ? <HeroPreview /> : <HeroV3 />}
+        {isHeroPreview ? <HeroPreview /> : <HeroV2Pro />}
         <TrustBar />
         <About />
         <Statistics />

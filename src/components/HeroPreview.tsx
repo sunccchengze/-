@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Hero } from "./Hero";
 import { HeroV1 } from "./HeroV1";
 import { HeroV2 } from "./HeroV2";
+import { HeroV2Pro } from "./HeroV2Pro";
 import { HeroV3 } from "./HeroV3";
 import { HeroV4 } from "./HeroV4";
 import { HeroV5 } from "./HeroV5";
@@ -12,20 +13,22 @@ import { HeroV5 } from "./HeroV5";
 const versions = [
   { id: "original", name: "原版", desc: "轮播背景+悬浮蒙版" },
   { id: "v1", name: "V1 数字驱动", desc: "Charity:Water风·具体数据突出" },
-  { id: "v2", name: "V2 全屏沉浸", desc: "GirlsWhoCode风·冲击力强" },
+  { id: "v2", name: "V2 原版", desc: "单图分栏·旧候选保留" },
+  { id: "v2pro", name: "V2 Pro · 正式", desc: "轮播分栏·当前正式首页" },
   { id: "v3", name: "V3 分屏叙事", desc: "WaterAid风·左右布局" },
   { id: "v4", name: "V4 极简克制", desc: "Medium风·大量留白" },
   { id: "v5", name: "V5 分屏固定", desc: "Obama风·沉浸叙事" },
 ];
 
 export function HeroPreview() {
-  // V3 是当前正式候选：信息清楚、图片只承担一个视觉焦点。
-  const [active, setActive] = useState("v3");
+  // V2 Pro 是当前正式候选：保留 V2 分栏并融合轮播、Logo 与完整招新信息。
+  const [active, setActive] = useState("v2pro");
 
   const HeroComponent = {
     original: Hero,
     v1: HeroV1,
     v2: HeroV2,
+    v2pro: HeroV2Pro,
     v3: HeroV3,
     v4: HeroV4,
     v5: HeroV5,

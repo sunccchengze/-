@@ -118,6 +118,21 @@ button {
     linear-gradient(180deg, rgba(40, 24, 24, 0.55) 0%, rgba(30, 20, 20, 0.85) 100%);
 }
 
+/* —— V2 Pro 首页：桌面左深右淡，手机改为上下遮罩 —— */
+.hero-v2pro-veil {
+  background:
+    linear-gradient(90deg, rgba(21, 12, 11, 0.94) 0%, rgba(27, 15, 13, 0.82) 38%, rgba(33, 18, 16, 0.46) 66%, rgba(25, 14, 13, 0.16) 100%),
+    linear-gradient(180deg, rgba(18, 10, 9, 0.36) 0%, transparent 35%, rgba(18, 10, 9, 0.28) 100%);
+}
+
+@media (max-width: 1023px) {
+  .hero-v2pro-veil {
+    background:
+      linear-gradient(180deg, rgba(21, 12, 11, 0.88) 0%, rgba(27, 15, 13, 0.78) 58%, rgba(25, 14, 13, 0.58) 100%),
+      linear-gradient(90deg, rgba(20, 12, 10, 0.22), rgba(20, 12, 10, 0.12));
+  }
+}
+
 /* —— Eyebrow / 装饰线 —— */
 .eyebrow {
   color: var(--color-rouge);
