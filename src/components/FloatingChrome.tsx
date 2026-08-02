@@ -51,7 +51,7 @@ export function FloatingChrome() {
             <div className="mx-auto flex max-w-lg items-center gap-3 md:max-w-none">
               <p className="min-w-0 flex-1 text-xs leading-snug text-white/85 md:hidden">
                 <span className="font-serif-cn font-bold text-white">加入英仔</span>
-                <span className="mt-0.5 block text-white/65">五星级公益 · 工时可认证</span>
+                <span className="mt-0.5 block text-white/65">五星级公益 · 多元项目持续开展</span>
               </p>
               <p className="hidden font-serif-cn text-sm font-bold text-white md:block">准备好了吗？</p>
               <a
