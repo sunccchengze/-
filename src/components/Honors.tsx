@@ -42,7 +42,7 @@ export function Honors() {
         <SectionHeader
           eyebrow="ACHIEVEMENTS"
           title="荣誉高光"
-          subtitle="答辩材料里的硬货：国家级五项 · 五星级 × 连续优秀 · 最佳团日 · 红旗团支部"
+          subtitle="本学年高光：国家级荣誉五项 · 五星级 × 连续优秀 · 最佳团日 · 红旗团支部"
           invert
         />
 

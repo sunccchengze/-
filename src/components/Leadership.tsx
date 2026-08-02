@@ -4,7 +4,7 @@ import { leadership } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
 export function Leadership() {
-  const { presidentMessage, advisor, core, coreTitle, advisorNote } = leadership;
+  const { presidentMessage, advisor, core, coreTitle } = leadership;
 
   return (
     <section id="team" className="bg-shell section-block">
@@ -63,7 +63,6 @@ export function Leadership() {
               </div>
               <p className="mt-5 font-serif-cn text-2xl font-bold text-rouge-deep">{advisor.name}</p>
               <p className="mt-1 text-sm text-muted">{advisor.title}</p>
-              {advisorNote ? <p className="mt-3 text-xs leading-5 text-muted">{advisorNote}</p> : null}
             </motion.div>
 
             <motion.div
@@ -74,7 +73,7 @@ export function Leadership() {
               transition={{ delay: 0.14, duration: 0.55 }}
             >
               <p className="text-xs font-bold tracking-[0.2em] text-rouge">
-                TEAM · {coreTitle ?? "社长团成员"}
+                {coreTitle ?? "社长团成员"}
               </p>
               <ul className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 {core.map((person) => (
@@ -82,14 +81,11 @@ export function Leadership() {
                     key={`${person.name}-${person.role}`}
                     className="flex items-baseline justify-between gap-2 rounded-xl bg-white/70 px-3 py-2.5 ring-1 ring-rouge/10"
                   >
-                    <span className="shrink-0 text-xs leading-4 text-muted">{person.role}</span>
-                    <span className="font-serif-cn text-sm font-bold text-ink">{person.name}</span>
+                    <span className="min-w-0 flex-1 text-xs leading-4 text-muted">{person.role}</span>
+                    <span className="shrink-0 font-serif-cn text-sm font-bold text-ink">{person.name}</span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-xs leading-5 text-muted">
-                第十六届社长团 · 换届推送定稿 · 不展示私人联系方式
-              </p>
             </motion.div>
           </div>
         </div>

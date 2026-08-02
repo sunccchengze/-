@@ -33,7 +33,7 @@ export function Statistics() {
         <SectionHeader
           eyebrow="IMPACT · THIS YEAR"
           title="用数字感受这一年"
-          subtitle="星级答辩里反复亮相的硬货：五星级底色、国家级荣誉、以及一次次被累计的陪伴"
+          subtitle="五星级底色、国家级荣誉，以及一次次被累计的陪伴与服务时长"
         />
         <div className="mt-16 grid gap-8 md:grid-cols-3 md:gap-10">
           {stats.map((stat, index) => (

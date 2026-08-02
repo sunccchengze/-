@@ -148,7 +148,7 @@ export function SummerPractice() {
         >
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <p className="font-serif-cn text-sm font-bold tracking-[0.2em] text-rouge">MORE ROUTES · 同季出发</p>
-            <p className="text-xs text-muted">启明星 · 青伴 · 陕博——故事很长，这里先留一张地图</p>
+            <p className="text-xs text-muted">2026.7 同季还有这些方向</p>
           </div>
           <ul className="mt-5 grid gap-4 md:grid-cols-3">
             {summerMore.map((item) => (
