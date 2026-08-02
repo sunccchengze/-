@@ -3,7 +3,6 @@ import {
   Departments,
   EagleMascot,
   FAQ,
-  FloatingChrome,
   Footer,
   HonorMarquee,
   Honors,
@@ -56,7 +55,6 @@ export default function App() {
       </main>
       <Footer />
       <EagleMascot />
-      <FloatingChrome />
     </>
   );
 }

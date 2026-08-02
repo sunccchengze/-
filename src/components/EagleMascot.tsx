@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, MessageCircle, X } from "lucide-react";
+import { ChevronDown, Heart, MessageCircle, Sparkles, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { IMG_小鹰正面, IMG_小鹰侧面, IMG_小鹰背面 } from "../config";
 
@@ -26,6 +26,7 @@ export function EagleMascot() {
   const [open, setOpen] = useState(true);
   const [section, setSection] = useState("top");
   const [moving, setMoving] = useState(false);
+  const [heartBurst, setHeartBurst] = useState(false);
 
   useEffect(() => {
     const ids = ["top", "summer", "departments", "join"];
@@ -65,6 +66,15 @@ export function EagleMascot() {
   const mood: EagleMood = open ? (moving ? "side" : "front") : "back";
   const message = sectionMessages[section] ?? sectionMessages.top;
 
+  const sendHeart = () => {
+    setHeartBurst(true);
+    window.setTimeout(() => setHeartBurst(false), 950);
+  };
+
+  const goJoin = () => {
+    document.getElementById("join")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <aside className="eagle-mascot fixed bottom-20 right-3 z-40 flex items-end gap-2 sm:bottom-7 sm:right-5 md:bottom-7 md:right-28" aria-label="英仔小鹰引导员">
       <AnimatePresence initial={false}>
@@ -78,6 +88,24 @@ export function EagleMascot() {
             aria-live="polite"
           >
             <p>{message}</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={sendHeart}
+                className="focus-ring inline-flex items-center gap-1 rounded-full bg-rouge/10 px-2.5 py-1 text-xs font-bold text-rouge-deep transition hover:bg-rouge hover:text-white"
+              >
+                <Heart className="h-3 w-3" aria-hidden="true" />
+                送你爱心
+              </button>
+              <button
+                type="button"
+                onClick={goJoin}
+                className="focus-ring inline-flex items-center gap-1 rounded-full bg-gold-soft/20 px-2.5 py-1 text-xs font-bold text-ink transition hover:bg-gold-soft hover:text-white"
+              >
+                <Sparkles className="h-3 w-3" aria-hidden="true" />
+                带我加入
+              </button>
+            </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
@@ -88,6 +116,25 @@ export function EagleMascot() {
             </button>
             <span className="eagle-speech-tail" aria-hidden="true" />
           </motion.div>
+        ) : null}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {heartBurst ? (
+          <div className="pointer-events-none absolute -right-3 -top-14 h-28 w-28" aria-hidden="true">
+            {[[-22, -10], [0, -38], [24, -18], [-10, -55], [34, -48]].map(([x, y], index) => (
+              <motion.span
+                key={`${x}-${y}`}
+                className="absolute left-1/2 top-1/2 text-rouge"
+                initial={{ opacity: 0, scale: 0.4, x: 0, y: 0 }}
+                animate={{ opacity: [0, 1, 0], scale: [0.4, 1, 0.8], x, y }}
+                exit={{ opacity: 0 }}
+                transition={{ delay: index * 0.05, duration: 0.75, ease: "easeOut" }}
+              >
+                <Heart className="h-4 w-4 fill-current" />
+              </motion.span>
+            ))}
+          </div>
         ) : null}
       </AnimatePresence>
 
