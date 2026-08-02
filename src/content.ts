@@ -128,7 +128,7 @@ export const leadership = {
     name: "王晗宇",
     title: "社长",
     quote:
-      "我们将传承英仔爱心社的优良传统，统筹协调、凝心聚力，聚焦助学助老、特殊儿童关怀、生态保护、文博服务等核心领域，把活动做得更扎实，把队伍带得更齐心，让更多同学在公益路上被接住、被看见。",
+      "欢迎你来英仔。我们会把助学、敬老、特殊儿童关怀、生态保护和文博服务一件件做扎实，把队伍带得更齐心——让想做好事的人，在这里被接住、被锻炼、被看见。",
     note: "",
   },
   coreTitle: "社长团成员",
@@ -160,7 +160,7 @@ export const about = {
   ],
 };
 
-/* ───────── Impact：星级答辩高频展示数据 ───────── */
+/* ───────── Impact 数据 ───────── */
 
 export const stats = [
   { value: 17, suffix: "届", label: "玉树支教接力", hint: "2010 驰援起航，2026 再赴称多" },
@@ -179,7 +179,7 @@ export const statsSecondary = [
 export const statsFooter =
   "近两千人次参与 · 五星级社团 × 红旗团支部 · 知行秦川双线（九峰 / 彬州）";
 /* ───────── 暑期实践 Spotlight ───────── */
-/* 按推送严格区分：部门 × 地点 × 活动，不混写 */
+/* 暑期实践：按部门与地点区分 */
 
 export type SummerCard = {
   id: string;
@@ -395,7 +395,7 @@ export const honors = [
 ];
 
 export const honorsNote =
-  "自 2010 年以来荣誉远不止这一页。时间线只摘本学年高光——完整故事，在每一次出发与每一次归来里。";
+  "自 2010 年以来荣誉远不止这一页。这里只摘本学年高光——完整故事，在每一次出发与归来里。";
 
 /* ───────── Departments ───────── */
 
@@ -415,7 +415,7 @@ export const functionalDepartments: Department[] = [
   {
     name: "常务部",
     image: IMG_常务部,
-    positioning: "让整艘船稳稳向前的大管家",
+    positioning: "保障社团运转的大管家",
     tags: ["会议统筹", "财务物资", "制度与考核"],
     highlights: [
       "组织大型会议，守护章程与内务秩序",
@@ -429,7 +429,7 @@ export const functionalDepartments: Department[] = [
   {
     name: "交流部",
     image: IMG_交流部,
-    positioning: "家文化的营造者，对外联结的桥梁",
+    positioning: "把大家连在一起，也连向校外",
     tags: ["招新体验", "团建活动", "社内文化"],
     highlights: [
       "组织招新、破冰、游园与节日活动",
@@ -443,7 +443,7 @@ export const functionalDepartments: Department[] = [
   {
     name: "宣传部",
     image: IMG_宣传部,
-    positioning: "把善意翻译成影像与故事的门面",
+    positioning: "用影像与文字讲好英仔的故事",
     tags: ["公众号", "短视频", "平面影像"],
     highlights: [
       "公众号、B 站、抖音矩阵运营（本学年粉增可观）",
@@ -460,7 +460,7 @@ export const projectDepartments: Department[] = [
   {
     name: "前卫部",
     image: IMG_前卫部,
-    positioning: "九峰助学主场，知行秦川·前卫线的主场",
+    positioning: "周至九峰助学 · 知行秦川前卫线",
     brandNote: "大手拉小手 · 前卫线",
     tags: ["九峰中学", "线上助学", "暑期夏令营"],
     highlights: [
@@ -475,7 +475,7 @@ export const projectDepartments: Department[] = [
   {
     name: "洩湖部",
     image: IMG_洩湖部,
-    positioning: "文姬与彬州的桥梁，知行秦川·洩湖线",
+    positioning: "文姬 / 彬州助学 · 知行秦川洩湖线",
     brandNote: "大手拉小手 · 洩湖线",
     tags: ["文姬中学", "彬州中学", "大学游"],
     highlights: [
@@ -520,7 +520,7 @@ export const projectDepartments: Department[] = [
   {
     name: "启明星",
     image: IMG_启明星,
-    positioning: "校内创新公益 + 中原文脉行走",
+    positioning: "校内公益创新，也能走出去看世界",
     tags: ["守望者", "校内摆摊", "洛阳开封实践"],
     highlights: [
       "校内：「粮安守护」「叶语创绘」「掐丝珐琅」「心声倾诉」与梧桐/樱花摆摊",
@@ -548,7 +548,7 @@ export const projectDepartments: Department[] = [
   {
     name: "陕博部",
     image: IMG_陕博部,
-    positioning: "在文物与观众之间，做历史的译员",
+    positioning: "在陕博，把文物讲给更多人听",
     tags: ["陕历博讲解", "培训", "陕博游"],
     highlights: [
       "寒暑假进馆服务，本学年讲解与引导超 1600 小时",
@@ -562,7 +562,7 @@ export const projectDepartments: Department[] = [
   {
     name: "萤火部",
     image: IMG_萤火部,
-    positioning: "病房、特教与社区——三条线的微光",
+    positioning: "病房、特教与社区里的微光陪伴",
     tags: ["病房疗愈", "千千爱特教", "社区儿童"],
     highlights: [
       "医院：梦想小剧场、游戏止痛药，用艺术缓解医疗恐惧",
@@ -696,8 +696,8 @@ export const joinSteps = [
 ];
 
 export const joinCta = {
-  title: "2026 秋季，下一站可以是玉树或陕博",
-  subtitle: "面向 2026 级。填表或进群问一句——199 人的队伍，留一个位置给你。",
+  title: "2026 秋季，下一站由你选择",
+  subtitle: "面向 2026 级。无论支教、敬老、文博还是宣传——填表或进群问一句，就有人接住你。",
   primary: "填写报名表",
   secondary: "先加招新群",
   footnote: "报名二维码与群入口也在页脚 · 招新 QQ 群 712079220",

@@ -85,7 +85,7 @@ export function Honors() {
               <article className="rounded-2xl border border-dashed border-white/30 bg-white/5 p-6 text-white/80 backdrop-blur-md">
                 <div className="flex items-center gap-3">
                   <MoreHorizontal className="h-6 w-6 text-rouge-mist" />
-                  <p className="font-serif-cn text-lg italic">十五年沉淀，远不止这一页</p>
+                  <p className="font-serif-cn text-lg italic">多年沉淀，远不止这一页</p>
                 </div>
                 <p className="mt-3 text-sm leading-7 text-white/70">{honorsNote}</p>
               </article>
