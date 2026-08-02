@@ -72,6 +72,7 @@ export function HeroV3() {
               <ChevronRight className="h-4 w-4" />
             </a>
           </motion.div>
+          <p className="mt-6 max-w-xl text-sm leading-6 text-muted">{hero.seasonNote}</p>
         </div>
 
         {/* 右侧 - 图片 */}
@@ -83,7 +84,7 @@ export function HeroV3() {
         >
           <img
             src={heroSlides[0]}
-            alt=""
+            alt="英仔爱心社志愿服务活动现场"
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-black/20" />
@@ -97,15 +98,6 @@ export function HeroV3() {
         </motion.div>
       </div>
 
-      {/* 底部信息 */}
-      <motion.p
-        className="absolute bottom-6 left-1/2 max-w-md -translate-x-1/2 text-center text-sm text-white/80 lg:hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-      >
-        {hero.seasonNote}
-      </motion.p>
     </section>
   );
 }

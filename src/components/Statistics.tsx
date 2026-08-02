@@ -85,11 +85,9 @@ export function Statistics() {
         >
           <Award className="h-5 w-5 text-rouge" aria-hidden="true" />
           <p className="font-serif-cn text-sm font-bold text-ink md:text-base">
-            校级五星级
-            <span className="mx-2 font-sans font-normal text-muted">×</span>
-            连续优秀社团底色
+            校级五星级社团
             <span className="mx-2 font-sans font-normal text-muted">·</span>
-            <span className="font-sans text-sm font-normal text-muted">志愿时光很充实</span>
+            <span className="font-sans text-sm font-normal text-muted">长期项目，持续行动</span>
           </p>
         </motion.div>
 
