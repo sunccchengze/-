@@ -575,6 +575,12 @@ export const projectDepartments: Department[] = [
   },
 ];
 
+export const departmentFinder = [
+  { title: "想陪伴孩子", detail: "支教助学、病房与特教、社区儿童", routes: "前卫 · 洩湖 · 萤火" },
+  { title: "想陪伴长者", detail: "社区、老年大学、护理院里的长期相处", routes: "向日葵 · 常青藤" },
+  { title: "想走进公共空间", detail: "文博讲解、校园公益、旧物循环与秦岭保护", routes: "陕博 · 启明星 · 心项目" },
+];
+
 export const departmentsIntro = {
   eyebrow: "OUR DEPARTMENTS",
   title: "找到属于你的位置",

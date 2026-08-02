@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
-import { Award } from "lucide-react";
 import { IMG_第3页背景 } from "../config";
-import { stats, statsFooter, statsSecondary, yearHighlights } from "../content";
+import { stats, statsFooter, statsSecondary } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
 function StatisticNumber({ value }: { value: number }) {
@@ -77,42 +76,8 @@ export function Statistics() {
           ))}
         </div>
 
-        <motion.div
-          className="mx-auto mt-10 flex max-w-2xl flex-wrap items-center justify-center gap-3 rounded-full border border-rouge/15 bg-white/75 px-5 py-3 text-center backdrop-blur-md"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <Award className="h-5 w-5 text-rouge" aria-hidden="true" />
-          <p className="font-serif-cn text-sm font-bold text-ink md:text-base">
-            校级五星级社团
-            <span className="mx-2 font-sans font-normal text-muted">·</span>
-            <span className="font-sans text-sm font-normal text-muted">长期项目，持续行动</span>
-          </p>
-        </motion.div>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {yearHighlights.map((item, index) => (
-            <motion.div
-              key={item.title}
-              className="rounded-2xl border border-rouge/10 bg-white/70 px-5 py-5 backdrop-blur-md transition hover:border-rouge/25 hover:shadow-md hover:shadow-rouge/10"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.08 * index, duration: 0.55 }}
-            >
-              <p className="text-xs tracking-[0.16em] text-rouge">{item.title}</p>
-              <p className="mt-2 font-data text-3xl font-bold text-ink">
-                {item.value}
-                <span className="ml-1 font-serif-cn text-base font-medium text-muted">{item.unit}</span>
-              </p>
-              <p className="mt-2 text-sm leading-6 text-muted">{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-
         <motion.p
-          className="mt-12 text-center font-serif-cn text-base text-rouge md:text-lg"
+          className="mt-10 text-center font-serif-cn text-base text-rouge md:text-lg"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

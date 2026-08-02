@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { IMG_第6页背景 } from "../config";
-import { departmentsIntro, functionalDepartments, projectDepartments, type Department } from "../content";
+import { departmentFinder, departmentsIntro, functionalDepartments, projectDepartments, type Department } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
 function DepartmentCard({ department, index }: { department: Department; index: number }) {
@@ -84,7 +84,20 @@ export function Departments() {
           subtitle={departmentsIntro.subtitle}
         />
 
-        <div className="mt-14 flex justify-center">
+        <div className="mx-auto mt-12 max-w-5xl">
+          <p className="text-center font-serif-cn text-base font-bold text-ink">还不知道部门名？先按你想走近的人和场景选。</p>
+          <div className="mt-5 grid gap-3 md:grid-cols-3">
+            {departmentFinder.map((item) => (
+              <div key={item.title} className="rounded-2xl border border-rouge/10 bg-white/70 px-5 py-4 text-left backdrop-blur-sm">
+                <p className="font-serif-cn text-base font-bold text-rouge-deep">{item.title}</p>
+                <p className="mt-1 text-sm leading-6 text-muted">{item.detail}</p>
+                <p className="mt-2 text-xs font-medium tracking-wide text-rouge">{item.routes}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10 flex justify-center">
           <div className="glass-panel relative flex h-14 w-[280px] rounded-full bg-white/50 p-1.5 md:w-[320px]" role="tablist" aria-label="部门类型">
             <motion.div
               className="absolute inset-y-1.5 rounded-full bg-warm-gradient shadow-md"
