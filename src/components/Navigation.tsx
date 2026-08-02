@@ -72,7 +72,7 @@ export function Navigation() {
           <span className="flex flex-col items-start leading-tight">
             <span className="font-serif-cn text-lg font-bold tracking-wide">{brand.name}</span>
             <span className="hidden text-[10px] tracking-[0.14em] text-white/55 sm:inline">
-              校级五星级 · 2026 秋招
+              校级五星级 · 2026 招新
             </span>
           </span>
         </a>
