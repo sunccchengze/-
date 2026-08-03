@@ -1,8 +1,8 @@
 # 英仔爱心社｜短视频任务状态
 
-> **状态：▶ ACTIVE（2026-08-03）**  
-> 当前第一目标：8 月初招新转化。  
-> 完整策略：[`VIDEO-STRATEGY-RESET.md`](./VIDEO-STRATEGY-RESET.md)。  
+> **状态：▶ ACTIVE（2026-08-03）**
+> 当前第一目标：8 月初招新转化。
+> 完整策略：[`VIDEO-STRATEGY-RESET.md`](./VIDEO-STRATEGY-RESET.md)。
 > 对外事实口径：[`PUBLIC-FACT-REGISTER.md`](./PUBLIC-FACT-REGISTER.md)。
 
 ## 当前立即任务
