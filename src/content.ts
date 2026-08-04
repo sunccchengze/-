@@ -330,6 +330,16 @@ export const summerCards: SummerCard[] = [
 
 
 
+
+/** 已确认的启明星暑期实践；不再混入未确认的敬老、陕历博暑期活动。 */
+export const summerMore = [
+  {
+    name: "启明星 · 启明寻洛，脉续中原",
+    desc: "2026.7 洛阳—开封：隋唐洛阳城、龙门石窟、洛阳博物馆、二里头与开封文旅调研，用脚步读中原文脉。",
+    image: IMG_启明星暑期,
+  },
+] as const;
+
 /* ───────── Why Join ───────── */
 
 export const whyJoin = [
