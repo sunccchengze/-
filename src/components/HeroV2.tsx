@@ -87,12 +87,12 @@ export function HeroV2() {
               {hero.primaryCta}
               <ArrowRight className="ml-2 h-5 w-5" />
             </a>
-            <button className="flex items-center gap-3 text-white/80 hover:text-white">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white/50 transition-all hover:border-white">
+            <a href={hero.secondaryHref} className="flex items-center gap-3 text-white/80 hover:text-white">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white/50 transition-all hover:border-white">
                 <Play className="ml-1 h-5 w-5" />
-              </div>
+              </span>
               <span className="font-serif-cn">了解我们的故事</span>
-            </button>
+            </a>
           </motion.div>
 
           {/* 底部时间 */}

@@ -41,6 +41,7 @@ export function HeroPreview() {
         <p className="hidden shrink-0 px-2 font-serif-cn text-xs font-bold tracking-wider text-muted md:block">内部预览 · 选择首页</p>
         {versions.map((v) => (
           <button
+            type="button"
             key={v.id}
             onClick={() => setActive(v.id)}
             className={`rounded-xl px-4 py-2.5 text-left transition-all ${
