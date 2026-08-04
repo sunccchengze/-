@@ -232,8 +232,8 @@ export const HERO_V2PRO_SLIDES = [
   { src: "/images/首页/首页13.jpg", title: "记录善意", line: "让每一次出发，都被好好看见", detail: "宣传部 · 影像与故事" },
   { src: "/images/首页/首页14.jpg", title: "英仔同行", line: "因为热爱相遇，为了善意并肩", detail: "交流部 · 社团文化" },
   { src: "/images/首页/首页15.jpg", title: "认真守护", line: "把每一份热忱，落成可靠的行动", detail: "常务部 · 稳定运转" },
-  { src: "/images/首页/首页16.jpg", title: "英仔大合影", line: "英为爱，仔一起", detail: "待替换为全社大合影" },
-  { src: "/images/首页/首页17.jpg", title: "新一届英仔", line: "薪火相传，下一站由你加入", detail: "待替换为第十六届社长团合影" },
+  { src: "/images/首页/首页16.jpg", title: "英仔大合影", line: "英为爱，仔一起", detail: "社团伙伴 · 公益同行" },
+  { src: "/images/首页/首页17.jpg", title: "新一届英仔", line: "薪火相传，下一站由你加入", detail: "2026 招新 · 与你相遇" },
 ] as const;
 
 // ─────────────────────────────────────────────────────────────

@@ -55,8 +55,8 @@ function HonorVaultCard({ item, index }: { item: VaultItem; index: number }) {
           ) : (
             <div className="flex h-full flex-col items-center justify-center rounded-xl bg-gradient-to-br from-[#f5ead5] via-[#d8bd89] to-[#8a5e37] px-5 text-center text-[#432b1d]">
               <Trophy className="h-10 w-10 text-[#8a5e37]" strokeWidth={1.3} aria-hidden="true" />
-              <p className="mt-5 font-serif-cn text-lg font-bold leading-7">荣誉证明待替换</p>
-              <p className="mt-3 text-xs leading-5">上传真实证书、奖杯或官方截图后自动展示</p>
+              <p className="mt-5 font-serif-cn text-lg font-bold leading-7">荣誉证明暂无法加载</p>
+              <p className="mt-3 text-xs leading-5">请刷新页面后重试</p>
             </div>
           )}
           <span className="absolute bottom-4 left-4 right-4 rounded-lg bg-black/35 px-2 py-1.5 text-center text-[10px] font-bold text-white backdrop-blur-sm">

@@ -15,7 +15,7 @@ export function FAQ() {
         <SectionHeader
           eyebrow="FAQ"
           title="新生最常问"
-          subtitle="时间、部门、工时、零基础——把顾虑留在报名之前"
+          subtitle="时间、部门、零基础——把顾虑留在报名之前"
         />
         <div className="mx-auto mt-14 max-w-4xl space-y-4">
           {faqs.map((item, index) => {
