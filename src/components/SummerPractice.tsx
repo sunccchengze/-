@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Image as ImageIcon, MapPin } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { IMG_第11页背景 } from "../config";
-import { summerCards, summerMore, summerSection, type SummerCard } from "../content";
+import { summerCards, summerSection, type SummerCard } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
 /**
@@ -229,33 +229,6 @@ export function SummerPractice() {
           ))}
         </div>
 
-        <motion.div
-          className="glass-panel mt-12 rounded-3xl p-7 md:p-9"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <p className="font-serif-cn text-sm font-bold tracking-[0.2em] text-rouge">MORE ROUTES · 同季出发</p>
-            <p className="text-xs text-muted">2026.7 同季还有这些方向</p>
-          </div>
-          <ul className="mt-5 grid gap-4 md:grid-cols-3">
-            {summerMore.map((item) => (
-              <li
-                key={item.name}
-                className="card-hover group overflow-hidden rounded-2xl bg-white/70 ring-1 ring-rouge/10"
-              >
-                <div className="image-shell aspect-[2.35/1] overflow-hidden">
-                  <SummerRouteImage src={item.image} alt={`${item.name}活动影像`} />
-                </div>
-                <div className="px-4 pb-4 pt-3">
-                  <p className="font-serif-cn text-base font-bold text-ink">{item.name}</p>
-                  <p className="mt-2 text-sm leading-6 text-muted">{item.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
         <p className="mt-10 text-center text-sm text-muted">
           想成为下一张合影里的人？
           <a href="#join" className="ml-1 font-medium text-rouge underline-offset-4 hover:underline">

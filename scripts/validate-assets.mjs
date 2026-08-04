@@ -12,7 +12,6 @@ for (const file of files) {
 const intentional = new Set([
   '/videos/summer/2026-qinchuan-recap.mp4',
   '/videos/summer/2026-yushu-recap.mp4',
-  ...Array.from({ length: 3 }, (_, i) => `/images/暑期实践/同季出发/同季${i + 1}.jpg`),
   ...Array.from({ length: 27 }, (_, i) => `/images/荣誉/荣誉${i + 1}.jpg`),
 ]);
 
