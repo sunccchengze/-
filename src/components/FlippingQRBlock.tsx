@@ -24,11 +24,11 @@ export function FlippingQRBlock({ qrSrc, label }: { qrSrc: string; label: string
         transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         // CSS reduced-motion globally collapses duration
       >
-        <div className="backface-hidden glass-panel absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-white p-2 ring-1 ring-white/30">
+        <div className="backface-hidden glass-panel absolute inset-0 flex flex-col items-center justify-center rounded-xl !bg-transparent p-0 ring-1 ring-white/30">
           <img
             src={qrSrc}
             alt={label}
-            className="h-[110px] w-[110px] rounded-lg bg-white object-contain"
+            className="h-[120px] w-[120px] rounded-xl object-contain"
             loading="lazy"
           />
           <p className="mt-2 text-center text-xs font-medium text-muted">{label}</p>

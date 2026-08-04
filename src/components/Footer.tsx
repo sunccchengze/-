@@ -40,11 +40,11 @@ export function Footer() {
             <h3 className="mb-5 font-medium text-white">联系我们</h3>
             <div className="flex flex-wrap items-center gap-6">
               <figure className="text-center">
-                <div className="glass-panel rounded-xl bg-white p-2 ring-1 ring-white/30">
+                <div className="glass-panel rounded-xl !bg-transparent p-0 ring-1 ring-white/30">
                   <img
                     src={IMG_报名二维码}
                     alt="扫码报名"
-                    className="h-[110px] w-[110px] rounded-lg bg-white object-contain"
+                    className="h-[110px] w-[110px] rounded-xl object-contain"
                     loading="lazy"
                   />
                 </div>
