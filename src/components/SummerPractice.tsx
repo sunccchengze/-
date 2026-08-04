@@ -87,63 +87,44 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
       viewport={{ once: true, amount: 0.15 }}
       transition={{ delay: index * 0.12, duration: 0.75 }}
     >
-      <div
-        className={`grid md:grid-cols-[0.95fr_1.05fr] ${
-          index % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
-        }`}
-      >
-        <div className="relative flex min-h-[260px] items-center justify-center overflow-hidden bg-[#e8ddd1] md:min-h-[480px]">
-          <img src={card.images[0]} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-30 blur-xl" />
-          <div className="relative aspect-square w-full max-w-full overflow-hidden shadow-[0_18px_40px_rgba(77,45,35,0.18)]">
-            <SummerImageCarousel images={card.images} alt={card.title} />
-          </div>
+      <div className={`grid md:grid-cols-2 ${index % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}>
+        <div className="relative aspect-square overflow-hidden bg-[#e8ddd1]">
+          <SummerImageCarousel images={card.images} alt={card.title} />
           <div className="absolute left-5 top-5 z-10 flex flex-col items-start gap-2">
-            <span className="rounded-full bg-white/92 px-3 py-1.5 text-xs font-bold tracking-wide text-rouge-deep backdrop-blur-md">
-              {card.badge}
-            </span>
-            <span className="rounded-full bg-rouge-deep/90 px-3 py-1 text-[11px] font-medium text-white backdrop-blur-md">
-              {card.dept}
-            </span>
+            <span className="rounded-full bg-white/92 px-3 py-1.5 text-xs font-bold tracking-wide text-rouge-deep backdrop-blur-md">{card.badge}</span>
+            <span className="rounded-full bg-rouge-deep/90 px-3 py-1 text-[11px] font-medium text-white backdrop-blur-md">{card.dept}</span>
           </div>
         </div>
-        <div className="flex flex-col justify-center p-7 md:p-10 lg:p-12">
+
+        <div className="flex flex-col justify-center p-7 md:p-9 lg:p-10">
           <div className="flex items-start gap-2 text-sm text-muted">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-rouge" />
             <span>{card.place}</span>
           </div>
           <h3 className="mt-3 font-serif-cn text-2xl font-bold leading-snug text-ink md:text-[30px]">{card.title}</h3>
           <p className="mt-3 font-serif-cn text-base italic leading-7 text-rouge md:text-lg">{card.poetic}</p>
-          <p className="mt-4 text-[15px] leading-[1.85] text-muted">{card.story}</p>
           <p className="mt-5 rounded-xl bg-gold-soft/[0.10] px-4 py-3 text-sm leading-6 text-ink">
-            <span className="font-serif-cn font-bold text-gold">参与说明 · </span>
-            {card.newcomerEntry}
+            <span className="font-serif-cn font-bold text-gold">参与说明 · </span>{card.newcomerEntry}
           </p>
-
-          <ul className="mt-5 space-y-2.5 border-l-2 border-rouge/25 pl-4">
-            {card.beats.map((beat) => (
-              <li key={beat} className="text-sm leading-6 text-ink/80">
-                {beat}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-7 grid grid-cols-3 gap-3">
-            {card.stats.map((s) => (
-              <div key={s.label} className="rounded-2xl bg-rouge/5 px-2 py-3 text-center ring-1 ring-rouge/10">
-                <p className="font-data text-xl font-bold text-rouge-deep md:text-2xl">{s.value}</p>
-                <p className="mt-1 text-[11px] text-muted">{s.label}</p>
+          <div className="mt-6 grid grid-cols-3 gap-3">
+            {card.stats.map((stat) => (
+              <div key={stat.label} className="rounded-2xl bg-rouge/5 px-2 py-3 text-center ring-1 ring-rouge/10">
+                <p className="font-data text-xl font-bold text-rouge-deep md:text-2xl">{stat.value}</p>
+                <p className="mt-1 text-[11px] text-muted">{stat.label}</p>
               </div>
             ))}
           </div>
-
           <div className="mt-5 flex flex-wrap gap-2">
-            {card.tags.map((t) => (
-              <span key={t} className="tag-pill">
-                {t}
-              </span>
-            ))}
+            {card.tags.map((tag) => <span key={tag} className="tag-pill">{tag}</span>)}
           </div>
         </div>
+      </div>
+
+      <div className="border-t border-rouge/10 px-7 py-7 md:px-10 md:py-8 lg:px-12">
+        <p className="text-[15px] leading-[1.85] text-muted">{card.story}</p>
+        <ul className="mt-6 grid gap-x-8 gap-y-2.5 border-l-2 border-rouge/25 pl-4 md:grid-cols-2">
+          {card.beats.map((beat) => <li key={beat} className="text-sm leading-6 text-ink/80">{beat}</li>)}
+        </ul>
       </div>
     </motion.article>
   );
