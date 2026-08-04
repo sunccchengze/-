@@ -9,25 +9,23 @@ function DepartmentCard({
   department,
   index,
   suggested,
-  wide = false,
 }: {
   department: Department;
   index: number;
   suggested: boolean;
-  wide?: boolean;
 }) {
   const Icon = department.icon;
   return (
     <motion.article
       className={`card-hover card-outline-gradient relative flex h-full flex-col overflow-hidden rounded-[24px] ${
-        wide ? "md:grid md:grid-cols-[0.88fr_1.12fr]" : ""
-      } ${suggested ? "dept-recommended z-10" : ""}`}
+        suggested ? "dept-recommended z-10" : ""
+      }`}
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ delay: (index % 3) * 0.08, duration: 0.65 }}
     >
-      <div className={`image-shell h-[200px] shrink-0 md:h-56 ${wide ? "md:h-full md:min-h-[300px]" : ""}`}>
+      <div className="image-shell h-[200px] shrink-0 md:h-56">
         <img
           src={department.image}
           alt={`${department.name}活动照片`}
@@ -220,7 +218,6 @@ export function Departments() {
                     key={department.name}
                     department={department}
                     index={index + departments.length - 2}
-                    wide
                     suggested={suggestedNames.includes(department.name)}
                   />
                 ))}
