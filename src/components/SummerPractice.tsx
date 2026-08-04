@@ -88,7 +88,7 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
       transition={{ delay: index * 0.12, duration: 0.75 }}
     >
       <div className={`grid md:grid-cols-2 ${index % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}>
-        <div className="relative aspect-square overflow-hidden bg-[#e8ddd1]">
+        <div className="relative aspect-[4/3] overflow-hidden bg-[#e8ddd1]">
           <SummerImageCarousel images={card.images} alt={card.title} />
           <div className="absolute left-5 top-5 z-10 flex flex-col items-start gap-2">
             <span className="rounded-full bg-white/92 px-3 py-1.5 text-xs font-bold tracking-wide text-rouge-deep backdrop-blur-md">{card.badge}</span>
