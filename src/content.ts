@@ -42,7 +42,6 @@ import {
   IMG_心项目,
   IMG_陕博部,
   IMG_萤火部,
-  IMG_同季出发,
   SUMMER_GALLERIES,
 } from "./config";
 
@@ -92,7 +91,7 @@ export const hero = {
   seasonNote: "2026 年 8 月底—9 月初 · 面向 2026 级 · 面试与入群安排以公众号通知为准",
 };
 
-/** 首屏下方信任条：五星 + 活动丰富度 + 书院指导（不提综测） */
+/** 首屏下方信任条：五星、活动丰富度与书院指导。 */
 export const trustBar = [
   { label: "校级五星级社团", detail: "校级最高评定，与连续优秀并列" },
   { label: "本学年 42 项代表活动", detail: "支教、讲解、敬老、环保，常年有出发" },

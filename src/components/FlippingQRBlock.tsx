@@ -3,11 +3,8 @@ import { ChevronLeft, Users } from "lucide-react";
 import { useState } from "react";
 import { QQ_招新群号 } from "../config";
 
-const PLACEHOLDER_QQ = "123456789";
-const isPlaceholderQQ = !QQ_招新群号 || String(QQ_招新群号) === PLACEHOLDER_QQ;
-
 /** 页脚招新群入口：正面二维码，翻转后给出可复制群号。 */
-export function FlippingQRBlock({ qrSrc }: { qrSrc: string; label?: string }) {
+export function FlippingQRBlock({ qrSrc }: { qrSrc: string }) {
   const [flipped, setFlipped] = useState(false);
 
   return (
@@ -31,16 +28,10 @@ export function FlippingQRBlock({ qrSrc }: { qrSrc: string; label?: string }) {
         <div className="backface-hidden rotate-y-180 absolute inset-0 flex flex-col items-center justify-center rounded-2xl border border-gold-soft/45 bg-[linear-gradient(145deg,rgba(112,61,55,0.98),rgba(50,31,30,0.98))] px-3 text-white shadow-[0_14px_32px_rgba(0,0,0,0.25)]">
           <Users className="h-6 w-6 text-gold-soft" strokeWidth={1.5} aria-hidden="true" />
           <p className="mt-2 text-[10px] font-bold tracking-[0.16em] text-white/65">QQ 招新群</p>
-          {isPlaceholderQQ ? (
-            <p className="mt-3 text-center text-xs leading-5 text-white/90">群号以招新现场<br />与公众号为准</p>
-          ) : (
-            <p className="mt-3 select-all rounded-lg border border-white/20 bg-white/10 px-2 py-1.5 font-data text-sm font-bold tracking-wide">{QQ_招新群号}</p>
-          )}
+          <p className="mt-3 select-all rounded-lg border border-white/20 bg-white/10 px-2 py-1.5 font-data text-sm font-bold tracking-wide">{QQ_招新群号}</p>
           <span className="mt-3 inline-flex items-center gap-1 text-[10px] text-white/55"><ChevronLeft className="h-3 w-3" /> 点击翻回二维码</span>
         </div>
       </motion.div>
     </button>
   );
 }
-
-export { isPlaceholderQQ };
