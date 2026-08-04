@@ -44,6 +44,21 @@ for (const anchor of new Set(anchors)) {
   if (!ids.has(anchor)) violations.push(`missing internal target #${anchor}`);
 }
 
+const assetRefs = new Set([...text.matchAll(/["'](\/images\/[^"']+)["']/g)].map((match) => match[1]));
+const imageFiles = readFiles(path.join(root, "public", "images"))
+  .filter((file) => /\.(jpg|jpeg|png|webp)$/i.test(file))
+  .map((file) => `/images/${path.relative(path.join(root, "public", "images"), file).split(path.sep).join("/")}`);
+for (const image of imageFiles) {
+  if (!assetRefs.has(image)) violations.push(`unreferenced public image ${image}`);
+}
+
+for (const file of files) {
+  const content = fs.readFileSync(file, "utf8");
+  for (const match of content.matchAll(/<button\b([^>]*)>/g)) {
+    if (!/\btype=/.test(match[1])) violations.push(`${path.relative(root, file)} has button without explicit type`);
+  }
+}
+
 const config = fs.readFileSync(path.join(root, "src/config.ts"), "utf8");
 const finalHeroSlides = (config.match(/src: "\/images\/首页\/首页\d+\.jpg"/g) ?? []).length;
 if (finalHeroSlides !== 17) violations.push(`expected 17 final homepage slides, found ${finalHeroSlides}`);
