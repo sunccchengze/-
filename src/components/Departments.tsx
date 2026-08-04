@@ -9,23 +9,25 @@ function DepartmentCard({
   department,
   index,
   suggested,
+  wide = false,
 }: {
   department: Department;
   index: number;
   suggested: boolean;
+  wide?: boolean;
 }) {
   const Icon = department.icon;
   return (
     <motion.article
       className={`card-hover card-outline-gradient relative flex h-full flex-col overflow-hidden rounded-[24px] ${
-        suggested ? "dept-recommended z-10" : ""
-      }`}
+        wide ? "md:grid md:grid-cols-[0.88fr_1.12fr]" : ""
+      } ${suggested ? "dept-recommended z-10" : ""}`}
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ delay: (index % 3) * 0.08, duration: 0.65 }}
     >
-      <div className="image-shell h-[200px] shrink-0 md:h-56">
+      <div className={`image-shell h-[200px] shrink-0 md:h-56 ${wide ? "md:h-full md:min-h-[300px]" : ""}`}>
         <img
           src={department.image}
           alt={`${department.name}活动照片`}
@@ -203,7 +205,7 @@ export function Departments() {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35 }}
           >
-            {departments.map((department, index) => (
+            {(activeTab === "project" ? departments.slice(0, -2) : departments).map((department, index) => (
               <DepartmentCard
                 key={department.name}
                 department={department}
@@ -211,6 +213,19 @@ export function Departments() {
                 suggested={activeTab === "project" && suggestedNames.includes(department.name)}
               />
             ))}
+            {activeTab === "project" ? (
+              <div className="md:col-span-2 lg:col-span-3 grid gap-7 md:grid-cols-2 lg:gap-8">
+                {departments.slice(-2).map((department, index) => (
+                  <DepartmentCard
+                    key={department.name}
+                    department={department}
+                    index={index + departments.length - 2}
+                    wide
+                    suggested={suggestedNames.includes(department.name)}
+                  />
+                ))}
+              </div>
+            ) : null}
           </motion.div>
         </AnimatePresence>
 
