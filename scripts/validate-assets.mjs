@@ -12,7 +12,7 @@ for (const file of files) {
 const intentional = new Set([
   '/videos/summer/2026-qinchuan-recap.mp4',
   '/videos/summer/2026-yushu-recap.mp4',
-  ...Array.from({ length: 12 }, (_, i) => `/images/honors/HONOR-${String(i + 1).padStart(2, '0')}.jpg`),
+  ...Array.from({ length: 12 }, (_, i) => `/images/荣誉/荣誉${i + 1}.jpg`),
 ]);
 
 const missing = [...paths].filter((asset) => !fs.existsSync(path.join(repo, 'public', asset)));

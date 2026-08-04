@@ -70,17 +70,17 @@ export const LINK_萤火部 = "https://mp.weixin.qq.com/s/iUJ0gI4KePy-_FMo0V1qoQ
 // ─────────────────────────────────────────────
 
 /** 社团 LOGO（用于：封面页大圆Logo、导航栏小Logo、页脚Logo） */
-export const IMG_LOGO = "/images/brand/logo.png";
+export const IMG_LOGO = "/images/品牌/英仔爱心社标志.png";
 
 // ─────────────────────────────────────────────
 //  四、二维码图片
 // ─────────────────────────────────────────────
 
 /** 报名二维码（用于：页脚扫码报名） */
-export const IMG_报名二维码 = "/images/recruit/registration-qr.png";
+export const IMG_报名二维码 = "/images/招新/报名二维码.png";
 
 /** 招新群二维码（用于：页脚翻转卡片正面） */
-export const IMG_招新群二维码 = "/images/recruit/group-qr.png";
+export const IMG_招新群二维码 = "/images/招新/招新群二维码.png";
 
 /**
  * 招新群QQ群号（用于：翻转卡片反面）
@@ -93,11 +93,11 @@ export const QQ_招新群号 = "712079220";
 // ─────────────────────────────────────────────
 
 export const IMG_首页轮播 = [
-  "/images/recruit/hero/01-slide.jpg",
-  "/images/recruit/hero/02-slide.jpg",
-  "/images/recruit/hero/03-slide.jpg",
-  "/images/recruit/hero/04-slide.jpg",
-  "/images/recruit/hero/05-slide.jpg",
+  "/images/首页/首页1.jpg",
+  "/images/首页/首页2.jpg",
+  "/images/首页/首页3.jpg",
+  "/images/首页/首页4.jpg",
+  "/images/首页/首页5.jpg",
 ];
 
 // ─────────────────────────────────────────────
@@ -105,56 +105,56 @@ export const IMG_首页轮播 = [
 // ─────────────────────────────────────────────
 
 /** 第2页背景（关于我们） */
-export const IMG_第2页背景 = "/images/sections/about-background.jpg";
+export const IMG_第2页背景 = "/images/页面背景/第2页背景.jpg";
 
 /** 第3页背景（荣誉数据） */
-export const IMG_第3页背景 = "/images/sections/impact-background.jpg";
+export const IMG_第3页背景 = "/images/页面背景/第3页背景.jpg";
 
 /** 第4页背景（四大理由） */
-export const IMG_第4页背景 = "/images/sections/why-background.jpg";
+export const IMG_第4页背景 = "/images/页面背景/第4页背景.jpg";
 
 /** 第5页背景（荣誉历程，也是视频未加载时的占位图） */
-export const IMG_第5页背景 = "/images/sections/honors-background.jpg";
+export const IMG_第5页背景 = "/images/页面背景/第5页背景.jpg";
 
 /** 第6页背景（部门介绍） */
-export const IMG_第6页背景 = "/images/sections/departments-background.jpg";
+export const IMG_第6页背景 = "/images/页面背景/第6页背景.jpg";
 
 /** 第7页背景（关注平台） */
-export const IMG_第7页背景 = "/images/sections/social-background.jpg";
+export const IMG_第7页背景 = "/images/页面背景/第7页背景.jpg";
 
 /** 第8页背景（加入我们 CTA） */
-export const IMG_第8页背景 = "/images/sections/join-background.jpg";
+export const IMG_第8页背景 = "/images/页面背景/第8页背景.jpg";
 
 /** 第9页背景（常见问题） */
-export const IMG_第9页背景 = "/images/sections/faq-background.jpg";
+export const IMG_第9页背景 = "/images/页面背景/第9页背景.jpg";
 
 /** 第10页背景（页脚） */
-export const IMG_第10页背景 = "/images/sections/footer-background.jpg";
+export const IMG_第10页背景 = "/images/页面背景/第10页背景.jpg";
 
 /** 荣誉历程视频背景（可选，不放则自动用第5页背景占位） */
-export const VIDEO_荣誉历程 = "/videos/honors-loop.mp4";
+export const VIDEO_荣誉历程 = "/videos/荣誉历程.mp4";
 
 // ─────────────────────────────────────────────
 //  七、公益活动剪影（共16张，4×4网格）
 // ─────────────────────────────────────────────
 
 export const IMG_公益活动剪影 = [
-  "/images/galleries/activity/01.jpg",
-  "/images/galleries/activity/02.jpg",
-  "/images/galleries/activity/03.jpg",
-  "/images/galleries/activity/04.jpg",
-  "/images/galleries/activity/05.jpg",
-  "/images/galleries/activity/06.jpg",
-  "/images/galleries/activity/07.jpg",
-  "/images/galleries/activity/08.jpg",
-  "/images/galleries/activity/09.jpg",
-  "/images/galleries/activity/10.jpg",
-  "/images/galleries/activity/11.jpg",
-  "/images/galleries/activity/12.jpg",
-  "/images/galleries/activity/13.jpg",
-  "/images/galleries/activity/14.jpg",
-  "/images/galleries/activity/15.jpg",
-  "/images/galleries/activity/16.jpg",
+  "/images/公益剪影/公益活动剪影1.jpg",
+  "/images/公益剪影/公益活动剪影2.jpg",
+  "/images/公益剪影/公益活动剪影3.jpg",
+  "/images/公益剪影/公益活动剪影4.jpg",
+  "/images/公益剪影/公益活动剪影5.jpg",
+  "/images/公益剪影/公益活动剪影6.jpg",
+  "/images/公益剪影/公益活动剪影7.jpg",
+  "/images/公益剪影/公益活动剪影8.jpg",
+  "/images/公益剪影/公益活动剪影9.jpg",
+  "/images/公益剪影/公益活动剪影10.jpg",
+  "/images/公益剪影/公益活动剪影11.jpg",
+  "/images/公益剪影/公益活动剪影12.jpg",
+  "/images/公益剪影/公益活动剪影13.jpg",
+  "/images/公益剪影/公益活动剪影14.jpg",
+  "/images/公益剪影/公益活动剪影15.jpg",
+  "/images/公益剪影/公益活动剪影16.jpg",
 ];
 
 // ─────────────────────────────────────────────
@@ -162,10 +162,10 @@ export const IMG_公益活动剪影 = [
 // ─────────────────────────────────────────────
 
 export const IMG_四大理由 = [
-  "/images/reasons/01-opportunities.jpg",
-  "/images/reasons/02-five-star.jpg",
-  "/images/reasons/03-growth.jpg",
-  "/images/reasons/04-community.jpg",
+  "/images/加入理由/更多历练机会.jpg",
+  "/images/加入理由/校级五星级社团.jpg",
+  "/images/加入理由/成长与技能.jpg",
+  "/images/加入理由/浓厚家文化氛围.jpg",
 ];
 
 // ─────────────────────────────────────────────
@@ -173,33 +173,33 @@ export const IMG_四大理由 = [
 //  替换真实照片时保持文件名即可生效
 // ─────────────────────────────────────────────
 
-export const IMG_常务部 = "/images/departments/01-administration.jpg";
-export const IMG_交流部 = "/images/departments/02-community.jpg";
-export const IMG_宣传部 = "/images/departments/03-media.jpg";
+export const IMG_常务部 = "/images/部门/常务部.jpg";
+export const IMG_交流部 = "/images/部门/交流部.jpg";
+export const IMG_宣传部 = "/images/部门/宣传部.jpg";
 /** @deprecated 历史共用图；前卫/洩湖可分别替换 */
-export const IMG_大手拉小手 = "/images/legacy/hand-in-hand.jpg";
-export const IMG_前卫部 = "/images/departments/04-qianwei.jpg";
-export const IMG_洩湖部 = "/images/departments/05-xiehu.jpg";
+export const IMG_大手拉小手 = "/images/部门/大手拉小手.jpg";
+export const IMG_前卫部 = "/images/部门/前卫部.jpg";
+export const IMG_洩湖部 = "/images/部门/洩湖部.jpg";
 /** @deprecated 历史共用图；向日葵/常青藤可分别替换 */
-export const IMG_青春伴夕阳 = "/images/legacy/youth-with-sunset.jpg";
-export const IMG_向日葵 = "/images/departments/07-sunflower.jpg";
-export const IMG_常青藤 = "/images/departments/08-ivy.jpg";
-export const IMG_启明星 = "/images/departments/10-morningstar.jpg";
-export const IMG_心项目 = "/images/departments/11-circulation.jpg";
-export const IMG_陕博部 = "/images/departments/09-museum.jpg";
-export const IMG_萤火部 = "/images/departments/06-yinghuo.jpg";
+export const IMG_青春伴夕阳 = "/images/部门/青春伴夕阳.jpg";
+export const IMG_向日葵 = "/images/部门/向日葵.jpg";
+export const IMG_常青藤 = "/images/部门/常青藤.jpg";
+export const IMG_启明星 = "/images/部门/启明星.jpg";
+export const IMG_心项目 = "/images/部门/心项目.jpg";
+export const IMG_陕博部 = "/images/部门/陕博部.jpg";
+export const IMG_萤火部 = "/images/部门/萤火部.jpg";
 
 // ─────────────────────────────────────────────
 //  十、暑期实践 Spotlight 封面（请换成真实成片截帧）
 // ─────────────────────────────────────────────
 
-export const IMG_暑期_玉树 = "/images/summer/01-yushu/00-cover.jpg";
-export const IMG_暑期_知行秦川 = "/images/summer/02-qinchuan/00-cover.jpg";
-export const IMG_暑期_秦岭 = "/images/summer/04-qinling/00-cover.jpg";
-export const IMG_暑期_萤火 = "/images/summer/03-yinghuo/00-cover.jpg";
+export const IMG_暑期_玉树 = "/images/暑期实践/玉树/玉树1.jpg";
+export const IMG_暑期_知行秦川 = "/images/暑期实践/知行秦川/知行1.jpg";
+export const IMG_暑期_秦岭 = "/images/暑期实践/秦岭/秦岭1.jpg";
+export const IMG_暑期_萤火 = "/images/暑期实践/萤火/萤火1.jpg";
 
 /** 第11页背景（暑期实践专区，可与第3页共用或单独替换） */
-export const IMG_第11页背景 = "/images/sections/impact-background.jpg";
+export const IMG_第11页背景 = "/images/页面背景/第3页背景.jpg";
 
 // ─────────────────────────────────────────────────────────────
 //  十一、V2 Pro 首页轮播
@@ -207,34 +207,34 @@ export const IMG_第11页背景 = "/images/sections/impact-background.jpg";
 //  后续大合影和第十六届社长团合影按 QUESTIONS.md 的文件名替换即可。
 // ─────────────────────────────────────────────────────────────
 
-export const IMG_小鹰正面 = "/images/mascot/eagle-front.png";
-export const IMG_小鹰侧面 = "/images/mascot/eagle-side.png";
-export const IMG_小鹰背面 = "/images/mascot/eagle-back.png";
-export const IMG_小鹰挥手 = "/images/mascot/eagle-wave.png";
-export const IMG_小鹰爱心 = "/images/mascot/eagle-heart.png";
-export const IMG_小鹰报名 = "/images/mascot/eagle-join.png";
-export const IMG_小鹰画画 = "/images/mascot/eagle-paint.png";
-export const IMG_小鹰飞行 = "/images/mascot/eagle-fly.png";
-export const IMG_小鹰相机 = "/images/mascot/eagle-camera.png";
+export const IMG_小鹰正面 = "/images/小鹰/小鹰正面.png";
+export const IMG_小鹰侧面 = "/images/小鹰/小鹰侧面.png";
+export const IMG_小鹰背面 = "/images/小鹰/小鹰背面.png";
+export const IMG_小鹰挥手 = "/images/小鹰/小鹰挥手.png";
+export const IMG_小鹰爱心 = "/images/小鹰/小鹰爱心.png";
+export const IMG_小鹰报名 = "/images/小鹰/小鹰报名.png";
+export const IMG_小鹰画画 = "/images/小鹰/小鹰画画.png";
+export const IMG_小鹰飞行 = "/images/小鹰/小鹰飞行.png";
+export const IMG_小鹰相机 = "/images/小鹰/小鹰相机.png";
 
 export const HERO_V2PRO_SLIDES = [
-  { src: IMG_暑期_玉树, title: "雪域相逢", line: "雪域相逢，共绽格桑", detail: "玉树支教团 · 高原课堂" },
-  { src: IMG_暑期_知行秦川, title: "知行秦川", line: "文浸秦川，笃学寻光", detail: "周至 / 彬州 · 暑期课堂" },
-  { src: IMG_暑期_萤火, title: "萤火微光", line: "以温柔伴童心，以微光暖星河", detail: "儿童关怀 · 陪伴成长" },
-  { src: IMG_暑期_秦岭, title: "青护秦岭", line: "踏峪寻青，净护秦岭", detail: "生态实践 · 山野同行" },
-  { src: IMG_陕博部, title: "长安文脉", line: "胸怀秦汉之源，颂扬华夏之光", detail: "陕博部 · 文博志愿" },
-  { src: IMG_前卫部, title: "大手拉小手", line: "以青春为桥，照见更远的世界", detail: "前卫部 · 九峰助学" },
-  { src: IMG_洩湖部, title: "知行彬州", line: "携光而行，筑梦秦川", detail: "洩湖部 · 彬州助学" },
-  { src: IMG_向日葵, title: "青春伴夕阳", line: "岁月有声，陪伴有光", detail: "向日葵 · 社区与老年大学" },
-  { src: IMG_常青藤, title: "温暖守护", line: "把下一次相见，写成温柔约定", detail: "常青藤 · 护理院陪伴" },
-  { src: IMG_启明星, title: "启明星", line: "把好奇点亮，把温暖带进校园", detail: "启明星 · 校园公益" },
-  { src: IMG_心项目, title: "旧物新生", line: "让每一份旧物，继续奔向需要的地方", detail: "心项目 · 循环与环保" },
-  { src: IMG_萤火部, title: "萤火连心", line: "微光汇聚，也能照亮成长", detail: "萤火部 · 儿童关怀" },
-  { src: IMG_宣传部, title: "记录善意", line: "让每一次出发，都被好好看见", detail: "宣传部 · 影像与故事" },
-  { src: IMG_交流部, title: "英仔同行", line: "因为热爱相遇，为了善意并肩", detail: "交流部 · 社团文化" },
-  { src: IMG_常务部, title: "认真守护", line: "把每一份热忱，落成可靠的行动", detail: "常务部 · 稳定运转" },
-  { src: IMG_公益活动剪影[0], title: "英仔大合影", line: "英为爱，仔一起", detail: "待替换为全社大合影" },
-  { src: IMG_公益活动剪影[1], title: "新一届英仔", line: "薪火相传，下一站由你加入", detail: "待替换为第十六届社长团合影" },
+  { src: "/images/首页/首页1.jpg", title: "雪域相逢", line: "雪域相逢，共绽格桑", detail: "玉树支教团 · 高原课堂" },
+  { src: "/images/首页/首页2.jpg", title: "知行秦川", line: "文浸秦川，笃学寻光", detail: "周至 / 彬州 · 暑期课堂" },
+  { src: "/images/首页/首页3.jpg", title: "萤火微光", line: "以温柔伴童心，以微光暖星河", detail: "儿童关怀 · 陪伴成长" },
+  { src: "/images/首页/首页4.jpg", title: "青护秦岭", line: "踏峪寻青，净护秦岭", detail: "生态实践 · 山野同行" },
+  { src: "/images/首页/首页5.jpg", title: "长安文脉", line: "胸怀秦汉之源，颂扬华夏之光", detail: "陕博部 · 文博志愿" },
+  { src: "/images/首页/首页6.jpg", title: "大手拉小手", line: "以青春为桥，照见更远的世界", detail: "前卫部 · 九峰助学" },
+  { src: "/images/首页/首页7.jpg", title: "知行彬州", line: "携光而行，筑梦秦川", detail: "洩湖部 · 彬州助学" },
+  { src: "/images/首页/首页8.jpg", title: "青春伴夕阳", line: "岁月有声，陪伴有光", detail: "向日葵 · 社区与老年大学" },
+  { src: "/images/首页/首页9.jpg", title: "温暖守护", line: "把下一次相见，写成温柔约定", detail: "常青藤 · 护理院陪伴" },
+  { src: "/images/首页/首页10.jpg", title: "启明星", line: "把好奇点亮，把温暖带进校园", detail: "启明星 · 校园公益" },
+  { src: "/images/首页/首页11.jpg", title: "旧物新生", line: "让每一份旧物，继续奔向需要的地方", detail: "心项目 · 循环与环保" },
+  { src: "/images/首页/首页12.jpg", title: "萤火连心", line: "微光汇聚，也能照亮成长", detail: "萤火部 · 儿童关怀" },
+  { src: "/images/首页/首页13.jpg", title: "记录善意", line: "让每一次出发，都被好好看见", detail: "宣传部 · 影像与故事" },
+  { src: "/images/首页/首页14.jpg", title: "英仔同行", line: "因为热爱相遇，为了善意并肩", detail: "交流部 · 社团文化" },
+  { src: "/images/首页/首页15.jpg", title: "认真守护", line: "把每一份热忱，落成可靠的行动", detail: "常务部 · 稳定运转" },
+  { src: "/images/首页/首页16.jpg", title: "英仔大合影", line: "英为爱，仔一起", detail: "待替换为全社大合影" },
+  { src: "/images/首页/首页17.jpg", title: "新一届英仔", line: "薪火相传，下一站由你加入", detail: "待替换为第十六届社长团合影" },
 ] as const;
 
 // ─────────────────────────────────────────────────────────────
@@ -246,37 +246,37 @@ export const HERO_V2PRO_SLIDES = [
 export const SUMMER_GALLERIES = {
   yushu: [
     IMG_暑期_玉树,
-    "/images/summer/01-yushu/01-assembly.jpg",
-    "/images/summer/01-yushu/02-journey.jpg",
-    "/images/summer/01-yushu/03-icebreak.jpg",
-    "/images/summer/01-yushu/04-classroom.jpg",
-    "/images/summer/01-yushu/05-culture.jpg",
-    "/images/summer/01-yushu/06-group.jpg",
+    "/images/暑期实践/玉树/玉树2.jpg",
+    "/images/暑期实践/玉树/玉树3.jpg",
+    "/images/暑期实践/玉树/玉树4.jpg",
+    "/images/暑期实践/玉树/玉树5.jpg",
+    "/images/暑期实践/玉树/玉树6.jpg",
+    "/images/暑期实践/玉树/玉树7.jpg",
   ],
   qinchuan: [
     IMG_暑期_知行秦川,
-    "/images/summer/02-qinchuan/01-jiufeng-opening.jpg",
-    "/images/summer/02-qinchuan/02-jiufeng-classroom.jpg",
-    "/images/summer/02-qinchuan/03-jiufeng-farewell.jpg",
-    "/images/summer/02-qinchuan/04-binzhou-opening.jpg",
-    "/images/summer/02-qinchuan/05-binzhou-classroom.jpg",
-    "/images/summer/02-qinchuan/06-binzhou-farewell.jpg",
+    "/images/暑期实践/知行秦川/知行2.jpg",
+    "/images/暑期实践/知行秦川/知行3.jpg",
+    "/images/暑期实践/知行秦川/知行4.jpg",
+    "/images/暑期实践/知行秦川/知行5.jpg",
+    "/images/暑期实践/知行秦川/知行6.jpg",
+    "/images/暑期实践/知行秦川/知行7.jpg",
   ],
   yinghuo: [
     IMG_暑期_萤火,
-    "/images/summer/03-yinghuo/01-hospital-art.jpg",
-    "/images/summer/03-yinghuo/02-qianqianai-class.jpg",
-    "/images/summer/03-yinghuo/03-special-olympics.jpg",
-    "/images/summer/03-yinghuo/04-community-group.jpg",
-    "/images/summer/03-yinghuo/05-team.jpg",
+    "/images/暑期实践/萤火/萤火2.jpg",
+    "/images/暑期实践/萤火/萤火3.jpg",
+    "/images/暑期实践/萤火/萤火4.jpg",
+    "/images/暑期实践/萤火/萤火5.jpg",
+    "/images/暑期实践/萤火/萤火6.jpg",
   ],
   qinling: [
     IMG_暑期_秦岭,
-    "/images/summer/04-qinling/01-ziwu-cleanup.jpg",
-    "/images/summer/04-qinling/02-eco-talk.jpg",
-    "/images/summer/04-qinling/03-nature-study.jpg",
-    "/images/summer/04-qinling/04-zhujiwan-interview.jpg",
-    "/images/summer/04-qinling/05-group.jpg",
+    "/images/暑期实践/秦岭/秦岭2.jpg",
+    "/images/暑期实践/秦岭/秦岭3.jpg",
+    "/images/暑期实践/秦岭/秦岭4.jpg",
+    "/images/暑期实践/秦岭/秦岭5.jpg",
+    "/images/暑期实践/秦岭/秦岭6.jpg",
   ],
 } as const;
 

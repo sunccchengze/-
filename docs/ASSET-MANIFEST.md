@@ -1,121 +1,65 @@
-# 招新站图片资产目录与替换清单
+# 招新站素材目录与替换清单
 
-> **当前规则**：网页配置已只引用本文件列出的标准路径。根目录中的旧中文文件名暂保留作为源备份；后续替换请直接覆盖标准路径，不要改组件代码。
+> **统一规则（2026-08-04）**：`public/images/` 下只保留网页实际引用的中文目录与中文文件名；不要在根目录放散图，不要新建英文目录。替换时直接覆盖相同文件名，不必改组件代码。
 >
-> **所有图片命名采用：页面/功能 → 模块 → 顺序/用途**。每次上传新图前先判断它属于哪个网页位置。
+> 所有图片路径都集中在 `src/config.ts`；改图前先按本清单放入对应位置。涉及萤火、医院、特殊儿童或特殊群体时，必须先遮挡可识别脸部。
 
-## 1. 品牌与招新入口
-
-| 标准路径 | 用途 |
-|---|---|
-| `public/images/brand/logo.png` | 社团正式 Logo |
-| `public/images/recruit/registration-qr.png` | 报名二维码 |
-| `public/images/recruit/group-qr.png` | 招新群二维码 |
-| `public/images/recruit/hero/01-yushu-slide.jpg` 至 `05-group-slide.jpg` | V2 Pro 首页轮播五张基础影像 |
-
-> 首页 V2 Pro 另会调用各部门、暑期活动、合影等资产形成长轮播；详见 `src/config.ts` 的 `HERO_V2PRO_SLIDES`。
-
-## 2. 页面背景
-
-| 标准路径 | 页面位置 |
-|---|---|
-| `public/images/sections/about-background.jpg` | 关于英仔 |
-| `public/images/sections/impact-background.jpg` | 数据区 / 暑期区背景 |
-| `public/images/sections/why-background.jpg` | 加入理由 |
-| `public/images/sections/honors-background.jpg` | 荣誉区视频回退图 |
-| `public/images/sections/departments-background.jpg` | 部门区 |
-| `public/images/sections/social-background.jpg` | 新媒体区 |
-| `public/images/sections/join-background.jpg` | 加入区 |
-| `public/images/sections/faq-background.jpg` | FAQ |
-| `public/images/sections/footer-background.jpg` | 页脚 |
-
-## 3. 活动剪影画廊
-
-路径：`public/images/galleries/activity/01.jpg` 至 `16.jpg`
-
-- 对应“关于英仔”区的 16 张活动剪影；
-- 推荐混合支教、敬老、文博、环保、校园公益、社团合影；
-- 统一横图，建议 16:9。
-
-## 4. 四个加入理由
-
-| 标准路径 | 对应内容 |
-|---|---|
-| `public/images/reasons/01-opportunities.jpg` | 机会多，节奏由你安排 |
-| `public/images/reasons/02-five-star.jpg` | 五星级与荣誉 |
-| `public/images/reasons/03-growth.jpg` | 成长与技能 |
-| `public/images/reasons/04-community.jpg` | 同伴与社团文化 |
-
-## 5. 部门图片
-
-| 标准路径 | 部门 |
-|---|---|
-| `public/images/departments/01-administration.jpg` | 常务部 |
-| `public/images/departments/02-community.jpg` | 交流部 |
-| `public/images/departments/03-media.jpg` | 宣传部 |
-| `public/images/departments/04-qianwei.jpg` | 前卫部 |
-| `public/images/departments/05-xiehu.jpg` | 洩湖部 |
-| `public/images/departments/06-yinghuo.jpg` | 萤火部 |
-| `public/images/departments/07-sunflower.jpg` | 向日葵 |
-| `public/images/departments/08-ivy.jpg` | 常青藤 |
-| `public/images/departments/09-museum.jpg` | 陕博部 |
-| `public/images/departments/10-morningstar.jpg` | 启明星 |
-| `public/images/departments/11-circulation.jpg` | 心项目 |
-
-## 6. 暑期实践图集
-
-完整文件名、画面要求与隐私注意见：
+## 目录总览
 
 ```text
-docs/SUMMER-GALLERY-SLOTS.md
+public/images/
+├─ 品牌/                 # 社团标志
+├─ 招新/                 # 两张二维码
+├─ 首页/                 # 首页1.jpg 至 首页17.jpg
+├─ 页面背景/             # 第2页背景.jpg 至 第10页背景.jpg
+├─ 公益剪影/             # 公益活动剪影1.jpg 至 公益活动剪影16.jpg
+├─ 加入理由/             # 四张理由配图
+├─ 部门/                 # 11 个部门及两张历史共用图
+├─ 暑期实践/             # 玉树、知行秦川、萤火、秦岭
+└─ 小鹰/                 # 九张互动动作图
+
+public/videos/
+├─ 荣誉历程.mp4
+└─ summer/               # 两条暑期总结视频
 ```
 
-轮播目录：
+## 1. 品牌、招新与首页
 
-```text
-public/images/summer/01-yushu/
-public/images/summer/02-qinchuan/
-public/images/summer/03-yinghuo/
-public/images/summer/04-qinling/
-```
-
-当前所有标准槽位已经用已有活动图复制填充，因此网页能立即显示多图轮播。后续替换时直接用真实对应照片覆盖同名文件即可。
-
-## 7. 暑期实践影像
-
-| 标准路径 | 用途 |
+| 路径 | 用途 |
 |---|---|
-| `public/videos/summer/2026-qinchuan-recap.mp4` | 2026 知行秦川五分钟总结视频，网页内点击播放 |
-| `public/videos/summer/2026-yushu-recap.mp4` | 玉树第十七届总结视频预留位，上传后自动开启播放 |
+| `品牌/英仔爱心社标志.png` | 导航、首页、页脚 Logo |
+| `招新/报名二维码.png` | 页脚报名二维码 |
+| `招新/招新群二维码.png` | 页脚招新群二维码 |
+| `首页/首页1.jpg`–`首页17.jpg` | V2 Pro 首页 17 张轮播，顺序与 `HERO_V2PRO_SLIDES` 一一对应 |
 
-要求：16:9、MP4（H.264 优先）、建议 720p/1080p、控制在 80MB 以内；医院、特教、儿童场景必须核验公开授权。
+首页顺序：玉树、知行秦川、萤火、秦岭、陕博、前卫、洩湖、向日葵、常青藤、启明星、心项目、萤火部、宣传部、交流部、常务部、全社合影、第十六届社长团合影。
 
-## 8. 吉祥物
+## 2. 页面背景、活动剪影、加入理由
 
-| 路径 | 动作 |
+| 目录 | 文件 |
 |---|---|
-| `public/images/mascot/eagle-front.png` | 正面 |
-| `public/images/mascot/eagle-side.png` | 侧面走动 |
-| `public/images/mascot/eagle-back.png` | 收起背面 |
-| `public/images/mascot/eagle-wave.png` | 挥手欢迎 |
-| `public/images/mascot/eagle-heart.png` | 抱爱心 |
-| `public/images/mascot/eagle-join.png` | 举报名牌 |
-| `public/images/mascot/eagle-paint.png` | 画画 |
-| `public/images/mascot/eagle-fly.png` | 飞行 |
-| `public/images/mascot/eagle-camera.png` | 拿相机 |
+| `页面背景/` | `第2页背景.jpg` 至 `第10页背景.jpg`，按网页页码对应 |
+| `公益剪影/` | `公益活动剪影1.jpg` 至 `公益活动剪影16.jpg`，用于“关于英仔”16 图画廊 |
+| `加入理由/` | `更多历练机会.jpg`、`校级五星级社团.jpg`、`成长与技能.jpg`、`浓厚家文化氛围.jpg` |
 
-## 8. 荣誉证明
+## 3. 部门
 
-路径与奖项对应关系见：
+`部门/` 内的文件：`常务部.jpg`、`交流部.jpg`、`宣传部.jpg`、`前卫部.jpg`、`洩湖部.jpg`、`萤火部.jpg`、`向日葵.jpg`、`常青藤.jpg`、`陕博部.jpg`、`启明星.jpg`、`心项目.jpg`。
 
-```text
-QUESTIONS.md → Q-023
-```
+`大手拉小手.jpg`、`青春伴夕阳.jpg` 是旧版候选页仍会引用的共用图；保留以保证 `?preview=hero` 的全部版本正常显示。
 
-目录：
+## 4. 暑期实践
 
-```text
-public/images/honors/HONOR-01.jpg 至 HONOR-12.jpg
-```
+详见 [`SUMMER-GALLERY-SLOTS.md`](./SUMMER-GALLERY-SLOTS.md)。当前网页仅展示：
 
-只使用真实奖状、奖杯、证书或官方获奖截图；不使用 AI 生成证书。
+- `暑期实践/玉树/玉树1.jpg` 至 `玉树7.jpg`
+- `暑期实践/知行秦川/知行1.jpg` 至 `知行7.jpg`
+- `暑期实践/萤火/萤火1.jpg` 至 `萤火6.jpg`
+- `暑期实践/秦岭/秦岭1.jpg` 至 `秦岭6.jpg`
+
+知行秦川网页只需 7 张，不要将用于成果材料、公众号和剪辑的 30 张素材全部放入网页轮播。
+
+## 5. 小鹰与荣誉
+
+- `小鹰/`：`小鹰正面.png`、`小鹰侧面.png`、`小鹰背面.png`、`小鹰挥手.png`、`小鹰爱心.png`、`小鹰报名.png`、`小鹰画画.png`、`小鹰飞行.png`、`小鹰相机.png`。
+- 荣誉真实凭证未来放在 `public/images/荣誉/荣誉1.jpg` 至 `荣誉12.jpg`；只能使用真实奖状、奖杯、证书或官方获奖截图。
