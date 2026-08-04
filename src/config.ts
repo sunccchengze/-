@@ -104,32 +104,27 @@ export const IMG_首页轮播 = [
 //  六、各模块全屏背景图
 // ─────────────────────────────────────────────
 
+/** 统一页面背景：第 2—10 页及暑期实践区共用同一张图。 */
+export const IMG_统一页面背景 = "/images/页面背景/统一页面背景.jpg";
+
 /** 第2页背景（关于我们） */
-export const IMG_第2页背景 = "/images/页面背景/第2页背景.jpg";
-
+export const IMG_第2页背景 = IMG_统一页面背景;
 /** 第3页背景（荣誉数据） */
-export const IMG_第3页背景 = "/images/页面背景/第3页背景.jpg";
-
+export const IMG_第3页背景 = IMG_统一页面背景;
 /** 第4页背景（四大理由） */
-export const IMG_第4页背景 = "/images/页面背景/第4页背景.jpg";
-
+export const IMG_第4页背景 = IMG_统一页面背景;
 /** 第5页背景（荣誉历程，也是视频未加载时的占位图） */
-export const IMG_第5页背景 = "/images/页面背景/第5页背景.jpg";
-
+export const IMG_第5页背景 = IMG_统一页面背景;
 /** 第6页背景（部门介绍） */
-export const IMG_第6页背景 = "/images/页面背景/第6页背景.jpg";
-
+export const IMG_第6页背景 = IMG_统一页面背景;
 /** 第7页背景（关注平台） */
-export const IMG_第7页背景 = "/images/页面背景/第7页背景.jpg";
-
+export const IMG_第7页背景 = IMG_统一页面背景;
 /** 第8页背景（加入我们 CTA） */
-export const IMG_第8页背景 = "/images/页面背景/第8页背景.jpg";
-
+export const IMG_第8页背景 = IMG_统一页面背景;
 /** 第9页背景（常见问题） */
-export const IMG_第9页背景 = "/images/页面背景/第9页背景.jpg";
-
+export const IMG_第9页背景 = IMG_统一页面背景;
 /** 第10页背景（页脚） */
-export const IMG_第10页背景 = "/images/页面背景/第10页背景.jpg";
+export const IMG_第10页背景 = IMG_统一页面背景;
 
 /** 荣誉历程视频背景（可选，不放则自动用第5页背景占位） */
 export const VIDEO_荣誉历程 = "/videos/荣誉历程.mp4";
@@ -199,7 +194,7 @@ export const IMG_暑期_秦岭 = "/images/暑期实践/秦岭/秦岭1.jpg";
 export const IMG_暑期_萤火 = "/images/暑期实践/萤火/萤火1.jpg";
 
 /** 第11页背景（暑期实践专区，可与第3页共用或单独替换） */
-export const IMG_第11页背景 = "/images/页面背景/第3页背景.jpg";
+export const IMG_第11页背景 = IMG_统一页面背景;
 
 // ─────────────────────────────────────────────────────────────
 //  十一、V2 Pro 首页轮播
