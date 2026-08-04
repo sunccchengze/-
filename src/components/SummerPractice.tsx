@@ -92,8 +92,11 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
           index % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
         }`}
       >
-        <div className="relative min-h-[260px] overflow-hidden md:min-h-[480px]">
-          <SummerImageCarousel images={card.images} alt={card.title} />
+        <div className="relative flex min-h-[260px] items-center justify-center overflow-hidden bg-[#e8ddd1] md:min-h-[480px]">
+          <img src={card.images[0]} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-30 blur-xl" />
+          <div className="relative aspect-square w-full max-w-full overflow-hidden shadow-[0_18px_40px_rgba(77,45,35,0.18)]">
+            <SummerImageCarousel images={card.images} alt={card.title} />
+          </div>
           <div className="absolute left-5 top-5 z-10 flex flex-col items-start gap-2">
             <span className="rounded-full bg-white/92 px-3 py-1.5 text-xs font-bold tracking-wide text-rouge-deep backdrop-blur-md">
               {card.badge}
