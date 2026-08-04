@@ -48,7 +48,7 @@ function HonorVaultCard({ item, index }: { item: VaultItem; index: number }) {
             <img
               src={item.image}
               alt={`${item.title}荣誉证明`}
-              className="shimmer h-full w-full rounded-xl object-cover"
+              className="shimmer h-full w-full rounded-xl bg-white object-contain"
               loading="lazy"
               onError={() => setImageFailed(true)}
             />
