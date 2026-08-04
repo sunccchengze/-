@@ -38,19 +38,17 @@ export function Footer() {
           </div>
           <div>
             <h3 className="mb-5 font-medium text-white">联系我们</h3>
-            <div className="flex flex-wrap items-center gap-6">
-              <figure className="text-center">
-                <div className="glass-panel rounded-xl !bg-transparent p-0 ring-1 ring-white/30">
-                  <img
-                    src={IMG_报名二维码}
-                    alt="扫码报名"
-                    className="h-[110px] w-[110px] rounded-xl object-contain"
-                    loading="lazy"
-                  />
+            <div className="mt-1 grid grid-cols-2 gap-3">
+              <figure className="flex h-[174px] w-[138px] flex-col items-center rounded-2xl border border-white/25 bg-[#191313]/45 p-2.5 shadow-[0_14px_32px_rgba(0,0,0,0.22)] backdrop-blur-md">
+                <div className="overflow-hidden rounded-xl ring-1 ring-white/25">
+                  <img src={IMG_报名二维码} alt="扫码报名" className="h-[116px] w-[116px] object-contain" loading="lazy" />
                 </div>
-                <figcaption className="mt-2 text-xs font-medium text-white/80">扫码报名</figcaption>
+                <figcaption className="mt-2 w-full px-1 text-center">
+                  <span className="block text-[10px] font-medium tracking-[0.14em] text-white/55">WPS 报名表</span>
+                  <span className="mt-0.5 block text-xs font-bold text-white">扫码报名</span>
+                </figcaption>
               </figure>
-              <FlippingQRBlock qrSrc={IMG_招新群二维码} label="点击查看群号" />
+              <FlippingQRBlock qrSrc={IMG_招新群二维码} />
             </div>
           </div>
         </div>
