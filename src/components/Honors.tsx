@@ -95,7 +95,7 @@ function HonorVault({ onClose }: { onClose: () => void }) {
       transition={{ duration: 0.35 }}
     >
       <div className="mx-auto max-w-[1360px]">
-        <div className="sticky top-0 z-10 -mx-4 mb-8 flex items-start justify-between gap-5 border-b border-white/15 bg-[#1d100f]/95 px-4 pb-5 pt-1 backdrop-blur-xl sm:-mx-8 sm:px-8">
+        <div className="sticky top-0 z-10 -mx-4 mb-8 flex items-start justify-between gap-5 border-b border-white/15 bg-[#2a1c18]/75 px-4 pb-5 pt-1 backdrop-blur-xl sm:-mx-8 sm:px-8">
           <div>
             <p className="text-xs font-bold tracking-[0.24em] text-rose-soft">HONOR ARCHIVE · 荣誉典藏</p>
             <h2 id="honor-vault-title" className="mt-2 font-serif-cn text-3xl font-bold tracking-[0.08em] text-white sm:text-4xl">
