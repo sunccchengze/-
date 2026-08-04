@@ -157,9 +157,10 @@ export const IMG_公益活动剪影 = [
 // ─────────────────────────────────────────────
 
 export const IMG_四大理由 = [
-  "/images/加入理由/更多历练机会.jpg",
-  "/images/加入理由/校级五星级社团.jpg",
+  // “方向多”与“成长”刻意互换：让画面语义与卡片文案匹配。
   "/images/加入理由/成长与技能.jpg",
+  "/images/加入理由/校级五星级社团.jpg",
+  "/images/加入理由/更多历练机会.jpg",
   "/images/加入理由/浓厚家文化氛围.jpg",
 ];
 
@@ -192,6 +193,13 @@ export const IMG_暑期_玉树 = "/images/暑期实践/玉树/玉树1.jpg";
 export const IMG_暑期_知行秦川 = "/images/暑期实践/知行秦川/知行1.jpg";
 export const IMG_暑期_秦岭 = "/images/暑期实践/秦岭/秦岭1.jpg";
 export const IMG_暑期_萤火 = "/images/暑期实践/萤火/萤火1.jpg";
+
+/** “同季出发”三张专属横图；请按同目录 README 放入真实素材。 */
+export const IMG_同季出发 = [
+  "/images/暑期实践/同季出发/同季1.jpg",
+  "/images/暑期实践/同季出发/同季2.jpg",
+  "/images/暑期实践/同季出发/同季3.jpg",
+] as const;
 
 /** 第11页背景（暑期实践专区，可与第3页共用或单独替换） */
 export const IMG_第11页背景 = IMG_统一页面背景;

@@ -137,7 +137,7 @@ export function Honors() {
       ) : (
         <img src={IMG_第5页背景} alt="" aria-hidden="true" className="video-bg pointer-events-none object-cover" />
       )}
-      <div className="bg-veil veil-dark" />
+      <div className="bg-veil honor-video-veil" />
       <div className="absolute inset-0 -z-[1] bg-[radial-gradient(circle_at_50%_30%,rgba(178,90,85,0.4),transparent_60%)]" />
 
       <div className="section-container">

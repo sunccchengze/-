@@ -92,7 +92,7 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
           index % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
         }`}
       >
-        <div className="relative min-h-[260px] overflow-hidden md:min-h-[480px]">
+        <div className="relative aspect-square min-h-[260px] self-start overflow-hidden md:min-h-0">
           <SummerImageCarousel images={card.images} alt={card.title} />
           <div className="absolute left-5 top-5 z-10 flex flex-col items-start gap-2">
             <span className="rounded-full bg-white/92 px-3 py-1.5 text-xs font-bold tracking-wide text-rouge-deep backdrop-blur-md">
@@ -146,6 +146,14 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
   );
 }
 
+function SummerRouteImage({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(135deg,#efe5d8,#dcc5a0)] text-xs font-bold tracking-[0.16em] text-rouge-deep/65">同季专属影像</div>;
+  }
+  return <img src={src} alt={alt} loading="lazy" className="h-full w-full object-cover" onError={() => setFailed(true)} />;
+}
+
 function SummerSupportCard({ card, index }: { card: SummerCard; index: number }) {
   return (
     <motion.article
@@ -155,7 +163,7 @@ function SummerSupportCard({ card, index }: { card: SummerCard; index: number })
       viewport={{ once: true, amount: 0.2 }}
       transition={{ delay: 0.1 * index, duration: 0.6 }}
     >
-      <div className="relative h-48 shrink-0 overflow-hidden">
+      <div className="relative aspect-[2.35/1] shrink-0 overflow-hidden">
         <SummerImageCarousel images={card.images} alt={card.title} compact />
         <div className="absolute left-4 top-4 z-10 flex flex-col items-start gap-1.5">
           <span className="rounded-full bg-white/92 px-2.5 py-1 text-[11px] font-bold text-rouge-deep">{card.badge}</span>
@@ -237,8 +245,8 @@ export function SummerPractice() {
                 key={item.name}
                 className="card-hover group overflow-hidden rounded-2xl bg-white/70 ring-1 ring-rouge/10"
               >
-                <div className="image-shell aspect-[16/7] overflow-hidden">
-                  <img src={item.image} alt={`${item.name}活动影像`} loading="lazy" className="h-full w-full object-cover" />
+                <div className="image-shell aspect-[2.35/1] overflow-hidden">
+                  <SummerRouteImage src={item.image} alt={`${item.name}活动影像`} />
                 </div>
                 <div className="px-4 pb-4 pt-3">
                   <p className="font-serif-cn text-base font-bold text-ink">{item.name}</p>

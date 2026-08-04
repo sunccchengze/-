@@ -118,6 +118,11 @@ button {
     linear-gradient(180deg, rgba(40, 24, 24, 0.55) 0%, rgba(30, 20, 20, 0.85) 100%);
 }
 
+/* 荣誉区保留文字对比度，同时让循环影像的运动可被看见。 */
+.honor-video-veil {
+  background: linear-gradient(180deg, rgba(40, 24, 24, 0.36) 0%, rgba(30, 20, 20, 0.63) 100%);
+}
+
 /* —— V2 Pro 首页：桌面左深右淡，手机改为上下遮罩 —— */
 .hero-v2pro-veil {
   background:

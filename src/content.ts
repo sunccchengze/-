@@ -42,6 +42,7 @@ import {
   IMG_心项目,
   IMG_陕博部,
   IMG_萤火部,
+  IMG_同季出发,
   SUMMER_GALLERIES,
 } from "./config";
 
@@ -331,17 +332,17 @@ export const summerMore = [
   {
     name: "启明星 · 启明寻洛，脉续中原",
     desc: "2026.7 洛阳—开封：龙门石窟、洛博、二里头与清明上河园，用脚步读文旅与文脉",
-    image: IMG_启明星,
+    image: IMG_同季出发[0],
   },
   {
     name: "青春伴夕阳 · 银龄方向",
     desc: "2026.7 向日葵 / 常青藤：社区医养、适老化调研与敬老陪伴，暑期与学期活动相连",
-    image: IMG_向日葵,
+    image: IMG_同季出发[1],
   },
   {
     name: "陕博部 · 暑期志愿联队",
     desc: "2026.7 陕历博讲解与民族融合专题路线，在展厅讲好长安故事",
-    image: IMG_陕博部,
+    image: IMG_同季出发[2],
   },
 ];
 
