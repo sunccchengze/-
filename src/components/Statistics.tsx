@@ -25,7 +25,7 @@ function StatisticNumber({ value }: { value: number }) {
 export function Statistics() {
   return (
     <section id="impact" className="bg-shell relative py-24 md:py-[120px]">
-      <img src={IMG_第3页背景} alt="" aria-hidden="true" className="bg-image" loading="lazy" decoding="async" />
+      <img src={IMG_第3页背景} alt="" aria-hidden="true" className="bg-image opacity-[0.18]" loading="lazy" decoding="async" />
       <div className="bg-veil veil-paper" />
       <div className="geo-pattern" aria-hidden="true" />
       <div className="section-container relative z-10">
