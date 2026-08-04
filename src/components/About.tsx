@@ -61,7 +61,7 @@ export function About() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-muted">
-          剪影来自支教、敬老、文博与校园公益现场——真实发生过的温暖
+          剪影来自支教、敬老、陕历博与校园公益现场——真实发生过的温暖
         </p>
       </div>
     </section>

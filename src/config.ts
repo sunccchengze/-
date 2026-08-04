@@ -217,7 +217,7 @@ export const HERO_V2PRO_SLIDES = [
   { src: "/images/首页/首页2.jpg", title: "知行秦川", line: "文浸秦川，笃学寻光", detail: "周至 / 彬州 · 暑期课堂" },
   { src: "/images/首页/首页3.jpg", title: "萤火微光", line: "以温柔伴童心，以微光暖星河", detail: "儿童关怀 · 陪伴成长" },
   { src: "/images/首页/首页4.jpg", title: "青护秦岭", line: "踏峪寻青，净护秦岭", detail: "生态实践 · 山野同行" },
-  { src: "/images/首页/首页5.jpg", title: "长安文脉", line: "胸怀秦汉之源，颂扬华夏之光", detail: "陕博部 · 文博志愿" },
+  { src: "/images/首页/首页5.jpg", title: "长安文脉", line: "胸怀秦汉之源，颂扬华夏之光", detail: "陕博部 · 陕历博志愿" },
   { src: "/images/首页/首页6.jpg", title: "大手拉小手", line: "以青春为桥，照见更远的世界", detail: "前卫部 · 九峰助学" },
   { src: "/images/首页/首页7.jpg", title: "知行彬州", line: "携光而行，筑梦秦川", detail: "洩湖部 · 彬州助学" },
   { src: "/images/首页/首页8.jpg", title: "青春伴夕阳", line: "岁月有声，陪伴有光", detail: "向日葵 · 社区与老年大学" },

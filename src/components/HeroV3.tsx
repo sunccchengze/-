@@ -93,7 +93,7 @@ export function HeroV3() {
           <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/95 p-5 backdrop-blur-sm shadow-xl sm:bottom-6 sm:left-6 sm:right-6 sm:p-6 md:bottom-10 md:left-10 md:right-10">
             <p className="font-serif-cn text-sm font-bold text-rouge">2026 暑期实践</p>
             <p className="mt-2 font-serif-cn text-lg font-bold text-ink">玉树第十七届 · 知行秦川双线</p>
-            <p className="mt-1 text-sm text-muted">支教 · 敬老 · 文博 · 环保 · 病房陪伴</p>
+            <p className="mt-1 text-sm text-muted">支教 · 敬老 · 陕历博 · 环保 · 病房陪伴</p>
           </div>
         </motion.div>
       </div>
