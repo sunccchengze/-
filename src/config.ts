@@ -194,8 +194,8 @@ export const IMG_暑期_知行秦川 = "/images/暑期实践/知行秦川/知行
 export const IMG_暑期_秦岭 = "/images/暑期实践/秦岭/秦岭1.jpg";
 export const IMG_暑期_萤火 = "/images/暑期实践/萤火/萤火1.jpg";
 
-/** 启明星“启明寻洛，脉续中原”暑期实践专属图。 */
-export const IMG_启明星暑期 = "/images/暑期实践/启明星/启明寻洛.jpg";
+/** 启明星“启明寻洛，脉续中原”暑期实践主封面。 */
+export const IMG_暑期_启明星 = "/images/暑期实践/启明星/启明星1.jpg";
 
 /** 第11页背景（暑期实践专区，可与第3页共用或单独替换） */
 export const IMG_第11页背景 = IMG_统一页面背景;
@@ -268,6 +268,7 @@ export const SUMMER_GALLERIES = {
     "/images/暑期实践/萤火/萤火4.jpg",
     "/images/暑期实践/萤火/萤火5.jpg",
     "/images/暑期实践/萤火/萤火6.jpg",
+    "/images/暑期实践/萤火/萤火7.jpg",
   ],
   qinling: [
     IMG_暑期_秦岭,
@@ -276,6 +277,16 @@ export const SUMMER_GALLERIES = {
     "/images/暑期实践/秦岭/秦岭4.jpg",
     "/images/暑期实践/秦岭/秦岭5.jpg",
     "/images/暑期实践/秦岭/秦岭6.jpg",
+    "/images/暑期实践/秦岭/秦岭7.jpg",
+  ],
+  qiming: [
+    IMG_暑期_启明星,
+    "/images/暑期实践/启明星/启明星2.jpg",
+    "/images/暑期实践/启明星/启明星3.jpg",
+    "/images/暑期实践/启明星/启明星4.jpg",
+    "/images/暑期实践/启明星/启明星5.jpg",
+    "/images/暑期实践/启明星/启明星6.jpg",
+    "/images/暑期实践/启明星/启明星7.jpg",
   ],
 } as const;
 

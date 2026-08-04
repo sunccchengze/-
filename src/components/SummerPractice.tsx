@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Image as ImageIcon, MapPin } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { IMG_第11页背景 } from "../config";
-import { summerCards, summerMore, summerSection, type SummerCard } from "../content";
+import { summerCards, summerSection, type SummerCard } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
 /**
@@ -146,12 +146,6 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
   );
 }
 
-function SummerRouteImage({ src, alt }: { src: string; alt: string }) {
-  const [failed, setFailed] = useState(false);
-  if (failed) return <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(135deg,#efe5d8,#dcc5a0)] text-xs font-bold tracking-[0.16em] text-rouge-deep/65">启明星暑期影像</div>;
-  return <img src={src} alt={alt} loading="lazy" className="h-full w-full object-cover" onError={() => setFailed(true)} />;
-}
-
 function SummerSupportCard({ card, index }: { card: SummerCard; index: number }) {
   return (
     <motion.article
@@ -221,31 +215,12 @@ export function SummerPractice() {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2 md:gap-8">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 md:gap-8 xl:grid-cols-3">
           {supports.map((card, index) => (
             <SummerSupportCard key={card.id} card={card} index={index} />
           ))}
         </div>
 
-        <motion.div
-          className="glass-panel mt-12 rounded-3xl p-7 md:p-9"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <p className="font-serif-cn text-sm font-bold tracking-[0.2em] text-rouge">MORE ROUTE · 同季出发</p>
-            <p className="text-xs text-muted">2026.7 启明星暑期实践</p>
-          </div>
-          <ul className="mt-5 grid gap-4">
-            {summerMore.map((item) => (
-              <li key={item.name} className="card-hover group overflow-hidden rounded-2xl bg-white/70 ring-1 ring-rouge/10 md:grid md:grid-cols-[1.05fr_0.95fr]">
-                <div className="image-shell aspect-[2.35/1] overflow-hidden md:aspect-auto"><SummerRouteImage src={item.image} alt={`${item.name}活动影像`} /></div>
-                <div className="px-5 py-5"><p className="font-serif-cn text-lg font-bold text-ink">{item.name}</p><p className="mt-2 text-sm leading-7 text-muted">{item.desc}</p></div>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
         <p className="mt-10 text-center text-sm text-muted">
           想成为下一张合影里的人？
           <a href="#join" className="ml-1 font-medium text-rouge underline-offset-4 hover:underline">
