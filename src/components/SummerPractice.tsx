@@ -122,8 +122,13 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
 
       <div className="border-t border-rouge/10 px-7 py-7 md:px-10 md:py-8 lg:px-12">
         <p className="text-[15px] leading-[1.85] text-muted">{card.story}</p>
-        <ul className="mt-6 grid gap-x-8 gap-y-2.5 border-l-2 border-rouge/25 pl-4 md:grid-cols-2">
-          {card.beats.map((beat) => <li key={beat} className="text-sm leading-6 text-ink/80">{beat}</li>)}
+        <ul className="mt-6 grid gap-3 md:grid-cols-2">
+          {card.beats.map((beat) => (
+            <li key={beat} className="flex items-start gap-3 rounded-xl border border-rouge/10 bg-white/55 px-4 py-3 text-sm leading-6 text-ink/80">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rouge" aria-hidden="true" />
+              <span>{beat}</span>
+            </li>
+          ))}
         </ul>
       </div>
     </motion.article>
