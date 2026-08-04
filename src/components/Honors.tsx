@@ -131,7 +131,7 @@ export function Honors() {
     <section id="honors" className="bg-shell section-block text-white">
       <AnimatePresence>{vaultOpen ? <HonorVault onClose={() => setVaultOpen(false)} /> : null}</AnimatePresence>
       {videoOk ? (
-        <video className="video-bg pointer-events-none" autoPlay muted loop playsInline preload="metadata" poster={IMG_第5页背景} aria-hidden="true" onError={() => setVideoOk(false)}>
+        <video className="video-bg pointer-events-none" autoPlay muted loop playsInline preload="auto" poster={IMG_第5页背景} aria-hidden="true" onError={() => setVideoOk(false)}>
           <source src={VIDEO_荣誉历程} type="video/mp4" />
         </video>
       ) : (
