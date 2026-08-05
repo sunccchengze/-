@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Clapperboard, Loader2, Play, RotateCcw, WifiOff } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IMG_第11页背景, SUMMER_GALLERIES, VIDEO_SOURCES_知行秦川, VIDEO_SOURCES_玉树 } from "../config";
-import { getConnectionQuality, isMobile, resolveVideoUrl } from "../utils/detect-env";
+import { getConnectionQuality, isMobile, orderedVideoSources } from "../utils/detect-env";
 import { SectionHeader } from "./SectionHeader";
 
 function FilmCard({
@@ -29,6 +29,11 @@ function FilmCard({
   const [userWantsVideo, setUserWantsVideo] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  /** 三级回退：CDN → Pages → GitHub，当前源失败后自动尝试下一个 */
+  const candidates = useMemo(() => orderedVideoSources(videoSources), [videoSources]);
+  const [sourceIndex, setSourceIndex] = useState(0);
+  const resolvedUrl = candidates[sourceIndex];
+
   useEffect(() => {
     const onOnline = () => { setOnline(true); setFailed(false); };
     const onOffline = () => setOnline(false);
@@ -38,10 +43,18 @@ function FilmCard({
   }, []);
 
   const unavailable = !online || failed;
-  const retry = () => { setReady(false); setFailed(false); setUserWantsVideo(false); setRetryKey((key) => key + 1); };
+  const retry = () => { setReady(false); setFailed(false); setUserWantsVideo(false); setSourceIndex(0); setRetryKey((key) => key + 1); };
 
-  /** 解析最佳视频源：国内CDN → Pages → GitHub */
-  const resolvedUrl = resolveVideoUrl(videoSources);
+  /** 当前源加载失败：自动切到下一个可用源；全部失败才显示“网络不太顺畅” */
+  const handleVideoError = () => {
+    setReady(false);
+    setIsPlaying(false);
+    if (sourceIndex + 1 < candidates.length) {
+      setSourceIndex((index) => index + 1);
+    } else {
+      setFailed(true);
+    }
+  };
 
   /** 用户点击播放 */
   const handlePlay = () => {
@@ -57,7 +70,7 @@ function FilmCard({
         {/* ── 用户点击后才渲染 video 元素 ── */}
         {userWantsVideo && !unavailable ? (
           <video
-            key={retryKey}
+            key={`${retryKey}-${sourceIndex}`}
             className="h-full w-full object-cover"
             controls
             playsInline
@@ -68,7 +81,7 @@ function FilmCard({
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
             onEnded={() => setIsPlaying(false)}
-            onError={() => setFailed(true)}
+            onError={handleVideoError}
           >
             <source src={resolvedUrl} type="video/mp4" />
             你的浏览器暂不支持视频播放。

@@ -48,28 +48,37 @@ export function getConnectionQuality(): "fast" | "slow" | "unknown" {
 }
 
 /**
- * 选择最佳视频源
- *
- * 优先级：
- * 1. 国内 CDN（腾讯云 COS / 阿里云 OSS / 七牛云）
- * 2. Cloudflare Pages（本站静态资源，比 GitHub 快）
- * 3. GitHub Release（兜底，国内最慢）
+ * 视频三级源（与 src/config.ts 中 VIDEO_SOURCES_* 的字段一一对应）
  */
-export function resolveVideoUrl({
-  cdnUrl,
-  pagesUrl,
-  githubUrl,
-}: {
-  cdnUrl?: string;
-  pagesUrl?: string;
-  githubUrl?: string;
-}): string {
+export type VideoSources = {
+  /** ① 国内 CDN（七牛云等），国内环境优先 */
+  cdn?: string;
+  /** ② Cloudflare Pages 本站静态资源，比 GitHub 快 */
+  pages?: string;
+  /** ③ GitHub Release，兜底（国内最慢） */
+  github?: string;
+};
+
+/**
+ * 按优先级返回完整视频源列表（去重），供组件播放失败时逐级回退：
+ * 国内环境：CDN → Pages → GitHub；海外环境：Pages → GitHub。
+ */
+export function orderedVideoSources(videoSources: VideoSources): string[] {
+  const list: string[] = [];
   // 如果在国内环境且有 CDN URL，优先使用
-  if (cdnUrl && isLikelyChina()) return cdnUrl;
+  if (videoSources.cdn && isLikelyChina()) list.push(videoSources.cdn);
   // 如果有 Pages 内链，比 GitHub 快
-  if (pagesUrl) return pagesUrl;
+  if (videoSources.pages) list.push(videoSources.pages);
   // 兜底
-  return githubUrl ?? pagesUrl ?? cdnUrl ?? "";
+  if (videoSources.github) list.push(videoSources.github);
+  return [...new Set(list)];
+}
+
+/**
+ * 选择最佳视频源（只取优先级最高的一个；需要失败回退时请用 orderedVideoSources）
+ */
+export function resolveVideoUrl(videoSources: VideoSources): string {
+  return orderedVideoSources(videoSources)[0] ?? "";
 }
 
 /** 粗判是否在国内网络环境 */
