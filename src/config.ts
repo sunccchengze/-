@@ -295,8 +295,56 @@ export const SUMMER_GALLERIES = {
 //  暑期影像统一由宣传部维护同名文件。
 // ─────────────────────────────────────────────────────────────
 /**
- * 大视频由 GitHub Release 托管，避免 Cloudflare Pages 的 25MiB 单文件静态资源限制。
- * 本地 public/videos/summer/ 仍保留同名文件，供 localhost 直接调试和素材备份。
+ * ─────────────────────────────────────────────────────────────
+ *  暑期实践影像 —— 三级回退源
+ * ─────────────────────────────────────────────────────────────
+ *
+ *  GitHub Release 在国内极慢/不可达，微信扫码完全无法播放。
+ *  改为三级回退：
+ *
+ *  ① 七牛云 CDN（国内免费 10GB 存储 + 10GB 流量/月）—— 最快
+ *  ② Cloudflare Pages 本站（yzaxs-1.pages.dev）—— 次快，压缩版 ≤5MB
+ *  ③ GitHub Release —— 兜底（仅海外可用）
+ *
+ *  压缩后的视频放 public/videos/summer/ 即可随 Cloudflare Pages 部署，
+ *  无需任何额外配置。七牛云是锦上添花，加速国内访问。
+ *
+ *  使用方式：组件中调用 resolveVideoUrl(videoSources) 选择最佳源。
+ * ─────────────────────────────────────────────────────────────
+ */
+
+/**
+ * 七牛云 CDN 域名 —— 免费额度：10GB存储 + 10GB CDN流量/月
+ *
+ * 配置步骤：
+ * 1. 注册 https://www.qiniu.com/ → 实名认证
+ * 2. 开通对象存储 Kodo → 新建空间（华东-上海区域）
+ * 3. 上传压缩后的视频到 summer/ 目录
+ * 4. 把下面这行替换为七牛分配的 CDN 域名（类似 xxx.qiniudns.com）
+ * 5. 留空 = 暂不使用七牛，仅走 Pages → GitHub 回退
+ */
+const CDN_VIDEO_BASE = "https://tjaojwmmm.hd-bkt.clouddn.com";
+
+/** 知行秦川总结视频 —— 三级源 */
+export const VIDEO_SOURCES_知行秦川 = {
+  /** ① 七牛云 CDN（国内最快，免费） */
+  cdn: CDN_VIDEO_BASE ? `${CDN_VIDEO_BASE}/summer/2026-qinchuan-recap.mp4` : undefined,
+  /** ② Cloudflare Pages 本站（压缩版 ≤5MB，yzaxs-1.pages.dev） */
+  pages: "/videos/summer/2026-qinchuan-recap.mp4",
+  /** ③ GitHub Release（兜底，海外可用） */
+  github: "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-qinchuan-recap.mp4",
+};
+
+/** 玉树总结视频 —— 三级源 */
+export const VIDEO_SOURCES_玉树 = {
+  cdn: CDN_VIDEO_BASE ? `${CDN_VIDEO_BASE}/summer/2026-yushu-recap.mp4` : undefined,
+  pages: "/videos/summer/2026-yushu-recap.mp4",
+  github: "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-yushu-recap.mp4",
+};
+
+/**
+ * 便捷导出：默认使用三级回退解析后的 URL
+ * 组件可以直接用，也可以用 VIDEO_SOURCES_xxx 自定义逻辑
  */
 export const VIDEO_知行秦川总结 = "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-qinchuan-recap.mp4";
 export const VIDEO_玉树总结 = "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-yushu-recap.mp4";

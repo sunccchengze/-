@@ -1606,8 +1606,84 @@ git diff --name-status HEAD..FETCH_HEAD
 - 所有萤火、医院、特殊儿童场景：无论当前看起来是否已有贴纸，均需人工逐图复核；Agent 不能凭文件名或缩略图宣布“已处理”。
 
 
-# 附录 N：GitHub Release 视频播放策略
 
-GitHub Release 资产是无银行卡条件下用于绕过 Cloudflare Pages 25MiB 限制的当前方案。视频卡在页面加载时只请求 metadata，并在 HTML 中预先连接 GitHub/Release CDN；不在首页预下载两条 140MB 视频，避免抢占招新站首屏带宽。
+# 附录 N：移动端视频优化 —— 微信扫码兼容（2026-08-05）
 
-重要：不要用任意 12 秒/固定时长把“尚未加载完成”误判为网络失败。只有真实 `video.error` 或浏览器 offline 才显示“网络不太顺畅”回退与重新加载按钮。正常慢连接应继续显示 poster 与“正在准备影像”，一旦 `canplay` 即显示“点击播放”。
+## 问题
+
+荣誉高光页视频背景在电脑端正常 autoplay，但**微信扫码出来的 WebView (X5 内核) 完全禁止视频 autoplay**，即使 `muted + playsInline` 也不行。暑期视频（知行秦川 87MB、玉树 46MB）托管在 GitHub Release，国内访问极慢/不可达，微信里完全无法播放。
+
+用户明确拒绝压缩到 5MB——"压缩到 5 兆完全就是一坨马赛克，啥也看不见"。
+
+## 解决方案
+
+### N.1 荣誉背景：Ken Burns 动画降级 + 点击播放
+
+**三态切换**（`src/components/Honors.tsx`）：
+
+| 环境 | 行为 | 实现 |
+|------|------|------|
+| 桌面端 | 视频 autoplay 正常 | `<video autoPlay muted loop playsInline>` |
+| 移动端/微信 | Ken Burns 动画海报 + ▶ 播放按钮 | `<img class="ken-burns">` + `<button onClick={play}>` |
+| 用户点击 ▶ | 视频开始播放（微信允许用户手势触发） | `videoRef.current.play()` |
+
+Ken Burns 动画（`src/index.css`）：20 秒循环的 CSS `scale + translate`，模拟电影镜头呼吸感。Apple/Netflix 同款方案。0 流量、0 等待、100% 兼容。
+
+### N.2 暑期视频：点击才加载 + 三级 CDN 回退
+
+**核心改动**（`src/components/SummerFilms.tsx`）：
+
+- **之前**：页面加载就创建 `<video>` + 请求 87MB → 移动端白屏
+- **现在**：初始只显示海报 + ▶ 播放按钮，用户点击后才创建 video 元素
+- 移动端 `preload="none"`，桌面端 `preload="metadata"`
+- 慢网检测："建议Wi-Fi" 提示
+- 网络错误：优雅降级 + 重试按钮
+
+**三级视频源回退**（`src/config.ts`）：
+
+```
+① 七牛云 CDN (tjaojwmmm.hd-bkt.clouddn.com)  → 国内最快
+② Cloudflare Pages (yzaxs-1.pages.dev)         → 次快（仅 ≤25MB 文件）
+③ GitHub Release                                → 海外兜底
+```
+
+运行时 `resolveVideoUrl()` 根据环境自动选择：微信/中文 → 走七牛；其他 → Pages → GitHub。
+
+### N.3 七牛云配置
+
+- 域名：`https://tjaojwmmm.hd-bkt.clouddn.com`（测试域名，自带 HTTPS，6 个月有效期）
+- 存储空间：华东区域，`summer/` 目录下存放两个原画质视频
+- 免费额度：10GB 存储 + 10GB CDN 流量/月 → 远远够用
+- 用户已上传两个原画质视频到 `summer/` 目录
+- `src/config.ts` 中 `CDN_VIDEO_BASE = "https://tjaojwmmm.hd-bkt.clouddn.com"` 已配置
+
+### N.4 环境检测工具
+
+`src/utils/detect-env.ts`：
+
+- `isWeChat()` — 微信 WebView 检测（`MicroMessenger` UA）
+- `cannotAutoplayVideo()` — 移动端 autoplay 能力检测
+- `getConnectionQuality()` — 网络质量（4G/3G/2G，用 Navigator Connection API）
+- `resolveVideoUrl({ cdn, pages, github })` — 三级回退 URL 选择
+- `isLikelyChina()` — 国内环境判断（微信 UA / zh-CN 语言）
+
+### N.5 构建脚本更新
+
+`scripts/strip-pages-video-assets.mjs`：
+
+- **之前**：删除整个 `dist/videos/summer/` 目录（因为文件 >25MB）
+- **现在**：只删除超过 25MB 的单个文件，保留 ≤25MB 的文件
+- 原画质视频（87MB/46MB）仍通过七牛 CDN 提供，不经过 Pages 部署
+
+### N.6 为什么七牛不能直接绑定 yzaxs-1.pages.dev 做回源
+
+因为那两个视频**不在** `yzaxs-1.pages.dev` 上——Cloudflare Pages 有 25MB 单文件限制，87MB/46MB 根本传不上去，所以之前放到了 GitHub Release。`yzaxs-1.pages.dev/videos/summer/xxx.mp4` 返回 404，七牛回源过去拿不到文件。七牛是对象存储，直接存视频文件本身，不需要回源到 Pages。
+
+### N.7 关键决策记录
+
+1. **不压缩视频**：用户明确拒绝，5MB 压 87MB 是马赛克
+2. **原画质直传七牛**：七牛没有单文件大小限制，87MB/46MB 原画质直接存
+3. **移动端不依赖 autoplay**：Ken Burns 动画是零流量零等待的最佳替代
+4. **点击才加载视频**：避免首屏白屏等待
+5. **七牛免费额度足够**：每月 10GB 存储 + 10GB 流量，远超实际用量
+6. **七牛测试域名 6 个月有效**：到期后需绑定自定义域名或续期
