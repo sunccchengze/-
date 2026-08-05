@@ -821,3 +821,24 @@ button {
     display: none;
   }
 }
+
+/* 荣誉翻卡瞬间的暖金光感：只在翻到真实证明时短促掠过，不让正面常亮。 */
+.honor-card-flipped::after {
+  position: absolute;
+  inset: -20%;
+  z-index: 20;
+  pointer-events: none;
+  content: "";
+  background: radial-gradient(circle at 50% 50%, rgba(255, 236, 166, 0.62), rgba(255, 236, 166, 0.08) 34%, transparent 66%);
+  animation: honorRevealGlow 0.9s ease-out both;
+}
+
+@keyframes honorRevealGlow {
+  0% { opacity: 0; transform: scale(0.55); }
+  38% { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.22); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .honor-card-flipped::after { animation: none; opacity: 0; }
+}

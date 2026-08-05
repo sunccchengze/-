@@ -217,6 +217,7 @@ export const IMG_小鹰飞行 = "/images/小鹰/小鹰飞行.png";
 export const IMG_小鹰相机 = "/images/小鹰/小鹰相机.png";
 
 export const HERO_V2PRO_SLIDES = [
+  { src: "/images/首页/首页16.jpg", title: "英仔大合影", line: "英为爱，仔一起", detail: "社团伙伴 · 公益同行" },
   { src: "/images/首页/首页1.jpg", title: "雪域相逢", line: "雪域相逢，共绽格桑", detail: "玉树支教团 · 高原课堂" },
   { src: "/images/首页/首页2.jpg", title: "知行秦川", line: "文浸秦川，笃学寻光", detail: "周至 / 彬州 · 暑期课堂" },
   { src: "/images/首页/首页3.jpg", title: "萤火微光", line: "以温柔伴童心，以微光暖星河", detail: "儿童关怀 · 陪伴成长" },
@@ -232,7 +233,6 @@ export const HERO_V2PRO_SLIDES = [
   { src: "/images/首页/首页13.jpg", title: "记录善意", line: "让每一次出发，都被好好看见", detail: "宣传部 · 影像与故事" },
   { src: "/images/首页/首页14.jpg", title: "英仔同行", line: "因为热爱相遇，为了善意并肩", detail: "交流部 · 社团文化" },
   { src: "/images/首页/首页15.jpg", title: "认真守护", line: "把每一份热忱，落成可靠的行动", detail: "常务部 · 稳定运转" },
-  { src: "/images/首页/首页16.jpg", title: "英仔大合影", line: "英为爱，仔一起", detail: "社团伙伴 · 公益同行" },
   { src: "/images/首页/首页17.jpg", title: "新一届英仔", line: "薪火相传，下一站由你加入", detail: "2026 招新 · 与你相遇" },
 ] as const;
 

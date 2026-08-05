@@ -10,7 +10,7 @@ const icons = [Compass, HandHeart, UsersRound, Route];
 export function NewcomerPath() {
   return (
     <section id="first-step" className="bg-shell section-block">
-      <img src={IMG_第2页背景} alt="" aria-hidden="true" className="bg-image opacity-[0.18]" loading="lazy" decoding="async" />
+      <img src={IMG_第2页背景} alt="" aria-hidden="true" className="bg-image opacity-[0.32]" loading="lazy" decoding="async" />
       <div className="bg-veil veil-paper opacity-95" />
       <div className="absolute inset-0 -z-[1] bg-[radial-gradient(circle_at_18%_28%,rgba(201,168,118,0.15),transparent_36%),radial-gradient(circle_at_82%_78%,rgba(178,90,85,0.12),transparent_40%)]" />
       <div className="section-container relative z-10">

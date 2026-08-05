@@ -4,7 +4,7 @@ import { leadership } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
 export function Leadership() {
-  const { presidentMessage, advisor, core, coreTitle } = leadership;
+  const { presidentMessage, advisor, advisorNote, core, coreTitle } = leadership;
 
   return (
     <section id="team" className="bg-shell section-block">
@@ -63,6 +63,7 @@ export function Leadership() {
               </div>
               <p className="mt-5 font-serif-cn text-2xl font-bold text-rouge-deep">{advisor.name}</p>
               <p className="mt-1 text-sm text-muted">{advisor.title}</p>
+              {advisorNote ? <p className="mt-3 text-xs leading-5 text-muted/80">{advisorNote}</p> : null}
             </motion.div>
 
             <motion.div

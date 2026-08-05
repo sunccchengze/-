@@ -25,7 +25,7 @@ function HonorVaultCard({ item, index }: { item: VaultItem; index: number }) {
       transition={{ delay: Math.min(index * 0.045, 0.5), duration: 0.48, ease: [0.2, 0.7, 0.25, 1] }}
     >
       <motion.div
-        className="preserve-3d relative h-full w-full"
+        className={`preserve-3d relative h-full w-full ${flipped ? "honor-card-flipped" : ""}`}
         animate={{ rotateY: flipped ? 180 : 0 }}
         transition={{ duration: 0.62, ease: [0.2, 0.7, 0.2, 1] }}
       >
