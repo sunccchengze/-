@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Award, MoreHorizontal, Trophy, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Award, MoreHorizontal, Play, Trophy, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { IMG_第5页背景, VIDEO_荣誉历程 } from "../config";
 import { honors, honorsNote, honorVault } from "../content";
+import { cannotAutoplayVideo, isMobile } from "../utils/detect-env";
 import { SectionHeader } from "./SectionHeader";
 
 type VaultItem = (typeof honorVault)[number];
@@ -127,18 +128,70 @@ function HonorVault({ onClose }: { onClose: () => void }) {
 export function Honors() {
   const [vaultOpen, setVaultOpen] = useState(false);
   const [videoOk, setVideoOk] = useState(true);
+  const [userStartedVideo, setUserStartedVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const visibleHonors = honors.slice(0, 4);
+
+  /** 移动端无法 autoplay，需要用户点击触发 */
+  const mobileNoAutoplay = cannotAutoplayVideo();
+  const useKenBurns = mobileNoAutoplay && !userStartedVideo;
+
+  /** 用户点击播放按钮 */
+  const handleUserPlay = () => {
+    setUserStartedVideo(true);
+    // 延迟一帧让 video 元素渲染后再 play
+    requestAnimationFrame(() => {
+      videoRef.current?.play().catch(() => {});
+    });
+  };
 
   return (
     <section id="honors" className="bg-shell section-block text-white">
       <AnimatePresence>{vaultOpen ? <HonorVault onClose={() => setVaultOpen(false)} /> : null}</AnimatePresence>
-      {videoOk ? (
-        <video className="video-bg pointer-events-none" autoPlay muted loop playsInline preload="auto" poster={IMG_第5页背景} aria-hidden="true" onError={() => setVideoOk(false)}>
+
+      {/* ── 背景层：三态切换 ── */}
+      {useKenBurns ? (
+        /* 移动端：Ken Burns 动画海报 —— 不依赖视频播放，视觉同样震撼 */
+        <>
+          <img
+            src={IMG_第5页背景}
+            alt=""
+            aria-hidden="true"
+            className="video-bg pointer-events-none object-cover ken-burns"
+          />
+          {/* 移动端轻触播放按钮 —— 微信允许用户手势触发播放 */}
+          <button
+            type="button"
+            onClick={handleUserPlay}
+            className="absolute inset-0 z-[1] flex items-center justify-center"
+            aria-label="点击播放荣誉历程背景影像"
+          >
+            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/40 bg-black/25 backdrop-blur-md transition-transform active:scale-90">
+              <Play className="h-6 w-6 text-white/90" fill="currentColor" />
+            </span>
+          </button>
+        </>
+      ) : videoOk ? (
+        /* 桌面端 / 用户已触发播放：视频自动播放 */
+        <video
+          ref={videoRef}
+          className="video-bg pointer-events-none"
+          autoPlay={!mobileNoAutoplay}
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={IMG_第5页背景}
+          aria-hidden="true"
+          onError={() => setVideoOk(false)}
+        >
           <source src={VIDEO_荣誉历程} type="video/mp4" />
         </video>
       ) : (
+        /* 视频加载失败：静默回退到静态海报 */
         <img src={IMG_第5页背景} alt="" aria-hidden="true" className="video-bg pointer-events-none object-cover" />
       )}
+
       <div className="bg-veil honor-video-veil" />
       <div className="absolute inset-0 -z-[1] bg-[radial-gradient(circle_at_50%_30%,rgba(178,90,85,0.4),transparent_60%)]" />
 

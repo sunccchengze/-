@@ -1,17 +1,33 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Clapperboard, RotateCcw, WifiOff } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { IMG_第11页背景, SUMMER_GALLERIES, VIDEO_知行秦川总结, VIDEO_玉树总结 } from "../config";
+import { ArrowRight, Clapperboard, Loader2, Play, RotateCcw, WifiOff } from "lucide-react";
+import { useEffect, useState } from "react";
+import { IMG_第11页背景, SUMMER_GALLERIES, VIDEO_SOURCES_知行秦川, VIDEO_SOURCES_玉树 } from "../config";
+import { getConnectionQuality, isMobile, resolveVideoUrl } from "../utils/detect-env";
 import { SectionHeader } from "./SectionHeader";
 
-function FilmCard({ title, subtitle, description, video, poster, storyLink }: { title: string; subtitle: string; description: string; video: string; poster: string; storyLink?: string }) {
-  const cardRef = useRef<HTMLElement>(null);
-  const [isNearby, setIsNearby] = useState(false);
-  const [isPhone, setIsPhone] = useState(false);
+function FilmCard({
+  title,
+  subtitle,
+  description,
+  videoSources,
+  poster,
+  storyLink,
+}: {
+  title: string;
+  subtitle: string;
+  description: string;
+  videoSources: { cdn?: string; pages?: string; github?: string };
+  poster: string;
+  storyLink?: string;
+}) {
   const [failed, setFailed] = useState(false);
   const [online, setOnline] = useState(() => typeof navigator === "undefined" || navigator.onLine);
   const [ready, setReady] = useState(false);
   const [retryKey, setRetryKey] = useState(0);
+
+  /** 核心优化：视频只在用户点击后才加载，减少移动端流量和加载等待 */
+  const [userWantsVideo, setUserWantsVideo] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const onOnline = () => { setOnline(true); setFailed(false); };
@@ -21,65 +37,83 @@ function FilmCard({ title, subtitle, description, video, poster, storyLink }: { 
     return () => { window.removeEventListener("online", onOnline); window.removeEventListener("offline", onOffline); };
   }, []);
 
-  // Release 视频体积大：只在用户即将滚到卡片时才让浏览器请求 metadata。
-  useEffect(() => {
-    const target = cardRef.current;
-    if (!target) return;
-    if (!("IntersectionObserver" in window)) {
-      setIsNearby(true);
-      return;
-    }
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        setIsNearby(true);
-        observer.disconnect();
-      },
-      { rootMargin: "700px 0px" },
-    );
-    observer.observe(target);
-    return () => observer.disconnect();
-  }, []);
-
-  // 手机端在靠近视频卡后持续缓冲，降低开始播放后的卡顿；桌面仍保持 metadata 策略。
-  useEffect(() => {
-    const media = window.matchMedia("(max-width: 639px)");
-    const sync = () => setIsPhone(media.matches);
-    sync();
-    media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
-  }, []);
-
   const unavailable = !online || failed;
-  const shouldLoadVideo = isNearby && !unavailable;
-  const retry = () => { setReady(false); setFailed(false); setRetryKey((key) => key + 1); };
+  const retry = () => { setReady(false); setFailed(false); setUserWantsVideo(false); setRetryKey((key) => key + 1); };
+
+  /** 解析最佳视频源：国内CDN → Pages → GitHub */
+  const resolvedUrl = resolveVideoUrl(videoSources);
+
+  /** 用户点击播放 */
+  const handlePlay = () => {
+    if (!userWantsVideo) setUserWantsVideo(true);
+  };
+
+  const connectionQuality = getConnectionQuality();
+  const mobile = isMobile();
 
   return (
-    <motion.article ref={cardRef} className="card-hover card-outline-gradient overflow-hidden rounded-[26px] bg-white/85" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}>
+    <motion.article className="card-hover card-outline-gradient overflow-hidden rounded-[26px] bg-white/85" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}>
       <div className="relative aspect-video overflow-hidden bg-[#221513]">
-        {shouldLoadVideo ? (
-          <video key={retryKey} className="h-full w-full object-cover" controls playsInline preload={isPhone ? "auto" : "metadata"} poster={poster} onCanPlay={() => setReady(true)} onError={() => setFailed(true)}>
-            <source src={video} type="video/mp4" />
+        {/* ── 用户点击后才渲染 video 元素 ── */}
+        {userWantsVideo && !unavailable ? (
+          <video
+            key={retryKey}
+            className="h-full w-full object-cover"
+            controls
+            playsInline
+            preload={mobile ? "none" : "metadata"}
+            poster={poster}
+            autoPlay
+            onCanPlay={() => { setReady(true); setIsPlaying(true); }}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            onEnded={() => setIsPlaying(false)}
+            onError={() => setFailed(true)}
+          >
+            <source src={resolvedUrl} type="video/mp4" />
             你的浏览器暂不支持视频播放。
           </video>
-        ) : (
+        ) : null}
+
+        {/* ── 海报 + 播放按钮（视频未播放时显示） ── */}
+        {!isPlaying ? (
           <>
             <img src={poster} alt={`${title}活动影像`} className="h-full w-full object-cover" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#211310]/80 via-[#211310]/25 to-transparent" />
-            <div className="absolute inset-x-5 bottom-5 z-10 text-white">
-              <p className="font-serif-cn text-xl font-bold">{unavailable ? "网络不太顺畅，影像稍后再见" : "影像正在准备中"}</p>
-              <p className="mt-2 text-sm leading-6 text-white/80">{unavailable ? "你可以稍后重新加载，也可关注公众号回顾这段夏天。" : "滑到这里时再为你准备播放，避免抢占首页加载。"}</p>
-              {unavailable ? (
+            <div className="absolute inset-0 bg-gradient-to-t from-[#211310]/70 via-[#211310]/20 to-transparent" />
+
+            {unavailable ? (
+              /* 网络错误状态 */
+              <div className="absolute inset-x-5 bottom-5 z-10 text-white">
+                <p className="font-serif-cn text-xl font-bold">网络不太顺畅，影像稍后再见</p>
+                <p className="mt-2 text-sm leading-6 text-white/80">你可以稍后重新加载，也可关注公众号回顾这段夏天。</p>
                 <button type="button" onClick={retry} className="focus-ring mt-3 inline-flex items-center gap-2 rounded-full border border-white/45 bg-white/15 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-sm hover:bg-white/25">
                   <RotateCcw className="h-3.5 w-3.5" />重新加载
                 </button>
-              ) : null}
-            </div>
+              </div>
+            ) : (
+              /* 播放按钮 —— 核心交互入口 */
+              <button
+                type="button"
+                onClick={handlePlay}
+                className="absolute inset-0 z-10 flex items-center justify-center"
+                aria-label={`播放${title}视频`}
+              >
+                <span className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-white/50 bg-black/30 backdrop-blur-md transition-all active:scale-90 hover:scale-105 hover:bg-black/40">
+                  {userWantsVideo && !ready ? (
+                    <Loader2 className="h-7 w-7 animate-spin text-white/90" />
+                  ) : (
+                    <Play className="h-7 w-7 text-white/90" fill="currentColor" />
+                  )}
+                </span>
+              </button>
+            )}
           </>
-        )}
+        ) : null}
+
+        {/* ── 状态标签 ── */}
         <span className="absolute left-4 top-4 z-10 inline-flex items-center gap-2 rounded-full bg-black/35 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
-          {unavailable ? <WifiOff className="h-3.5 w-3.5" /> : <Clapperboard className="h-3.5 w-3.5" />}
-          {unavailable ? "网络稍后重试" : shouldLoadVideo ? ready ? "点击播放" : "正在准备影像" : "滑到附近再加载"}
+          {unavailable ? <WifiOff className="h-3.5 w-3.5" /> : isPlaying ? <Clapperboard className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
+          {unavailable ? "网络稍后重试" : isPlaying ? "播放中" : connectionQuality === "slow" ? "点击播放（建议Wi-Fi）" : "点击播放"}
         </span>
       </div>
       <div className="flex items-center justify-between gap-4 px-6 pb-7 pt-6">
@@ -99,8 +133,8 @@ export function SummerFilms() {
       <div className="section-container relative z-10">
         <SectionHeader eyebrow="SUMMER FILMS" title="把那个夏天，留在影像里" subtitle="一段可播放的知行秦川，一场仍在继续的玉树赴约；镜头让真实行动被更多人看见。" />
         <div className="mt-14 grid gap-7 md:grid-cols-2 md:gap-8">
-          <FilmCard title="知行秦川，梦启今夏" subtitle="2026.7 · 周至九峰 × 彬州" description="从开营、课堂、英语话剧、科学科普到游园与告别，把这个夏天的笑声和认真留在镜头里。" video={VIDEO_知行秦川总结} poster={SUMMER_GALLERIES.qinchuan[0]} />
-          <FilmCard title="梦绽格桑原，玉树支教团" subtitle="第十七届 · 青海玉树" description="从西安到称多，把一堂堂课、一次次破冰与十七年的约定带到雪域高原。" video={VIDEO_玉树总结} poster={SUMMER_GALLERIES.yushu[0]} storyLink="#summer" />
+          <FilmCard title="知行秦川，梦启今夏" subtitle="2026.7 · 周至九峰 × 彬州" description="从开营、课堂、英语话剧、科学科普到游园与告别，把这个夏天的笑声和认真留在镜头里。" videoSources={VIDEO_SOURCES_知行秦川} poster={SUMMER_GALLERIES.qinchuan[0]} />
+          <FilmCard title="梦绽格桑原，玉树支教团" subtitle="第十七届 · 青海玉树" description="从西安到称多，把一堂堂课、一次次破冰与十七年的约定带到雪域高原。" videoSources={VIDEO_SOURCES_玉树} poster={SUMMER_GALLERIES.yushu[0]} storyLink="#summer" />
         </div>
       </div>
     </section>
