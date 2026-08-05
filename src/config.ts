@@ -294,5 +294,9 @@ export const SUMMER_GALLERIES = {
 //  十三、暑期实践影像
 //  暑期影像统一由宣传部维护同名文件。
 // ─────────────────────────────────────────────────────────────
-export const VIDEO_知行秦川总结 = "/videos/summer/2026-qinchuan-recap.mp4";
-export const VIDEO_玉树总结 = "/videos/summer/2026-yushu-recap.mp4";
+/**
+ * 大视频由 GitHub Release 托管，避免 Cloudflare Pages 的 25MiB 单文件静态资源限制。
+ * 本地 public/videos/summer/ 仍保留同名文件，供 localhost 直接调试和素材备份。
+ */
+export const VIDEO_知行秦川总结 = "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-qinchuan-recap.mp4";
+export const VIDEO_玉树总结 = "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-yushu-recap.mp4";

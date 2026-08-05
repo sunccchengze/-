@@ -176,7 +176,7 @@ public/videos/summer/2026-yushu-recap.mp4     约 48 MB
 public/videos/荣誉历程.mp4                     约 2.2 MB
 ```
 
-知行秦川原始片曾约 384MB，不能推 GitHub。当前推入仓库的是压缩后的 Web 版。未来替换时确保单文件低于 GitHub 100MB 限制；不要推荐 Git LFS 作为 Pages 静态视频播放方案。
+知行秦川原始片曾约 384MB，不能推 GitHub。当前 Web 版可作为 GitHub Release 资产保存，但 Cloudflare Pages 静态资产单文件上限为 25MiB：不得把大视频作为 Pages 的 dist 资产。当前两条公开视频托管于 GitHub Release `media-2026-v1`；构建后脚本会从 dist 删除本地 summer 视频副本。未来替换时同步更新 Release 资产与 `src/config.ts` 的 URL；不要推荐 Git LFS 作为 Pages 静态视频播放方案。
 
 ---
 
