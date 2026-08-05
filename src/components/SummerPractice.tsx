@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Image as ImageIcon, MapPin } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { IMG_第11页背景 } from "../config";
 import { summerCards, summerSection, type SummerCard } from "../content";
 import { SectionHeader } from "./SectionHeader";
@@ -10,32 +10,57 @@ import { SectionHeader } from "./SectionHeader";
  * 用户按 docs/SUMMER-GALLERY-SLOTS.md 上传后，无需修改组件即可加入轮播。
  */
 function SummerImageCarousel({ images, alt, compact = false }: { images: readonly string[]; alt: string; compact?: boolean }) {
-  const [loaded, setLoaded] = useState<Set<number>>(() => new Set([0]));
+  const shellRef = useRef<HTMLDivElement>(null);
+  const [isNearby, setIsNearby] = useState(false);
+  const [loaded, setLoaded] = useState<Set<number>>(() => new Set());
   const [current, setCurrent] = useState(0);
 
+  // 页面会同时渲染五组图集；移动端绝不能在首屏一次请求全部 35 张。
+  // 提前一屏开始加载，保证滚到卡片时已有当前图和下一张可切换。
   useEffect(() => {
+    const target = shellRef.current;
+    if (!target) return;
+    if (!("IntersectionObserver" in window)) {
+      setIsNearby(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        setIsNearby(true);
+        observer.disconnect();
+      },
+      { rootMargin: "700px 0px" },
+    );
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
+
+  // 仅请求当前图与下一张；切换后再继续向前预取一张。
+  useEffect(() => {
+    if (!isNearby || images.length === 0) return;
+    const indices = [current, (current + 1) % images.length].filter((index, position, values) => values.indexOf(index) === position);
     let active = true;
-    images.forEach((src, index) => {
+    indices.forEach((index) => {
+      const src = images[index];
+      if (!src) return;
       const image = new Image();
       image.onload = () => {
-        if (!active) return;
-        setLoaded((previous) => new Set(previous).add(index));
+        if (active) setLoaded((previous) => new Set(previous).add(index));
       };
       image.src = src;
     });
-    return () => {
-      active = false;
-    };
-  }, [images]);
+    return () => { active = false; };
+  }, [current, images, isNearby]);
 
   const available = useMemo(() => [...loaded].filter((index) => images[index]).sort((a, b) => a - b), [images, loaded]);
 
   useEffect(() => {
-    if (!available.includes(current)) setCurrent(available[0] ?? 0);
-  }, [available, current]);
+    if (isNearby && available.length > 0 && !available.includes(current)) setCurrent(available[0]);
+  }, [available, current, isNearby]);
 
   useEffect(() => {
-    if (available.length < 2) return;
+    if (!isNearby || available.length < 2) return;
     const timer = window.setInterval(() => {
       setCurrent((previous) => {
         const position = available.indexOf(previous);
@@ -43,20 +68,25 @@ function SummerImageCarousel({ images, alt, compact = false }: { images: readonl
       });
     }, 5000);
     return () => window.clearInterval(timer);
-  }, [available]);
+  }, [available, isNearby]);
+
+  const src = images[current] ?? images[0];
 
   return (
-    <div className="image-shell relative h-full w-full">
-      <motion.img
-        key={current}
-        src={images[current] ?? images[0]}
-        alt={alt}
-        className="h-full w-full object-cover"
-        initial={{ opacity: 0, scale: 1.02 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.55 }}
-        loading="lazy"
-      />
+    <div ref={shellRef} className="image-shell relative h-full w-full">
+      {isNearby ? (
+        <motion.img
+          key={current}
+          src={src}
+          alt={alt}
+          className="h-full w-full object-cover"
+          initial={{ opacity: 0, scale: 1.02 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.55 }}
+          loading="eager"
+          decoding="async"
+        />
+      ) : null}
       {available.length > 1 ? (
         <div className={`absolute bottom-3 right-3 z-10 flex items-center gap-1.5 rounded-full bg-black/35 px-2 py-1.5 backdrop-blur-sm ${compact ? "scale-90" : ""}`} aria-label="活动图片轮播">
           <ImageIcon className="h-3 w-3 text-white/80" aria-hidden="true" />
