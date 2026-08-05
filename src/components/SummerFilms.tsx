@@ -7,7 +7,7 @@ import { SectionHeader } from "./SectionHeader";
 function FilmCard({ title, subtitle, description, video, poster, storyLink }: { title: string; subtitle: string; description: string; video: string; poster: string; storyLink?: string }) {
   const [failed, setFailed] = useState(false);
   const [online, setOnline] = useState(() => typeof navigator === "undefined" || navigator.onLine);
-  const [loaded, setLoaded] = useState(false);
+  const [ready, setReady] = useState(false);
   const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => {
@@ -18,20 +18,16 @@ function FilmCard({ title, subtitle, description, video, poster, storyLink }: { 
     return () => { window.removeEventListener("online", onOnline); window.removeEventListener("offline", onOffline); };
   }, []);
 
-  useEffect(() => {
-    if (!online || loaded || failed) return;
-    const timer = window.setTimeout(() => setFailed(true), 12000);
-    return () => window.clearTimeout(timer);
-  }, [online, loaded, failed, retryKey]);
+
 
   const unavailable = !online || failed;
-  const retry = () => { setLoaded(false); setFailed(false); setRetryKey((key) => key + 1); };
+  const retry = () => { setReady(false); setFailed(false); setRetryKey((key) => key + 1); };
 
   return (
     <motion.article className="card-hover card-outline-gradient overflow-hidden rounded-[26px] bg-white/85" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}>
       <div className="relative aspect-video overflow-hidden bg-[#221513]">
         {!unavailable ? (
-          <video key={retryKey} className="h-full w-full object-cover" controls playsInline preload="metadata" poster={poster} onLoadedData={() => setLoaded(true)} onError={() => setFailed(true)}>
+          <video key={retryKey} className="h-full w-full object-cover" controls playsInline preload="metadata" poster={poster} onCanPlay={() => setReady(true)} onError={() => setFailed(true)}>
             <source src={video} type="video/mp4" />
             你的浏览器暂不支持视频播放。
           </video>
@@ -50,7 +46,7 @@ function FilmCard({ title, subtitle, description, video, poster, storyLink }: { 
         )}
         <span className="absolute left-4 top-4 z-10 inline-flex items-center gap-2 rounded-full bg-black/35 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
           {unavailable ? <WifiOff className="h-3.5 w-3.5" /> : <Clapperboard className="h-3.5 w-3.5" />}
-          {unavailable ? "网络稍后重试" : "点击播放"}
+          {unavailable ? "网络稍后重试" : ready ? "点击播放" : "正在准备影像"}
         </span>
       </div>
       <div className="flex items-center justify-between gap-4 px-6 pb-7 pt-6">

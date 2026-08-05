@@ -1604,3 +1604,10 @@ git diff --name-status HEAD..FETCH_HEAD
 
 - `public/images/首页/首页3.jpg`：萤火首页图，疑似存在可识别人脸；**待用户/素材负责人逐张确认并遮脸或换图后再对外发布**。
 - 所有萤火、医院、特殊儿童场景：无论当前看起来是否已有贴纸，均需人工逐图复核；Agent 不能凭文件名或缩略图宣布“已处理”。
+
+
+# 附录 N：GitHub Release 视频播放策略
+
+GitHub Release 资产是无银行卡条件下用于绕过 Cloudflare Pages 25MiB 限制的当前方案。视频卡在页面加载时只请求 metadata，并在 HTML 中预先连接 GitHub/Release CDN；不在首页预下载两条 140MB 视频，避免抢占招新站首屏带宽。
+
+重要：不要用任意 12 秒/固定时长把“尚未加载完成”误判为网络失败。只有真实 `video.error` 或浏览器 offline 才显示“网络不太顺畅”回退与重新加载按钮。正常慢连接应继续显示 poster 与“正在准备影像”，一旦 `canplay` 即显示“点击播放”。
