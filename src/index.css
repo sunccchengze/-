@@ -118,6 +118,26 @@ button {
     linear-gradient(180deg, rgba(40, 24, 24, 0.55) 0%, rgba(30, 20, 20, 0.85) 100%);
 }
 
+/* 荣誉区保留文字对比度，同时让循环影像的运动可被看见。 */
+.honor-video-veil {
+  background: linear-gradient(180deg, rgba(40, 24, 24, 0.36) 0%, rgba(30, 20, 20, 0.63) 100%);
+}
+
+/* —— V2 Pro 首页：桌面左深右淡，手机改为上下遮罩 —— */
+.hero-v2pro-veil {
+  background:
+    linear-gradient(90deg, rgba(21, 12, 11, 0.94) 0%, rgba(27, 15, 13, 0.82) 38%, rgba(33, 18, 16, 0.46) 66%, rgba(25, 14, 13, 0.16) 100%),
+    linear-gradient(180deg, rgba(18, 10, 9, 0.36) 0%, transparent 35%, rgba(18, 10, 9, 0.28) 100%);
+}
+
+@media (max-width: 1023px) {
+  .hero-v2pro-veil {
+    background:
+      linear-gradient(180deg, rgba(21, 12, 11, 0.88) 0%, rgba(27, 15, 13, 0.78) 58%, rgba(25, 14, 13, 0.58) 100%),
+      linear-gradient(90deg, rgba(20, 12, 10, 0.22), rgba(20, 12, 10, 0.12));
+  }
+}
+
 /* —— Eyebrow / 装饰线 —— */
 .eyebrow {
   color: var(--color-rouge);
@@ -661,4 +681,164 @@ button {
   ::-webkit-scrollbar-track {
     background: rgba(250, 246, 243, 0.8);
   }
+}
+
+/* —— 英仔小鹰网页宠物 —— */
+.eagle-mascot {
+  pointer-events: none;
+}
+
+.eagle-mascot > * {
+  pointer-events: auto;
+}
+
+.eagle-pet {
+  animation: eagleFloat 3.6s ease-in-out infinite;
+  filter: drop-shadow(0 10px 12px rgba(54, 31, 17, 0.2));
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+.eagle-pet:hover {
+  animation-play-state: paused;
+  filter: drop-shadow(0 14px 18px rgba(54, 31, 17, 0.28));
+  transform: translateY(-3px) rotate(-2deg);
+}
+
+.eagle-pet-image {
+  transform-origin: bottom center;
+}
+
+.eagle-speech::after {
+  position: absolute;
+  right: -7px;
+  bottom: 24px;
+  width: 14px;
+  height: 14px;
+  content: "";
+  border-right: 1px solid rgba(178, 90, 85, 0.15);
+  border-top: 1px solid rgba(178, 90, 85, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+  transform: rotate(45deg);
+}
+
+@keyframes eagleFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@media (max-width: 639px) {
+  .eagle-speech::after {
+    right: 17px;
+    bottom: -7px;
+    transform: rotate(135deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eagle-pet {
+    animation: none !important;
+  }
+}
+
+/* 部门推荐：点击服务对象导览后，让匹配卡片有明确且克制的展陈层级。 */
+.dept-recommended {
+  border-color: rgba(178, 90, 85, 0.8) !important;
+  box-shadow:
+    0 0 0 3px rgba(201, 168, 118, 0.28),
+    0 18px 48px rgba(142, 63, 61, 0.23),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+  animation: recommendedGlow 2.8s ease-in-out infinite;
+}
+
+@keyframes recommendedGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px rgba(201, 168, 118, 0.22),
+      0 18px 48px rgba(142, 63, 61, 0.2),
+      0 1px 0 rgba(255, 255, 255, 0.9) inset;
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(201, 168, 118, 0.32),
+      0 24px 58px rgba(142, 63, 61, 0.3),
+      0 1px 0 rgba(255, 255, 255, 0.95) inset;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dept-recommended {
+    animation: none !important;
+  }
+}
+
+/* 全站微循环：只让光与空气感缓慢流动，不引入高频廉价动画。 */
+.bg-shell > .bg-veil {
+  animation: ambientVeil 18s ease-in-out infinite alternate;
+}
+
+.gradient-divider {
+  background-size: 180% 100%;
+  animation: dividerFlow 6s ease-in-out infinite;
+}
+
+.card-hover::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(115deg, transparent 28%, rgba(255, 255, 255, 0.12) 48%, transparent 68%);
+  transform: translateX(-130%);
+  transition: transform 1.15s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.card-hover:hover::after {
+  transform: translateX(130%);
+}
+
+@keyframes ambientVeil {
+  0% { filter: saturate(0.98) brightness(0.99); }
+  100% { filter: saturate(1.04) brightness(1.02); }
+}
+
+@keyframes dividerFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-shell > .bg-veil,
+  .gradient-divider {
+    animation: none !important;
+  }
+  .card-hover::after {
+    display: none;
+  }
+}
+
+/* 荣誉翻卡瞬间的暖金光感：只在翻到真实证明时短促掠过，不让正面常亮。 */
+.honor-card-flipped::after {
+  position: absolute;
+  inset: -20%;
+  z-index: 20;
+  pointer-events: none;
+  content: "";
+  background: radial-gradient(circle at 50% 50%, rgba(255, 236, 166, 0.62), rgba(255, 236, 166, 0.08) 34%, transparent 66%);
+  animation: honorRevealGlow 0.9s ease-out both;
+}
+
+@keyframes honorRevealGlow {
+  0% { opacity: 0; transform: scale(0.55); }
+  38% { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.22); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .honor-card-flipped::after { animation: none; opacity: 0; }
 }

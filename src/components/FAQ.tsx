@@ -15,7 +15,7 @@ export function FAQ() {
         <SectionHeader
           eyebrow="FAQ"
           title="新生最常问"
-          subtitle="时间、部门、工时、零基础——把顾虑留在报名之前"
+          subtitle="时间、部门、零基础——把顾虑留在报名之前"
         />
         <div className="mx-auto mt-14 max-w-4xl space-y-4">
           {faqs.map((item, index) => {
@@ -38,6 +38,7 @@ export function FAQ() {
                   className="focus-ring flex w-full items-center justify-between gap-6 p-6 text-left font-serif-cn text-lg font-medium text-ink md:text-xl"
                   onClick={() => setOpenIndex(open ? -1 : index)}
                   aria-expanded={open}
+                  aria-controls={`faq-a-${index}`}
                   id={`faq-q-${index}`}
                 >
                   {item.question}

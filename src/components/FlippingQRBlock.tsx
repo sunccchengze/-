@@ -1,66 +1,37 @@
 import { motion } from "framer-motion";
-import { Users } from "lucide-react";
+import { ChevronLeft, Users } from "lucide-react";
 import { useState } from "react";
 import { QQ_招新群号 } from "../config";
 
-/** 历史占位群号；真群号写入 config 后自动展示数字 */
-const PLACEHOLDER_QQ = "123456789";
-const isPlaceholderQQ = !QQ_招新群号 || String(QQ_招新群号) === PLACEHOLDER_QQ;
-
-export function FlippingQRBlock({ qrSrc, label }: { qrSrc: string; label: string }) {
+/** 页脚招新群入口：正面二维码，翻转后给出可复制群号。 */
+export function FlippingQRBlock({ qrSrc }: { qrSrc: string }) {
   const [flipped, setFlipped] = useState(false);
 
   return (
-    <div
-      className="perspective-1000 relative h-[164px] w-[120px] cursor-pointer"
-      onClick={() => setFlipped(!flipped)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          setFlipped((v) => !v);
-        }
-      }}
-      role="button"
-      tabIndex={0}
+    <button
+      type="button"
+      className="focus-ring perspective-1000 relative h-[174px] w-[138px] cursor-pointer rounded-2xl text-left"
+      onClick={() => setFlipped((value) => !value)}
       aria-label="点击翻转查看QQ招新群号"
+      aria-pressed={flipped}
     >
-      <motion.div
-        className="preserve-3d relative h-full w-full"
-        animate={{ rotateY: flipped ? 180 : 0 }}
-        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-        // CSS reduced-motion globally collapses duration
-      >
-        <div className="backface-hidden glass-panel absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-white p-2 ring-1 ring-white/30">
-          <img
-            src={qrSrc}
-            alt={label}
-            className="h-[110px] w-[110px] rounded-lg bg-white object-contain"
-            loading="lazy"
-          />
-          <p className="mt-2 text-center text-xs font-medium text-muted">{label}</p>
+      <motion.div className="preserve-3d relative h-full w-full" animate={{ rotateY: flipped ? 180 : 0 }} transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}>
+        <div className="backface-hidden absolute inset-0 flex flex-col items-center rounded-2xl border border-white/25 bg-[#191313]/45 p-2.5 shadow-[0_14px_32px_rgba(0,0,0,0.22)] backdrop-blur-md">
+          <div className="overflow-hidden rounded-xl ring-1 ring-white/25">
+            <img src={qrSrc} alt="招新QQ群二维码" className="h-[116px] w-[116px] object-contain" loading="lazy" />
+          </div>
+          <div className="mt-2 w-full px-1 text-center">
+            <p className="text-[10px] font-medium tracking-[0.14em] text-white/55">2026 招新群</p>
+            <p className="mt-0.5 text-xs font-bold text-white">点击查看群号</p>
+          </div>
         </div>
-        <div className="backface-hidden rotate-y-180 absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-warm-gradient p-3 text-white shadow-lg shadow-rouge/20">
-          <Users className="mb-2 h-6 w-6" aria-hidden="true" />
-          <p className="font-serif-cn text-xs font-bold tracking-wider">QQ招新群</p>
-          <div className="my-2 h-px w-8 bg-white/40" />
-          {isPlaceholderQQ ? (
-            <p className="px-1 text-center text-[11px] leading-snug text-white/95">
-              群号以招新现场
-              <br />
-              与公众号为准
-            </p>
-          ) : (
-            <p className="select-all rounded bg-white/20 px-2 py-1 text-center font-data text-sm font-bold">
-              {QQ_招新群号}
-            </p>
-          )}
-          <p className="mt-1 text-center text-[10px] text-white/70">
-            {isPlaceholderQQ ? "也可扫正面二维码" : "长按可复制群号"}
-          </p>
+        <div className="backface-hidden rotate-y-180 absolute inset-0 flex flex-col items-center justify-center rounded-2xl border border-gold-soft/45 bg-[linear-gradient(145deg,rgba(112,61,55,0.98),rgba(50,31,30,0.98))] px-3 text-white shadow-[0_14px_32px_rgba(0,0,0,0.25)]">
+          <Users className="h-6 w-6 text-gold-soft" strokeWidth={1.5} aria-hidden="true" />
+          <p className="mt-2 text-[10px] font-bold tracking-[0.16em] text-white/65">QQ 招新群</p>
+          <p className="mt-3 select-all rounded-lg border border-white/20 bg-white/10 px-2 py-1.5 font-data text-sm font-bold tracking-wide">{QQ_招新群号}</p>
+          <span className="mt-3 inline-flex items-center gap-1 text-[10px] text-white/55"><ChevronLeft className="h-3 w-3" /> 点击翻回二维码</span>
         </div>
       </motion.div>
-    </div>
+    </button>
   );
 }
-
-export { isPlaceholderQQ };

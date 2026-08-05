@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/strip-pages-video-assets.mjs",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "validate:assets": "node scripts/validate-assets.mjs",
+    "audit:public": "node scripts/audit-public-surface.mjs"
   },
   "dependencies": {
     "clsx": "2.1.1",
