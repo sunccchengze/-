@@ -15,17 +15,20 @@ export function HeroV2Pro() {
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const timer = window.setTimeout(() => setShowIntro(false), reduce ? 0 : 1500);
+    const isPhone = window.matchMedia("(max-width: 639px)").matches;
+    // 手机首访优先尽快展示可操作的首页；桌面开屏时长保持原样。
+    const timer = window.setTimeout(() => setShowIntro(false), reduce ? 0 : isPhone ? 650 : 1500);
     return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
+    const isPhone = window.matchMedia("(max-width: 639px)").matches;
 
     const timer = window.setInterval(() => {
       setCurrentSlide((current) => (current + 1) % HERO_V2PRO_SLIDES.length);
-    }, 5000);
+    }, isPhone ? 8000 : 5000);
 
     return () => window.clearInterval(timer);
   }, []);

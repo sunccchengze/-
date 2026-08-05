@@ -558,7 +558,7 @@ button {
   height: 2px;
 }
 
-.shimmer::after {
+.certificate-shimmer::after {
   position: absolute;
   inset: 0;
   content: "";
