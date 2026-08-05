@@ -1626,3 +1626,59 @@ GitHub Release 资产是无银行卡条件下用于绕过 Cloudflare Pages 25MiB
 - `SummerImageCarousel` 使用 `IntersectionObserver`（`rootMargin: 700px`）；进入视窗附近才加载，并且任何时刻只预取当前图和下一张。不要恢复“页面一渲染就遍历五组图集并请求全部图片”的做法。
 - `SummerFilms` 仅在视窗附近才挂载 `<video preload="metadata">`；首屏不请求 GitHub Release 视频数据。保留 GitHub Release 视频地址及 Pages 构建剥离本地大视频策略。
 - 仅真实 `video.error` 或浏览器 offline 进入失败回退；慢连接继续显示 poster 与“正在准备影像”，不得再用固定秒数误判失败。
+
+---
+
+# 附录 O：交接快照｜移动端性能 PR（2026-08-05）
+
+> **下一位 Agent 先读这里。** 用户将本分支 Merge 后，本会话会关闭；本附录是当前状态的最短可执行交接，不要只根据旧章节判断部署或性能状态。
+
+## 当前 Git 状态
+
+```text
+生产 main：2970b96（PR #2 已合并）
+当前工作分支：arena/019fcfc4-repo
+待用户 Merge 的 PR：#3 Optimize mobile loading path
+当前提交：6eb503c optimize mobile loading path
+PR 地址：https://github.com/sunccchengze/-/pull/3
+```
+
+本 PR 已先合入当时的 `origin/main`，再提交移动端性能改动；不要再把 `arena/019fc032-repo` 当作后续开发分支。下一位 Agent 必须服从其 Arena 系统消息指定的固定分支。
+
+## 用户刚刚确认的核心问题
+
+- 真机手机端曾“带不动、加载不出来”；目标是**只优化手机端启动性能，桌面视觉与节奏不动**。
+- Arena 沙箱 Live Preview 不能从手机外部浏览器直接打开。用户截图中的 `Preview Unavailable` 是 Arena 预览外壳拦截页，不是网站 HTTP/前端故障；不要据此继续盲改页面。
+- 真机有效验收入口应是正式 Cloudflare Pages 站点 `https://yzaxs-1.pages.dev`，但必须在用户 Merge 后等待现有部署链路完成并由用户实际打开验证。**不得声称 Cloudflare 已部署或已验证。**
+
+## 本 PR 的性能实现与不可回退点
+
+1. `HeroV2Pro.tsx`
+   - 手机（`max-width: 639px`）开屏：650ms；桌面：1500ms。
+   - 手机轮播：8000ms；桌面：5000ms。
+2. `index.html`
+   - 高优先级 Hero 预载图为真实首图 `/images/首页/首页16.jpg`，不可退回 `首页1.jpg`。
+3. `SummerPractice.tsx`
+   - 每个 `SummerImageCarousel` 以 `IntersectionObserver`、`rootMargin: 700px` 延迟启动。
+   - 仅预加载**当前图 + 下一张**；不要恢复 mount 时遍历所有图集的 `images.forEach(...)` 全量预加载。
+4. `SummerFilms.tsx`
+   - 视频卡进入视窗附近才挂载 `<video preload="metadata">`。
+   - 首屏不得请求 GitHub Release 视频 metadata/内容。
+   - 慢网络显示 poster 与“正在准备影像”；只有 `video.error` 或 offline 显示失败回退。绝不能恢复固定秒数超时判失败。
+5. GitHub Release 视频直链与 `scripts/strip-pages-video-assets.mjs` 必须保留：这是 Cloudflare Pages 25MiB 单文件限制的规避策略。
+
+## 已完成验证（代码级，不等于真机）
+
+```text
+npm run audit:public      通过
+npm run typecheck         通过
+npm run validate:assets   通过（126 项）
+npm run build            通过，并确认剥离本地 summer 视频
+```
+
+## Merge 后第一优先级
+
+1. 用户在正式 Pages 手机浏览器进行冷启动测试：清除/无痕缓存后首次打开，观察首屏、下滑到暑期图集、下滑到 SummerFilms。
+2. 若仍慢，先让用户提供网络环境、机型/浏览器、首屏卡在何处的录屏或网络面板，不要凭空继续删内容或换视频。
+3. 分别验证 Release 视频在普通手机浏览器、微信、QQ 内置浏览器的播放；它们仍是人工待办。
+4. 保持此前红线：不造事实；不删萤火/秦岭第 7 张；儿童与特殊群体素材继续逐图人工审核；新内容温柔融入、不重构抢重点。
