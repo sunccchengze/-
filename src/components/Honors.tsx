@@ -45,13 +45,15 @@ function HonorVaultCard({ item, index }: { item: VaultItem; index: number }) {
 
         <div className="backface-hidden rotate-y-180 absolute inset-0 overflow-hidden rounded-2xl border border-white/25 bg-[#f6ead5] p-2 shadow-[0_16px_42px_rgba(0,0,0,0.28)]">
           {!imageFailed ? (
-            <img
-              src={item.image}
-              alt={`${item.title}荣誉证明`}
-              className="shimmer h-full w-full rounded-xl bg-white object-contain"
-              loading="lazy"
-              onError={() => setImageFailed(true)}
-            />
+            <div className="certificate-shimmer relative h-full w-full overflow-hidden rounded-xl bg-white">
+              <img
+                src={item.image}
+                alt={`${item.title}荣誉证明`}
+                className="h-full w-full object-contain"
+                loading="lazy"
+                onError={() => setImageFailed(true)}
+              />
+            </div>
           ) : (
             <div className="flex h-full flex-col items-center justify-center rounded-xl bg-gradient-to-br from-[#f5ead5] via-[#d8bd89] to-[#8a5e37] px-5 text-center text-[#432b1d]">
               <Trophy className="h-10 w-10 text-[#8a5e37]" strokeWidth={1.3} aria-hidden="true" />
