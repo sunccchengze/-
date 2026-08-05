@@ -80,3 +80,10 @@
 - 多轮 build/typecheck 绿灯
 - MemberVoices 副标题强化社员现场感
 - muted 对比度微调；综测话术再软化
+
+## 2026-08-05 · 视频“网络不太顺畅”修复
+- **根因**：`resolveVideoUrl()` 解构参数名为 `cdnUrl/pagesUrl/githubUrl`，与 `VIDEO_SOURCES_*` 的 `cdn/pages/github` 键不匹配 → 返回空串 → `<source src="">` 立即报错 → 知行/玉树两张卡都误显「网络不太顺畅」。非真实网络问题。
+- 修复 `src/utils/detect-env.ts`：新增 `VideoSources` 类型与 `orderedVideoSources()`（国内：CDN→Pages→GitHub；海外：Pages→GitHub，去重）。
+- 修复 `src/components/SummerFilms.tsx`：FilmCard 改为真实三级回退——当前源 `onError` 自动切下一源，全部失败才显示错误态；重试从第一源重新开始；video key 含 sourceIndex 强制重挂载。
+- 顺手清理 `src/components/Honors.tsx` 未使用 import（阻断 typecheck 的存量问题）。
+- `npm run typecheck` ✅ · `npm run build` ✅

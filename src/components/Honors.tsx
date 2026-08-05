@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { IMG_第5页背景, VIDEO_荣誉历程 } from "../config";
 import { honors, honorsNote, honorVault } from "../content";
-import { cannotAutoplayVideo, isMobile } from "../utils/detect-env";
+import { cannotAutoplayVideo } from "../utils/detect-env";
 import { SectionHeader } from "./SectionHeader";
 
 type VaultItem = (typeof honorVault)[number];
