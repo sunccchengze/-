@@ -7,6 +7,7 @@ import { SectionHeader } from "./SectionHeader";
 function FilmCard({ title, subtitle, description, video, poster, storyLink }: { title: string; subtitle: string; description: string; video: string; poster: string; storyLink?: string }) {
   const cardRef = useRef<HTMLElement>(null);
   const [isNearby, setIsNearby] = useState(false);
+  const [isPhone, setIsPhone] = useState(false);
   const [failed, setFailed] = useState(false);
   const [online, setOnline] = useState(() => typeof navigator === "undefined" || navigator.onLine);
   const [ready, setReady] = useState(false);
@@ -40,6 +41,15 @@ function FilmCard({ title, subtitle, description, video, poster, storyLink }: { 
     return () => observer.disconnect();
   }, []);
 
+  // 手机端在靠近视频卡后持续缓冲，降低开始播放后的卡顿；桌面仍保持 metadata 策略。
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 639px)");
+    const sync = () => setIsPhone(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
   const unavailable = !online || failed;
   const shouldLoadVideo = isNearby && !unavailable;
   const retry = () => { setReady(false); setFailed(false); setRetryKey((key) => key + 1); };
@@ -48,7 +58,7 @@ function FilmCard({ title, subtitle, description, video, poster, storyLink }: { 
     <motion.article ref={cardRef} className="card-hover card-outline-gradient overflow-hidden rounded-[26px] bg-white/85" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}>
       <div className="relative aspect-video overflow-hidden bg-[#221513]">
         {shouldLoadVideo ? (
-          <video key={retryKey} className="h-full w-full object-cover" controls playsInline preload="metadata" poster={poster} onCanPlay={() => setReady(true)} onError={() => setFailed(true)}>
+          <video key={retryKey} className="h-full w-full object-cover" controls playsInline preload={isPhone ? "auto" : "metadata"} poster={poster} onCanPlay={() => setReady(true)} onError={() => setFailed(true)}>
             <source src={video} type="video/mp4" />
             你的浏览器暂不支持视频播放。
           </video>
