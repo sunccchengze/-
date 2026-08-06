@@ -296,55 +296,54 @@ export const SUMMER_GALLERIES = {
 // ─────────────────────────────────────────────────────────────
 /**
  * ─────────────────────────────────────────────────────────────
- *  暑期实践影像 —— 三级回退源
+ *  暑期实践影像 —— 播放源配置（2026-08-06 重设）
  * ─────────────────────────────────────────────────────────────
  *
- *  GitHub Release 在国内极慢/不可达，微信扫码完全无法播放。
- *  改为三级回退：
+ *  原方案「七牛云 CDN 第一优先」已弃用，原因：
+ *   七牛免费测试域名（*.bkt.clouddn.com）现已失效（DNS 不通），
+ *   且国内云厂商 CDN 绑定自定义域名都要求 ICP 备案，
+ *   对托管在 pages.dev 的站点不可行。
  *
- *  ① 七牛云 CDN（国内免费 10GB 存储 + 10GB 流量/月）—— 最快
- *  ② Cloudflare Pages 本站（yzaxs-1.pages.dev）—— 次快，压缩版 ≤5MB
- *  ③ GitHub Release —— 兜底（仅海外可用）
+ *  新链路（按优先级，组件点击播放后逐级自动回退）：
  *
- *  压缩后的视频放 public/videos/summer/ 即可随 Cloudflare Pages 部署，
- *  无需任何额外配置。七牛云是锦上添花，加速国内访问。
- *
- *  使用方式：组件中调用 resolveVideoUrl(videoSources) 选择最佳源。
+ *  ① B站嵌入 —— 把成片传上社团 B站账号后填 BV 号即启用：
+ *     国内最快、免费、不限流量、全画质，还能顺便运营账号。
+ *     留空 = 跳过，走下面的 mp4 回退链。
+ *  ② Cloudflare Pages 本站 —— public/videos/summer/ 下的压缩版
+ *     （知行 540p ≈23.6MiB / 玉树 720p ≈10MiB，均 < 25MiB 单文件上限），
+ *     随部署自动生效，无需额外配置。
+ *  ③ GitHub Release 原片 —— 海外/桌面兜底（国内慢但可达）。
+ *  ④ 免费 GitHub 加速镜像 —— 可选，第三方代理不稳定，失效删掉该行即可。
  * ─────────────────────────────────────────────────────────────
  */
 
-/**
- * 七牛云 CDN 域名 —— 免费额度：10GB存储 + 10GB CDN流量/月
- *
- * 配置步骤：
- * 1. 注册 https://www.qiniu.com/ → 实名认证
- * 2. 开通对象存储 Kodo → 新建空间（华东-上海区域）
- * 3. 上传压缩后的视频到 summer/ 目录
- * 4. 把下面这行替换为七牛分配的 CDN 域名（类似 xxx.qiniudns.com）
- * 5. 留空 = 暂不使用七牛，仅走 Pages → GitHub 回退
- */
-const CDN_VIDEO_BASE = "https://tjaojwmmm.hd-bkt.clouddn.com";
-
-/** 知行秦川总结视频 —— 三级源 */
+/** 知行秦川总结视频 —— 播放源 */
 export const VIDEO_SOURCES_知行秦川 = {
-  /** ① 七牛云 CDN（国内最快，免费） */
-  cdn: CDN_VIDEO_BASE ? `${CDN_VIDEO_BASE}/summer/2026-qinchuan-recap.mp4` : undefined,
-  /** ② Cloudflare Pages 本站（压缩版 ≤5MB，yzaxs-1.pages.dev） */
+  /** ① B站 BV 号（上传后填，如 "BV1GJ411x7h7"；留空 = 不用 B站） */
+  bilibili: "",
+  /** ② Cloudflare Pages 本站压缩版（540p，≤25MiB） */
   pages: "/videos/summer/2026-qinchuan-recap.mp4",
-  /** ③ GitHub Release（兜底，海外可用） */
+  /** ③ GitHub Release 原片（1080p，国内慢，兜底） */
   github: "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-qinchuan-recap.mp4",
+  /** ④ 可选：GitHub 加速镜像（失效删掉即可） */
+  mirror: "https://gh-proxy.com/https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-qinchuan-recap.mp4",
 };
 
-/** 玉树总结视频 —— 三级源 */
+/** 玉树总结视频 —— 播放源 */
 export const VIDEO_SOURCES_玉树 = {
-  cdn: CDN_VIDEO_BASE ? `${CDN_VIDEO_BASE}/summer/2026-yushu-recap.mp4` : undefined,
+  /** ① B站 BV 号（上传后填；留空 = 不用 B站） */
+  bilibili: "",
+  /** ② Cloudflare Pages 本站压缩版（720p，≤25MiB） */
   pages: "/videos/summer/2026-yushu-recap.mp4",
+  /** ③ GitHub Release 原片（720p HEVC，国内慢，兜底） */
   github: "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-yushu-recap.mp4",
+  /** ④ 可选：GitHub 加速镜像（失效删掉即可） */
+  mirror: "https://gh-proxy.com/https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-yushu-recap.mp4",
 };
 
 /**
- * 便捷导出：默认使用三级回退解析后的 URL
+ * 便捷导出：本站直链（随 Cloudflare Pages 部署生效）
  * 组件可以直接用，也可以用 VIDEO_SOURCES_xxx 自定义逻辑
  */
-export const VIDEO_知行秦川总结 = "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-qinchuan-recap.mp4";
-export const VIDEO_玉树总结 = "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-yushu-recap.mp4";
+export const VIDEO_知行秦川总结 = "/videos/summer/2026-qinchuan-recap.mp4";
+export const VIDEO_玉树总结 = "/videos/summer/2026-yushu-recap.mp4";

@@ -16,7 +16,7 @@ function FilmCard({
   title: string;
   subtitle: string;
   description: string;
-  videoSources: { cdn?: string; pages?: string; github?: string };
+  videoSources: { bilibili?: string; pages?: string; github?: string; mirror?: string };
   poster: string;
   storyLink?: string;
 }) {
@@ -29,7 +29,7 @@ function FilmCard({
   const [userWantsVideo, setUserWantsVideo] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  /** 三级回退：CDN → Pages → GitHub，当前源失败后自动尝试下一个 */
+  /** mp4 回退链：Pages → GitHub → 镜像，当前源失败后自动尝试下一个（B站模式不走此链） */
   const candidates = useMemo(() => orderedVideoSources(videoSources), [videoSources]);
   const [sourceIndex, setSourceIndex] = useState(0);
   const resolvedUrl = candidates[sourceIndex];
@@ -43,7 +43,7 @@ function FilmCard({
   }, []);
 
   const unavailable = !online || failed;
-  const retry = () => { setReady(false); setFailed(false); setUserWantsVideo(false); setSourceIndex(0); setRetryKey((key) => key + 1); };
+  const retry = () => { setReady(false); setFailed(false); setIsPlaying(false); setUserWantsVideo(false); setSourceIndex(0); setRetryKey((key) => key + 1); };
 
   /** 当前源加载失败：自动切到下一个可用源；全部失败才显示“网络不太顺畅” */
   const handleVideoError = () => {
@@ -59,6 +59,8 @@ function FilmCard({
   /** 用户点击播放 */
   const handlePlay = () => {
     if (!userWantsVideo) setUserWantsVideo(true);
+    // B站嵌入模式：iframe 自带播放器，点击后直接隐藏海报层
+    if (videoSources.bilibili) setIsPlaying(true);
   };
 
   const connectionQuality = getConnectionQuality();
@@ -67,25 +69,41 @@ function FilmCard({
   return (
     <motion.article className="card-hover card-outline-gradient overflow-hidden rounded-[26px] bg-white/85" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}>
       <div className="relative aspect-video overflow-hidden bg-[#221513]">
-        {/* ── 用户点击后才渲染 video 元素 ── */}
+        {/* ── 用户点击后才渲染播放器（B站 iframe 或本地 video）── */}
         {userWantsVideo && !unavailable ? (
-          <video
-            key={`${retryKey}-${sourceIndex}`}
-            className="h-full w-full object-cover"
-            controls
-            playsInline
-            preload={mobile ? "none" : "metadata"}
-            poster={poster}
-            autoPlay
-            onCanPlay={() => { setReady(true); setIsPlaying(true); }}
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
-            onEnded={() => setIsPlaying(false)}
-            onError={handleVideoError}
-          >
-            <source src={resolvedUrl} type="video/mp4" />
-            你的浏览器暂不支持视频播放。
-          </video>
+          videoSources.bilibili ? (
+            /* ① B站嵌入：配置了 BV 号时优先使用（国内最快，无需自备流量） */
+            <iframe
+              key={retryKey}
+              className="h-full w-full"
+              src={`https://player.bilibili.com/player.html?bvid=${videoSources.bilibili}&page=1&high_quality=1&danmaku=0&autoplay=1`}
+              title={`${title}视频（B站）`}
+              scrolling="no"
+              frameBorder="no"
+              allowFullScreen
+              allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          ) : (
+            /* ②③④ mp4 回退链：Pages → GitHub → 镜像 */
+            <video
+              key={`${retryKey}-${sourceIndex}`}
+              className="h-full w-full object-cover"
+              controls
+              playsInline
+              preload={mobile ? "none" : "metadata"}
+              poster={poster}
+              autoPlay
+              onCanPlay={() => { setReady(true); setIsPlaying(true); }}
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              onEnded={() => setIsPlaying(false)}
+              onError={handleVideoError}
+            >
+              <source src={resolvedUrl} type="video/mp4" />
+              你的浏览器暂不支持视频播放。
+            </video>
+          )
         ) : null}
 
         {/* ── 海报 + 播放按钮（视频未播放时显示） ── */}

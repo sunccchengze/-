@@ -87,3 +87,13 @@
 - 修复 `src/components/SummerFilms.tsx`：FilmCard 改为真实三级回退——当前源 `onError` 自动切下一源，全部失败才显示错误态；重试从第一源重新开始；video key 含 sourceIndex 强制重挂载。
 - 顺手清理 `src/components/Honors.tsx` 未使用 import（阻断 typecheck 的存量问题）。
 - `npm run typecheck` ✅ · `npm run build` ✅
+
+## 2026-08-06 · 暑期视频播放源重设（七牛弃用）
+- **背景**：七牛测试域名 `tjaojwmmm.hd-bkt.clouddn.com` 已失效（DNS 不通）；国内云 CDN 绑自定义域名均需 ICP 备案，对 pages.dev 不可行 → 弃用七牛，`src/config.ts` 删除 `CDN_VIDEO_BASE` 与 `cdn` 源。
+- **转码**（ffmpeg 7，H.264 + AAC + faststart，2-pass）：
+  - 知行秦川 91MB 1080p/2.3Mbps → **24.7MB 540p/500kbps**（311s，兼容全浏览器）
+  - 玉树 47.7MB 720p **10-bit HEVC**/8.8Mbps → **10.4MB 720p H.264/1.8Mbps**（43s；顺带修复 HEVC 在 Firefox/部分安卓/微信里无法播放的问题）
+  - 原文件仍在 git 历史与 GitHub Release（media-2026-v1）中。
+- **新回退链**：B站嵌入（填 BV 号启用）→ Cloudflare Pages 压缩版（≤25MiB 单文件上限，已达标）→ GitHub Release → gh-proxy 镜像（可选）。
+- **代码**：`detect-env.ts` VideoSources 改为 `bilibili/pages/github/mirror`，`orderedVideoSources` 去 CDN 逻辑；`SummerFilms.tsx` 支持 B站 iframe 嵌入（BV 号非空时优先），retry 补 `setIsPlaying(false)`。
+- `npm run typecheck` ✅ · `npm run build` ✅（strip 脚本确认两视频均 < 25MiB，不再被删）
