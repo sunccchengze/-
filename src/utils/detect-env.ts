@@ -48,29 +48,32 @@ export function getConnectionQuality(): "fast" | "slow" | "unknown" {
 }
 
 /**
- * 视频三级源（与 src/config.ts 中 VIDEO_SOURCES_* 的字段一一对应）
+ * 视频播放源（与 src/config.ts 中 VIDEO_SOURCES_* 的字段一一对应）
+ * 优先级：B站嵌入（组件单独处理，不参与 mp4 回退链）→ Pages → GitHub → 镜像
  */
 export type VideoSources = {
-  /** ① 国内 CDN（七牛云等），国内环境优先 */
-  cdn?: string;
-  /** ② Cloudflare Pages 本站静态资源，比 GitHub 快 */
+  /** ① B站 BV 号（iframe 嵌入，由组件直接渲染，不走 mp4 回退链） */
+  bilibili?: string;
+  /** ② Cloudflare Pages 本站静态资源（压缩版，部署即生效） */
   pages?: string;
-  /** ③ GitHub Release，兜底（国内最慢） */
+  /** ③ GitHub Release，兜底（国内慢） */
   github?: string;
+  /** ④ 免费 GitHub 加速镜像（可选，第三方不稳定） */
+  mirror?: string;
 };
 
 /**
- * 按优先级返回完整视频源列表（去重），供组件播放失败时逐级回退：
- * 国内环境：CDN → Pages → GitHub；海外环境：Pages → GitHub。
+ * 按优先级返回完整 mp4 源列表（去重），供组件播放失败时逐级回退：
+ * Pages → GitHub → 镜像（国内国外同一顺序；Pages 压缩版体量小，国内直连尚可）。
  */
 export function orderedVideoSources(videoSources: VideoSources): string[] {
   const list: string[] = [];
-  // 如果在国内环境且有 CDN URL，优先使用
-  if (videoSources.cdn && isLikelyChina()) list.push(videoSources.cdn);
-  // 如果有 Pages 内链，比 GitHub 快
+  // Pages 内链随 Cloudflare Pages 部署，国内直连比 GitHub 快
   if (videoSources.pages) list.push(videoSources.pages);
-  // 兜底
+  // GitHub Release 兜底
   if (videoSources.github) list.push(videoSources.github);
+  // 免费加速镜像（如 gh-proxy.com），失效会自动走完全部源后显示错误态
+  if (videoSources.mirror) list.push(videoSources.mirror);
   return [...new Set(list)];
 }
 
@@ -79,16 +82,4 @@ export function orderedVideoSources(videoSources: VideoSources): string[] {
  */
 export function resolveVideoUrl(videoSources: VideoSources): string {
   return orderedVideoSources(videoSources)[0] ?? "";
-}
-
-/** 粗判是否在国内网络环境 */
-function isLikelyChina(): boolean {
-  // 微信 = 国内
-  if (isWeChat()) return true;
-  // 检查语言偏好
-  if (typeof navigator !== "undefined") {
-    const lang = navigator.language || "";
-    if (lang.startsWith("zh-CN") || lang.startsWith("zh_Hans")) return true;
-  }
-  return false;
 }

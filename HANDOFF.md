@@ -2,11 +2,16 @@
 
 > **用途**：这是给下一位接手本仓库、且没有任何先前聊天记忆的 AI Agent / 开发者的工作记忆迁移文件。它不是简短 README，也不是面向公众的文案。必须先读本文件，再读下列原始事实、素材、代码与记录文件，才能继续工作。
 >
-> **最后更新**：2026-08-04（Asia/Shanghai）
-> **当前工作分支**：`arena/019fc032-repo`
+> **最后更新**：2026-08-06（Asia/Shanghai）
+> **当前工作分支**：`arena/019fd4c9-repo`
 > **用户本地仓库**：`D:\yingzai-recruit`
 > **仓库服务对象**：西安交通大学英仔爱心社 2026 招新网站。
 > **最高原则**：不编造、不把推断写成事实、不用“看起来合理”的 AI 文案替代真实组织信息。
+>
+> **⚠️ 2026-08-06 重大变化速览（详见附录 O）**：七牛 CDN 已弃用（域名失效+备案墙）；
+> 暑期两条视频已转码压缩（知行 24.7MB 540p / 玉树 10.4MB 720p）随 Cloudflare Pages 部署；
+> 播放主源已切到 **B站嵌入**（知行 BV1R2MX6cE6A / 玉树 BV1pqgv6cEPS，用户提供并确认）；
+> 回退链为 B站 → Pages → GitHub Release → gh-proxy 镜像；`荣誉历程.mp4` 已转 H.264 全浏览器兼容。
 
 ---
 
@@ -105,7 +110,7 @@
 只能在：
 
 ```text
-arena/019fc032-repo
+arena/019fd4c9-repo
 ```
 
 工作。不要切换到别的分支；不要 force push。
@@ -113,7 +118,7 @@ arena/019fc032-repo
 仓库环境有时 Git 元数据会落后，而工作区保留较新内容。Agent 环境恢复方法：
 
 ```bash
-git fetch origin arena/019fc032-repo
+git fetch origin arena/019fd4c9-repo
 git reset --mixed FETCH_HEAD
 ```
 
@@ -129,7 +134,7 @@ git reset --hard FETCH_HEAD
 
 ```powershell
 cd D:\yingzai-recruit
-git pull --rebase origin arena/019fc032-repo
+git pull --rebase origin arena/019fd4c9-repo
 npm install
 npm run dev
 ```
@@ -166,17 +171,23 @@ wrangler whoami: not authenticated
 
 不要承诺 Agent 已部署 Pages。用户当前最可信的审核路径是 localhost 录屏。历史 Pages URL 可能陈旧，不要作为当前版本依据。
 
-## 3.4 视频 Git 限制
+## 3.4 视频 Git 限制与现状（2026-08-06 更新）
 
-已推送并在仓库存在：
+**当前仓库内视频**（均已转码为 H.264+AAC+faststart，全浏览器兼容）：
 
 ```text
-public/videos/summer/2026-qinchuan-recap.mp4  约 91 MB
-public/videos/summer/2026-yushu-recap.mp4     约 48 MB
-public/videos/荣誉历程.mp4                     约 2.2 MB
+public/videos/summer/2026-qinchuan-recap.mp4  约 24.7 MB（540p，311 秒）
+public/videos/summer/2026-yushu-recap.mp4     约 10.4 MB（720p，43 秒）
+public/videos/荣誉历程.mp4                    约 2.2 MB（720p，18.7 秒）
 ```
 
-知行秦川原始片曾约 384MB，不能推 GitHub。当前 Web 版可作为 GitHub Release 资产保存，但 Cloudflare Pages 静态资产单文件上限为 25MiB：不得把大视频作为 Pages 的 dist 资产。当前两条公开视频托管于 GitHub Release `media-2026-v1`；构建后脚本会从 dist 删除本地 summer 视频副本。未来替换时同步更新 Release 资产与 `src/config.ts` 的 URL；不要推荐 Git LFS 作为 Pages 静态视频播放方案。
+**重要变化**：Cloudflare Pages 单文件上限 25MiB，上述文件均达标，**现在直接随 Pages 部署生效**，
+`scripts/strip-pages-video-assets.mjs` 只删除超 25MiB 的文件，不会再动它们。
+
+历史事实：原 91MB/47.7MB 原片仍在 git 历史与 GitHub Release `media-2026-v1` 中（海外兜底用）。
+知行原始片曾约 384MB，不可推 GitHub。不要推荐 Git LFS 作为 Pages 静态视频播放方案。
+
+播放主源现在是 **B站嵌入**（见 §9.1 与附录 O），mp4 只是回退层。
 
 ---
 
@@ -454,16 +465,29 @@ public/images/页面背景/统一页面背景.jpg
 
 # 9. 视频策略与展示
 
-## 9.1 暑期视频
+## 9.1 暑期视频（2026-08-06 更新：主源为 B站嵌入）
 
 网页位置：`SummerFilms.tsx`，位于 `SummerPractice` 后。
 
+**播放源配置**在 `src/config.ts` 的 `VIDEO_SOURCES_知行秦川 / VIDEO_SOURCES_玉树`，
+每个视频一个对象，字段按优先级：
+
 ```text
-知行秦川：/videos/summer/2026-qinchuan-recap.mp4
-玉树：/videos/summer/2026-yushu-recap.mp4
+① bilibili: "BV1R2MX6cE6A"（知行）/"BV1pqgv6cEPS"（玉树）—— B站 iframe 嵌入，
+   国内点击播放即走 B站（全画质、不耗站点流量）；BV 号留空则跳过
+② pages:    "/videos/summer/xxx.mp4" —— Cloudflare Pages 压缩版（随部署生效）
+③ github:   GitHub Release media-2026-v1 原片（国内慢，兜底）
+④ mirror:   gh-proxy.com 免费加速镜像（可选，第三方不稳定，失效删掉该行）
 ```
 
-两条视频均使用原生 controls、`playsInline`、`preload="metadata"`。用户此前已在 localhost 直接访问玉树视频路径并确认可播放，证明路径与浏览器编码正常。
+组件行为：`bilibili` 非空时点击播放渲染 B站播放器 iframe；卡片描述下方提供
+「B站播放不了？用直链播放」逃生按钮（个别网络拦截 iframe 时切回 mp4 链）。
+mp4 链加载失败会按 pages → github → mirror 自动逐级回退，全部失败才显示
+「网络不太顺畅」+ 重新加载按钮。移动端 `preload="none"`，桌面 `preload="metadata"`。
+
+`src/utils/detect-env.ts` 的 `orderedVideoSources()` 维护回退顺序（已去掉七牛 CDN 逻辑）。
+
+两条视频曾用原生 controls + `preload="metadata"` 直接播放，用户已在 localhost 确认可播放。
 
 ## 9.2 荣誉背景视频
 
@@ -539,16 +563,18 @@ npm run build
 
 ## 11.2 最近实际通过结果
 
-截至 2026-08-04 deadline 审查：
+截至 2026-08-06 全面体检（最后一次）：
 
 ```text
-Public-surface audit passed: 36 source files, 17 homepage slides, 27 honor slots.
+Public-surface audit passed: 37 source files, 17 homepage slides, 27 honor slots.
 tsc --noEmit: pass
 validate-assets: 128 configured assets, all exist
 vite build: pass
-125 张 public/images 图片 identify 解码：0 失败
-3 段 MP4 container header：通过
-内部锚点：无缺失
+125 张 public/images 图片 PIL verify 解码：0 失败
+3 段 MP4 ffmpeg 全量解码：0 错误（含 荣誉历程.mp4，已转 H.264）
+全部 <img> 有 alt、全部 target=_blank 有 rel、全部 <button> 有 type（跨行精确扫描）
+本地 preview 冒烟：页面 200、BV 号与逃生按钮在产物中、mp4 Range 请求 206（边下边播）
+B站两个 BV 号：页面 + player.bilibili.com 嵌入页双重验证可播放（2026-08-06）
 ```
 
 外链（WPS、微信、抖音、B 站、外部公众号）在 Agent 沙箱网络环境中不可确认，不得说“已打开验证”。用户需要手工点开/扫码验证。
@@ -562,13 +588,14 @@ vite build: pass
 1. 正式 WPS 报名链接内容、字段、提交结果；
 2. 两个二维码实际扫码是否准确指向报名表/QQ群；
 3. 公众号、抖音、B 站、部门文章链接；
-4. 微信和 QQ 内置浏览器；
-5. 手机不同机型、Safari/Android Chrome；
-6. 小鹰拖拽顺滑度；
-7. 荣誉背景视频首访是否足够快出现；
-8. 玉树、知行主卡最终 4:3 图片区视觉是否符合用户最新截图期待；
-9. 启明星、心项目双宽收官卡的实际视觉呈现；
-10. 敏感场景所有人脸遮挡是否符合用户最终审批。
+4. **B站嵌入在真机微信/QQ/手机浏览器的实际播放体验**（iframe 加载、点击播放、全屏）；
+5. 微信和 QQ 内置浏览器；
+6. 手机不同机型、Safari/Android Chrome；
+7. 小鹰拖拽顺滑度；
+8. 荣誉背景视频首访是否足够快出现（现已 H.264，兼容性已修复，仍需真机确认）；
+9. 玉树、知行主卡最终 4:3 图片区视觉是否符合用户最新截图期待；
+10. 启明星、心项目双宽收官卡的实际视觉呈现；
+11. 敏感场景所有人脸遮挡是否符合用户最终审批（`public/images/首页/首页3.jpg` 萤火图仍标记待人工确认）。
 
 不要把这些写成“已通过”。
 
@@ -583,8 +610,8 @@ vite build: pass
 ```powershell
 git add "public/images/首页/首页6.jpg"
 git commit -m "update homepage slide six"
-git pull --rebase origin arena/019fc032-repo
-git push origin arena/019fc032-repo
+git pull --rebase origin arena/019fd4c9-repo
+git push origin arena/019fd4c9-repo
 ```
 
 之后 fetch 检查远端 commit 与实际文件。
@@ -786,8 +813,8 @@ public/images/页面背景/统一页面背景.jpg
 ```powershell
 git add "public/images/首页/首页6.jpg"
 git commit -m "update homepage slide six"
-git pull --rebase origin arena/019fc032-repo
-git push origin arena/019fc032-repo
+git pull --rebase origin arena/019fd4c9-repo
+git push origin arena/019fd4c9-repo
 ```
 
 ### push 被 fetch-first 拒绝
@@ -795,8 +822,8 @@ git push origin arena/019fc032-repo
 这是 Agent 在用户本地提交后又推送了修改时的正常分支分叉。正确顺序：
 
 ```powershell
-git pull --rebase origin arena/019fc032-repo
-git push origin arena/019fc032-repo
+git pull --rebase origin arena/019fd4c9-repo
+git push origin arena/019fd4c9-repo
 ```
 
 不要 `--force`。
@@ -813,7 +840,7 @@ schannel: server closed abruptly (missing close_notify)
 
 ```powershell
 git config --global http.version HTTP/1.1
-git pull --rebase origin arena/019fc032-repo
+git pull --rebase origin arena/019fd4c9-repo
 ```
 
 不要建议关闭 SSL 验证；不要建议 `http.sslVerify false`。
@@ -1090,7 +1117,7 @@ Agent 建好稳定中文路径和 README
 
 ```bash
 # 1. 获取远端真实状态
-git fetch origin arena/019fc032-repo
+git fetch origin arena/019fd4c9-repo
 git reset --mixed FETCH_HEAD
 
 # 2. 阅读事实与交接
@@ -1115,7 +1142,7 @@ find public/videos -type f | sort
 如果用户说“我已经 push 了”，不要只相信聊天。执行：
 
 ```bash
-git fetch origin arena/019fc032-repo
+git fetch origin arena/019fd4c9-repo
 git log --oneline -5 FETCH_HEAD
 git diff --name-status HEAD..FETCH_HEAD
 ```
@@ -1178,7 +1205,7 @@ git diff --name-status HEAD..FETCH_HEAD
 
 ### Q11. 本地仓库和远端、使用工具？
 
-**已确认**：本地 `D:\yingzai-recruit` 与远端 `sunccchengze/-` 的 `arena/019fc032-repo` 是协作仓库；用户主要在 Windows PowerShell 执行 Git 命令，并使用 VS Code/资源管理器查看文件。
+**已确认**：本地 `D:\yingzai-recruit` 与远端 `sunccchengze/-` 的 `arena/019fd4c9-repo` 是协作仓库；用户主要在 Windows PowerShell 执行 Git 命令，并使用 VS Code/资源管理器查看文件。
 
 ### Q12. 用户最信任的预览方式？
 
@@ -1609,9 +1636,10 @@ git diff --name-status HEAD..FETCH_HEAD
 
 # 附录 N：移动端视频优化 —— 微信扫码兼容（2026-08-05）
 
-## 问题
-
-荣誉高光页视频背景在电脑端正常 autoplay，但**微信扫码出来的 WebView (X5 内核) 完全禁止视频 autoplay**，即使 `muted + playsInline` 也不行。暑期视频（知行秦川 87MB、玉树 46MB）托管在 GitHub Release，国内访问极慢/不可达，微信里完全无法播放。
+> ⚠️ **过时说明（2026-08-06）**：本附录 N.2/N.3/N.6/N.7 中「七牛云 CDN 第一优先」「不压缩视频」
+> 的决策已被推翻——七牛测试域名已失效、国内云 CDN 绑自定义域名需 ICP 备案（对 pages.dev 不可行），
+> 且用户最终接受了压缩转码（480p 级是马赛克，但 540p/720p 可用）。当前方案见**附录 O**：
+> 视频已转码进 Pages + 主源切 B站嵌入。N.1（荣誉背景 Ken Burns 降级）仍有效。
 
 用户明确拒绝压缩到 5MB——"压缩到 5 兆完全就是一坨马赛克，啥也看不见"。
 
@@ -1687,3 +1715,76 @@ Ken Burns 动画（`src/index.css`）：20 秒循环的 CSS `scale + translate`�
 4. **点击才加载视频**：避免首屏白屏等待
 5. **七牛免费额度足够**：每月 10GB 存储 + 10GB 流量，远超实际用量
 6. **七牛测试域名 6 个月有效**：到期后需绑定自定义域名或续期
+
+---
+
+# 附录 O：B站播放源接入 + 视频转码 + 全面体检（2026-08-06）
+
+> 本附录是当前（2026-08-06）视频方案的最权威状态，取代附录 N 中的旧决策。
+> 用户已确认使用社团 B站官方账号（XJTU英仔爱心社官方，mid 595714952）的视频。
+
+## O.1 时间线
+
+1. **七牛失效**：`tjaojwmmm.hd-bkt.clouddn.com` DNS 不通（免费测试域名到期）。
+   国内云 CDN（阿里 OSS/腾讯 COS/七牛/又拍）绑自定义域名全部要求 ICP 备案，
+   对托管在 `yzaxs-1.pages.dev` 的站点不可行 → 永久弃用七牛。
+2. **转码压缩**（ffmpeg 7.0.2，H.264 High + AAC + `movflags=+faststart`，2-pass）：
+   - 知行秦川：91MB 1080p/2.3Mbps → **24.7MB 960×540/500kbps**（311s，卡进 Pages 25MiB 上限）
+   - 玉树：47.7MB 720p **10-bit HEVC**/8.8Mbps → **10.4MB 720p H.264/1.8Mbps**
+     （10-bit HEVC 输入必须加 `format=yuv420p` 滤镜再 2-pass，否则 x264 报
+     "Incomplete MB-tree stats file"——踩坑记录）
+   - 荣誉历程：2.2MB 720p HEVC → **H.264 同尺寸**（Firefox/部分 Linux Chrome 不支持 HEVC，
+     原视频在这些浏览器会静默降级，现已全兼容）
+3. **用户提供 BV 号**（2026-08-06）：知行 `BV1R2MX6cE6A`（《知行秦川，梦启今夏》5:11，
+   2026-08-03 发布）、玉树 `BV1pqgv6cEPS`（《玉树｜满眼期待与新奇体验撞了个满怀》，
+   2026-07-24 发布）。已双重验证：B站页面可访问 + `player.bilibili.com/player.html?bvid=...`
+   返回官方嵌入播放器。
+
+## O.2 当前播放链路（src/config.ts 的 VIDEO_SOURCES_*）
+
+```text
+① bilibili（B站 iframe，用户点击即播，全画质，国内最快，不耗站流量）
+② pages    （Cloudflare Pages 压缩版，≤25MiB，随部署生效）
+③ github   （GitHub Release media-2026-v1 原片，国内慢，海外/桌面兜底）
+④ mirror   （gh-proxy.com 免费加速镜像，可选，失效删掉该行）
+```
+
+- `src/utils/detect-env.ts`：`VideoSources` 类型 = `{ bilibili?, pages?, github?, mirror? }`；
+  `orderedVideoSources()` 返回 pages→github→mirror（已删除七牛 `cdn` 字段与 `isLikelyChina`）。
+- `src/components/SummerFilms.tsx`：
+  - `bilibili` 非空 → 点击播放渲染 `<iframe src="https://player.bilibili.com/player.html?bvid=...&page=1&high_quality=1&danmaku=0&autoplay=1">`
+  - 卡片描述下方有「B站播放不了？用直链播放」逃生按钮（`useDirect` 状态切回 mp4 链）
+  - mp4 链逐级回退、全部失败显示「网络不太顺畅」+ 重新加载（重试会重置 isPlaying/useDirect）
+- `index.html`：preconnect 增加 `player.bilibili.com`。
+- 原 91MB/47.7MB 原片仍在 git 历史与 GitHub Release `media-2026-v1`；
+  原片若需替换 Release 资产，可用压缩版覆盖（可选，非必须）。
+
+## O.3 转码后文件规格（当前仓库内）
+
+| 文件 | 大小 | 规格 | 用途 |
+|---|---|---|---|
+| `public/videos/summer/2026-qinchuan-recap.mp4` | 24.7MB | 960×540 H.264 30fps 500kbps + AAC 128k | 知行 mp4 回退层 |
+| `public/videos/summer/2026-yushu-recap.mp4` | 10.4MB | 1280×720 H.264 30fps 1.8Mbps + AAC 128k | 玉树 mp4 回退层 |
+| `public/videos/荣誉历程.mp4` | 2.2MB | 1280×720 H.264 846kbps + AAC 97k | 荣誉背景（桌面 autoplay） |
+
+`scripts/strip-pages-video-assets.mjs` 只删 >25MiB 文件 → 上述三个均保留在 Pages 构建产物。
+已用 ffmpeg 全量解码验证（0 错误），Range 请求 206（faststart 边下边播正常）。
+
+## O.4 2026-08-06 全面体检结果（最终）
+
+- typecheck / build / validate:assets（128 项齐全）/ audit:public（37 源文件、17 轮播、27 荣誉槽）全绿；
+- 125 张图片 PIL verify 0 失败；3 段视频 ffmpeg 解码 0 错误；
+- 跨行精确扫描：所有 `<img>` 有 alt（装饰图 alt=""+aria-hidden）、所有 `target="_blank"` 有
+  rel="noopener noreferrer"、所有 `<button>` 有显式 type；
+- 文案口径核对：2026 招新、第十七届玉树、199 社员、2025-2026 年度等与 QUESTIONS.md 确认一致；
+- 外链（WPS/微信/抖音/B站）沙箱网络不可达，必须用户真机验证——不得宣称已打开；
+- 提交：`9d81bca`（弃七牛+转码）、`50e4f22`（B站接入+逃生通道+preconnect）。
+
+## O.5 遗留/待人工事项（给下一位 Agent）
+
+1. 用户需在真机（微信/QQ/手机浏览器/桌面）点击两条暑期视频，确认 B站 iframe 播放体验；
+2. 若 B站嵌入被某环境拦截，逃生按钮可切直链——如仍异常，反馈现象后修；
+3. 可选：把压缩版 mp4 覆盖上传 GitHub Release `media-2026-v1`（加速兜底层）；
+4. `public/images/首页/首页3.jpg`（萤火图）人脸遮挡仍待人工确认，未解除前不可宣称合格；
+5. 未部署验证：Agent 无 Cloudflare 凭据，Pages 部署后需用户确认 `yzaxs-1.pages.dev` 实际效果；
+6. 正式 WPS 报名表、二维码、公众号链接等外链终审在用户侧。
