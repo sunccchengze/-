@@ -16,11 +16,14 @@
 > GitHub Release → gh-proxy 镜像（可选）。配置见 `src/config.ts` 的
 > `VIDEO_SOURCES_知行秦川 / VIDEO_SOURCES_玉树`。
 >
-> **你还剩两件可选的事**：
-> 1. （推荐）把两条成片传上社团 B站账号，把 BV 号填进 `src/config.ts` 的两个
->    `bilibili: ""` 字段 —— 国内体验最好、不耗自己流量、全画质；
-> 2. （可选）把压缩后的两个 mp4 重新上传到 GitHub Release `media-2026-v1`，
->    覆盖原片，让 GitHub 兜底层也变快。
+> **B站播放源已接入（2026-08-06，用户提供 BV 号）**：
+> - 知行秦川 `BV1R2MX6cE6A` · 玉树 `BV1pqgv6cEPS`（社团官方账号，已双重验证可播放）
+> - 已填入 `src/config.ts` 的 `VIDEO_SOURCES_*`，国内用户点击播放即走 B站 iframe，
+>   全画质、不耗站点流量；mp4 链（Pages → GitHub → 镜像）自动成为回退。
+> - 卡片下方提供「B站播放不了？用直链播放」逃生入口，应对个别网络拦截 iframe 的情况。
+>
+> **你只剩一件可选的事**：把压缩后的两个 mp4 重新上传到 GitHub Release `media-2026-v1`，
+> 覆盖原片，让 GitHub 兜底层也变快（不传也不影响，B站是主源）。
 
 ---
 

@@ -29,10 +29,15 @@ function FilmCard({
   const [userWantsVideo, setUserWantsVideo] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  /** B站嵌入失败时的手动逃生通道：切回 mp4 回退链 */
+  const [useDirect, setUseDirect] = useState(false);
+
   /** mp4 回退链：Pages → GitHub → 镜像，当前源失败后自动尝试下一个（B站模式不走此链） */
   const candidates = useMemo(() => orderedVideoSources(videoSources), [videoSources]);
   const [sourceIndex, setSourceIndex] = useState(0);
   const resolvedUrl = candidates[sourceIndex];
+
+  const bilibiliMode = !!videoSources.bilibili && !useDirect;
 
   useEffect(() => {
     const onOnline = () => { setOnline(true); setFailed(false); };
@@ -43,7 +48,7 @@ function FilmCard({
   }, []);
 
   const unavailable = !online || failed;
-  const retry = () => { setReady(false); setFailed(false); setIsPlaying(false); setUserWantsVideo(false); setSourceIndex(0); setRetryKey((key) => key + 1); };
+  const retry = () => { setReady(false); setFailed(false); setIsPlaying(false); setUseDirect(false); setUserWantsVideo(false); setSourceIndex(0); setRetryKey((key) => key + 1); };
 
   /** 当前源加载失败：自动切到下一个可用源；全部失败才显示“网络不太顺畅” */
   const handleVideoError = () => {
@@ -63,6 +68,14 @@ function FilmCard({
     if (videoSources.bilibili) setIsPlaying(true);
   };
 
+  /** B站嵌入不可用（企业网/部分微信环境）时切回 mp4 直链 */
+  const handleDirectPlay = () => {
+    setUseDirect(true);
+    setReady(false);
+    setIsPlaying(false);
+    setSourceIndex(0);
+  };
+
   const connectionQuality = getConnectionQuality();
   const mobile = isMobile();
 
@@ -71,7 +84,7 @@ function FilmCard({
       <div className="relative aspect-video overflow-hidden bg-[#221513]">
         {/* ── 用户点击后才渲染播放器（B站 iframe 或本地 video）── */}
         {userWantsVideo && !unavailable ? (
-          videoSources.bilibili ? (
+          bilibiliMode ? (
             /* ① B站嵌入：配置了 BV 号时优先使用（国内最快，无需自备流量） */
             <iframe
               key={retryKey}
@@ -148,7 +161,17 @@ function FilmCard({
         </span>
       </div>
       <div className="flex items-center justify-between gap-4 px-6 pb-7 pt-6">
-        <div><p className="text-xs font-bold tracking-[0.18em] text-rouge">{subtitle}</p><h3 className="mt-2 font-serif-cn text-2xl font-bold text-ink">{title}</h3><p className="mt-3 text-sm leading-7 text-muted">{description}</p></div>
+        <div>
+          <p className="text-xs font-bold tracking-[0.18em] text-rouge">{subtitle}</p>
+          <h3 className="mt-2 font-serif-cn text-2xl font-bold text-ink">{title}</h3>
+          <p className="mt-3 text-sm leading-7 text-muted">{description}</p>
+          {/* B站嵌入的逃生通道：个别网络环境被拦截时可手动切回 mp4 直链 */}
+          {userWantsVideo && bilibiliMode ? (
+            <button type="button" onClick={handleDirectPlay} className="focus-ring mt-2 text-xs font-bold text-rouge underline-offset-4 hover:underline">
+              B站播放不了？用直链播放 →
+            </button>
+          ) : null}
+        </div>
         {storyLink ? <a href={storyLink} className="focus-ring group shrink-0 rounded-full p-2 text-rouge" aria-label={`查看${title}项目故事`}><ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" /></a> : null}
       </div>
     </motion.article>

@@ -319,8 +319,8 @@ export const SUMMER_GALLERIES = {
 
 /** 知行秦川总结视频 —— 播放源 */
 export const VIDEO_SOURCES_知行秦川 = {
-  /** ① B站 BV 号（上传后填，如 "BV1GJ411x7h7"；留空 = 不用 B站） */
-  bilibili: "",
+  /** ① B站嵌入（XJTU英仔爱心社官方 BV1R2MX6cE6A《知行秦川，梦启今夏》） */
+  bilibili: "BV1R2MX6cE6A",
   /** ② Cloudflare Pages 本站压缩版（540p，≤25MiB） */
   pages: "/videos/summer/2026-qinchuan-recap.mp4",
   /** ③ GitHub Release 原片（1080p，国内慢，兜底） */
@@ -331,8 +331,8 @@ export const VIDEO_SOURCES_知行秦川 = {
 
 /** 玉树总结视频 —— 播放源 */
 export const VIDEO_SOURCES_玉树 = {
-  /** ① B站 BV 号（上传后填；留空 = 不用 B站） */
-  bilibili: "",
+  /** ① B站嵌入（XJTU英仔爱心社官方 BV1pqgv6cEPS《玉树｜满眼期待与新奇体验撞了个满怀》） */
+  bilibili: "BV1pqgv6cEPS",
   /** ② Cloudflare Pages 本站压缩版（720p，≤25MiB） */
   pages: "/videos/summer/2026-yushu-recap.mp4",
   /** ③ GitHub Release 原片（720p HEVC，国内慢，兜底） */

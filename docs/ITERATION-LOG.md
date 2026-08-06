@@ -97,3 +97,13 @@
 - **新回退链**：B站嵌入（填 BV 号启用）→ Cloudflare Pages 压缩版（≤25MiB 单文件上限，已达标）→ GitHub Release → gh-proxy 镜像（可选）。
 - **代码**：`detect-env.ts` VideoSources 改为 `bilibili/pages/github/mirror`，`orderedVideoSources` 去 CDN 逻辑；`SummerFilms.tsx` 支持 B站 iframe 嵌入（BV 号非空时优先），retry 补 `setIsPlaying(false)`。
 - `npm run typecheck` ✅ · `npm run build` ✅（strip 脚本确认两视频均 < 25MiB，不再被删）
+
+## 2026-08-06 · B站播放源接入（用户提供 BV 号）
+- 用户确认使用社团 B站账号视频：
+  - 知行秦川 → `BV1R2MX6cE6A`（《知行秦川，梦启今夏》5:11，2026-08-03 发布）
+  - 玉树 → `BV1pqgv6cEPS`（《玉树｜满眼期待与新奇体验撞了个满怀》，2026-07-24 发布）
+  - 均已通过 B站页面与官方嵌入播放器（player.bilibili.com）双重验证可播放。
+- `src/config.ts`：两个 `bilibili` 字段填入 BV 号；国内用户点击后走 B站 iframe（全画质、不耗站流量），mp4 链（Pages→GitHub→镜像）保留为回退。
+- `SummerFilms.tsx`：新增「B站播放不了？用直链播放」逃生通道（个别网络/企业网拦截 iframe 时手动切回 mp4 链）。
+- `index.html`：preconnect 增加 `player.bilibili.com`（B站成为主源）。
+- 全面体检：跨行精确扫描全部 `<img>` alt / `target="_blank"` rel（均合规）；组件逻辑、文案日期（2026/第十七届）、锚点、按钮 type 复查；`typecheck`/`build`/`validate:assets`/`audit:public` 四绿；本地 preview 冒烟验证页面与视频 Range 播放正常。
