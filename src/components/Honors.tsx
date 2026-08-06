@@ -136,22 +136,56 @@ export function Honors() {
   const mobileNoAutoplay = cannotAutoplayVideo();
   const useKenBurns = mobileNoAutoplay && !userStartedVideo;
 
-  /** 用户点击播放按钮 */
+  /**
+   * 用户点击播放按钮。
+   * 关键：微信 XWeb 要求 play() 必须在用户手势的同步调用链中执行，
+   * 异步（rAF/setTimeout/effect）调用会被直接拒绝。
+   * 因此 video 元素常驻挂载（移动端点击前 opacity-0 隐藏），点击时同步 play()。
+   */
   const handleUserPlay = () => {
     setUserStartedVideo(true);
-    // 延迟一帧让 video 元素渲染后再 play
-    requestAnimationFrame(() => {
-      videoRef.current?.play().catch(() => {});
-    });
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.play().catch(() => {});
+    }
   };
 
   return (
     <section id="honors" className="bg-shell section-block text-white">
       <AnimatePresence>{vaultOpen ? <HonorVault onClose={() => setVaultOpen(false)} /> : null}</AnimatePresence>
 
-      {/* ── 背景层：三态切换 ── */}
+      {/* ── 背景层 ──
+          视频常驻渲染：桌面 autoplay；移动端点击前 opacity-0 隐藏（被 Ken Burns 海报覆盖），
+          点击播放按钮时同步 play()（满足微信手势链要求）。 */}
+      {videoOk ? (
+        <video
+          ref={videoRef}
+          className={`video-bg pointer-events-none ${useKenBurns ? "opacity-0" : ""}`}
+          autoPlay={!mobileNoAutoplay}
+          muted
+          loop
+          playsInline
+          preload={mobileNoAutoplay ? "none" : "auto"}
+          poster={IMG_第5页背景}
+          aria-hidden="true"
+          onError={() => setVideoOk(false)}
+          onCanPlay={() => {
+            /* 兜底：preload=none 时视频异步加载完成，若仍处于待播状态则补一次 play */
+            if (userStartedVideo && videoRef.current?.paused) {
+              videoRef.current.play().catch(() => {});
+            }
+          }}
+        >
+          <source src={VIDEO_荣誉历程} type="video/mp4" />
+        </video>
+      ) : (
+        /* 视频加载失败：静默回退到静态海报 */
+        <img src={IMG_第5页背景} alt="" aria-hidden="true" className="video-bg pointer-events-none object-cover" />
+      )}
+
       {useKenBurns ? (
-        /* 移动端：Ken Burns 动画海报 —— 不依赖视频播放，视觉同样震撼 */
+        /* 移动端：Ken Burns 动画海报 + 轻触播放按钮（点击后同步 play，海报消失） */
         <>
           <img
             src={IMG_第5页背景}
@@ -159,7 +193,6 @@ export function Honors() {
             aria-hidden="true"
             className="video-bg pointer-events-none object-cover ken-burns"
           />
-          {/* 移动端轻触播放按钮 —— 微信允许用户手势触发播放 */}
           <button
             type="button"
             onClick={handleUserPlay}
@@ -171,26 +204,7 @@ export function Honors() {
             </span>
           </button>
         </>
-      ) : videoOk ? (
-        /* 桌面端 / 用户已触发播放：视频自动播放 */
-        <video
-          ref={videoRef}
-          className="video-bg pointer-events-none"
-          autoPlay={!mobileNoAutoplay}
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={IMG_第5页背景}
-          aria-hidden="true"
-          onError={() => setVideoOk(false)}
-        >
-          <source src={VIDEO_荣誉历程} type="video/mp4" />
-        </video>
-      ) : (
-        /* 视频加载失败：静默回退到静态海报 */
-        <img src={IMG_第5页背景} alt="" aria-hidden="true" className="video-bg pointer-events-none object-cover" />
-      )}
+      ) : null}
 
       <div className="bg-veil honor-video-veil" />
       <div className="absolute inset-0 -z-[1] bg-[radial-gradient(circle_at_50%_30%,rgba(178,90,85,0.4),transparent_60%)]" />

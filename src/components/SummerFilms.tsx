@@ -39,6 +39,15 @@ function FilmCard({
 
   const bilibiliMode = !!videoSources.bilibili && !useDirect;
 
+  /** B站 iframe 加载状态：加载中转圈提示；8 秒兜底隐藏，避免白屏卡死无反馈 */
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  useEffect(() => {
+    if (!userWantsVideo || !bilibiliMode) return;
+    setIframeLoaded(false);
+    const timer = window.setTimeout(() => setIframeLoaded(true), 8000);
+    return () => window.clearTimeout(timer);
+  }, [userWantsVideo, bilibiliMode, retryKey]);
+
   useEffect(() => {
     const onOnline = () => { setOnline(true); setFailed(false); };
     const onOffline = () => setOnline(false);
@@ -86,17 +95,25 @@ function FilmCard({
         {userWantsVideo && !unavailable ? (
           bilibiliMode ? (
             /* ① B站嵌入：配置了 BV 号时优先使用（国内最快，无需自备流量） */
-            <iframe
-              key={retryKey}
-              className="h-full w-full"
-              src={`https://player.bilibili.com/player.html?bvid=${videoSources.bilibili}&page=1&high_quality=1&danmaku=0&autoplay=1`}
-              title={`${title}视频（B站）`}
-              scrolling="no"
-              frameBorder="no"
-              allowFullScreen
-              allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
-              referrerPolicy="strict-origin-when-cross-origin"
-            />
+            <>
+              {!iframeLoaded ? (
+                <div className="absolute inset-0 flex items-center justify-center bg-[#221513]">
+                  <Loader2 className="h-7 w-7 animate-spin text-white/80" />
+                </div>
+              ) : null}
+              <iframe
+                key={retryKey}
+                className="h-full w-full"
+                src={`https://player.bilibili.com/player.html?bvid=${videoSources.bilibili}&page=1&high_quality=1&danmaku=0&autoplay=1`}
+                title={`${title}视频（B站）`}
+                scrolling="no"
+                frameBorder="no"
+                allowFullScreen
+                allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
+                referrerPolicy="strict-origin-when-cross-origin"
+                onLoad={() => setIframeLoaded(true)}
+              />
+            </>
           ) : (
             /* ②③④ mp4 回退链：Pages → GitHub → 镜像 */
             <video

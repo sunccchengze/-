@@ -107,3 +107,10 @@
 - `SummerFilms.tsx`：新增「B站播放不了？用直链播放」逃生通道（个别网络/企业网拦截 iframe 时手动切回 mp4 链）。
 - `index.html`：preconnect 增加 `player.bilibili.com`（B站成为主源）。
 - 全面体检：跨行精确扫描全部 `<img>` alt / `target="_blank"` rel（均合规）；组件逻辑、文案日期（2026/第十七届）、锚点、按钮 type 复查；`typecheck`/`build`/`validate:assets`/`audit:public` 四绿；本地 preview 冒烟验证页面与视频 Range 播放正常。
+
+## 2026-08-06 · 微信扫码端专项自检（修复荣誉视频微信播放 bug）
+- **根因**：Honors 荣誉背景视频原用 `requestAnimationFrame` 异步调 `play()`——① 点击瞬间 video 元素尚未渲染（ref 为 null）play 静默失败；② 微信 XWeb 强制 play() 必须在用户手势同步调用链内，异步调用必被拒；③ 失败后 video 无 controls + pointer-events-none → 微信里荣誉视频彻底无法播放。
+- **修复**（Honors.tsx）：video 元素常驻挂载（移动端点击前 `opacity-0` 隐藏 + `preload="none"` 不耗流量），点击播放按钮时**同步** `play()`（满足微信手势链）；新增 `onCanPlay` 兜底补播；桌面 autoplay 行为不变。
+- **SummerFilms.tsx**：B站 iframe 新增加载转圈（iframe onLoad 隐藏，8 秒兜底隐藏避免白屏卡死无反馈）。
+- 微信 UA 冒烟：页面 200、三段视频 Range 206、B站嵌入/逃生按钮均在产物中。
+- `typecheck` ✅ · `build` ✅（视频均 <25MiB）
