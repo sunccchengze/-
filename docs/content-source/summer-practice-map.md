@@ -87,3 +87,4 @@
 
 - 玉树日记与秦岭青苗计划的吸收边界见 [`2026-08-wechat-yushu-qinling-updates.md`](./2026-08-wechat-yushu-qinling-updates.md)。玉树温和融入既有叙述；秦岭青苗计划作为山野实践的成果转化。
 - 萤火儿童医院病房关怀、玉树辞别总结大会与志愿者终篇日记的吸收边界见 [`2026-08-wechat-yinghuo-yushu-farewell-updates.md`](./2026-08-wechat-yinghuo-yushu-farewell-updates.md)。病房小课桌与非药物干预、辞别歌声与雪峰远眺的羁绊温和融入网页文案。
+- 青春伴夕阳“银发融城”返乡实践纪实的吸收边界见 [`2026-08-wechat-yinfarongcheng-updates.md`](./2026-08-wechat-yinfarongcheng-updates.md)。20名队员返乡、200份样本与四大常态帮扶融入暑期实践辅卡及向日葵/常青藤部门介绍。

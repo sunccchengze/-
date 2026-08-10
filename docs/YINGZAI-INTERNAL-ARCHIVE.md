@@ -396,3 +396,4 @@
 
 1. 玉树支教日记 3 与心项目“秦岭青苗计划”的提炼、公开边界见 `docs/content-source/2026-08-wechat-yushu-qinling-updates.md`。
 2. 萤火儿童医院病房关怀、玉树辞别总结大会与志愿者终篇日记的提炼、公开边界见 `docs/content-source/2026-08-wechat-yinghuo-yushu-farewell-updates.md`。已温和融进 `src/content.ts` 暑期实践主辅卡文案与萤火部介绍。
+3. 青春伴夕阳“银发融城”返乡实践纪实的提炼、公开边界见 `docs/content-source/2026-08-wechat-yinfarongcheng-updates.md`。已融进 `src/content.ts` 暑期实践辅卡与向日葵/常青藤部门介绍。
