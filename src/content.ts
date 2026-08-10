@@ -1,6 +1,7 @@
 /**
  * 招新站文案与结构化内容（面向新生，非公文照抄）
  * 改字优先改本文件；图片路径仍在 config.ts
+ * 2026-08 暑期实践卡片扩展更新：萤火、秦岭、启明、银发融城 2x2 精细化布局
  */
 import type { LucideIcon } from "lucide-react";
 import {
