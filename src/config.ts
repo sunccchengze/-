@@ -197,6 +197,9 @@ export const IMG_暑期_萤火 = "/images/暑期实践/萤火/萤火1.jpg";
 /** 启明星“启明寻洛，脉续中原”暑期实践主封面。 */
 export const IMG_暑期_启明星 = "/images/暑期实践/启明星/启明星1.jpg";
 
+/** 青春伴夕阳“银发融城”暑期返乡调研实践主封面。 */
+export const IMG_暑期_银发融城 = "/images/暑期实践/银发融城/银发融城1.jpg";
+
 /** 第11页背景（暑期实践专区，可与第3页共用或单独替换） */
 export const IMG_第11页背景 = IMG_统一页面背景;
 
@@ -287,6 +290,13 @@ export const SUMMER_GALLERIES = {
     "/images/暑期实践/启明星/启明星5.jpg",
     "/images/暑期实践/启明星/启明星6.jpg",
     "/images/暑期实践/启明星/启明星7.jpg",
+  ],
+  yinfarongcheng: [
+    IMG_暑期_银发融城,
+    "/images/暑期实践/银发融城/银发融城2.jpg",
+    "/images/暑期实践/银发融城/银发融城3.jpg",
+    "/images/暑期实践/银发融城/银发融城4.jpg",
+    "/images/暑期实践/银发融城/银发融城5.jpg",
   ],
 } as const;
 

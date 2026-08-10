@@ -234,7 +234,7 @@ export function SummerPractice() {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2 md:gap-8 xl:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-2">
           {supports.map((card, index) => (
             <SummerSupportCard key={card.id} card={card} index={index} />
           ))}
