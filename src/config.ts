@@ -297,9 +297,6 @@ export const SUMMER_GALLERIES = {
     "/images/暑期实践/银发融城/银发融城3.jpg",
     "/images/暑期实践/银发融城/银发融城4.jpg",
     "/images/暑期实践/银发融城/银发融城5.jpg",
-    "/images/暑期实践/银发融城/银发融城6.jpg",
-    "/images/暑期实践/银发融城/银发融城7.jpg",
-    "/images/暑期实践/银发融城/银发融城8.jpg",
   ],
 } as const;
 
