@@ -85,4 +85,5 @@
 
 ## 2026-08 公众号补充
 
-玉树日记与秦岭青苗计划的吸收边界见 [`2026-08-wechat-yushu-qinling-updates.md`](./2026-08-wechat-yushu-qinling-updates.md)。玉树温和融入既有叙述；秦岭青苗计划作为山野实践的成果转化。
+- 玉树日记与秦岭青苗计划的吸收边界见 [`2026-08-wechat-yushu-qinling-updates.md`](./2026-08-wechat-yushu-qinling-updates.md)。玉树温和融入既有叙述；秦岭青苗计划作为山野实践的成果转化。
+- 萤火儿童医院病房关怀、玉树辞别总结大会与志愿者终篇日记的吸收边界见 [`2026-08-wechat-yinghuo-yushu-farewell-updates.md`](./2026-08-wechat-yinghuo-yushu-farewell-updates.md)。病房小课桌与非药物干预、辞别歌声与雪峰远眺的羁绊温和融入网页文案。
