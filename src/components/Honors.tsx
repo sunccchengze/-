@@ -107,6 +107,14 @@ function HonorVault({ onClose }: { onClose: () => void }) {
             <p className="mt-2 max-w-2xl text-sm leading-6 text-white/65">
               金色题签记录荣誉，点击翻阅真实证明；每一份成果都来自一届届英仔的长期行动。
             </p>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <span className="rounded-full border border-gold-soft/40 bg-gold-soft/15 px-3 py-1 text-xs font-bold text-[#f6e5ba]">
+                ★ 西安交通大学校级五星公益社团
+              </span>
+              <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-bold text-white/90">
+                ★ 仲英书院指导 · 第二课堂合规认证
+              </span>
+            </div>
           </div>
           <button type="button" onClick={onClose} className="focus-ring inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 text-sm font-bold text-white transition hover:bg-white hover:text-rouge-deep" aria-label="关闭荣誉典藏墙">
             <X className="h-4 w-4" aria-hidden="true" />
@@ -211,7 +219,15 @@ export function Honors() {
 
       <div className="section-container">
         <SectionHeader eyebrow="ACHIEVEMENTS" title="荣誉高光" subtitle="本学年高光：国家级荣誉五项 · 五星级社团 · 最佳团日 · 红旗团支部" invert />
-        <div className="relative mx-auto mt-16 max-w-4xl">
+        <div className="mx-auto mt-4 flex max-w-2xl flex-wrap items-center justify-center gap-2 text-center">
+          <span className="rounded-full border border-gold-soft/40 bg-black/35 px-4 py-1.5 text-xs font-bold text-[#f6e5ba] backdrop-blur-sm">
+            ★ 西安交通大学校级五星公益社团
+          </span>
+          <span className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold text-white/90 backdrop-blur-sm">
+            ★ 仲英书院长期指导 · 第二课堂合规认证
+          </span>
+        </div>
+        <div className="relative mx-auto mt-12 max-w-4xl">
           <div className="absolute left-4 top-0 h-full w-px bg-white/20 md:left-[190px]" aria-hidden="true" />
           {visibleHonors.map((honor, index) => (
             <motion.div key={honor.date} className="gpu-accelerated relative grid gap-4 pb-8 pl-12 md:grid-cols-[160px_1fr] md:gap-12 md:pl-0" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ delay: Math.min(index, 4) * 0.06, duration: 0.5 }}>
