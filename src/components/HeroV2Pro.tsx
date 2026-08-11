@@ -227,13 +227,6 @@ export function HeroV2Pro() {
               了解今年的故事
               <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </a>
-            <button
-              type="button"
-              onClick={() => setCardModalOpen(true)}
-              className="focus-ring inline-flex items-center gap-1.5 rounded-full border border-gold-soft/40 bg-gold-soft/15 px-4 py-2.5 text-xs font-bold text-white backdrop-blur-sm transition hover:bg-gold-soft hover:text-ink"
-            >
-              <span>生成招新探访名片</span>
-            </button>
           </motion.div>
 
           <motion.p
