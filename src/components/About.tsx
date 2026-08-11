@@ -99,17 +99,17 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
           ))}
         </div>
       ) : (
-        <div className="relative mx-auto h-[520px] w-full max-w-[760px] sm:h-[640px]">
+        <div className="relative mx-auto h-[290px] w-full max-w-[760px] sm:h-[530px]">
           <AnimatePresence>
             {deck.slice(0, 4).map((card, i) => {
               const isTop = i === 0;
               const rotate = i === 0 ? 0 : i === 1 ? -3.5 : i === 2 ? 4 : -2.5;
-              const yOffset = i * 10;
+              const yOffset = i * 8;
               const scale = 1 - i * 0.035;
               return (
                 <motion.div
                   key={card.id}
-                  className={`gpu-accelerated absolute inset-0 rounded-none bg-[#FAFAF7] p-4 shadow-2xl ring-1 ring-black/20 sm:p-7 pb-16 sm:pb-24 ${
+                  className={`gpu-accelerated absolute inset-0 rounded-none bg-[#FAFAF7] p-3.5 sm:p-5 pb-9 sm:pb-11 shadow-2xl ring-1 ring-black/20 ${
                     isTop ? "z-40 cursor-pointer active:cursor-grabbing" : "pointer-events-none"
                   }`}
                   style={{ zIndex: 40 - i * 10 }}
@@ -149,7 +149,7 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
                       draggable={false}
                     />
                   </div>
-                  <div className="absolute bottom-4 left-0 right-0 text-center font-serif-cn text-sm font-bold tracking-wider text-muted/90 sm:bottom-6 sm:text-base">
+                  <div className="absolute bottom-2 sm:bottom-3 left-0 right-0 text-center font-serif-cn text-xs sm:text-sm font-bold tracking-wider text-muted/90">
                     现场纪念 #{String(card.idx + 1).padStart(2, "0")} / {images.length} — 以爱陪伴，真实发生过的温暖
                   </div>
                 </motion.div>
