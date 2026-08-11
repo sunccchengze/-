@@ -96,7 +96,7 @@ function DepartmentCard({
 }
 
 export function Departments() {
-  const [activeTab, setActiveTab] = useState<"functional" | "project">("project");
+  const [activeTab, setActiveTab] = useState<"functional" | "project">("functional");
   const [suggestedRoute, setSuggestedRoute] = useState<string | null>(null);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [selectedDepartment, setSelectedDepartment] = useState<Department | null>(null);
