@@ -66,7 +66,7 @@ function SummerImageCarousel({ images, alt, compact = false }: { images: readonl
         const position = available.indexOf(previous);
         return available[(position + 1) % available.length] ?? available[0];
       });
-    }, 5000);
+    }, 3000);
     return () => window.clearInterval(timer);
   }, [available, isNearby]);
 

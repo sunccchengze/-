@@ -30,7 +30,7 @@ export function HeroV2Pro() {
 
     const timer = window.setInterval(() => {
       setCurrentSlide((current) => (current + 1) % HERO_V2PRO_SLIDES.length);
-    }, isPhone ? 8000 : 5000);
+    }, 3000);
 
     return () => window.clearInterval(timer);
   }, []);

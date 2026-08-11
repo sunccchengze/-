@@ -14,7 +14,7 @@ export function Hero() {
     if (reduce) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
