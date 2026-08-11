@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Grid, Layers } from "lucide-react";
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { IMG_第2页背景, IMG_公益活动剪影 as galleryImages } from "../config";
 import { about } from "../content";
 import { SectionHeader } from "./SectionHeader";
@@ -26,13 +26,15 @@ function renderEmphasized(text: string): ReactNode[] {
 /**
  * 方案 1（Aristide Benoist 物理力学与手势甩牌）：拍立得相片堆·手指发牌甩页 (Polaroid Deck)
  * 1. 取消圆角，纯真实相片直角质感；
- * 2. 每隔 3s 自动发下一张，点击照片也会抛出下一张；
- * 3. 头部文案极简化，仅保留 Polaroid Deck；
- * 4. 整体展示面积放大一倍。
+ * 2. 只有当用户滑到本版块时才开始自动发牌，且第 1 张图停留时长延长至 6s，其余 3s；
+ * 3. 现场纪实单行纪念字句在底部留白区域严格实现【竖直居中】与水平居中；
+ * 4. 整体展示面积增大一倍。
  */
 function PolaroidDeck({ images }: { images: readonly string[] }) {
   const [deck, setDeck] = useState(() => images.map((src, idx) => ({ src, idx, id: `photo-${idx}` })));
   const [isGridView, setIsGridView] = useState(false);
+  const [inView, setInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const swipeNext = () => {
     setDeck((prev) => {
@@ -50,15 +52,30 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
   };
 
   useEffect(() => {
-    if (isGridView) return;
-    const timer = window.setInterval(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry?.isIntersecting ?? false);
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isGridView || !inView) return;
+    const currentIdx = deck[0]?.idx ?? 0;
+    const delay = currentIdx === 0 ? 6000 : 3000; // 第一张图展示时间延长到 6s，其余 3s
+    const timer = window.setTimeout(() => {
       swipeNext();
-    }, 3000);
-    return () => window.clearInterval(timer);
-  }, [isGridView, deck]);
+    }, delay);
+    return () => window.clearTimeout(timer);
+  }, [isGridView, inView, deck]);
 
   return (
-    <div className="mx-auto mt-16 max-w-5xl">
+    <div ref={containerRef} className="mx-auto mt-16 max-w-5xl">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4 px-2">
         <div className="flex items-center gap-2">
           <span className="rounded-full bg-rouge/10 px-4 py-1.5 text-xs font-bold tracking-widest text-rouge-deep uppercase">
@@ -99,7 +116,7 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
           ))}
         </div>
       ) : (
-        <div className="relative mx-auto h-[290px] w-full max-w-[760px] sm:h-[530px]">
+        <div className="relative mx-auto h-[310px] w-full max-w-[760px] sm:h-[540px]">
           <AnimatePresence>
             {deck.slice(0, 4).map((card, i) => {
               const isTop = i === 0;
@@ -109,7 +126,7 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
               return (
                 <motion.div
                   key={card.id}
-                  className={`gpu-accelerated absolute inset-0 rounded-none bg-[#FAFAF7] p-3.5 sm:p-5 pb-9 sm:pb-11 shadow-2xl ring-1 ring-black/20 ${
+                  className={`gpu-accelerated absolute inset-0 flex flex-col justify-between rounded-none bg-[#FAFAF7] p-3.5 sm:p-5 shadow-2xl ring-1 ring-black/20 ${
                     isTop ? "z-40 cursor-pointer active:cursor-grabbing" : "pointer-events-none"
                   }`}
                   style={{ zIndex: 40 - i * 10 }}
@@ -141,7 +158,7 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
                     }
                   }}
                 >
-                  <div className="aspect-[16/10] sm:aspect-[16/10] w-full overflow-hidden rounded-none bg-cream">
+                  <div className="aspect-[16/10] sm:aspect-[16/10] w-full shrink-0 overflow-hidden rounded-none bg-cream">
                     <img
                       src={card.src}
                       alt={`公益活动真实剪影 #${card.idx + 1}`}
@@ -149,7 +166,8 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
                       draggable={false}
                     />
                   </div>
-                  <div className="absolute bottom-2 sm:bottom-3 left-0 right-0 text-center font-serif-cn text-xs sm:text-sm font-bold tracking-wider text-muted/90">
+                  {/* 底部留白区域里的竖直居中与水平居中纪念文字 */}
+                  <div className="flex flex-1 items-center justify-center px-2 text-center font-serif-cn text-xs sm:text-sm font-bold tracking-wider text-muted/90">
                     现场纪念 #{String(card.idx + 1).padStart(2, "0")} / {images.length} — 以爱陪伴，真实发生过的温暖
                   </div>
                 </motion.div>
