@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Grid, Layers } from "lucide-react";
-import { type ReactNode, useState } from "react";
+import { Grid, Layers } from "lucide-react";
+import { type ReactNode, useEffect, useState } from "react";
 import { IMG_第2页背景, IMG_公益活动剪影 as galleryImages } from "../config";
 import { about } from "../content";
 import { SectionHeader } from "./SectionHeader";
@@ -25,7 +25,10 @@ function renderEmphasized(text: string): ReactNode[] {
 
 /**
  * 方案 1（Aristide Benoist 物理力学与手势甩牌）：拍立得相片堆·手指发牌甩页 (Polaroid Deck)
- * 替代原先单一的 16 张静态网格平铺，支持触控拖拽甩开相片，并附带 4×4 经典视图切换按钮。
+ * 1. 取消圆角，纯真实相片直角质感；
+ * 2. 每隔 3s 自动发下一张，点击照片也会抛出下一张；
+ * 3. 头部文案极简化，仅保留 Polaroid Deck；
+ * 4. 整体展示面积放大一倍。
  */
 function PolaroidDeck({ images }: { images: readonly string[] }) {
   const [deck, setDeck] = useState(() => images.map((src, idx) => ({ src, idx, id: `photo-${idx}` })));
@@ -46,15 +49,20 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
     });
   };
 
+  useEffect(() => {
+    if (isGridView) return;
+    const timer = window.setInterval(() => {
+      swipeNext();
+    }, 3000);
+    return () => window.clearInterval(timer);
+  }, [isGridView, deck]);
+
   return (
-    <div className="mx-auto mt-16 max-w-4xl">
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4 px-2">
+    <div className="mx-auto mt-16 max-w-5xl">
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-4 px-2">
         <div className="flex items-center gap-2">
-          <span className="rounded-full bg-rouge/10 px-3 py-1 text-xs font-bold text-rouge-deep">
-            Polaroid Deck · 拍立得相片发牌
-          </span>
-          <span className="text-xs text-muted">
-            {isGridView ? "4×4 经典平铺视图" : "按住照片向左/向右拖拽即可抛开相片"}
+          <span className="rounded-full bg-rouge/10 px-4 py-1.5 text-xs font-bold tracking-widest text-rouge-deep uppercase">
+            Polaroid Deck
           </span>
         </div>
         <button
@@ -91,18 +99,18 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
           ))}
         </div>
       ) : (
-        <div className="relative mx-auto h-[380px] w-full max-w-[420px] sm:h-[440px]">
+        <div className="relative mx-auto h-[520px] w-full max-w-[760px] sm:h-[640px]">
           <AnimatePresence>
             {deck.slice(0, 4).map((card, i) => {
               const isTop = i === 0;
-              const rotate = i === 0 ? 0 : i === 1 ? -4 : i === 2 ? 4.5 : -3;
-              const yOffset = i * 8;
-              const scale = 1 - i * 0.04;
+              const rotate = i === 0 ? 0 : i === 1 ? -3.5 : i === 2 ? 4 : -2.5;
+              const yOffset = i * 10;
+              const scale = 1 - i * 0.035;
               return (
                 <motion.div
                   key={card.id}
-                  className={`gpu-accelerated absolute inset-0 rounded-[24px] bg-[#FAFAF7] p-3 shadow-2xl ring-1 ring-black/15 sm:p-5 pb-11 sm:pb-14 ${
-                    isTop ? "z-40 cursor-grab active:cursor-grabbing" : "pointer-events-none"
+                  className={`gpu-accelerated absolute inset-0 rounded-none bg-[#FAFAF7] p-4 shadow-2xl ring-1 ring-black/20 sm:p-7 pb-16 sm:pb-24 ${
+                    isTop ? "z-40 cursor-pointer active:cursor-grabbing" : "pointer-events-none"
                   }`}
                   style={{ zIndex: 40 - i * 10 }}
                   initial={false}
@@ -113,17 +121,18 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
                     opacity: 1 - i * 0.15,
                   }}
                   exit={{
-                    x: 450,
-                    rotate: 25,
+                    x: 580,
+                    rotate: 26,
                     opacity: 0,
-                    transition: { duration: 0.3 },
+                    transition: { duration: 0.38 },
                   }}
-                  transition={{ type: "spring", stiffness: 280, damping: 25 }}
+                  transition={{ type: "spring", stiffness: 280, damping: 26 }}
                   drag={isTop ? "x" : false}
                   dragConstraints={{ left: 0, right: 0 }}
                   dragElastic={0.7}
+                  onClick={isTop ? swipeNext : undefined}
                   onDragEnd={(_e, info) => {
-                    if (Math.abs(info.offset.x) > 60) {
+                    if (Math.abs(info.offset.x) > 50) {
                       if (info.offset.x > 0) {
                         swipeNext();
                       } else {
@@ -132,7 +141,7 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
                     }
                   }}
                 >
-                  <div className="aspect-[4/3] w-full overflow-hidden rounded-xl bg-cream">
+                  <div className="aspect-[16/10] sm:aspect-[16/10] w-full overflow-hidden rounded-none bg-cream">
                     <img
                       src={card.src}
                       alt={`公益活动真实剪影 #${card.idx + 1}`}
@@ -140,37 +149,13 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
                       draggable={false}
                     />
                   </div>
-                  <div className="absolute bottom-3 left-0 right-0 text-center font-serif-cn text-xs font-bold tracking-wider text-muted/85 sm:bottom-4 sm:text-sm">
+                  <div className="absolute bottom-4 left-0 right-0 text-center font-serif-cn text-sm font-bold tracking-wider text-muted/90 sm:bottom-6 sm:text-base">
                     现场纪念 #{String(card.idx + 1).padStart(2, "0")} / {images.length} — 以爱陪伴，真实发生过的温暖
                   </div>
                 </motion.div>
               );
             })}
           </AnimatePresence>
-        </div>
-      )}
-
-      {!isGridView && (
-        <div className="mt-6 flex items-center justify-center gap-6">
-          <button
-            type="button"
-            onClick={swipePrev}
-            className="focus-ring inline-flex h-11 items-center gap-2 rounded-full border border-rouge/20 bg-white/80 px-5 text-xs font-bold text-ink backdrop-blur-sm transition hover:bg-white hover:text-rouge-deep active:scale-95"
-          >
-            <ArrowLeft className="h-4 w-4 text-rouge" />
-            甩上张
-          </button>
-          <span className="hidden text-xs font-bold tracking-wider text-muted/70 sm:inline">
-            —— 拖动卡片发牌，或点击左右侧按键 ——
-          </span>
-          <button
-            type="button"
-            onClick={swipeNext}
-            className="focus-ring inline-flex h-11 items-center gap-2 rounded-full border border-rouge/20 bg-white/80 px-5 text-xs font-bold text-ink backdrop-blur-sm transition hover:bg-white hover:text-rouge-deep active:scale-95"
-          >
-            甩下张
-            <ArrowRight className="h-4 w-4 text-rouge" />
-          </button>
         </div>
       )}
     </div>

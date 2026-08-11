@@ -282,7 +282,7 @@ export function Departments() {
         <p className="mt-6 text-center font-serif-cn text-base text-muted md:text-lg">{departmentsIntro.footer}</p>
       </div>
 
-      {/* 方案 7（Matt Perry 空间动效）：layoutId 剧场式无缝缩放展开大图 */}
+      {/* 剧场式大图展台（丝滑弹窗，保留卡片底图零白底漏出） */}
       <AnimatePresence>
         {selectedDepartment ? (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10">
@@ -291,18 +291,18 @@ export function Departments() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
               onClick={() => setSelectedDepartment(null)}
             />
             <motion.div
               className="relative z-10 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl bg-[#241615] shadow-2xl ring-1 ring-white/20"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, scale: 0.88, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.88, y: 15 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="relative aspect-[16/9] w-full overflow-hidden bg-black">
-                <motion.img
-                  layoutId={`dept-image-${selectedDepartment.name}`}
+                <img
                   src={selectedDepartment.image}
                   alt={selectedDepartment.name}
                   className="h-full w-full object-cover"

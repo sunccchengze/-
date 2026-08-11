@@ -95,10 +95,11 @@ export function HeroV2Pro() {
           src={activeSlide.src}
           alt={`${activeSlide.title}｜英仔爱心社志愿服务活动现场`}
           className="gpu-accelerated absolute inset-0 -z-20 h-full w-full object-cover"
-          initial={{ opacity: 0, scale: 1.035 }}
-          animate={{ opacity: 1, scale: 1 }}
+          style={{ transformOrigin: "center center" }}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1.00 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.15, ease: "easeInOut" }}
+          transition={{ duration: 1.6, ease: [0.25, 0.1, 0.25, 1] }}
           fetchPriority={currentSlide === 0 ? "high" : "auto"}
           decoding="async"
         />
