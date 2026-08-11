@@ -150,11 +150,7 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
                   onClick={isTop ? swipeNext : undefined}
                   onDragEnd={(_e, info) => {
                     if (Math.abs(info.offset.x) > 50) {
-                      if (info.offset.x > 0) {
-                        swipeNext();
-                      } else {
-                        swipePrev();
-                      }
+                      swipeNext();
                     }
                   }}
                 >
@@ -208,6 +204,9 @@ export function About() {
 
         <p className="mt-8 text-center text-sm text-muted">
           剪影来自支教、敬老、陕历博与校园公益现场——真实发生过的温暖
+        </p>
+        <p className="mt-2 text-center text-xs font-bold tracking-widest text-rouge-deep">
+          左右滑动或点击
         </p>
       </div>
     </section>

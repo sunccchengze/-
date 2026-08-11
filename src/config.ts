@@ -21,9 +21,9 @@ export const SITE_URL = "https://yzaxs-1.pages.dev";
 
 /**
  * 立即报名链接（出现在：顶部导航、封面页主按钮、加入我们模块）
- * 当前为临时 WPS 链接；2026 正式报名表发布后替换本行即可。
+ * 2026 正式在线报名表链接。
  */
-export const LINK_报名 = "https://f.wps.cn/g/1AxxMyao/";
+export const LINK_报名 = "https://tuvtpb2u.jsjform.com/f/zPAVNv";
 
 /** 微信公众号链接 */
 export const LINK_微信公众号 = "https://mp.weixin.qq.com/s/lJJeVU1osRMRd7oRWvTFzQ";

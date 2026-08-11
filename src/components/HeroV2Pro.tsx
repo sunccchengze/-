@@ -131,7 +131,7 @@ export function HeroV2Pro() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.12, duration: 0.5 }}
-            aria-label="校级五星级社团"
+            aria-label="校级五星级公益社团"
           >
             <span className="flex items-center gap-1.5" aria-hidden="true">
               {[0, 1, 2, 3, 4].map((star) => (
@@ -145,7 +145,7 @@ export function HeroV2Pro() {
                 </motion.span>
               ))}
             </span>
-            <span className="font-serif-cn text-sm font-bold tracking-[0.16em] text-white/85 sm:text-base">校级五星级社团</span>
+            <span className="font-serif-cn text-sm font-bold tracking-[0.16em] text-white/85 sm:text-base">校级五星级公益社团</span>
           </motion.div>
 
           <motion.h1

@@ -44,7 +44,7 @@ export function Footer() {
                   <img src={IMG_报名二维码} alt="扫码报名" className="h-[116px] w-[116px] object-contain" loading="lazy" />
                 </div>
                 <figcaption className="mt-2 w-full px-1 text-center">
-                  <span className="block text-[10px] font-medium tracking-[0.14em] text-white/55">WPS 报名表</span>
+                  <span className="block text-[10px] font-medium tracking-[0.14em] text-white/55">在线报名表</span>
                   <span className="mt-0.5 block text-xs font-bold text-white">扫码报名</span>
                 </figcaption>
               </figure>
