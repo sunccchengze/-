@@ -20,15 +20,15 @@
   --color-cream: #FAF6F3;
   --color-paper: #FFFFFF;
 
-  --font-sans: "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
-  --font-serif-cn: "Noto Serif SC", "Songti SC", serif;
+  --font-sans: "DengXian", "等线", "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  --font-serif-cn: "Noto Serif SC", "Songti SC", "DengXian", "等线", serif;
   --font-data: "Libre Baskerville", "Playfair Display", Georgia, serif;
 }
 
 :root {
   color: #3E3E3E;
   background: #FAF6F3;
-  font-family: "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  font-family: "DengXian", "等线", "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
   text-rendering: geometricPrecision;
 }
 
@@ -40,6 +40,7 @@ body {
   margin: 0;
   min-width: 320px;
   background: #FAF6F3;
+  font-family: "DengXian", "等线", "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
 }
 
 ::selection {
@@ -866,4 +867,36 @@ button {
 
 @media (prefers-reduced-motion: reduce) {
   .honor-card-flipped::after { animation: none; opacity: 0; }
+}
+
+/* ============================================================================
+ * 方案 C（UI UX Pro Max & taste-skill）：移动端触控滑动（Swipe Gestures）与 GPU 硬件加速
+ * ============================================================================ */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.touch-swipe-container {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-snap-x-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.scroll-snap-x-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-snap-item {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }

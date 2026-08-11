@@ -214,7 +214,7 @@ export function Honors() {
         <div className="relative mx-auto mt-16 max-w-4xl">
           <div className="absolute left-4 top-0 h-full w-px bg-white/20 md:left-[190px]" aria-hidden="true" />
           {visibleHonors.map((honor, index) => (
-            <motion.div key={honor.date} className="relative grid gap-4 pb-8 pl-12 md:grid-cols-[160px_1fr] md:gap-12 md:pl-0" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ delay: Math.min(index, 4) * 0.06, duration: 0.5 }}>
+            <motion.div key={honor.date} className="gpu-accelerated relative grid gap-4 pb-8 pl-12 md:grid-cols-[160px_1fr] md:gap-12 md:pl-0" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ delay: Math.min(index, 4) * 0.06, duration: 0.5 }}>
               <div className="timeline-dot absolute left-[9px] top-2 h-4 w-4 rounded-full border-4 border-white md:left-[183px]" />
               <time className="font-data text-lg font-bold text-rouge-mist md:text-right">{honor.date}</time>
               <article className="glass-panel-dark rounded-2xl border-l-4 border-rouge p-6">

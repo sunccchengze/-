@@ -17,7 +17,7 @@ function DepartmentCard({
   const Icon = department.icon;
   return (
     <motion.article
-      className={`card-hover card-outline-gradient relative flex h-full flex-col overflow-hidden rounded-[24px] ${
+      className={`card-hover card-outline-gradient gpu-accelerated relative flex h-full flex-col overflow-hidden rounded-[24px] ${
         suggested ? "dept-recommended z-10" : ""
       }`}
       initial={{ opacity: 0, y: 36 }}
@@ -87,8 +87,29 @@ function DepartmentCard({
 export function Departments() {
   const [activeTab, setActiveTab] = useState<"functional" | "project">("project");
   const [suggestedRoute, setSuggestedRoute] = useState<string | null>(null);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const departments = activeTab === "functional" ? functionalDepartments : projectDepartments;
   const suggestedNames = departmentFinder.find((item) => item.title === suggestedRoute)?.departments ?? [];
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && activeTab === "functional") {
+        setActiveTab("project");
+        setSuggestedRoute(null);
+      } else if (diff < 0 && activeTab === "project") {
+        setActiveTab("functional");
+        setSuggestedRoute(null);
+      }
+    }
+    setTouchStartX(null);
+  };
 
   const chooseRoute = (title: string) => {
     setSuggestedRoute(title);
@@ -197,7 +218,9 @@ export function Departments() {
             key={activeTab}
             id="dept-panel"
             role="tabpanel"
-            className="mt-14 grid items-stretch gap-7 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+            className="touch-swipe-container gpu-accelerated mt-14 grid items-stretch gap-7 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}

@@ -172,10 +172,10 @@ export const IMG_四大理由 = [
 export const IMG_常务部 = "/images/部门/常务部.jpg";
 export const IMG_交流部 = "/images/部门/交流部.jpg";
 export const IMG_宣传部 = "/images/部门/宣传部.jpg";
-/** @deprecated 历史共用图；前卫/洩湖可分别替换 */
+/** @deprecated 历史共用图；启梦/拾辉可分别替换 */
 export const IMG_大手拉小手 = "/images/部门/大手拉小手.jpg";
-export const IMG_前卫部 = "/images/部门/前卫部.jpg";
-export const IMG_洩湖部 = "/images/部门/洩湖部.jpg";
+export const IMG_启梦部 = "/images/部门/启梦部.jpg";
+export const IMG_拾辉部 = "/images/部门/拾辉部.jpg";
 /** @deprecated 历史共用图；向日葵/常青藤可分别替换 */
 export const IMG_青春伴夕阳 = "/images/部门/青春伴夕阳.jpg";
 export const IMG_向日葵 = "/images/部门/向日葵.jpg";
@@ -226,8 +226,8 @@ export const HERO_V2PRO_SLIDES = [
   { src: "/images/首页/首页3.jpg", title: "萤火微光", line: "以温柔伴童心，以微光暖星河", detail: "儿童关怀 · 陪伴成长" },
   { src: "/images/首页/首页4.jpg", title: "青护秦岭", line: "踏峪寻青，净护秦岭", detail: "生态实践 · 山野同行" },
   { src: "/images/首页/首页5.jpg", title: "长安文脉", line: "胸怀秦汉之源，颂扬华夏之光", detail: "陕博部 · 陕历博志愿" },
-  { src: "/images/首页/首页6.jpg", title: "大手拉小手", line: "以青春为桥，照见更远的世界", detail: "前卫部 · 九峰助学" },
-  { src: "/images/首页/首页7.jpg", title: "知行彬州", line: "携光而行，筑梦秦川", detail: "洩湖部 · 彬州助学" },
+  { src: "/images/首页/首页6.jpg", title: "大手拉小手", line: "以青春为桥，照见更远的世界", detail: "启梦部 · 九峰助学" },
+  { src: "/images/首页/首页7.jpg", title: "知行彬州", line: "携光而行，筑梦秦川", detail: "拾辉部 · 彬州助学" },
   { src: "/images/首页/首页8.jpg", title: "青春伴夕阳", line: "岁月有声，陪伴有光", detail: "向日葵 · 社区与老年大学" },
   { src: "/images/首页/首页9.jpg", title: "温暖守护", line: "把下一次相见，写成温柔约定", detail: "常青藤 · 护理院陪伴" },
   { src: "/images/首页/首页10.jpg", title: "启明星", line: "把好奇点亮，把温暖带进校园", detail: "启明星 · 校园公益" },

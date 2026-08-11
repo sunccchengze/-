@@ -111,7 +111,7 @@ function SummerImageCarousel({ images, alt, compact = false }: { images: readonl
 function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
   return (
     <motion.article
-      className="card-hover card-outline-gradient group overflow-hidden rounded-[28px]"
+      className="card-hover card-outline-gradient gpu-accelerated group overflow-hidden rounded-[28px]"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
@@ -168,7 +168,7 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
 function SummerSupportCard({ card, index }: { card: SummerCard; index: number }) {
   return (
     <motion.article
-      className="card-hover card-outline-gradient flex h-full flex-col overflow-hidden rounded-[24px]"
+      className="card-hover card-outline-gradient gpu-accelerated flex h-full flex-col overflow-hidden rounded-[24px]"
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}

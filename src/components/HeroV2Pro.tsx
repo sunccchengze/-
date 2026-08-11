@@ -21,6 +21,8 @@ export function HeroV2Pro() {
     return () => window.clearTimeout(timer);
   }, []);
 
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
@@ -33,10 +35,33 @@ export function HeroV2Pro() {
     return () => window.clearInterval(timer);
   }, []);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        setCurrentSlide((prev) => (prev + 1) % HERO_V2PRO_SLIDES.length);
+      } else {
+        setCurrentSlide((prev) => (prev - 1 + HERO_V2PRO_SLIDES.length) % HERO_V2PRO_SLIDES.length);
+      }
+    }
+    setTouchStartX(null);
+  };
+
   const activeSlide = HERO_V2PRO_SLIDES[currentSlide] ?? HERO_V2PRO_SLIDES[0];
 
   return (
-    <section id="top" className="hero-v2pro relative isolate min-h-[100svh] overflow-hidden bg-[#241615] text-white">
+    <section
+      id="top"
+      className="hero-v2pro relative isolate min-h-[100svh] overflow-hidden bg-[#241615] text-white touch-swipe-container gpu-accelerated"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <AnimatePresence>
         {showIntro ? (
           <motion.div
@@ -69,7 +94,7 @@ export function HeroV2Pro() {
           key={currentSlide}
           src={activeSlide.src}
           alt={`${activeSlide.title}｜英仔爱心社志愿服务活动现场`}
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
+          className="gpu-accelerated absolute inset-0 -z-20 h-full w-full object-cover"
           initial={{ opacity: 0, scale: 1.035 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
@@ -206,7 +231,7 @@ export function HeroV2Pro() {
 
         <div className="relative hidden min-h-[100svh] lg:block" aria-hidden="true">
           <div className="absolute bottom-16 right-10 flex w-[min(500px,calc(100%-5rem))] items-end justify-between gap-7 px-2 py-3 xl:right-16">
-            <div className="min-w-0 bg-gradient-to-r from-black/0 via-black/18 to-black/0 px-4 py-2 backdrop-blur-[2px]">
+            <div className="min-w-0">
               <p className="font-serif-cn text-2xl font-bold tracking-[0.08em] text-white text-shadow-soft">{activeSlide.line}</p>
               <p className="mt-2 text-xs tracking-[0.08em] text-white/70">{activeSlide.detail}</p>
             </div>
