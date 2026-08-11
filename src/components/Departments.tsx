@@ -275,21 +275,26 @@ export function Departments() {
             </div>
           ))}
         </div>
-        <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-gold-soft/40 bg-white/85 px-5 py-4 text-left shadow-sm">
-          <p className="font-serif-cn text-sm font-bold text-[#8E3F3D]">全校各书院青年共同体 · 零卷度真诚交友</p>
-          <p className="mt-2 text-sm leading-7 text-muted">
-            这不是一场充满考核淘汰的竞争，这是一趟在四万人的交大校园里寻找真诚同行的旅程。无论你所读哪个专业班级、身处哪个书院（彭康、仲英、文治、崇实、钱学森、宗濂、南洋、励志等），我们的 11 个部门都是你在校园里最具温度的跨书院友爱第三空间，期待你来到这里，收获没有绩点攀比、彼此包容扶持的跨院挚友。
-          </p>
-        </div>
-        <div className="mx-auto mt-4 max-w-4xl rounded-2xl border border-rouge/20 bg-rouge/[0.05] px-5 py-4 text-left">
-          <p className="font-serif-cn text-sm font-bold text-rouge-deep">零经验新手干事安心承诺 · 一帮一带</p>
-          <p className="mt-2 text-sm leading-7 text-muted">
-            本社团各部门全面提供零起步岗前一帮一带指引与标准素材库支持；招新面试绝不仅仅考核已有专业特长，我们更为看重的，是你愿不愿意怀抱一颗真诚的心，和我们共同成长。
-          </p>
-        </div>
-        <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-gold-soft/30 bg-gold-soft/[0.08] px-5 py-4 text-left">
-          <p className="font-serif-cn text-sm font-bold text-gold">旁听制度 · 多一种体验</p>
-          <p className="mt-2 text-sm leading-7 text-muted">{departmentsIntro.observerNote}</p>
+        {/* 三个卡片纵向均匀分布 (Evenly distributed vertically with gap-6 / 24px spacing) */}
+        <div className="mx-auto mt-12 flex max-w-4xl flex-col gap-6">
+          <div className="rounded-2xl border border-gold-soft/40 bg-white/85 px-6 py-5 text-left shadow-sm">
+            <p className="font-serif-cn text-base font-bold text-[#8E3F3D]">全校各书院青年共同体 · 零卷度真诚交友</p>
+            <p className="mt-2 text-sm leading-7 text-muted">
+              这不是一场充满考核淘汰的竞争，这是一趟在四万人的交大校园里寻找真诚同行的旅程。无论你所读哪个专业班级、身处哪个书院（彭康、仲英、文治、崇实、钱学森、宗濂、南洋、励志等），我们的 11 个部门都是你在校园里最具温度的跨书院友爱第三空间，期待你来到这里，收获没有绩点攀比、彼此包容扶持的跨院挚友。
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-rouge/20 bg-rouge/[0.05] px-6 py-5 text-left">
+            <p className="font-serif-cn text-base font-bold text-rouge-deep">零经验新手干事安心承诺 · 一帮一带</p>
+            <p className="mt-2 text-sm leading-7 text-muted">
+              本社团各部门全面提供零起步岗前一帮一带指引与标准素材库支持；招新面试绝不仅仅考核已有专业特长，我们更为看重的，是你愿不愿意怀抱一颗真诚的心，和我们共同成长。
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-gold-soft/30 bg-gold-soft/[0.08] px-6 py-5 text-left">
+            <p className="font-serif-cn text-base font-bold text-gold">旁听制度 · 多一种体验</p>
+            <p className="mt-2 text-sm leading-7 text-muted">{departmentsIntro.observerNote}</p>
+          </div>
         </div>
         <p className="mt-6 text-center font-serif-cn text-base text-muted md:text-lg">{departmentsIntro.footer}</p>
       </div>
