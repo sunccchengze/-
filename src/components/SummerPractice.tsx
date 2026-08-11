@@ -109,14 +109,22 @@ function SummerImageCarousel({ images, alt, compact = false }: { images: readonl
 }
 
 function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
+  const isGlowCard = true; // 莫兰迪暖背光扩散雾 (Guillermo Rauch Ambient Backlight Glow)
   return (
-    <motion.article
-      className="card-hover card-outline-gradient gpu-accelerated group overflow-hidden rounded-[28px]"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ delay: index * 0.12, duration: 0.75 }}
-    >
+    <div className="group relative isolate">
+      {isGlowCard ? (
+        <div
+          className="pointer-events-none absolute -inset-3 -z-10 rounded-[36px] bg-gradient-to-r from-[#8E3F3D]/42 via-[#C97D74]/32 to-[#C9A876]/42 blur-[28px] opacity-85 transition-all duration-700 group-hover:scale-[1.02] group-hover:opacity-100"
+          aria-hidden="true"
+        />
+      ) : null}
+      <motion.article
+        className="card-hover card-outline-gradient gpu-accelerated overflow-hidden rounded-[28px]"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ delay: index * 0.12, duration: 0.75 }}
+      >
       <div className={`grid md:grid-cols-2 ${index % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}>
         <div className="relative aspect-[4/3] overflow-hidden bg-[#e8ddd1]">
           <SummerImageCarousel images={card.images} alt={card.title} />
@@ -162,13 +170,22 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
         </ul>
       </div>
     </motion.article>
+    </div>
   );
 }
 
 function SummerSupportCard({ card, index }: { card: SummerCard; index: number }) {
+  const isGlowCard = card.title.includes("知行") || card.id.includes("qinchuan"); // 莫兰迪暖背光扩散雾 (Ambient Backlight Glow)
   return (
-    <motion.article
-      className="card-hover card-outline-gradient gpu-accelerated flex h-full flex-col overflow-hidden rounded-[24px]"
+    <div className="group relative isolate h-full">
+      {isGlowCard ? (
+        <div
+          className="pointer-events-none absolute -inset-2.5 -z-10 rounded-[28px] bg-gradient-to-r from-[#8E3F3D]/38 via-[#C97D74]/28 to-[#C9A876]/38 blur-[24px] opacity-80 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-100"
+          aria-hidden="true"
+        />
+      ) : null}
+      <motion.article
+        className="card-hover card-outline-gradient gpu-accelerated flex h-full flex-col overflow-hidden rounded-[24px]"
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -210,6 +227,7 @@ function SummerSupportCard({ card, index }: { card: SummerCard; index: number })
         </div>
       </div>
     </motion.article>
+    </div>
   );
 }
 
