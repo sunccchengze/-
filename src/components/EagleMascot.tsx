@@ -68,6 +68,10 @@ export function EagleMascot() {
   const initiatedDrag = useRef(false);
 
   useEffect(() => {
+    Object.values(eagleImages).forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
     const waveTimer = window.setTimeout(() => setActionPose(null), 1800);
     return () => window.clearTimeout(waveTimer);
   }, []);
@@ -266,7 +270,7 @@ export function EagleMascot() {
         {!open ? (
           <span className="absolute -left-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-rouge text-white shadow-md shadow-rouge/30" aria-hidden="true"><MessageCircle className="h-3.5 w-3.5" /></span>
         ) : (
-          <span className="absolute -right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-rouge shadow-sm" aria-hidden="true"><ChevronDown className="h-3.5 w-3.5" /></span>
+          <span className="absolute -left-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-rouge shadow-sm" aria-hidden="true"><ChevronDown className="h-3.5 w-3.5" /></span>
         )}
       </button>
     </motion.aside>
