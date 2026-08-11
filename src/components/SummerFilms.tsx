@@ -202,7 +202,7 @@ export function SummerFilms() {
       <div className="bg-veil veil-cream opacity-95" />
       <div className="absolute inset-0 -z-[1] bg-[radial-gradient(circle_at_12%_18%,rgba(201,168,118,0.16),transparent_32%),radial-gradient(circle_at_88%_76%,rgba(178,90,85,0.12),transparent_38%)]" />
       <div className="section-container relative z-10">
-        <SectionHeader eyebrow="SUMMER FILMS" title="把那个夏天，留在影像里" subtitle="一段可播放的知行秦川，一场仍在继续的玉树赴约；镜头让真实行动被更多人看见。" />
+        <SectionHeader eyebrow="SUMMER FILMS" title="把那个夏天，留在影像里" subtitle="秦川行罢，窗下留一线清光；玉树归来，雪原存十七载深情。步履纵有终程，心火永驻帧间。" />
         <div className="mt-14 grid gap-7 md:grid-cols-2 md:gap-8">
           <FilmCard title="知行秦川，梦启今夏" subtitle="2026.7 · 周至九峰 × 彬州" description="从开营、课堂、英语话剧、科学科普到游园与告别，把这个夏天的笑声和认真留在镜头里。" videoSources={VIDEO_SOURCES_知行秦川} poster={SUMMER_GALLERIES.qinchuan[0]} />
           <FilmCard title="梦绽格桑原，玉树支教团" subtitle="第十七届 · 青海玉树" description="从西安到称多，把一堂堂课、一次次破冰与十七年的约定带到雪域高原。" videoSources={VIDEO_SOURCES_玉树} poster={SUMMER_GALLERIES.yushu[0]} storyLink="#summer" />
