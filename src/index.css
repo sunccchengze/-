@@ -416,7 +416,7 @@ button {
   content: "";
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(178, 90, 85, 0.55), rgba(212, 165, 165, 0.4), rgba(201, 168, 118, 0.55));
+  background: linear-gradient(135deg, rgba(142, 63, 61, 0.28), rgba(201, 125, 116, 0.18), rgba(201, 168, 118, 0.28));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;

@@ -12,12 +12,20 @@ import { brand, hero } from "../content";
 export function HeroV2Pro() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
+  const [show3sHook, setShow3sHook] = useState(false);
+  const [cardModalOpen, setCardModalOpen] = useState(false);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isPhone = window.matchMedia("(max-width: 639px)").matches;
-    // 手机首访优先尽快展示可操作的首页；桌面开屏时长保持原样。
     const timer = window.setTimeout(() => setShowIntro(false), reduce ? 0 : isPhone ? 650 : 1500);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setShow3sHook(true);
+    }, 3000);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -127,7 +135,7 @@ export function HeroV2Pro() {
           </motion.div>
 
           <motion.div
-            className="flex items-center gap-3"
+            className="flex flex-wrap items-center gap-2"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.12, duration: 0.5 }}
@@ -146,10 +154,24 @@ export function HeroV2Pro() {
               ))}
             </span>
             <span className="font-serif-cn text-sm font-bold tracking-[0.16em] text-white/85 sm:text-base">校级五星级公益社团</span>
+            <span className="hidden text-white/40 sm:inline">|</span>
+            <span className="rounded-full bg-rouge-deep/80 px-3 py-0.5 text-xs font-bold text-white shadow-sm">
+              全国唯一非唐奖生普通学子自建
+            </span>
+          </motion.div>
+
+          <motion.div
+            className="mt-4 inline-flex flex-wrap items-center gap-2 rounded-full border border-white/20 bg-black/35 px-4 py-1.5 text-xs font-bold text-white/90 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.15 }}
+          >
+            <span className="text-gold-soft">最高主流关注：</span>
+            <span>《人民日报》《光明日报》《陕西日报》重点报道优秀社会服务集体</span>
           </motion.div>
 
           <motion.h1
-            className="mt-8 font-serif-cn text-[3.1rem] font-bold leading-[1.08] tracking-[0.08em] text-white sm:text-6xl xl:text-7xl"
+            className="mt-6 font-serif-cn text-[3.1rem] font-bold leading-[1.08] tracking-[0.08em] text-white sm:text-6xl xl:text-7xl"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.16, duration: 0.65 }}
@@ -158,7 +180,7 @@ export function HeroV2Pro() {
           </motion.h1>
 
           <motion.p
-            className="mt-5 font-serif-cn text-lg tracking-[0.08em] text-rose-soft sm:text-xl"
+            className="mt-4 font-serif-cn text-lg tracking-[0.08em] text-rose-soft sm:text-xl"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.24, duration: 0.58 }}
@@ -166,8 +188,21 @@ export function HeroV2Pro() {
             {brand.tagline}
           </motion.p>
 
+          <AnimatePresence>
+            {show3sHook ? (
+              <motion.div
+                className="mt-3 max-w-xl rounded-xl border border-gold-soft/30 bg-gold-soft/[0.12] px-4 py-2 text-xs leading-5 text-white/95 backdrop-blur-sm sm:text-sm"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45 }}
+              >
+                从交大北门启程，跨越三千三百公里直达雪域高原；这是一批普通大学生用 17 年连续不间断的真实行动，写在中国大西北大地上最“燃”的公益誓言。
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
+
           <motion.p
-            className="mt-6 max-w-xl font-serif-cn text-base leading-8 text-white/88 sm:text-lg"
+            className="mt-5 max-w-xl font-serif-cn text-base leading-8 text-white/88 sm:text-lg"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.58 }}
@@ -210,6 +245,13 @@ export function HeroV2Pro() {
               了解今年的故事
               <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </a>
+            <button
+              type="button"
+              onClick={() => setCardModalOpen(true)}
+              className="focus-ring inline-flex items-center gap-1.5 rounded-full border border-gold-soft/40 bg-gold-soft/15 px-4 py-2.5 text-xs font-bold text-white backdrop-blur-sm transition hover:bg-gold-soft hover:text-ink"
+            >
+              <span>生成招新探访名片</span>
+            </button>
           </motion.div>
 
           <motion.p
@@ -256,7 +298,19 @@ export function HeroV2Pro() {
               onClick={() => setCurrentSlide(index)}
               className="focus-ring flex h-10 w-8 items-center justify-center rounded-full"
             >
-              <span className={`h-1.5 rounded-full transition-all duration-300 ${index === currentSlide ? "w-5 bg-white" : "w-1.5 bg-white/45 hover:bg-white/75"}`} />
+              {index === currentSlide ? (
+                <span className="relative block h-1.5 w-6 overflow-hidden rounded-full bg-white/35">
+                  <motion.span
+                    key={currentSlide}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 3.0, ease: "linear" }}
+                    className="block h-full w-full origin-left bg-white"
+                  />
+                </span>
+              ) : (
+                <span className="h-1.5 w-1.5 rounded-full bg-white/45 transition-all hover:bg-white/75" />
+              )}
             </button>
           ))}
         </div>
@@ -267,6 +321,108 @@ export function HeroV2Pro() {
           SCROLL <ArrowDown className="h-3.5 w-3.5 animate-bounce" aria-hidden="true" />
         </a>
       </div>
+
+      <SocialCurrencyModal open={cardModalOpen} onClose={() => setCardModalOpen(false)} />
     </section>
+  );
+}
+
+function SocialCurrencyModal({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  const [nickname, setNickname] = useState("交大 2026 级探访者");
+  const [copied, setCopied] = useState(false);
+
+  const quoteText =
+    "交大五星公益荣誉底色·全国唯一由非唐奖生普通学子结成·连续17年奔赴高原与三秦。我已在交大英仔爱心社2026招新站开启探访，期待在真诚纯粹的同伴中遇见你。";
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(quoteText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
+  };
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+      <div className="fixed inset-0 bg-black/85 backdrop-blur-md" onClick={onClose} />
+      <div className="relative z-10 w-full max-w-xl overflow-hidden rounded-3xl border border-gold-soft/40 bg-[#241615] p-6 text-white shadow-2xl sm:p-8">
+        <div className="flex items-center justify-between border-b border-white/15 pb-4">
+          <div>
+            <span className="rounded-full bg-rouge-deep px-3 py-1 text-xs font-bold text-white">
+              VIRAL-01 · 探访纪念名片
+            </span>
+            <h3 className="mt-2 font-serif-cn text-xl font-bold">英仔爱心社 2026 探访纪念卡</h3>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="focus-ring flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+            aria-label="关闭探访纪念卡"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <div className="mt-5">
+          <label className="block text-xs font-bold text-white/80">
+            给自己取个昵称（自定义生成至名片）：
+          </label>
+          <input
+            type="text"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value || "交大 2026 级探访者")}
+            placeholder="如：能动新生·小王"
+            className="mt-2 w-full rounded-xl border border-white/25 bg-white/10 px-4 py-2.5 text-sm font-bold text-white placeholder-white/40 focus:border-gold-soft focus:outline-none"
+          />
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-gold-soft/40 bg-gradient-to-br from-[#8E3F3D] via-[#4d2524] to-[#241615] p-6 shadow-xl">
+          <div className="flex items-center justify-between">
+            <span className="font-serif-cn text-xs font-bold tracking-widest text-[#f6e5ba]">
+              XJTU YINGZAI 2026
+            </span>
+            <span className="rounded-full bg-black/40 px-3 py-1 text-[11px] font-bold text-gold-soft">
+              ★ 荣耀探访者：{nickname}
+            </span>
+          </div>
+          <p className="mt-4 font-serif-cn text-sm sm:text-base font-bold leading-7 text-white">
+            {quoteText}
+          </p>
+          <div className="mt-6 flex items-center justify-between border-t border-white/20 pt-4">
+            <div className="flex items-center gap-3">
+              <img src={IMG_报名二维码} alt="报名码" className="h-14 w-14 rounded-lg bg-white p-1" />
+              <div>
+                <p className="text-xs font-bold text-white">微信扫码/长按</p>
+                <p className="text-[11px] text-white/70">直达在线表单报名</p>
+              </div>
+            </div>
+            <span className="text-[11px] text-[#f6e5ba]">西安交通大学校级五星公益社团</span>
+          </div>
+        </div>
+
+        <div className="mt-6 flex items-center justify-end gap-3">
+          <button
+            type="button"
+            onClick={handleCopy}
+            className="focus-ring rounded-full bg-gold-soft px-6 py-2.5 text-xs font-bold text-ink transition hover:bg-white"
+          >
+            {copied ? "✓ 已复制名片去分享" : "一键复制卡片誓言去分享"}
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="focus-ring rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-xs font-bold text-white hover:bg-white/20"
+          >
+            完成
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

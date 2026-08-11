@@ -81,6 +81,9 @@ function DepartmentCard({
           <span className="mx-1.5 text-rouge/40">·</span>
           {department.fit}
         </p>
+        <p className="mt-2 text-xs leading-5 text-muted/80 italic">
+          零经验新手干事安心承诺：本部门全面提供零起步岗前一帮一带指引与标准素材库支持；招新面试绝不仅仅考核已有专业特长，我们更为看重的，是你愿不愿意怀抱一颗真诚的心，和我们共同成长。
+        </p>
         <a
           href={department.link}
           target="_blank"
@@ -275,6 +278,12 @@ export function Departments() {
             </div>
           ))}
         </div>
+        <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-rouge/20 bg-white/80 px-5 py-4 text-left shadow-sm">
+          <p className="font-serif-cn text-sm font-bold text-rouge-deep">四大书院跨域青年共同体 · 零卷度友谊</p>
+          <p className="mt-2 text-sm leading-7 text-muted">
+            这不是一场充满考核淘汰的竞争，这是一趟在四万人的交大校园里寻找真诚同行的旅程。无论你所读哪个专业班级、身处哪个书院楼栋（仲英、崇实、彭康、南洋等），我们的 11 个部门都是你在校园里最具温度的跨书院友爱第三空间，期待你来到这里，收获没有绩点攀比、彼此包容扶持的跨院挚友。
+          </p>
+        </div>
         <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-gold-soft/30 bg-gold-soft/[0.08] px-5 py-4 text-left">
           <p className="font-serif-cn text-sm font-bold text-gold">旁听制度 · 多一种体验</p>
           <p className="mt-2 text-sm leading-7 text-muted">{departmentsIntro.observerNote}</p>
@@ -300,6 +309,14 @@ export function Departments() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.88, y: 15 }}
               transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              drag="y"
+              dragConstraints={{ top: 0, bottom: 0 }}
+              dragElastic={0.7}
+              onDragEnd={(_e, info) => {
+                if (info.offset.y > 100) {
+                  setSelectedDepartment(null);
+                }
+              }}
             >
               <div className="relative aspect-[16/9] w-full overflow-hidden bg-black">
                 <img

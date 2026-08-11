@@ -14,7 +14,7 @@ function StatisticNumber({ value }: { value: number }) {
       style={{ fontWeight: 900 }}
     >
       {inView ? (
-        <CountUp end={value} duration={1.8} easingFn={(t, b, c, d) => c * (1 - Math.pow(2, (-10 * t) / d)) + b} />
+        <CountUp end={value} duration={1.2} easingFn={(t, b, c, d) => c * (1 - Math.pow(2, (-12 * t) / d)) + b} />
       ) : (
         0
       )}

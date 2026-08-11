@@ -17,7 +17,7 @@ import {
 type EaglePose = "front" | "side" | "back" | "wave" | "heart" | "join" | "paint" | "fly" | "camera";
 
 const sectionMessages: Record<string, string> = {
-  top: "你好呀！我是英仔小鹰，带你认识英仔。",
+  top: "同学你好！我是鹰仔。不用担心自己以前没做过志愿或者不会写策划，学长学姐带你从零一步步开始！在线报名只需几分钟~",
   about: "英仔今年 16 岁啦，我们把善意做成一次次真的出发。",
   impact: "每一个数字背后，都是被认真记录的陪伴。",
   summer: "今年夏天，我们去了玉树、周至、彬州，还有更多地方。",

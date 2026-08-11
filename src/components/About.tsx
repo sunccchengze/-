@@ -34,7 +34,18 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
   const [deck, setDeck] = useState(() => images.map((src, idx) => ({ src, idx, id: `photo-${idx}` })));
   const [isGridView, setIsGridView] = useState(false);
   const [inView, setInView] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!inView || isGridView) return;
+    const t1 = setTimeout(() => setShowHint(true), 1500);
+    const t2 = setTimeout(() => setShowHint(false), 2400);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [inView, isGridView]);
 
   const swipeNext = () => {
     setDeck((prev) => {
@@ -132,7 +143,8 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
                   style={{ zIndex: 40 - i * 10 }}
                   initial={false}
                   animate={{
-                    rotate: `${rotate}deg`,
+                    rotate: isTop && showHint ? [0, 3.5, 0] : `${rotate}deg`,
+                    x: isTop && showHint ? [0, 16, 0] : 0,
                     y: yOffset,
                     scale,
                     opacity: 1 - i * 0.15,
@@ -163,8 +175,11 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
                     />
                   </div>
                   {/* 底部留白区域里的竖直居中与水平居中纪念文字 */}
-                  <div className="flex flex-1 items-center justify-center px-2 text-center font-serif-cn text-xs sm:text-sm font-bold tracking-wider text-muted/90">
-                    现场纪念 #{String(card.idx + 1).padStart(2, "0")} / {images.length} — 以爱陪伴，真实发生过的温暖
+                  <div className="relative flex flex-1 items-center justify-center px-2 text-center font-serif-cn text-xs sm:text-sm font-bold tracking-wider text-muted/90">
+                    <span>现场纪念 #{String(card.idx + 1).padStart(2, "0")} / {images.length} — 以爱陪伴，真实发生过的温暖</span>
+                    <span className="absolute right-2 bottom-1 select-none font-data text-[9px] font-bold tracking-[0.25em] text-[#8E3F3D]/25 uppercase">
+                      XJTU · YINGZAI 2026
+                    </span>
                   </div>
                 </motion.div>
               );
@@ -195,6 +210,9 @@ export function About() {
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.75 }}
         >
+          <p className="font-serif-cn font-semibold text-rouge-deep">
+            “所谓公益，从来不是高高在上的单向赠予，而是普通人之间的彼此点亮。是我们在青海玉树称多的教室里，把从西安带来的课本和手心里的奶糖分给高原上的孩童；也是他们在夜幕徐徐降临时，拉着我们的手去后山看那朵盛开的格桑花。”
+          </p>
           {about.paragraphs.map((p, i) => (
             <p key={i}>{renderEmphasized(p)}</p>
           ))}

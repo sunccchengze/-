@@ -79,6 +79,9 @@ export const IMG_LOGO = "/images/品牌/英仔爱心社标志.png";
 /** 报名二维码（用于：页脚扫码报名） */
 export const IMG_报名二维码 = "/images/招新/报名二维码.png";
 
+/** 孙承泽学长直联名片圆头像 */
+export const IMG_孙承泽头像 = "/images/头像.jpg";
+
 /** 招新群二维码（用于：页脚翻转卡片正面） */
 export const IMG_招新群二维码 = "/images/招新/招新群二维码.png";
 
