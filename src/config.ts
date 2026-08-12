@@ -195,6 +195,8 @@ export const IMG_萤火部 = "/images/部门/萤火部.jpg";
 export const IMG_暑期_玉树 = "/images/暑期实践/玉树/玉树1.jpg";
 export const IMG_暑期_知行秦川 = "/images/暑期实践/知行秦川/知行1.jpg";
 export const IMG_暑期_秦岭 = "/images/暑期实践/秦岭/秦岭1.jpg";
+/** 秦岭实践卡内视频封面（BV1vCum6DE8Y 的 B 站官方封面）。 */
+export const IMG_暑期_秦岭视频封面 = "https://i0.hdslb.com/bfs/archive/f5401571ca8184fd13d99c3a01b885775ef693c2.jpg";
 export const IMG_暑期_萤火 = "/images/暑期实践/萤火/萤火1.jpg";
 
 /** 启明星“启明寻洛，脉续中原”暑期实践主封面。 */
@@ -362,6 +364,14 @@ export const VIDEO_SOURCES_玉树 = {
   github: "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-yushu-recap.mp4",
   /** ④ 可选：GitHub 加速镜像（失效删掉即可） */
   mirror: "https://gh-proxy.com/https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-yushu-recap.mp4",
+};
+
+/**
+ * 秦岭实践卡内视频 —— 仅在秦岭卡片展示，不加入 SUMMER FILMS。
+ * 当前使用社团 B 站成片；未来如补充 MP4，可沿用 pages / github / mirror 回退字段。
+ */
+export const VIDEO_SOURCES_秦岭 = {
+  bilibili: "BV1vCum6DE8Y",
 };
 
 /**
