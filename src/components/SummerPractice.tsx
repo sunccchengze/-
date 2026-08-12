@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Image as ImageIcon, MapPin } from "lucide-react";
+import { BookOpen, ExternalLink, Image as ImageIcon, MapPin } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IMG_第11页背景 } from "../config";
 import { summerCards, summerSection, type SummerCard } from "../content";
@@ -161,6 +161,41 @@ function SummerHeroCard({ card, index }: { card: SummerCard; index: number }) {
               <span>{beat}</span>
             </li>
           ))}
+          {card.id === "yushu" ? (
+            <li className="list-none">
+              <a
+                href="https://mp.weixin.qq.com/s/eYOIQ0BZPa51ZUXrXIkfyQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/portal flex h-full flex-col justify-between rounded-xl border border-rouge/30 bg-gradient-to-br from-rouge/[0.08] via-white/85 to-gold-soft/15 p-4 text-left shadow-sm transition-all hover:border-rouge hover:bg-white hover:shadow-md"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-rouge-deep px-2.5 py-0.5 font-data text-[10px] font-bold text-white">
+                      <BookOpen className="h-3 w-3" />
+                      LATEST REPORT · 2026.8.12
+                    </span>
+                    <span className="flex items-center gap-1 text-[11px] font-bold text-rouge group-hover/portal:underline">
+                      微信推文直达
+                      <ExternalLink className="h-3 w-3" />
+                    </span>
+                  </div>
+                  <h4 className="mt-2.5 font-serif-cn text-sm font-bold text-ink group-hover/portal:text-rouge-deep">
+                    📰 深度纪实：《薪传西迁薪火，情暖雪域童心》
+                  </h4>
+                  <p className="mt-1 text-xs leading-5 text-muted">
+                    献礼交大130周年华诞：三位一体素质教学、高原防晒洗手操作与三江源科学实验现场报道。
+                  </p>
+                </div>
+                <div className="mt-2.5 flex items-center justify-between border-t border-rouge/10 pt-2 text-[11px] text-rouge-mist">
+                  <span>青海玉树 · 称多文乐寄宿学校</span>
+                  <span className="font-bold text-rouge transition-transform group-hover/portal:translate-x-0.5">
+                    点击前往阅读 →
+                  </span>
+                </div>
+              </a>
+            </li>
+          ) : null}
         </ul>
       </div>
     </motion.article>

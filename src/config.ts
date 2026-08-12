@@ -301,6 +301,10 @@ export const SUMMER_GALLERIES = {
     "/images/暑期实践/银发融城/银发融城4.jpg",
     "/images/暑期实践/银发融城/银发融城5.jpg",
   ],
+  shanbo: [
+    "/images/部门/陕博部.jpg",
+    "/images/首页/首页5.png",
+  ],
 } as const;
 
 // ─────────────────────────────────────────────────────────────
