@@ -203,6 +203,9 @@ export const IMG_暑期_启明星 = "/images/暑期实践/启明星/启明星1.j
 /** 青春伴夕阳“银发融城”暑期返乡调研实践主封面。 */
 export const IMG_暑期_银发融城 = "/images/暑期实践/银发融城/银发融城1.jpg";
 
+/** 陕博部文博展厅志愿服务暑期实践主封面。 */
+export const IMG_暑期_陕博 = "/images/暑期实践/陕博/陕博1.jpg";
+
 /** 第11页背景（暑期实践专区，可与第3页共用或单独替换） */
 export const IMG_第11页背景 = IMG_统一页面背景;
 
@@ -302,8 +305,11 @@ export const SUMMER_GALLERIES = {
     "/images/暑期实践/银发融城/银发融城5.jpg",
   ],
   shanbo: [
-    "/images/部门/陕博部.jpg",
-    "/images/首页/首页5.png",
+    IMG_暑期_陕博,
+    "/images/暑期实践/陕博/陕博2.png",
+    "/images/暑期实践/陕博/陕博3.jpg",
+    "/images/暑期实践/陕博/陕博4.jpg",
+    "/images/暑期实践/陕博/陕博5.jpg",
   ],
 } as const;
 
