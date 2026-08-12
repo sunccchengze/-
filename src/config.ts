@@ -306,7 +306,7 @@ export const SUMMER_GALLERIES = {
   ],
   shanbo: [
     IMG_暑期_陕博,
-    "/images/暑期实践/陕博/陕博2.png",
+    "/images/暑期实践/陕博/陕博2.jpg",
     "/images/暑期实践/陕博/陕博3.jpg",
     "/images/暑期实践/陕博/陕博4.jpg",
     "/images/暑期实践/陕博/陕博5.jpg",
