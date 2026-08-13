@@ -33,7 +33,9 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis 接管平滑过程；固定导航高度由 scroll-padding 统一预留。 */
+  scroll-behavior: auto;
+  scroll-padding-top: 80px;
 }
 
 body {

@@ -37,7 +37,10 @@ export function HeroPreview() {
   return (
     <div className="relative">
       {/* 版本选择器 - 固定左侧 */}
-      <div className="fixed inset-x-3 bottom-3 z-50 flex max-h-[42vh] gap-2 overflow-x-auto rounded-2xl bg-white/95 p-3 shadow-2xl backdrop-blur-sm md:inset-x-auto md:bottom-auto md:left-4 md:top-1/2 md:max-h-[80vh] md:w-56 md:-translate-y-1/2 md:flex-col md:overflow-y-auto">
+      <div
+        className="fixed inset-x-3 bottom-3 z-50 flex max-h-[42vh] gap-2 overflow-x-auto rounded-2xl bg-white/95 p-3 shadow-2xl backdrop-blur-sm md:inset-x-auto md:bottom-auto md:left-4 md:top-1/2 md:max-h-[80vh] md:w-56 md:-translate-y-1/2 md:flex-col md:overflow-y-auto"
+        data-lenis-prevent
+      >
         <p className="hidden shrink-0 px-2 font-serif-cn text-xs font-bold tracking-wider text-muted md:block">内部预览 · 选择首页</p>
         {versions.map((v) => (
           <button

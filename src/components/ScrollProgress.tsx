@@ -1,9 +1,11 @@
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useLenis } from "lenis/react";
 
-/** 顶部阅读进度条——高级落地页常见细节，强化「长页可预期」 */
+/** 顶部阅读进度条——直接跟随 Lenis 的平滑滚动进度。 */
 export function ScrollProgress() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
+  const lenisProgress = useMotionValue(0);
+  useLenis((lenis) => lenisProgress.set(lenis.progress), [lenisProgress]);
+  const scaleX = useSpring(lenisProgress, {
     stiffness: 120,
     damping: 28,
     restDelta: 0.001,

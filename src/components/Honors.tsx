@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { Award, MoreHorizontal, Play, Trophy, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -72,6 +73,8 @@ function HonorVaultCard({ item, index }: { item: VaultItem; index: number }) {
 }
 
 function HonorVault({ onClose }: { onClose: () => void }) {
+  const lenis = useLenis();
+
   useEffect(() => {
     const previous = document.body.style.overflow;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -79,16 +82,19 @@ function HonorVault({ onClose }: { onClose: () => void }) {
     };
 
     document.body.style.overflow = "hidden";
+    lenis?.stop();
     window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = previous;
+      lenis?.start();
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [onClose]);
+  }, [lenis, onClose]);
 
   return createPortal(
     <motion.div
       className="fixed inset-0 z-[90] overflow-y-auto bg-[#1d100f]/[0.97] px-4 py-5 text-white sm:px-8 sm:py-8"
+      data-lenis-prevent
       role="dialog"
       aria-modal="true"
       aria-labelledby="honor-vault-title"

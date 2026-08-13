@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { IMG_第9页背景 } from "../config";
@@ -7,16 +8,23 @@ import { SectionHeader } from "./SectionHeader";
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
+  const lenis = useLenis();
 
   const toggleFaq = (index: number) => {
     const nextOpen = openIndex === index ? -1 : index;
     setOpenIndex(nextOpen);
     if (nextOpen !== -1) {
       setTimeout(() => {
-        document.getElementById(`faq-q-${index}`)?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        const target = document.getElementById(`faq-q-${index}`);
+        if (!target) return;
+
+        if (lenis) {
+          const bounds = target.getBoundingClientRect();
+          const centeredTop = window.scrollY + bounds.top - (window.innerHeight - bounds.height) / 2;
+          lenis.scrollTo(centeredTop);
+        } else {
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
       }, 220);
     }
   };

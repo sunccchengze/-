@@ -1,4 +1,5 @@
 import { AnimatePresence, motion, useDragControls } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { ChevronDown, Heart, MessageCircle, Palette, Sparkles, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
@@ -55,6 +56,7 @@ const sectionPoses: Partial<Record<string, EaglePose>> = {
  * 默认挥手欢迎；滚动时侧身；按区块和按钮切换真实动作图片。
  */
 export function EagleMascot() {
+  const lenis = useLenis();
   const [open, setOpen] = useState(true);
   const [section, setSection] = useState("top");
   const [moving, setMoving] = useState(false);
@@ -145,7 +147,10 @@ export function EagleMascot() {
 
   const goJoin = () => {
     runAction("join", () => {
-      document.getElementById("join")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const target = document.getElementById("join");
+      if (!target) return;
+      if (lenis) lenis.scrollTo(target);
+      else target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
 

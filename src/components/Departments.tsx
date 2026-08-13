@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { ArrowRight, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IMG_第6页背景 } from "../config";
 import { departmentFinder, departmentsIntro, functionalDepartments, projectDepartments, skillRoutes, type Department } from "../content";
 import { SectionHeader } from "./SectionHeader";
@@ -96,12 +97,25 @@ function DepartmentCard({
 }
 
 export function Departments() {
+  const lenis = useLenis();
   const [activeTab, setActiveTab] = useState<"functional" | "project">("functional");
   const [suggestedRoute, setSuggestedRoute] = useState<string | null>(null);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [selectedDepartment, setSelectedDepartment] = useState<Department | null>(null);
   const departments = activeTab === "functional" ? functionalDepartments : projectDepartments;
   const suggestedNames = departmentFinder.find((item) => item.title === suggestedRoute)?.departments ?? [];
+
+  useEffect(() => {
+    if (!selectedDepartment) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    lenis?.stop();
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      lenis?.start();
+    };
+  }, [lenis, selectedDepartment]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStartX(e.targetTouches[0].clientX);
@@ -127,7 +141,10 @@ export function Departments() {
     setSuggestedRoute(title);
     setActiveTab("project");
     window.setTimeout(() => {
-      document.getElementById("dept-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const target = document.getElementById("dept-panel");
+      if (!target) return;
+      if (lenis) lenis.scrollTo(target);
+      else target.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 0);
   };
 
@@ -302,7 +319,7 @@ export function Departments() {
       {/* 剧场式大图展台（丝滑弹窗，保留卡片底图零白底漏出） */}
       <AnimatePresence>
         {selectedDepartment ? (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10" data-lenis-prevent>
             <motion.div
               className="fixed inset-0 bg-black/85 backdrop-blur-md"
               initial={{ opacity: 0 }}
