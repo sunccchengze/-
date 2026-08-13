@@ -21,7 +21,7 @@ export function SocialMedia() {
             return (
               <motion.article
                 key={platform.detail}
-                className="card-hover card-outline-gradient rounded-[24px] p-9 text-center"
+                className="card-hover card-outline-gradient flex h-full flex-col rounded-[24px] p-9 text-center"
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -33,12 +33,12 @@ export function SocialMedia() {
                 <h3 className="mt-6 font-serif-cn text-2xl font-bold text-ink">{platform.name}</h3>
                 <p className="mt-1 text-sm text-muted">{platform.detail}</p>
                 <p className="mt-4 font-data text-lg font-bold text-rouge-deep">{platform.metric}</p>
-                <p className="mt-3 text-sm leading-6 text-muted">{platform.blurb}</p>
+                <p className="mt-3 flex-1 text-sm leading-6 text-muted">{platform.blurb}</p>
                 <a
                   href={platform.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary mt-7 px-8 py-3 text-sm"
+                  className="btn-secondary mt-7 self-center px-8 py-3 text-sm"
                 >
                   去关注
                 </a>
