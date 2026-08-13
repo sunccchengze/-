@@ -848,6 +848,66 @@ button {
   }
 }
 
+/* 荣誉典藏入口：周期性轻弹 + 暖金扩散环，让首次浏览者不会错过入口。 */
+.honor-vault-trigger {
+  position: relative;
+  isolation: isolate;
+  transform-origin: center;
+  will-change: transform, box-shadow;
+  animation: honorVaultElasticNudge 4.4s cubic-bezier(0.22, 0.72, 0.28, 1) infinite;
+}
+
+.honor-vault-trigger::before {
+  position: absolute;
+  inset: -5px;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  border: 1px solid rgba(246, 229, 186, 0.72);
+  border-radius: 18px;
+  opacity: 0;
+  animation: honorVaultAttentionRing 4.4s ease-out infinite;
+}
+
+/* 悬停与键盘聚焦时停止自动提醒，把控制权交还给用户。 */
+.honor-vault-trigger:hover,
+.honor-vault-trigger:focus-visible {
+  animation: none;
+}
+
+.honor-vault-trigger:hover::before,
+.honor-vault-trigger:focus-visible::before {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes honorVaultElasticNudge {
+  0%, 28%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 0 0 rgba(201, 168, 118, 0);
+  }
+  7% {
+    transform: translateY(-6px) scale(1.045);
+    box-shadow: 0 16px 36px rgba(201, 168, 118, 0.24);
+  }
+  12% { transform: translateY(2px) scale(0.99); }
+  17% { transform: translateY(-3px) scale(1.022); }
+  23% { transform: translateY(0) scale(1); }
+}
+
+@keyframes honorVaultAttentionRing {
+  0%, 2% { opacity: 0; transform: scale(0.94); }
+  8% { opacity: 0.72; }
+  25%, 100% { opacity: 0; transform: scale(1.16); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .honor-vault-trigger,
+  .honor-vault-trigger::before {
+    animation: none !important;
+  }
+}
+
 /* 荣誉翻卡瞬间的暖金光感：只在翻到真实证明时短促掠过，不让正面常亮。 */
 .honor-card-flipped::after {
   position: absolute;

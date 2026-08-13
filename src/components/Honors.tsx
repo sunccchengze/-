@@ -248,8 +248,13 @@ export function Honors() {
           </motion.div>
         </div>
         <div className="mt-6 text-center">
-          <button type="button" className="btn-ghost-white group min-w-[240px] font-serif-cn font-bold" onClick={() => setVaultOpen(true)} aria-haspopup="dialog">
-            <Award className="h-5 w-5 text-rouge-mist transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
+          <button
+            type="button"
+            className="honor-vault-trigger btn-ghost-white group min-w-[240px] font-serif-cn font-bold"
+            onClick={() => setVaultOpen(true)}
+            aria-haspopup="dialog"
+          >
+            <Award className="h-5 w-5 text-rouge-mist transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110" aria-hidden="true" />
             打开荣誉典藏墙
           </button>
         </div>
