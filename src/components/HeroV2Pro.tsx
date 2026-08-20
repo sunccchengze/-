@@ -25,7 +25,6 @@ export function HeroV2Pro() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
-    const isPhone = window.matchMedia("(max-width: 639px)").matches;
 
     const timer = window.setInterval(() => {
       setCurrentSlide((current) => (current + 1) % HERO_V2PRO_SLIDES.length);

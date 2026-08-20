@@ -2,11 +2,18 @@
 
 > **用途**：这是给下一位接手本仓库、且没有任何先前聊天记忆的 AI Agent / 开发者的工作记忆迁移文件。它不是简短 README，也不是面向公众的文案。必须先读本文件，再读下列原始事实、素材、代码与记录文件，才能继续工作。
 >
-> **最后更新**：2026-08-12（Asia/Shanghai）
-> **当前工作分支**：`arena/019fef55-repo`
+> **最后更新**：2026-08-20（Asia/Shanghai）
+> **当前工作分支**：`arena/01a01ed2-repo`
 > **用户本地仓库**：`D:\yingzai-recruit`
 > **仓库服务对象**：西安交通大学英仔爱心社 2026 招新网站。
 > **最高原则**：不编造、不把推断写成事实、不用“看起来合理”的 AI 文案替代真实组织信息。
+>
+> **🚨 2026-08-20 部门介绍推文链接更换（社长团 + 职能三部门）**：
+> 1. `src/config.ts` 已将 **社长团（新增 `LINK_社长团`）/ 常务部 / 交流部 / 宣传部** 四条"了解"入口更换为公众号「职能部门」招新系列最新推文，链接由孙承泽部长提供，Agent 已逐条访问验证标题与归属（社长团→常务部→交流部→宣传部连载顺序）；
+> 2. `src/components/Leadership.tsx` 社长团成员卡底部新增「了解社长团故事」按钮（复用 `btn-card` 样式，与部门卡"了解部门故事"完全一致）；
+> 3. **项目线 6 条链接（大手拉小手/青春伴夕阳/启明星/心项目/陕博部/萤火部）暂未收到新版推文，仍指向原链接**，待公众号发布对应系列后统一更换（见 `QUESTIONS.md` Q-002）；
+> 4. 验证记录与事实登记已写入 `docs/PUBLIC-FACT-REGISTER.md`。
+> 5. **同轮修复三项继承问题**：(a) `npm run typecheck` 两处 TS6133 未使用变量（`About.tsx` 死代码 `swipePrev`、`HeroV2Pro.tsx` 冗余 `isPhone`）已清除；(b) `audit-public-surface.mjs` 首页轮播正则只匹配 `.jpg` 导致 17 张槽位误报 14 张，已扩为 `jpg/png/webp`；(c) Tailwind v4 自动内容探测把 `技能库&准则/`、docs 等 Markdown 里的 `[file:line]` token 误生成无效 CSS，已在 `src/index.css` 改为 `source(none)` + 显式 `@source`（仅扫 `src/` 与根 `index.html`），构建警告清零，单文件体积 **945.89 kB → 671.63 kB（gzip 234.02 → 198.93 kB）**，抽查全部自定义类名与任意值类均已正常生成。
 >
 > **🚨 2026-08-12 最新交接总表与重大任务收尾（详见 [`docs/2026-08-12-SESSION-HANDOFF-SUN-CHENGZE.md`](./docs/2026-08-12-SESSION-HANDOFF-SUN-CHENGZE.md)）**：
 > 1. **陕博部暑期专区部署竣工**：已根据部长指令在 `public/images/暑期实践/` 增开**陕博**目录（`/images/暑期实践/陕博/`），放置 `陕博1~5` 志愿者图集；已在 `src/config.ts` 导出 `IMG_暑期_陕博` 且完成 `SUMMER_GALLERIES.shanbo` 关联，与玉树/秦川/秦岭/萤火/启明星/银发融城同样实现 3 秒 Ken Burns 平滑焦距轮播；

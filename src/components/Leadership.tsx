@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { Quote, Sparkles } from "lucide-react";
+import { ArrowRight, Quote, Sparkles } from "lucide-react";
 import { leadership } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
 export function Leadership() {
-  const { presidentMessage, advisor, advisorNote, core, coreTitle } = leadership;
+  const { presidentMessage, advisor, advisorNote, core, coreTitle, coreLink } = leadership;
 
   return (
     <section id="team" className="bg-shell section-block">
@@ -87,6 +87,17 @@ export function Leadership() {
                   </li>
                 ))}
               </ul>
+              {coreLink ? (
+                <a
+                  href={coreLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-card focus-ring mt-5 self-start text-sm"
+                >
+                  了解社长团故事
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              ) : null}
             </motion.div>
           </div>
         </div>

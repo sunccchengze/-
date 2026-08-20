@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700;900&family=Playfair+Display:wght@600;700&display=swap");
-@import "tailwindcss";
+/* 关闭 Tailwind v4 自动内容探测：仓库根的 docs/技能库 等 Markdown 里的
+   [file:line] 之类 token 会被误判为类名，生成无效 CSS 并触发构建警告。
+   类名只可能出现在 src/ 源码与根 index.html 中，显式限定即可。 */
+@import "tailwindcss" source(none);
+@source "../index.html";
+@source "./**/*.{ts,tsx}";
+@source "./index.css";
 
 @theme {
   /* 莫兰迪红主色（占比最大） */

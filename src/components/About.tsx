@@ -54,14 +54,6 @@ function PolaroidDeck({ images }: { images: readonly string[] }) {
     });
   };
 
-  const swipePrev = () => {
-    setDeck((prev) => {
-      if (prev.length <= 1) return prev;
-      const last = prev[prev.length - 1]!;
-      return [last, ...prev.slice(0, -1)];
-    });
-  };
-
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;

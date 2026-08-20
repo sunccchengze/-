@@ -20,6 +20,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import {
+  LINK_社长团,
   LINK_常务部,
   LINK_交流部,
   LINK_宣传部,
@@ -150,6 +151,8 @@ export const leadership = {
     note: "",
   },
   coreTitle: "社长团成员",
+  /** 社长团介绍推文（2026-08-20 更新，链接见 config.ts 的 LINK_社长团） */
+  coreLink: LINK_社长团,
   core: [
     { name: "王晗宇", role: "社长" },
     { name: "李振杰", role: "团支书" },

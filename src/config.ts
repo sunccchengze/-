@@ -36,16 +36,24 @@ export const LINK_哔哩哔哩 = "https://space.bilibili.com/595714952?spm_id_fr
 
 // ─────────────────────────────────────────────
 //  二、各部门"了解更多"链接
+//  2026-08-20 更新：社长团 / 常务部 / 交流部 / 宣传部 四条已换成
+//  公众号「职能部门」招新系列最新推文（社长团→常务部→交流部→宣传部），
+//  链接由孙承泽提供，Agent 已逐条访问验证标题与内容归属无误。
+//  项目部门链接（大手拉小手/青春伴夕阳/启明星/心项目/陕博部/萤火部）
+//  暂未收到新版推文，仍指向原链接，待系列更新后统一更换。
 // ─────────────────────────────────────────────
 
-/** 常务部介绍链接 */
-export const LINK_常务部 = "https://mp.weixin.qq.com/s/paHXDTzTpxyUewvVc3lYjQ";
+/** 社长团介绍链接（《社长团介绍》：社长王晗宇、团支书李振杰与各位副社） */
+export const LINK_社长团 = "https://mp.weixin.qq.com/s/O6QIsHcULQw8FS15Oc8OXA";
 
-/** 交流部介绍链接 */
-export const LINK_交流部 = "https://mp.weixin.qq.com/s/o8SZ7ZMmvq1WQyqbMUf5ZQ";
+/** 常务部介绍链接（《常务部部门介绍》） */
+export const LINK_常务部 = "https://mp.weixin.qq.com/s/f4PtOC8tXP3YD6RSxeFlBw";
 
-/** 宣传部介绍链接 */
-export const LINK_宣传部 = "https://mp.weixin.qq.com/s/u25BKkC-36kQRnA1jeRT-w";
+/** 交流部介绍链接（《交流部部门介绍》） */
+export const LINK_交流部 = "https://mp.weixin.qq.com/s/YP6H0Ga-2F5hKdFo1QbH4A";
+
+/** 宣传部介绍链接（《宣传部部门介绍》） */
+export const LINK_宣传部 = "https://mp.weixin.qq.com/s/TLjPITNSixKQ4AeXiS3Blg";
 
 /** 大手拉小手介绍链接 */
 export const LINK_大手拉小手 = "https://mp.weixin.qq.com/s/q5dj69Fj4jg2wQ2zS6_lVw";
