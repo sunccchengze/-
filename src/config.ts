@@ -25,8 +25,12 @@ export const SITE_URL = "https://yzaxs-1.pages.dev";
  */
 export const LINK_报名 = "https://tuvtpb2u.jsjform.com/f/zPAVNv";
 
-/** 微信公众号链接 */
-export const LINK_微信公众号 = "https://mp.weixin.qq.com/s/lJJeVU1osRMRd7oRWvTFzQ";
+/**
+ * 微信公众号链接（FOLLOW US 区「微信公众号 · 去关注」按钮跳转目标）
+ * 2026-08-20 按孙承泽指示：指向「职能部门」招新系列最新推文《社长团介绍》，
+ * 与部门区 LINK_社长团 同一篇；读者可在文章页顶部关注公众号。
+ */
+export const LINK_微信公众号 = "https://mp.weixin.qq.com/s/O6QIsHcULQw8FS15Oc8OXA";
 
 /** 抖音号链接 */
 export const LINK_抖音号 = "https://v.douyin.com/wgSkkbFH80g/";
