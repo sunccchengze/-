@@ -40,11 +40,13 @@ export const LINK_哔哩哔哩 = "https://space.bilibili.com/595714952?spm_id_fr
 
 // ─────────────────────────────────────────────
 //  二、各部门"了解更多"链接
+//  2026-09-02 更新：项目部门六条（大手拉小手/青春伴夕阳/启明星/心项目/
+//  陕博部/萤火部）已换成公众号「项目部门」招新系列推文（2026-08-21 发布），
+//  链接由孙承泽提供，Agent 已逐条抓取访问验证标题与内容归属无误。
+//  至此职能部门 + 项目部门共 10 条全部指向 2026 招新季最新推文。
 //  2026-08-20 更新：社长团 / 常务部 / 交流部 / 宣传部 四条已换成
 //  公众号「职能部门」招新系列最新推文（社长团→常务部→交流部→宣传部），
 //  链接由孙承泽提供，Agent 已逐条访问验证标题与内容归属无误。
-//  项目部门链接（大手拉小手/青春伴夕阳/启明星/心项目/陕博部/萤火部）
-//  暂未收到新版推文，仍指向原链接，待系列更新后统一更换。
 // ─────────────────────────────────────────────
 
 /** 社长团介绍链接（《社长团介绍》：社长王晗宇、团支书李振杰与各位副社） */
@@ -59,23 +61,23 @@ export const LINK_交流部 = "https://mp.weixin.qq.com/s/YP6H0Ga-2F5hKdFo1QbH4A
 /** 宣传部介绍链接（《宣传部部门介绍》） */
 export const LINK_宣传部 = "https://mp.weixin.qq.com/s/TLjPITNSixKQ4AeXiS3Blg";
 
-/** 大手拉小手介绍链接 */
-export const LINK_大手拉小手 = "https://mp.weixin.qq.com/s/q5dj69Fj4jg2wQ2zS6_lVw";
+/** 大手拉小手介绍链接（《大手拉小手 部门介绍》，2026-08-21 项目部门系列） */
+export const LINK_大手拉小手 = "https://mp.weixin.qq.com/s/atbmi9mYJnbz_aGLbgwSsw";
 
-/** 青春伴夕阳介绍链接 */
-export const LINK_青春伴夕阳 = "https://mp.weixin.qq.com/s/afPoFtNNKo3hjqsQnsm1YA";
+/** 青春伴夕阳介绍链接（《青春伴夕阳介绍》，2026-08-21 项目部门系列） */
+export const LINK_青春伴夕阳 = "https://mp.weixin.qq.com/s/FrSgjzHMXBPTLu-hWwLK9A";
 
-/** 启明星介绍链接（启明星和心项目共用） */
-export const LINK_启明星 = "https://mp.weixin.qq.com/s/5iV-2Ml3msB2xXhbezBhYA";
+/** 启明星介绍链接（《启明星&心项目》合推，2026-08-21 项目部门系列；启明星和心项目共用） */
+export const LINK_启明星 = "https://mp.weixin.qq.com/s/mvyezNk-A8hL1OtfW-aiUA";
 
-/** 心项目介绍链接（启明星和心项目共用） */
-export const LINK_心项目 = "https://mp.weixin.qq.com/s/5iV-2Ml3msB2xXhbezBhYA";
+/** 心项目介绍链接（《启明星&心项目》合推，2026-08-21 项目部门系列；启明星和心项目共用） */
+export const LINK_心项目 = "https://mp.weixin.qq.com/s/mvyezNk-A8hL1OtfW-aiUA";
 
-/** 陕博部介绍链接 */
-export const LINK_陕博部 = "https://mp.weixin.qq.com/s/PxxMumKWh4i9YxFxyHUYiA";
+/** 陕博部介绍链接（《陕博部部门介绍》，2026-08-21 项目部门系列） */
+export const LINK_陕博部 = "https://mp.weixin.qq.com/s/7BHzcluBXYD6UV1EjnlcPg";
 
-/** 萤火部介绍链接 */
-export const LINK_萤火部 = "https://mp.weixin.qq.com/s/iUJ0gI4KePy-_FMo0V1qoQ";
+/** 萤火部介绍链接（《萤火部部门介绍》，2026-08-21 项目部门系列） */
+export const LINK_萤火部 = "https://mp.weixin.qq.com/s/DnRGXDCypNDUF_KCem1rLQ";
 
 // ─────────────────────────────────────────────
 //  三、LOGO 图片
