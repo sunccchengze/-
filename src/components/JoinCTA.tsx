@@ -57,7 +57,7 @@ export function JoinCTA() {
           {joinCta.title}
         </motion.h2>
         <motion.p
-          className="mt-6 max-w-2xl text-lg text-white/90 md:text-xl"
+          className="mt-6 max-w-2xl text-sm leading-6 text-white/80 md:text-base"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

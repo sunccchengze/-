@@ -1,10 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent as ReactMouseEvent } from "react";
 import { LINK_报名 as joinLink, IMG_LOGO } from "../config";
 import { brand, hero, navLinks } from "../content";
 
 export function Navigation() {
+  const lenis = useLenis();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("#top");
@@ -18,10 +20,14 @@ export function Navigation() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    if (open) lenis?.stop();
+    else lenis?.start();
+
     return () => {
       document.body.style.overflow = "";
+      if (open) lenis?.start();
     };
-  }, [open]);
+  }, [lenis, open]);
 
   useEffect(() => {
     const onResize = () => {
@@ -30,6 +36,15 @@ export function Navigation() {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
+
+  const handleMobileAnchor = (event: ReactMouseEvent<HTMLAnchorElement>, href: string) => {
+    setOpen(false);
+    if (!lenis) return;
+
+    event.preventDefault();
+    window.history.pushState(null, "", href);
+    window.requestAnimationFrame(() => lenis.scrollTo(href, { force: true }));
+  };
 
   /* 滚动监听：高亮当前 section（impeccable · interaction） */
   useEffect(() => {
@@ -125,6 +140,7 @@ export function Navigation() {
         {open ? (
           <motion.div
             className="fixed inset-0 top-16 z-40 bg-[#1e1210]/96 backdrop-blur-xl lg:hidden"
+            data-lenis-prevent
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -137,7 +153,7 @@ export function Navigation() {
                   className={`min-h-12 px-4 py-3 font-serif-cn text-2xl font-bold ${
                     active === link.href ? "text-rose" : "text-white"
                   }`}
-                  onClick={() => setOpen(false)}
+                  onClick={(event) => handleMobileAnchor(event, link.href)}
                 >
                   {link.label}
                 </a>

@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { IMG_第9页背景 } from "../config";
@@ -7,6 +8,27 @@ import { SectionHeader } from "./SectionHeader";
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
+  const lenis = useLenis();
+
+  const toggleFaq = (index: number) => {
+    const nextOpen = openIndex === index ? -1 : index;
+    setOpenIndex(nextOpen);
+    if (nextOpen !== -1) {
+      setTimeout(() => {
+        const target = document.getElementById(`faq-q-${index}`);
+        if (!target) return;
+
+        if (lenis) {
+          const bounds = target.getBoundingClientRect();
+          const centeredTop = window.scrollY + bounds.top - (window.innerHeight - bounds.height) / 2;
+          lenis.scrollTo(centeredTop);
+        } else {
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }, 220);
+    }
+  };
+
   return (
     <section id="faq" className="bg-shell section-block">
       <img src={IMG_第9页背景} alt="" aria-hidden="true" className="bg-image" loading="lazy" decoding="async" />
@@ -36,7 +58,7 @@ export function FAQ() {
                 <button
                   type="button"
                   className="focus-ring flex w-full items-center justify-between gap-6 p-6 text-left font-serif-cn text-lg font-medium text-ink md:text-xl"
-                  onClick={() => setOpenIndex(open ? -1 : index)}
+                  onClick={() => toggleFaq(index)}
                   aria-expanded={open}
                   aria-controls={`faq-a-${index}`}
                   id={`faq-q-${index}`}

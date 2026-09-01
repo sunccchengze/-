@@ -1,26 +1,43 @@
+import { Suspense, lazy } from "react";
 import {
   About,
-  Departments,
   EagleMascot,
-  FAQ,
   Footer,
   HonorMarquee,
-  Honors,
   JoinCTA,
   Leadership,
-  MemberVoices,
   Navigation,
   NewcomerPath,
   ScrollProgress,
   SocialMedia,
   Statistics,
   SummerPractice,
-  SummerFilms,
   TrustBar,
-  WhyJoin,
 } from "./components";
 import { HeroPreview } from "./components/HeroPreview";
 import { HeroV2Pro } from "./components/HeroV2Pro";
+
+/**
+ * 方案 B：对首屏以下交互较重、包含大量大图/弹窗/视频背景的模块进行 React.lazy 懒加载与 Suspense 分割。
+ * 显著缩短移动端首屏加载时的主线程渲染阻塞时长（TBT / FCP 极速提升）。
+ */
+const SummerFilms = lazy(() => import("./components/SummerFilms").then((m) => ({ default: m.SummerFilms })));
+const MemberVoices = lazy(() => import("./components/MemberVoices").then((m) => ({ default: m.MemberVoices })));
+const WhyJoin = lazy(() => import("./components/WhyJoin").then((m) => ({ default: m.WhyJoin })));
+const Honors = lazy(() => import("./components/Honors").then((m) => ({ default: m.Honors })));
+const Departments = lazy(() => import("./components/Departments").then((m) => ({ default: m.Departments })));
+const FAQ = lazy(() => import("./components/FAQ").then((m) => ({ default: m.FAQ })));
+
+function SectionSkeleton({ label }: { label?: string }) {
+  return (
+    <div className="flex min-h-[320px] w-full items-center justify-center bg-cream px-4 py-12">
+      <div className="flex flex-col items-center gap-3 text-center">
+        <div className="h-2 w-16 animate-pulse rounded-full bg-rouge/20" />
+        {label && <span className="font-serif-cn text-xs font-bold tracking-widest text-muted/60">{label}</span>}
+      </div>
+    </div>
+  );
+}
 
 /**
  * 正常访问只展示正式首页；仅在 ?preview=hero 时开放 5 版首屏比较器。
@@ -47,15 +64,27 @@ export default function App() {
         <Statistics />
         <HonorMarquee />
         <SummerPractice />
-        <SummerFilms />
-        <MemberVoices />
+        <Suspense fallback={<SectionSkeleton label="影像纪录加载中..." />}>
+          <SummerFilms />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton label="心声载入中..." />}>
+          <MemberVoices />
+        </Suspense>
         <Leadership />
-        <WhyJoin />
-        <Honors />
-        <Departments />
+        <Suspense fallback={<SectionSkeleton label="加入理由载入中..." />}>
+          <WhyJoin />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton label="荣誉高光加载中..." />}>
+          <Honors />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton label="部门全景加载中..." />}>
+          <Departments />
+        </Suspense>
         <SocialMedia />
         <JoinCTA />
-        <FAQ />
+        <Suspense fallback={<SectionSkeleton label="问答载入中..." />}>
+          <FAQ />
+        </Suspense>
       </main>
       <Footer />
       <EagleMascot />

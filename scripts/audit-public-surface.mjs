@@ -60,7 +60,8 @@ for (const file of files) {
 }
 
 const config = fs.readFileSync(path.join(root, "src/config.ts"), "utf8");
-const finalHeroSlides = (config.match(/src: "\/images\/首页\/首页\d+\.jpg"/g) ?? []).length;
+// 轮播槽位现为 jpg/png 混排（首页3/首页5/首页15 为 png），正则需同时覆盖两类扩展名。
+const finalHeroSlides = (config.match(/src: "\/images\/首页\/首页\d+\.(?:jpe?g|png|webp)"/g) ?? []).length;
 if (finalHeroSlides !== 17) violations.push(`expected 17 final homepage slides, found ${finalHeroSlides}`);
 
 const honors = fs.readFileSync(path.join(root, "src/content.ts"), "utf8");

@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { Award, MoreHorizontal, Play, Trophy, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -72,6 +73,8 @@ function HonorVaultCard({ item, index }: { item: VaultItem; index: number }) {
 }
 
 function HonorVault({ onClose }: { onClose: () => void }) {
+  const lenis = useLenis();
+
   useEffect(() => {
     const previous = document.body.style.overflow;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -79,16 +82,19 @@ function HonorVault({ onClose }: { onClose: () => void }) {
     };
 
     document.body.style.overflow = "hidden";
+    lenis?.stop();
     window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = previous;
+      lenis?.start();
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [onClose]);
+  }, [lenis, onClose]);
 
   return createPortal(
     <motion.div
       className="fixed inset-0 z-[90] overflow-y-auto bg-[#1d100f]/[0.97] px-4 py-5 text-white sm:px-8 sm:py-8"
+      data-lenis-prevent
       role="dialog"
       aria-modal="true"
       aria-labelledby="honor-vault-title"
@@ -107,6 +113,14 @@ function HonorVault({ onClose }: { onClose: () => void }) {
             <p className="mt-2 max-w-2xl text-sm leading-6 text-white/65">
               金色题签记录荣誉，点击翻阅真实证明；每一份成果都来自一届届英仔的长期行动。
             </p>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <span className="rounded-full border border-gold-soft/40 bg-gold-soft/15 px-3 py-1 text-xs font-bold text-[#f6e5ba]">
+                ★ 西安交通大学校级五星公益社团
+              </span>
+              <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-bold text-white/90">
+                ★ 仲英书院指导 · 第二课堂合规认证
+              </span>
+            </div>
           </div>
           <button type="button" onClick={onClose} className="focus-ring inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 text-sm font-bold text-white transition hover:bg-white hover:text-rouge-deep" aria-label="关闭荣誉典藏墙">
             <X className="h-4 w-4" aria-hidden="true" />
@@ -211,10 +225,18 @@ export function Honors() {
 
       <div className="section-container">
         <SectionHeader eyebrow="ACHIEVEMENTS" title="荣誉高光" subtitle="本学年高光：国家级荣誉五项 · 五星级社团 · 最佳团日 · 红旗团支部" invert />
-        <div className="relative mx-auto mt-16 max-w-4xl">
+        <div className="mx-auto mt-4 flex max-w-2xl flex-wrap items-center justify-center gap-2 text-center">
+          <span className="rounded-full border border-gold-soft/40 bg-black/35 px-4 py-1.5 text-xs font-bold text-[#f6e5ba] backdrop-blur-sm">
+            ★ 西安交通大学校级五星公益社团
+          </span>
+          <span className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold text-white/90 backdrop-blur-sm">
+            ★ 仲英书院长期指导 · 第二课堂合规认证
+          </span>
+        </div>
+        <div className="relative mx-auto mt-12 max-w-4xl">
           <div className="absolute left-4 top-0 h-full w-px bg-white/20 md:left-[190px]" aria-hidden="true" />
           {visibleHonors.map((honor, index) => (
-            <motion.div key={honor.date} className="relative grid gap-4 pb-8 pl-12 md:grid-cols-[160px_1fr] md:gap-12 md:pl-0" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ delay: Math.min(index, 4) * 0.06, duration: 0.5 }}>
+            <motion.div key={honor.date} className="gpu-accelerated relative grid gap-4 pb-8 pl-12 md:grid-cols-[160px_1fr] md:gap-12 md:pl-0" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ delay: Math.min(index, 4) * 0.06, duration: 0.5 }}>
               <div className="timeline-dot absolute left-[9px] top-2 h-4 w-4 rounded-full border-4 border-white md:left-[183px]" />
               <time className="font-data text-lg font-bold text-rouge-mist md:text-right">{honor.date}</time>
               <article className="glass-panel-dark rounded-2xl border-l-4 border-rouge p-6">
@@ -232,8 +254,13 @@ export function Honors() {
           </motion.div>
         </div>
         <div className="mt-6 text-center">
-          <button type="button" className="btn-ghost-white group min-w-[240px] font-serif-cn font-bold" onClick={() => setVaultOpen(true)} aria-haspopup="dialog">
-            <Award className="h-5 w-5 text-rouge-mist transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
+          <button
+            type="button"
+            className="honor-vault-trigger btn-ghost-white group min-w-[240px] font-serif-cn font-bold"
+            onClick={() => setVaultOpen(true)}
+            aria-haspopup="dialog"
+          >
+            <Award className="h-5 w-5 text-rouge-mist transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110" aria-hidden="true" />
             打开荣誉典藏墙
           </button>
         </div>

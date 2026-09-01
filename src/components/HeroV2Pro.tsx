@@ -16,27 +16,50 @@ export function HeroV2Pro() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isPhone = window.matchMedia("(max-width: 639px)").matches;
-    // 手机首访优先尽快展示可操作的首页；桌面开屏时长保持原样。
     const timer = window.setTimeout(() => setShowIntro(false), reduce ? 0 : isPhone ? 650 : 1500);
     return () => window.clearTimeout(timer);
   }, []);
 
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
-    const isPhone = window.matchMedia("(max-width: 639px)").matches;
 
     const timer = window.setInterval(() => {
       setCurrentSlide((current) => (current + 1) % HERO_V2PRO_SLIDES.length);
-    }, isPhone ? 8000 : 5000);
+    }, 3000);
 
     return () => window.clearInterval(timer);
   }, []);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        setCurrentSlide((prev) => (prev + 1) % HERO_V2PRO_SLIDES.length);
+      } else {
+        setCurrentSlide((prev) => (prev - 1 + HERO_V2PRO_SLIDES.length) % HERO_V2PRO_SLIDES.length);
+      }
+    }
+    setTouchStartX(null);
+  };
+
   const activeSlide = HERO_V2PRO_SLIDES[currentSlide] ?? HERO_V2PRO_SLIDES[0];
 
   return (
-    <section id="top" className="hero-v2pro relative isolate min-h-[100svh] overflow-hidden bg-[#241615] text-white">
+    <section
+      id="top"
+      className="hero-v2pro relative isolate min-h-[100svh] overflow-hidden bg-[#241615] text-white touch-swipe-container gpu-accelerated"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <AnimatePresence>
         {showIntro ? (
           <motion.div
@@ -69,16 +92,35 @@ export function HeroV2Pro() {
           key={currentSlide}
           src={activeSlide.src}
           alt={`${activeSlide.title}｜英仔爱心社志愿服务活动现场`}
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
-          initial={{ opacity: 0, scale: 1.035 }}
-          animate={{ opacity: 1, scale: 1 }}
+          className="gpu-accelerated absolute inset-0 -z-20 h-full w-full object-cover"
+          style={{ transformOrigin: "center center" }}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1.00 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.15, ease: "easeInOut" }}
+          transition={{ duration: 1.6, ease: [0.25, 0.1, 0.25, 1] }}
           fetchPriority={currentSlide === 0 ? "high" : "auto"}
           decoding="async"
         />
       </AnimatePresence>
       <div className="hero-v2pro-veil absolute inset-0 -z-10" aria-hidden="true" />
+
+      {/* VIRAL-03: 媒体重点报道权威 —— 顶部无框悬浮横幅漂动 */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-30 overflow-hidden bg-gradient-to-b from-black/65 via-black/35 to-transparent py-3">
+        <motion.div
+          className="flex whitespace-nowrap font-serif-cn text-xs sm:text-sm font-bold tracking-wider text-[#f6e5ba]"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        >
+          {[0, 1].map((i) => (
+            <span key={i} className="mx-12 inline-flex items-center gap-4">
+              <span>✨ 媒体权威关注：连续获《人民日报》《光明日报》《陕西日报》重点报道优秀社会服务集体</span>
+              <span className="text-white/40">|</span>
+              <span>✨ 西安交通大学校级五星公益社团 · 仲英书院长期指导</span>
+              <span className="text-white/40">|</span>
+            </span>
+          ))}
+        </motion.div>
+      </div>
 
       <div className="relative mx-auto grid min-h-[100svh] max-w-[1440px] lg:grid-cols-[minmax(0,0.46fr)_minmax(0,0.54fr)]">
         <div className="flex min-h-[100svh] flex-col justify-center px-6 pb-28 pt-28 sm:px-10 lg:px-16 lg:pb-24 lg:pt-28 xl:px-24">
@@ -105,7 +147,7 @@ export function HeroV2Pro() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.12, duration: 0.5 }}
-            aria-label="校级五星级社团"
+            aria-label="校级五星级公益社团"
           >
             <span className="flex items-center gap-1.5" aria-hidden="true">
               {[0, 1, 2, 3, 4].map((star) => (
@@ -119,7 +161,7 @@ export function HeroV2Pro() {
                 </motion.span>
               ))}
             </span>
-            <span className="font-serif-cn text-sm font-bold tracking-[0.16em] text-white/85 sm:text-base">校级五星级社团</span>
+            <span className="font-serif-cn text-sm font-bold tracking-[0.16em] text-white/85 sm:text-base">校级五星级公益社团</span>
           </motion.div>
 
           <motion.h1
@@ -206,7 +248,7 @@ export function HeroV2Pro() {
 
         <div className="relative hidden min-h-[100svh] lg:block" aria-hidden="true">
           <div className="absolute bottom-16 right-10 flex w-[min(500px,calc(100%-5rem))] items-end justify-between gap-7 px-2 py-3 xl:right-16">
-            <div className="min-w-0 bg-gradient-to-r from-black/0 via-black/18 to-black/0 px-4 py-2 backdrop-blur-[2px]">
+            <div className="min-w-0">
               <p className="font-serif-cn text-2xl font-bold tracking-[0.08em] text-white text-shadow-soft">{activeSlide.line}</p>
               <p className="mt-2 text-xs tracking-[0.08em] text-white/70">{activeSlide.detail}</p>
             </div>
@@ -230,7 +272,19 @@ export function HeroV2Pro() {
               onClick={() => setCurrentSlide(index)}
               className="focus-ring flex h-10 w-8 items-center justify-center rounded-full"
             >
-              <span className={`h-1.5 rounded-full transition-all duration-300 ${index === currentSlide ? "w-5 bg-white" : "w-1.5 bg-white/45 hover:bg-white/75"}`} />
+              {index === currentSlide ? (
+                <span className="relative block h-1.5 w-6 overflow-hidden rounded-full bg-white/35">
+                  <motion.span
+                    key={currentSlide}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 3.0, ease: "linear" }}
+                    className="block h-full w-full origin-left bg-white"
+                  />
+                </span>
+              ) : (
+                <span className="h-1.5 w-1.5 rounded-full bg-white/45 transition-all hover:bg-white/75" />
+              )}
             </button>
           ))}
         </div>

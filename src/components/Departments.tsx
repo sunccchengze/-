@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useLenis } from "lenis/react";
+import { ArrowRight, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { IMG_第6页背景 } from "../config";
 import { departmentFinder, departmentsIntro, functionalDepartments, projectDepartments, skillRoutes, type Department } from "../content";
 import { SectionHeader } from "./SectionHeader";
@@ -9,15 +10,17 @@ function DepartmentCard({
   department,
   index,
   suggested,
+  onSelect,
 }: {
   department: Department;
   index: number;
   suggested: boolean;
+  onSelect: (department: Department) => void;
 }) {
   const Icon = department.icon;
   return (
     <motion.article
-      className={`card-hover card-outline-gradient relative flex h-full flex-col overflow-hidden rounded-[24px] ${
+      className={`card-hover card-outline-gradient gpu-accelerated relative flex h-full flex-col overflow-hidden rounded-[24px] ${
         suggested ? "dept-recommended z-10" : ""
       }`}
       initial={{ opacity: 0, y: 36 }}
@@ -25,13 +28,22 @@ function DepartmentCard({
       viewport={{ once: true, amount: 0.12 }}
       transition={{ delay: (index % 3) * 0.08, duration: 0.65 }}
     >
-      <div className="image-shell h-[200px] shrink-0 md:h-56">
-        <img
+      <div className="image-shell group/img relative h-[200px] shrink-0 md:h-56">
+        <motion.img
+          layoutId={`dept-image-${department.name}`}
           src={department.image}
           alt={`${department.name}活动照片`}
           loading="lazy"
-          className="h-full w-full object-cover"
+          className="h-full w-full cursor-pointer object-cover transition-transform duration-500 group-hover/img:scale-105"
+          onClick={() => onSelect(department)}
         />
+        <button
+          type="button"
+          onClick={() => onSelect(department)}
+          className="absolute right-4 bottom-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-black/65 px-3 py-1 text-[11px] font-bold text-white opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover/img:opacity-100"
+        >
+          <span>点击展开剧场大图</span>
+        </button>
         <div className="absolute left-5 top-5 z-10 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/85 text-rouge backdrop-blur-md">
           <Icon className="h-6 w-6" strokeWidth={1.8} aria-hidden="true" />
         </div>
@@ -85,16 +97,54 @@ function DepartmentCard({
 }
 
 export function Departments() {
-  const [activeTab, setActiveTab] = useState<"functional" | "project">("project");
+  const lenis = useLenis();
+  const [activeTab, setActiveTab] = useState<"functional" | "project">("functional");
   const [suggestedRoute, setSuggestedRoute] = useState<string | null>(null);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [selectedDepartment, setSelectedDepartment] = useState<Department | null>(null);
   const departments = activeTab === "functional" ? functionalDepartments : projectDepartments;
   const suggestedNames = departmentFinder.find((item) => item.title === suggestedRoute)?.departments ?? [];
+
+  useEffect(() => {
+    if (!selectedDepartment) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    lenis?.stop();
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      lenis?.start();
+    };
+  }, [lenis, selectedDepartment]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && activeTab === "functional") {
+        setActiveTab("project");
+        setSuggestedRoute(null);
+      } else if (diff < 0 && activeTab === "project") {
+        setActiveTab("functional");
+        setSuggestedRoute(null);
+      }
+    }
+    setTouchStartX(null);
+  };
 
   const chooseRoute = (title: string) => {
     setSuggestedRoute(title);
     setActiveTab("project");
     window.setTimeout(() => {
-      document.getElementById("dept-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const target = document.getElementById("dept-panel");
+      if (!target) return;
+      if (lenis) lenis.scrollTo(target);
+      else target.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 0);
   };
 
@@ -197,7 +247,9 @@ export function Departments() {
             key={activeTab}
             id="dept-panel"
             role="tabpanel"
-            className="mt-14 grid items-stretch gap-7 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+            className="touch-swipe-container gpu-accelerated mt-14 grid items-stretch gap-7 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
@@ -209,6 +261,7 @@ export function Departments() {
                 department={department}
                 index={index}
                 suggested={activeTab === "project" && suggestedNames.includes(department.name)}
+                onSelect={(dept) => setSelectedDepartment(dept)}
               />
             ))}
             {activeTab === "project" ? (
@@ -219,6 +272,7 @@ export function Departments() {
                     department={department}
                     index={index + departments.length - 2}
                     suggested={suggestedNames.includes(department.name)}
+                    onSelect={(dept) => setSelectedDepartment(dept)}
                   />
                 ))}
               </div>
@@ -238,12 +292,97 @@ export function Departments() {
             </div>
           ))}
         </div>
-        <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-gold-soft/30 bg-gold-soft/[0.08] px-5 py-4 text-left">
-          <p className="font-serif-cn text-sm font-bold text-gold">旁听制度 · 多一种体验</p>
-          <p className="mt-2 text-sm leading-7 text-muted">{departmentsIntro.observerNote}</p>
+        {/* 三个卡片纵向均匀分布 (Evenly distributed vertically with gap-6 / 24px spacing) */}
+        <div className="mx-auto mt-12 flex max-w-4xl flex-col gap-6">
+          <div className="rounded-2xl border border-gold-soft/40 bg-white/85 px-6 py-5 text-left shadow-sm">
+            <p className="font-serif-cn text-base font-bold text-[#8E3F3D]">全校各书院青年共同体 · 零卷度真诚交友</p>
+            <p className="mt-2 text-sm leading-7 text-muted">
+              这不是一场充满考核淘汰的竞争，这是一趟在四万人的交大校园里寻找真诚同行的旅程。无论你所读哪个专业班级、身处哪个书院（彭康、仲英、文治、崇实、钱学森、宗濂、南洋、励志等），我们的 11 个部门都是你在校园里最具温度的跨书院友爱第三空间，期待你来到这里，收获没有绩点攀比、彼此包容扶持的跨院挚友。
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-rouge/20 bg-rouge/[0.05] px-6 py-5 text-left">
+            <p className="font-serif-cn text-base font-bold text-rouge-deep">零经验新手干事安心承诺 · 一帮一带</p>
+            <p className="mt-2 text-sm leading-7 text-muted">
+              本社团各部门全面提供零起步岗前一帮一带指引与标准素材库支持；招新面试绝不仅仅考核已有专业特长，我们更为看重的，是你愿不愿意怀抱一颗真诚的心，和我们共同成长。
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-gold-soft/30 bg-gold-soft/[0.08] px-6 py-5 text-left">
+            <p className="font-serif-cn text-base font-bold text-gold">旁听制度 · 多一种体验</p>
+            <p className="mt-2 text-sm leading-7 text-muted">{departmentsIntro.observerNote}</p>
+          </div>
         </div>
         <p className="mt-6 text-center font-serif-cn text-base text-muted md:text-lg">{departmentsIntro.footer}</p>
       </div>
+
+      {/* 剧场式大图展台（丝滑弹窗，保留卡片底图零白底漏出） */}
+      <AnimatePresence>
+        {selectedDepartment ? (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10" data-lenis-prevent>
+            <motion.div
+              className="fixed inset-0 bg-black/85 backdrop-blur-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setSelectedDepartment(null)}
+            />
+            <motion.div
+              className="relative z-10 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl bg-[#241615] shadow-2xl ring-1 ring-white/20"
+              initial={{ opacity: 0, scale: 0.88, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.88, y: 15 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              drag="y"
+              dragConstraints={{ top: 0, bottom: 0 }}
+              dragElastic={0.7}
+              onDragEnd={(_e, info) => {
+                if (info.offset.y > 100) {
+                  setSelectedDepartment(null);
+                }
+              }}
+            >
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-black">
+                <img
+                  src={selectedDepartment.image}
+                  alt={selectedDepartment.name}
+                  className="h-full w-full object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => setSelectedDepartment(null)}
+                  className="focus-ring absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/65 text-white backdrop-blur-md transition hover:bg-white hover:text-rouge-deep"
+                  aria-label="关闭剧场大图"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="flex flex-col justify-between gap-4 border-t border-white/10 bg-[#2a1c18]/90 px-6 py-5 text-white sm:flex-row sm:items-center sm:px-8">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <h3 className="font-serif-cn text-2xl font-bold">{selectedDepartment.name}</h3>
+                    {selectedDepartment.brandNote ? (
+                      <span className="rounded-full bg-rouge-deep px-3 py-0.5 text-xs font-bold text-white">
+                        {selectedDepartment.brandNote}
+                      </span>
+                    ) : null}
+                  </div>
+                  <p className="mt-1.5 font-serif-cn text-sm italic text-rose-soft">{selectedDepartment.positioning}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedDepartment(null)}
+                  className="focus-ring inline-flex shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/15 px-6 py-2.5 text-xs font-bold text-white transition hover:bg-white hover:text-rouge-deep"
+                >
+                  收回卡片
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        ) : null}
+      </AnimatePresence>
     </section>
   );
 }

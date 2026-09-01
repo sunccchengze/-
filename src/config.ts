@@ -21,12 +21,16 @@ export const SITE_URL = "https://yzaxs-1.pages.dev";
 
 /**
  * 立即报名链接（出现在：顶部导航、封面页主按钮、加入我们模块）
- * 当前为临时 WPS 链接；2026 正式报名表发布后替换本行即可。
+ * 2026 正式在线报名表链接。
  */
-export const LINK_报名 = "https://f.wps.cn/g/1AxxMyao/";
+export const LINK_报名 = "https://tuvtpb2u.jsjform.com/f/zPAVNv";
 
-/** 微信公众号链接 */
-export const LINK_微信公众号 = "https://mp.weixin.qq.com/s/lJJeVU1osRMRd7oRWvTFzQ";
+/**
+ * 微信公众号链接（FOLLOW US 区「微信公众号 · 去关注」按钮跳转目标）
+ * 2026-08-20 按孙承泽指示：指向「职能部门」招新系列最新推文《社长团介绍》，
+ * 与部门区 LINK_社长团 同一篇；读者可在文章页顶部关注公众号。
+ */
+export const LINK_微信公众号 = "https://mp.weixin.qq.com/s/O6QIsHcULQw8FS15Oc8OXA";
 
 /** 抖音号链接 */
 export const LINK_抖音号 = "https://v.douyin.com/wgSkkbFH80g/";
@@ -36,16 +40,24 @@ export const LINK_哔哩哔哩 = "https://space.bilibili.com/595714952?spm_id_fr
 
 // ─────────────────────────────────────────────
 //  二、各部门"了解更多"链接
+//  2026-08-20 更新：社长团 / 常务部 / 交流部 / 宣传部 四条已换成
+//  公众号「职能部门」招新系列最新推文（社长团→常务部→交流部→宣传部），
+//  链接由孙承泽提供，Agent 已逐条访问验证标题与内容归属无误。
+//  项目部门链接（大手拉小手/青春伴夕阳/启明星/心项目/陕博部/萤火部）
+//  暂未收到新版推文，仍指向原链接，待系列更新后统一更换。
 // ─────────────────────────────────────────────
 
-/** 常务部介绍链接 */
-export const LINK_常务部 = "https://mp.weixin.qq.com/s/paHXDTzTpxyUewvVc3lYjQ";
+/** 社长团介绍链接（《社长团介绍》：社长王晗宇、团支书李振杰与各位副社） */
+export const LINK_社长团 = "https://mp.weixin.qq.com/s/O6QIsHcULQw8FS15Oc8OXA";
 
-/** 交流部介绍链接 */
-export const LINK_交流部 = "https://mp.weixin.qq.com/s/o8SZ7ZMmvq1WQyqbMUf5ZQ";
+/** 常务部介绍链接（《常务部部门介绍》） */
+export const LINK_常务部 = "https://mp.weixin.qq.com/s/f4PtOC8tXP3YD6RSxeFlBw";
 
-/** 宣传部介绍链接 */
-export const LINK_宣传部 = "https://mp.weixin.qq.com/s/u25BKkC-36kQRnA1jeRT-w";
+/** 交流部介绍链接（《交流部部门介绍》） */
+export const LINK_交流部 = "https://mp.weixin.qq.com/s/YP6H0Ga-2F5hKdFo1QbH4A";
+
+/** 宣传部介绍链接（《宣传部部门介绍》） */
+export const LINK_宣传部 = "https://mp.weixin.qq.com/s/TLjPITNSixKQ4AeXiS3Blg";
 
 /** 大手拉小手介绍链接 */
 export const LINK_大手拉小手 = "https://mp.weixin.qq.com/s/q5dj69Fj4jg2wQ2zS6_lVw";
@@ -79,6 +91,9 @@ export const IMG_LOGO = "/images/品牌/英仔爱心社标志.png";
 /** 报名二维码（用于：页脚扫码报名） */
 export const IMG_报名二维码 = "/images/招新/报名二维码.png";
 
+/** 孙承泽学长直联名片圆头像 */
+export const IMG_孙承泽头像 = "/images/头像.jpg";
+
 /** 招新群二维码（用于：页脚翻转卡片正面） */
 export const IMG_招新群二维码 = "/images/招新/招新群二维码.png";
 
@@ -95,9 +110,9 @@ export const QQ_招新群号 = "712079220";
 export const IMG_首页轮播 = [
   "/images/首页/首页1.jpg",
   "/images/首页/首页2.jpg",
-  "/images/首页/首页3.jpg",
+  "/images/首页/首页3.png",
   "/images/首页/首页4.jpg",
-  "/images/首页/首页5.jpg",
+  "/images/首页/首页5.png",
 ];
 
 // ─────────────────────────────────────────────
@@ -172,10 +187,10 @@ export const IMG_四大理由 = [
 export const IMG_常务部 = "/images/部门/常务部.jpg";
 export const IMG_交流部 = "/images/部门/交流部.jpg";
 export const IMG_宣传部 = "/images/部门/宣传部.jpg";
-/** @deprecated 历史共用图；前卫/洩湖可分别替换 */
-export const IMG_大手拉小手 = "/images/部门/大手拉小手.jpg";
-export const IMG_前卫部 = "/images/部门/前卫部.jpg";
-export const IMG_洩湖部 = "/images/部门/洩湖部.jpg";
+/** @deprecated 历史共用图；启梦/拾辉可分别替换 */
+export const IMG_大手拉小手 = "/images/部门/大手拉小手.png";
+export const IMG_启梦部 = "/images/部门/启梦部.jpg";
+export const IMG_拾辉部 = "/images/部门/拾辉部.png";
 /** @deprecated 历史共用图；向日葵/常青藤可分别替换 */
 export const IMG_青春伴夕阳 = "/images/部门/青春伴夕阳.jpg";
 export const IMG_向日葵 = "/images/部门/向日葵.jpg";
@@ -192,10 +207,18 @@ export const IMG_萤火部 = "/images/部门/萤火部.jpg";
 export const IMG_暑期_玉树 = "/images/暑期实践/玉树/玉树1.jpg";
 export const IMG_暑期_知行秦川 = "/images/暑期实践/知行秦川/知行1.jpg";
 export const IMG_暑期_秦岭 = "/images/暑期实践/秦岭/秦岭1.jpg";
+/** 秦岭实践卡内视频封面（BV1vCum6DE8Y 的 B 站官方封面）。 */
+export const IMG_暑期_秦岭视频封面 = "https://i0.hdslb.com/bfs/archive/f5401571ca8184fd13d99c3a01b885775ef693c2.jpg";
 export const IMG_暑期_萤火 = "/images/暑期实践/萤火/萤火1.jpg";
 
 /** 启明星“启明寻洛，脉续中原”暑期实践主封面。 */
 export const IMG_暑期_启明星 = "/images/暑期实践/启明星/启明星1.jpg";
+
+/** 青春伴夕阳“银发融城”暑期返乡调研实践主封面。 */
+export const IMG_暑期_银发融城 = "/images/暑期实践/银发融城/银发融城1.jpg";
+
+/** 陕博部文博展厅志愿服务暑期实践主封面。 */
+export const IMG_暑期_陕博 = "/images/暑期实践/陕博/陕博1.jpg";
 
 /** 第11页背景（暑期实践专区，可与第3页共用或单独替换） */
 export const IMG_第11页背景 = IMG_统一页面背景;
@@ -220,11 +243,11 @@ export const HERO_V2PRO_SLIDES = [
   { src: "/images/首页/首页16.jpg", title: "英仔大合影", line: "英为爱，仔一起", detail: "社团伙伴 · 公益同行" },
   { src: "/images/首页/首页1.jpg", title: "雪域相逢", line: "雪域相逢，共绽格桑", detail: "玉树支教团 · 高原课堂" },
   { src: "/images/首页/首页2.jpg", title: "知行秦川", line: "文浸秦川，笃学寻光", detail: "周至 / 彬州 · 暑期课堂" },
-  { src: "/images/首页/首页3.jpg", title: "萤火微光", line: "以温柔伴童心，以微光暖星河", detail: "儿童关怀 · 陪伴成长" },
+  { src: "/images/首页/首页3.png", title: "萤火微光", line: "以温柔伴童心，以微光暖星河", detail: "儿童关怀 · 陪伴成长" },
   { src: "/images/首页/首页4.jpg", title: "青护秦岭", line: "踏峪寻青，净护秦岭", detail: "生态实践 · 山野同行" },
-  { src: "/images/首页/首页5.jpg", title: "长安文脉", line: "胸怀秦汉之源，颂扬华夏之光", detail: "陕博部 · 陕历博志愿" },
-  { src: "/images/首页/首页6.jpg", title: "大手拉小手", line: "以青春为桥，照见更远的世界", detail: "前卫部 · 九峰助学" },
-  { src: "/images/首页/首页7.jpg", title: "知行彬州", line: "携光而行，筑梦秦川", detail: "洩湖部 · 彬州助学" },
+  { src: "/images/首页/首页5.png", title: "长安文脉", line: "胸怀秦汉之源，颂扬华夏之光", detail: "陕博部 · 陕历博志愿" },
+  { src: "/images/首页/首页6.jpg", title: "大手拉小手", line: "以青春为桥，照见更远的世界", detail: "启梦部 · 九峰助学" },
+  { src: "/images/首页/首页7.jpg", title: "知行彬州", line: "携光而行，筑梦秦川", detail: "拾辉部 · 彬州助学" },
   { src: "/images/首页/首页8.jpg", title: "青春伴夕阳", line: "岁月有声，陪伴有光", detail: "向日葵 · 社区与老年大学" },
   { src: "/images/首页/首页9.jpg", title: "温暖守护", line: "把下一次相见，写成温柔约定", detail: "常青藤 · 护理院陪伴" },
   { src: "/images/首页/首页10.jpg", title: "启明星", line: "把好奇点亮，把温暖带进校园", detail: "启明星 · 校园公益" },
@@ -232,7 +255,7 @@ export const HERO_V2PRO_SLIDES = [
   { src: "/images/首页/首页12.jpg", title: "萤火连心", line: "微光汇聚，也能照亮成长", detail: "萤火部 · 儿童关怀" },
   { src: "/images/首页/首页13.jpg", title: "记录善意", line: "让每一次出发，都被好好看见", detail: "宣传部 · 影像与故事" },
   { src: "/images/首页/首页14.jpg", title: "英仔同行", line: "因为热爱相遇，为了善意并肩", detail: "交流部 · 社团文化" },
-  { src: "/images/首页/首页15.jpg", title: "认真守护", line: "把每一份热忱，落成可靠的行动", detail: "常务部 · 稳定运转" },
+  { src: "/images/首页/首页15.png", title: "认真守护", line: "把每一份热忱，落成可靠的行动", detail: "常务部 · 稳定运转" },
   { src: "/images/首页/首页17.jpg", title: "新一届英仔", line: "薪火相传，下一站由你加入", detail: "2026 招新 · 与你相遇" },
 ] as const;
 
@@ -288,6 +311,20 @@ export const SUMMER_GALLERIES = {
     "/images/暑期实践/启明星/启明星6.jpg",
     "/images/暑期实践/启明星/启明星7.jpg",
   ],
+  yinfarongcheng: [
+    IMG_暑期_银发融城,
+    "/images/暑期实践/银发融城/银发融城2.jpg",
+    "/images/暑期实践/银发融城/银发融城3.jpg",
+    "/images/暑期实践/银发融城/银发融城4.jpg",
+    "/images/暑期实践/银发融城/银发融城5.jpg",
+  ],
+  shanbo: [
+    IMG_暑期_陕博,
+    "/images/暑期实践/陕博/陕博2.jpg",
+    "/images/暑期实践/陕博/陕博3.jpg",
+    "/images/暑期实践/陕博/陕博4.jpg",
+    "/images/暑期实践/陕博/陕博5.jpg",
+  ],
 } as const;
 
 // ─────────────────────────────────────────────────────────────
@@ -339,6 +376,14 @@ export const VIDEO_SOURCES_玉树 = {
   github: "https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-yushu-recap.mp4",
   /** ④ 可选：GitHub 加速镜像（失效删掉即可） */
   mirror: "https://gh-proxy.com/https://github.com/sunccchengze/-/releases/download/media-2026-v1/2026-yushu-recap.mp4",
+};
+
+/**
+ * 秦岭实践卡内视频 —— 仅在秦岭卡片展示，不加入 SUMMER FILMS。
+ * 当前使用社团 B 站成片；未来如补充 MP4，可沿用 pages / github / mirror 回退字段。
+ */
+export const VIDEO_SOURCES_秦岭 = {
+  bilibili: "BV1vCum6DE8Y",
 };
 
 /**

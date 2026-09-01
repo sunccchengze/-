@@ -14,7 +14,7 @@ export function Hero() {
     if (reduce) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -25,11 +25,12 @@ export function Hero() {
           key={currentSlide}
           src={heroSlides[currentSlide]}
           alt=""
-          className="absolute inset-0 -z-[3] h-full w-full object-cover"
-          initial={{ opacity: 0, scale: 1.03 }}
-          animate={{ opacity: 0.78, scale: 1 }}
+          className="gpu-accelerated absolute inset-0 -z-[3] h-full w-full object-cover"
+          style={{ transformOrigin: "center center" }}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 0.78, scale: 1.00 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.1, ease: "easeInOut" }}
+          transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
           fetchPriority={currentSlide === 0 ? "high" : "auto"}
           decoding="async"
         />

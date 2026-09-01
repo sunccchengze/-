@@ -15,7 +15,7 @@
 | JoinSteps + CTA | 降低报名焦虑 |
 | FloatingChrome | 移动/桌面快捷报名 + 回顶 |
 | Departments 8+legend | 选部不迷路 |
-| FAQ 扩展 | 前卫洩湖、五星、工时 |
+| FAQ 扩展 | 启梦拾辉、五星、工时 |
 | 工程拆分 | 18 组件 + content/config |
 
 ## 构建状态

@@ -1,4 +1,5 @@
 import { AnimatePresence, motion, useDragControls } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { ChevronDown, Heart, MessageCircle, Palette, Sparkles, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
@@ -17,7 +18,7 @@ import {
 type EaglePose = "front" | "side" | "back" | "wave" | "heart" | "join" | "paint" | "fly" | "camera";
 
 const sectionMessages: Record<string, string> = {
-  top: "你好呀！我是英仔小鹰，带你认识英仔。",
+  top: "同学你好！我是鹰仔。不用担心自己以前没做过志愿或者不会写策划，学长学姐带你从零一步步开始！在线报名只需几分钟~",
   about: "英仔今年 16 岁啦，我们把善意做成一次次真的出发。",
   impact: "每一个数字背后，都是被认真记录的陪伴。",
   summer: "今年夏天，我们去了玉树、周至、彬州，还有更多地方。",
@@ -55,6 +56,7 @@ const sectionPoses: Partial<Record<string, EaglePose>> = {
  * 默认挥手欢迎；滚动时侧身；按区块和按钮切换真实动作图片。
  */
 export function EagleMascot() {
+  const lenis = useLenis();
   const [open, setOpen] = useState(true);
   const [section, setSection] = useState("top");
   const [moving, setMoving] = useState(false);
@@ -68,6 +70,10 @@ export function EagleMascot() {
   const initiatedDrag = useRef(false);
 
   useEffect(() => {
+    Object.values(eagleImages).forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
     const waveTimer = window.setTimeout(() => setActionPose(null), 1800);
     return () => window.clearTimeout(waveTimer);
   }, []);
@@ -141,7 +147,10 @@ export function EagleMascot() {
 
   const goJoin = () => {
     runAction("join", () => {
-      document.getElementById("join")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const target = document.getElementById("join");
+      if (!target) return;
+      if (lenis) lenis.scrollTo(target);
+      else target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
 
@@ -266,7 +275,7 @@ export function EagleMascot() {
         {!open ? (
           <span className="absolute -left-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-rouge text-white shadow-md shadow-rouge/30" aria-hidden="true"><MessageCircle className="h-3.5 w-3.5" /></span>
         ) : (
-          <span className="absolute -right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-rouge shadow-sm" aria-hidden="true"><ChevronDown className="h-3.5 w-3.5" /></span>
+          <span className="absolute -left-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-rouge shadow-sm" aria-hidden="true"><ChevronDown className="h-3.5 w-3.5" /></span>
         )}
       </button>
     </motion.aside>

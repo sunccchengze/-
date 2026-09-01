@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700;900&family=Playfair+Display:wght@600;700&display=swap");
-@import "tailwindcss";
+/* 关闭 Tailwind v4 自动内容探测：仓库根的 docs/技能库 等 Markdown 里的
+   [file:line] 之类 token 会被误判为类名，生成无效 CSS 并触发构建警告。
+   类名只可能出现在 src/ 源码与根 index.html 中，显式限定即可。 */
+@import "tailwindcss" source(none);
+@source "../index.html";
+@source "./**/*.{ts,tsx}";
+@source "./index.css";
 
 @theme {
   /* 莫兰迪红主色（占比最大） */
@@ -20,26 +26,29 @@
   --color-cream: #FAF6F3;
   --color-paper: #FFFFFF;
 
-  --font-sans: "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
-  --font-serif-cn: "Noto Serif SC", "Songti SC", serif;
+  --font-sans: "DengXian", "等线", "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  --font-serif-cn: "Noto Serif SC", "Songti SC", "DengXian", "等线", serif;
   --font-data: "Libre Baskerville", "Playfair Display", Georgia, serif;
 }
 
 :root {
   color: #3E3E3E;
   background: #FAF6F3;
-  font-family: "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  font-family: "DengXian", "等线", "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
   text-rendering: geometricPrecision;
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis 接管平滑过程；固定导航高度由 scroll-padding 统一预留。 */
+  scroll-behavior: auto;
+  scroll-padding-top: 80px;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   background: #FAF6F3;
+  font-family: "DengXian", "等线", "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
 }
 
 ::selection {
@@ -415,7 +424,7 @@ button {
   content: "";
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(178, 90, 85, 0.55), rgba(212, 165, 165, 0.4), rgba(201, 168, 118, 0.55));
+  background: linear-gradient(135deg, rgba(142, 63, 61, 0.28), rgba(201, 125, 116, 0.18), rgba(201, 168, 118, 0.28));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -847,6 +856,66 @@ button {
   }
 }
 
+/* 荣誉典藏入口：周期性轻弹 + 暖金扩散环，让首次浏览者不会错过入口。 */
+.honor-vault-trigger {
+  position: relative;
+  isolation: isolate;
+  transform-origin: center;
+  will-change: transform, box-shadow;
+  animation: honorVaultElasticNudge 4.4s cubic-bezier(0.22, 0.72, 0.28, 1) infinite;
+}
+
+.honor-vault-trigger::before {
+  position: absolute;
+  inset: -5px;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  border: 1px solid rgba(246, 229, 186, 0.72);
+  border-radius: 18px;
+  opacity: 0;
+  animation: honorVaultAttentionRing 4.4s ease-out infinite;
+}
+
+/* 悬停与键盘聚焦时停止自动提醒，把控制权交还给用户。 */
+.honor-vault-trigger:hover,
+.honor-vault-trigger:focus-visible {
+  animation: none;
+}
+
+.honor-vault-trigger:hover::before,
+.honor-vault-trigger:focus-visible::before {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes honorVaultElasticNudge {
+  0%, 28%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 0 0 rgba(201, 168, 118, 0);
+  }
+  7% {
+    transform: translateY(-6px) scale(1.045);
+    box-shadow: 0 16px 36px rgba(201, 168, 118, 0.24);
+  }
+  12% { transform: translateY(2px) scale(0.99); }
+  17% { transform: translateY(-3px) scale(1.022); }
+  23% { transform: translateY(0) scale(1); }
+}
+
+@keyframes honorVaultAttentionRing {
+  0%, 2% { opacity: 0; transform: scale(0.94); }
+  8% { opacity: 0.72; }
+  25%, 100% { opacity: 0; transform: scale(1.16); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .honor-vault-trigger,
+  .honor-vault-trigger::before {
+    animation: none !important;
+  }
+}
+
 /* 荣誉翻卡瞬间的暖金光感：只在翻到真实证明时短促掠过，不让正面常亮。 */
 .honor-card-flipped::after {
   position: absolute;
@@ -866,4 +935,36 @@ button {
 
 @media (prefers-reduced-motion: reduce) {
   .honor-card-flipped::after { animation: none; opacity: 0; }
+}
+
+/* ============================================================================
+ * 方案 C（UI UX Pro Max & taste-skill）：移动端触控滑动（Swipe Gestures）与 GPU 硬件加速
+ * ============================================================================ */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.touch-swipe-container {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-snap-x-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.scroll-snap-x-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-snap-item {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
