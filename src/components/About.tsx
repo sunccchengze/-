@@ -219,31 +219,6 @@ export function About() {
           左右滑动或点击
         </p>
 
-        {/* 治理架构：书院指导 · 社长团决策 · 团支部与社友会协同 */}
-        <motion.figure
-          className="card-hover card-outline-gradient mt-14 overflow-hidden rounded-[28px] p-4 md:p-6"
-          initial={{ opacity: 0, y: 26 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-        >
-          <figcaption className="mb-4 px-2">
-            <p className="text-xs font-bold tracking-[0.22em] text-rouge">GOVERNANCE · 治理架构</p>
-            <p className="mt-1 font-serif-cn text-lg font-bold text-ink">
-              以项目制为主、企业体制为辅，参照公司垂直管理模式
-            </p>
-          </figcaption>
-          {/* 竖版长图（约 2:3）：限制最大宽度并水平居中 */}
-          <img
-            src="/images/架构图/治理架构图.png"
-            alt="英仔爱心社治理架构：仲英书院指导，社长团为决策核心，团支部与社友会协同，下辖 3 个职能部门与 8 个项目部门"
-            width={848}
-            height={1264}
-            loading="lazy"
-            decoding="async"
-            className="mx-auto block h-auto w-full max-w-[560px] rounded-2xl"
-          />
-        </motion.figure>
       </div>
     </section>
   );

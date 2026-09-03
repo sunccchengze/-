@@ -45,9 +45,9 @@ for (const anchor of new Set(anchors)) {
 }
 
 const assetRefs = new Set([...text.matchAll(/["'](\/images\/[^"']+)["']/g)].map((match) => match[1]));
-// 该图仅在 README.md 中展示（与网页版 治理架构图.png 为两张不同的竖版候选，均已投入使用）。
+// 治理架构图仅展示在 README.md（网站页面已不使用），故此处登记豁免。
 const intentionallyUnreferenced = new Set([
-  "/images/架构图/治理架构图-方卡版.png",
+  "/images/架构图/治理架构图.png",
 ]);
 const imageFiles = readFiles(path.join(root, "public", "images"))
   .filter((file) => /\.(jpg|jpeg|png|webp)$/i.test(file))
