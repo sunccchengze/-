@@ -78,6 +78,17 @@
 社长团 10 人与各部门 **34 位部长**的完整介绍（班级、家乡、MBTI、自我介绍原文）已整理归档至
 📇 [`docs/content-source/2026-recruit-wechat-team-profiles.md`](docs/content-source/2026-recruit-wechat-team-profiles.md)
 
+### 组织架构图
+
+<div align="center">
+
+<img src="public/images/架构图/组织架构图.png" alt="英仔爱心社 2026 组织架构图：社长团 10 人 + 部长团 34 人 + 11 个部门" width="100%">
+
+<sub><b>44 位负责人 · 11 个部门</b>　每位成员的关键词标签均取自本人 2026 招新推文自述<br>
+同步展示于官网 <code>#team</code> 区块　·　改人员或标签后运行 <code>npm run org-chart</code> 重新生成</sub>
+
+</div>
+
 ### 社团定位（年度总结原文）
 
 > 西安交通大学英仔爱心社是由学生自愿发起并组成的**非营利性公益团体**，于 2010 年 10 月成立，同年 12 月正式挂牌。社团以「服务社会、奉献爱心、推己及人、薪火相传」为宗旨，通过大手拉小手支教、陕西历史博物馆志愿服务、碑林区敬老活动、物资漂流、特殊儿童陪伴等多种形式，提升大学生的社会责任感与奉献精神，在校园及社会中引领公益风尚，推动爱心火种不断传递。目前社团共有成员 199 人，定位为**开放型公益平台**，致力于搭建社会服务与爱心奉献之间的桥梁。
@@ -643,10 +654,14 @@ Yingzai2026/
 │   └── utils/
 ├── public/
 │   ├── images/                品牌 / 首页 / 部门 / 荣誉 / 暑期实践 / 小鹰 / 公益剪影
+│   │   ├── 架构图/            组织架构图 PNG（由脚本生成）
+│   │   └── 小鹰/部门徽章/     12 只部门主题小鹰（AI 生成，架构图素材）
 │   └── videos/                summer/ 压缩成片（单文件 ≤ 25MiB）
 ├── scripts/
 │   ├── validate-assets.mjs        校验 config 引用的素材是否都存在
 │   ├── audit-public-surface.mjs   对外信息面审计
+│   ├── build-org-chart.mjs        组织架构图生成器（npm run org-chart）
+│   ├── org-chart-data.mjs         架构图数据源：44 人姓名 / 职务 / 关键词标签
 │   ├── faststart-mp4.mjs          mp4 moov 前置，秒开
 │   └── strip-pages-video-assets.mjs  构建后剔除超限视频
 └── docs/                      50+ 篇工程与内容文档

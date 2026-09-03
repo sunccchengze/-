@@ -101,6 +101,52 @@ export function Leadership() {
             </motion.div>
           </div>
         </div>
+
+        {/* 组织架构图：社长团 + 部长团 44 人 */}
+        <motion.figure
+          className="card-hover card-outline-gradient mt-12 overflow-hidden rounded-[28px] p-4 md:p-6"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6 }}
+        >
+          <figcaption className="mb-4 flex flex-wrap items-baseline justify-between gap-2 px-2">
+            <div>
+              <p className="text-xs font-bold tracking-[0.22em] text-rouge">ORG CHART · 组织架构</p>
+              <p className="mt-1 font-serif-cn text-lg font-bold text-ink">
+                社长团 10 人 · 部长团 34 人 · 11 个部门
+              </p>
+            </div>
+            <a
+              href="/images/架构图/组织架构图.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-card focus-ring text-sm"
+            >
+              查看大图
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </figcaption>
+          <a
+            href="/images/架构图/组织架构图.png"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="focus-ring block overflow-hidden rounded-2xl"
+          >
+            <img
+              src="/images/架构图/组织架构图.png"
+              alt="西安交通大学英仔爱心社 2026 组织架构图：社长团、职能部门与项目部门共 44 位负责人"
+              width={2560}
+              height={2426}
+              loading="lazy"
+              decoding="async"
+              className="h-auto w-full"
+            />
+          </a>
+          <p className="mt-3 px-2 text-xs leading-5 text-muted/80">
+            图中每位成员的关键词标签均取自本人 2026 招新推文中的自我介绍。
+          </p>
+        </motion.figure>
       </div>
     </section>
   );

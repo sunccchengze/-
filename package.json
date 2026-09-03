@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "validate:assets": "node scripts/validate-assets.mjs",
-    "audit:public": "node scripts/audit-public-surface.mjs"
+    "audit:public": "node scripts/audit-public-surface.mjs",
+    "org-chart": "node scripts/build-org-chart.mjs"
   },
   "dependencies": {
     "clsx": "2.1.1",
@@ -23,6 +24,7 @@
     "tailwind-merge": "3.4.0"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "4.1.17",
     "@types/node": "22.19.17",
     "@types/react": "19.2.7",
