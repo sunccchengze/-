@@ -136,8 +136,8 @@ export function Leadership() {
             <img
               src="/images/架构图/组织架构图.png"
               alt="西安交通大学英仔爱心社 2026 组织架构图：社长团、职能部门与项目部门共 44 位负责人"
-              width={2560}
-              height={2426}
+              width={2556}
+              height={2346}
               loading="lazy"
               decoding="async"
               className="h-auto w-full"

@@ -2,10 +2,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const repo = process.cwd();
-const files = ['src/config.ts', 'src/content.ts', 'index.html'];
+/** 扫描全部源码（含组件内硬编码图片），避免 Leadership.tsx 这类直接写死的路径漏检 */
+const readSources = (dir) =>
+  fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const target = path.join(dir, entry.name);
+    return entry.isDirectory() ? readSources(target) : /\.(ts|tsx)$/.test(entry.name) ? [target] : [];
+  });
+const files = [...readSources(path.join(repo, 'src')), path.join(repo, 'index.html')];
 const paths = new Set();
 for (const file of files) {
-  const text = fs.readFileSync(path.join(repo, file), 'utf8');
+  const text = fs.readFileSync(file, 'utf8');
   for (const match of text.matchAll(/["'](\/images\/[^"']+|\/videos\/[^"']+)["']/g)) paths.add(match[1]);
 }
 
