@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "validate:assets": "node scripts/validate-assets.mjs",
     "audit:public": "node scripts/audit-public-surface.mjs",
-    "org-chart": "node scripts/build-org-chart.mjs"
+    "org-chart": "node scripts/build-org-chart.mjs",
+    "gov-chart": "node scripts/build-gov-chart.mjs",
+    "charts": "npm run org-chart && npm run gov-chart"
   },
   "dependencies": {
     "clsx": "2.1.1",
@@ -30,6 +32,7 @@
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "5.1.1",
+    "d3-flextree": "^2.1.2",
     "tailwindcss": "4.1.17",
     "typescript": "5.9.3",
     "vite": "7.3.2",
