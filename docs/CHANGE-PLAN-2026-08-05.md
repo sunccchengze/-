@@ -2,7 +2,7 @@
 
 > **用途**：这是用户（孙承泽）审阅并转交的执行单。请在你 Merge 前按本单完成全部改动，跑完门禁后 push `arena/019fc032-repo`，等待用户 Merge。Merge 之后网站后续优化由下一位 Agent（本会话）继续。
 >
-> **依据**：用户 2026-08-05 对 Q1–Q100 的最新逐条答复（原话见 `QUESTIONS-ARCHIVE-2026-08-05.md`，若尚未建立则按本单引用）。
+> **依据**：用户 2026-08-05 对 Q1–Q100 的最新逐条答复（原话见 `docs/archive/QUESTIONS-ARCHIVE-2026-08-05.md`，若尚未建立则按本单引用）。
 >
 > **状态标记**：🔴 必须做 ／ 🟡 建议做 ／ ⚪ 记录待办（不改代码）
 >
@@ -18,7 +18,7 @@
   - `src/content.ts` 的 `observerNote`（约 671 行）——开放名单加“萤火”，不开放名单改为“交流部、陕博、启明星、心项目”；
   - `src/content.ts` FAQ“什么是旁听制度？”答案（约 762 行）——同步；
   - `docs/PUBLIC-FACT-REGISTER.md`“旁听部门”行——同步。
-- 同步更新 `HANDOFF.md` 5.3 节。
+- 同步更新 `docs/HANDOFF.md` 5.3 节。
 
 ### 1.2 玉树届次：2025 = 第十六届
 - 用户确认：2026 第十七届，**2025 应为第十六届**。
@@ -114,7 +114,7 @@
 
 ### 6.2 🟡 知行秦川公开包装版：决定不制作
 - 用户确认：直接发正式片，不做“teaser + 正片 + outro”公开包装版。
-- 更新 `docs/VIDEO-QINCHUAN-WRAPPER.md` 与 `HANDOFF.md` 9.3 节为“2026-08 决定：不做公开包装版，直接使用正式片”。
+- 更新 `docs/VIDEO-QINCHUAN-WRAPPER.md` 与 `docs/HANDOFF.md` 9.3 节为“2026-08 决定：不做公开包装版，直接使用正式片”。
 - 网站视频链接不变（`2026-qinchuan-recap.mp4` 即最终版）。
 
 ### 6.3 🟡 玉树视频后续替换
@@ -130,7 +130,7 @@
 
 ### 7.2 🔴 新建问答总账文档（用户 Q93）
 - 用户原话：专门建一个 Question 文档，把所有问过的问题与所有回答都记在里面，让下一代 Agent 快速理解。
-- 建议文件名：`QUESTIONS-ARCHIVE-2026-08-05.md`（根目录或 docs/），收录：历次 QUESTIONS.md 内容 + 本次 Q1–Q100 全部问答（含本执行单对应项）；HANDOFF 引用该文件。
+- 建议文件名：`docs/archive/QUESTIONS-ARCHIVE-2026-08-05.md`（根目录或 docs/），收录：历次 docs/QUESTIONS.md 内容 + 本次 Q1–Q100 全部问答（含本执行单对应项）；HANDOFF 引用该文件。
 
 ### 7.3 🔴 HANDOFF 持续更新
 - 补入：用户档案（2.1）、旁听（1.1）、届次（1.2）、部署确认（Cloudflare Pages 不变，Q2）、分支约定（改完 merge 后由下一位 Agent 在 `arena/019fc032-repo` 继续，Q87）、无固定 deadline（尽快上线交刘晗梦审核，Q95）、视频托管（GitHub Release + build 剥离脚本，Q1/Q2/Q75）、红线补充（见 7.4）。
@@ -141,7 +141,7 @@
 - deadline 内不状态播报、不假称验证；
 - 不删萤火/秦岭第 7 张、不缩回荣誉 12 项等既有红线继续有效。
 
-### 7.5 🟡 思政课实践记录册（deliverables/）
+### 7.5 🟡 思政课实践记录册（docs/deliverables/）
 - 用户已提交、不再维护（Q9/Q83）。建议保留为存档，在 README 或 HANDOFF 标注“已提交，仅存档”；用户允许删除，倾向保留。
 
 ---

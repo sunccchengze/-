@@ -1,7 +1,7 @@
 # 独立优化时段总结 · 截止 2026-08-02 02:00 CST
 
 ## 你回来后请先做
-1. 打开并逐条答复根目录 **`QUESTIONS.md`**（红色阻塞项优先）
+1. 打开并逐条答复 **`docs/QUESTIONS.md`**（红色阻塞项优先）
 2. 按 **`docs/IMAGE-SLOTS.md`** 换真图
 3. 改 **`src/config.ts`** 里的真实 QQ 群号与报名链
 4. `npm run dev` 或 `npm run preview` 手机+桌面点一遍（见 `docs/VIEWPORT-QA.md`）

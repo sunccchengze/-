@@ -3,7 +3,7 @@
 时区：Asia/Shanghai · 收工目标 2026-08-02 02:00
 
 ## Round 1 · 01:06–01:09
-- 建立 `QUESTIONS.md`、`docs/IMAGE-SLOTS.md`、AI 内阁 skill 存档
+- 建立 `docs/QUESTIONS.md`、`docs/IMAGE-SLOTS.md`、AI 内阁 skill 存档
 - 信任条 TrustBar（五星 / 工时认证 / 仲英指导）
 - 社员声音 MemberVoices
 - 移动端 StickyJoinBar
@@ -59,7 +59,7 @@
 
 ## 收工前状态
 - `npm run build` ✅
-- 待用户：QUESTIONS.md + 真图 + 真群号
+- 待用户：docs/QUESTIONS.md + 真图 + 真群号
 
 ## 01:24–01:25 · 架构收官
 - App.tsx 精简为组件组装层（~45 行）

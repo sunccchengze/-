@@ -65,9 +65,9 @@
 - `docs/SUMMER-GALLERY-SLOTS.md`：暑期图集命名；
 - `docs/DEVICE-QA-RUNBOOK.md`：真机测试执行单；
 - `docs/RECRUITMENT-OPERATIONS-MATRIX.md`：招新责任表；
-- `HANDOFF.md`：后续会话/人员交接；
+- `docs/HANDOFF.md`：后续会话/人员交接；
 - `GHG_1` 至 `GHG_4`：多视角审阅；
-- `GHG_34_EXECUTION_PLAN.md`：A/B 双线计划。
+- `docs/review/GHG_34_EXECUTION_PLAN.md`：A/B 双线计划。
 
 ## 二、本阶段验证结果
 

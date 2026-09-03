@@ -9,7 +9,7 @@
 
 **目标**：招新转化 + 信任，而非功能堆砌。  
 **路径**：信任层（五星/工时）→ 故事层（暑期/声音）→ 选择层（部门）→ 低摩擦 CTA。  
-**硬约束**：不功利、不编造数字、缺素材用编号占位、不确定进 `QUESTIONS.md`。
+**硬约束**：不功利、不编造数字、缺素材用编号占位、不确定进 `docs/QUESTIONS.md`。
 
 ---
 
@@ -39,7 +39,7 @@
 
 ## 明确未做（等你）
 
-见 `QUESTIONS.md` Q-001~020 与 `docs/PRE-LAUNCH-CHECKLIST.md`。
+见 `docs/QUESTIONS.md` Q-001~020 与 `docs/PRE-LAUNCH-CHECKLIST.md`。
 
 
 ## 收工追加（01:27）

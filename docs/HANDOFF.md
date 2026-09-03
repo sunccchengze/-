@@ -11,11 +11,11 @@
 > **🚨 2026-08-20 部门介绍推文链接更换（社长团 + 职能三部门）**：
 > 1. `src/config.ts` 已将 **社长团（新增 `LINK_社长团`）/ 常务部 / 交流部 / 宣传部** 四条"了解"入口更换为公众号「职能部门」招新系列最新推文，链接由孙承泽部长提供，Agent 已逐条访问验证标题与归属（社长团→常务部→交流部→宣传部连载顺序）；**同日追加：FOLLOW US 区「微信公众号 · 去关注」按钮（`LINK_微信公众号`）亦按部长指示改指《社长团介绍》一文**（旧链为 `lJJeVU1osRMRd7oRWvTFzQ`），后续若希望该按钮改指别的最新推文，改 `config.ts` 这一行即可；
 > 2. `src/components/Leadership.tsx` 社长团成员卡底部新增「了解社长团故事」按钮（复用 `btn-card` 样式，与部门卡"了解部门故事"完全一致）；
-> 3. **项目线 6 条链接（大手拉小手/青春伴夕阳/启明星/心项目/陕博部/萤火部）暂未收到新版推文，仍指向原链接**，待公众号发布对应系列后统一更换（见 `QUESTIONS.md` Q-002）；
+> 3. **项目线 6 条链接（大手拉小手/青春伴夕阳/启明星/心项目/陕博部/萤火部）暂未收到新版推文，仍指向原链接**，待公众号发布对应系列后统一更换（见 `docs/QUESTIONS.md` Q-002）；
 > 4. 验证记录与事实登记已写入 `docs/PUBLIC-FACT-REGISTER.md`。
 > 5. **同轮修复三项继承问题**：(a) `npm run typecheck` 两处 TS6133 未使用变量（`About.tsx` 死代码 `swipePrev`、`HeroV2Pro.tsx` 冗余 `isPhone`）已清除；(b) `audit-public-surface.mjs` 首页轮播正则只匹配 `.jpg` 导致 17 张槽位误报 14 张，已扩为 `jpg/png/webp`；(c) Tailwind v4 自动内容探测把 `技能库&准则/`、docs 等 Markdown 里的 `[file:line]` token 误生成无效 CSS，已在 `src/index.css` 改为 `source(none)` + 显式 `@source`（仅扫 `src/` 与根 `index.html`），构建警告清零，单文件体积 **945.89 kB → 671.63 kB（gzip 234.02 → 198.93 kB）**，抽查全部自定义类名与任意值类均已正常生成。
 >
-> **🚨 2026-08-12 最新交接总表与重大任务收尾（详见 [`docs/2026-08-12-SESSION-HANDOFF-SUN-CHENGZE.md`](./docs/2026-08-12-SESSION-HANDOFF-SUN-CHENGZE.md)）**：
+> **🚨 2026-08-12 最新交接总表与重大任务收尾（详见 [`docs/2026-08-12-SESSION-HANDOFF-SUN-CHENGZE.md`](./2026-08-12-SESSION-HANDOFF-SUN-CHENGZE.md)）**：
 > 1. **陕博部暑期专区部署竣工**：已根据部长指令在 `public/images/暑期实践/` 增开**陕博**目录（`/images/暑期实践/陕博/`），放置 `陕博1~5` 志愿者图集；已在 `src/config.ts` 导出 `IMG_暑期_陕博` 且完成 `SUMMER_GALLERIES.shanbo` 关联，与玉树/秦川/秦岭/萤火/启明星/银发融城同样实现 3 秒 Ken Burns 平滑焦距轮播；
 > 2. **孙承泽（宣传部部长）一手档案与交接纪律**：能动强基 2501，INTJ-T（效率优于套话），从日照山东来；坚决拒绝“学长教你/不会影响你学习/托住你”等公文说教与 AI 废话；宣传部部长个人介绍自述草案详见 `docs/2026-PROPAGANDA-MINISTER-INTRO-SUN-CHENGZE.md`，**谨记：部长指示“先不急着写，去了解足够信息，下一轮对话确定后我再动笔！”，在下个 session 对话确认前，勿自行替换进网站**；
 > 3. **极品设计与功能闭环**：细工科莫兰迪红边框（`border border-[#8E3F3D]/15`）、拍立得 6s 留白/3s 轮播/微章底标、部门均等 24px 纵向 `gap-6` 与唯一带教声明、所有八大书院无遗漏名单、微信干警名片（头像卡翻转复制 `rzwxtp`）；
@@ -32,7 +32,7 @@
 
 你接手的不是一个泛公益社团模板，而是一个由用户长期逐项核验、反复纠偏的真实招新站。用户叫孙承泽，是英仔爱心社宣传部部长，对网站、图片、视频、事实与表达有强烈控制欲和高标准；他不喜欢空泛的管理话术、过度客气、假大空、AI 腔、臆造数据或“先交一个差不多版本”。
 
-他希望你直接、诚实、高质量地干活：发现事实不确定，先记录；发现用户已明确否定的方向，不要反复走回去；用户要求“继续工作到 deadline”，不要每做一小步就发送“继续中”并结束工作窗口。详见 [`docs/DEADLINE-TASK-EXECUTION-GUIDE.md`](./docs/DEADLINE-TASK-EXECUTION-GUIDE.md)。
+他希望你直接、诚实、高质量地干活：发现事实不确定，先记录；发现用户已明确否定的方向，不要反复走回去；用户要求“继续工作到 deadline”，不要每做一小步就发送“继续中”并结束工作窗口。详见 [`docs/DEADLINE-TASK-EXECUTION-GUIDE.md`](./DEADLINE-TASK-EXECUTION-GUIDE.md)。
 
 绝不能把“用户想要高级感”理解为堆积金色、粒子、烟花、霓虹或炫技。当前视觉目标是：**低调奢华、明亮高级、暖金、低饱和红、乳白、真实影像、可读性优先**。
 
@@ -42,26 +42,26 @@
 
 ## 1.1 强制优先阅读
 
-1. 本文件 `HANDOFF.md`；
-2. [`docs/PUBLIC-FACT-REGISTER.md`](./docs/PUBLIC-FACT-REGISTER.md)：公开事实总表；
-3. [`QUESTIONS.md`](./QUESTIONS.md)：不确定项、待用户确认项；
-4. [`src/config.ts`](./src/config.ts)：链接、所有图片/视频路径、首页轮播、暑期图集；
-5. [`src/content.ts`](./src/content.ts)：所有公开文案、部门、暑期项目、荣誉、FAQ；
-6. [`docs/ASSET-MANIFEST.md`](./docs/ASSET-MANIFEST.md)：素材目录约定；
-7. [`docs/SUMMER-GALLERY-SLOTS.md`](./docs/SUMMER-GALLERY-SLOTS.md)：暑期图片槽位；
-8. [`docs/IMAGE-NAMING-PLAN-CN.md`](./docs/IMAGE-NAMING-PLAN-CN.md)：中文命名规则；
-9. [`docs/DEADLINE-TASK-EXECUTION-GUIDE.md`](./docs/DEADLINE-TASK-EXECUTION-GUIDE.md)：有截止时间任务的执行规则。
+1. 本文件 `docs/HANDOFF.md`；
+2. [`docs/PUBLIC-FACT-REGISTER.md`](./PUBLIC-FACT-REGISTER.md)：公开事实总表；
+3. [`docs/QUESTIONS.md`](./QUESTIONS.md)：不确定项、待用户确认项；
+4. [`src/config.ts`](../src/config.ts)：链接、所有图片/视频路径、首页轮播、暑期图集；
+5. [`src/content.ts`](../src/content.ts)：所有公开文案、部门、暑期项目、荣誉、FAQ；
+6. [`docs/ASSET-MANIFEST.md`](./ASSET-MANIFEST.md)：素材目录约定；
+7. [`docs/SUMMER-GALLERY-SLOTS.md`](./SUMMER-GALLERY-SLOTS.md)：暑期图片槽位；
+8. [`docs/IMAGE-NAMING-PLAN-CN.md`](./IMAGE-NAMING-PLAN-CN.md)：中文命名规则；
+9. [`docs/DEADLINE-TASK-EXECUTION-GUIDE.md`](./DEADLINE-TASK-EXECUTION-GUIDE.md)：有截止时间任务的执行规则。
 
 ## 1.2 重要专项资料
 
-- [`docs/QINCHUAN-2026-SIX-DIMENSIONS.md`](./docs/QINCHUAN-2026-SIX-DIMENSIONS.md)：知行秦川六维成果稿。注意其中精确课时口径若没有原始排课/结项台账，不能擅自扩展到公开网站或新材料；用户近期对 `九峰 100+ / 彬州 50+` 的证据链提出追问。
-- [`docs/VIDEO-QINCHUAN-WRAPPER.md`](./docs/VIDEO-QINCHUAN-WRAPPER.md)：知行秦川正式片与公开包装片的边界。
-- [`docs/VIDEO-QINCHUAN-SCRIPTS.md`](./docs/VIDEO-QINCHUAN-SCRIPTS.md)、[`docs/VIDEO-STRATEGY-RESET.md`](./docs/VIDEO-STRATEGY-RESET.md)、[`docs/viral-video-brief.md`](./docs/viral-video-brief.md)：视频策略。
-- [`docs/RECRUITMENT-OPERATIONS-MATRIX.md`](./docs/RECRUITMENT-OPERATIONS-MATRIX.md)：招新运营口径。
-- [`docs/DEVICE-QA-RUNBOOK.md`](./docs/DEVICE-QA-RUNBOOK.md)：设备实测清单。
-- [`docs/YINGZAI-INTERNAL-ARCHIVE.md`](./docs/YINGZAI-INTERNAL-ARCHIVE.md)：内部档案。它有价值，但不是自动等于“可公开、已确认”的事实来源。
-- [`docs/content-source/`](./docs/content-source/)：较早内容来源与地图。需要与最新用户确认交叉核验。
-- `GHG_1.md` 至 `GHG_4.md`：先前多视角审查材料；把它们视为过程资料，不可替代用户最后确认。
+- [`docs/QINCHUAN-2026-SIX-DIMENSIONS.md`](./QINCHUAN-2026-SIX-DIMENSIONS.md)：知行秦川六维成果稿。注意其中精确课时口径若没有原始排课/结项台账，不能擅自扩展到公开网站或新材料；用户近期对 `九峰 100+ / 彬州 50+` 的证据链提出追问。
+- [`docs/VIDEO-QINCHUAN-WRAPPER.md`](./VIDEO-QINCHUAN-WRAPPER.md)：知行秦川正式片与公开包装片的边界。
+- [`docs/VIDEO-QINCHUAN-SCRIPTS.md`](./VIDEO-QINCHUAN-SCRIPTS.md)、[`docs/VIDEO-STRATEGY-RESET.md`](./VIDEO-STRATEGY-RESET.md)、[`docs/viral-video-brief.md`](./viral-video-brief.md)：视频策略。
+- [`docs/RECRUITMENT-OPERATIONS-MATRIX.md`](./RECRUITMENT-OPERATIONS-MATRIX.md)：招新运营口径。
+- [`docs/DEVICE-QA-RUNBOOK.md`](./DEVICE-QA-RUNBOOK.md)：设备实测清单。
+- [`docs/YINGZAI-INTERNAL-ARCHIVE.md`](./YINGZAI-INTERNAL-ARCHIVE.md)：内部档案。它有价值，但不是自动等于“可公开、已确认”的事实来源。
+- [`docs/content-source/`](./content-source)：较早内容来源与地图。需要与最新用户确认交叉核验。
+- `docs/review/GHG_1.md` 至 `docs/review/GHG_4.md`：先前多视角审查材料；把它们视为过程资料，不可替代用户最后确认。
 
 ## 1.3 代码入口
 
@@ -84,7 +84,7 @@
 
 - 直接、短句、具体。不要“非常感谢您的耐心”“我将竭诚”等客服腔。
 - 不要假装已验证。必须区分：代码检查通过 / 本地浏览器观察 / 真机实测 / 外部链接人工验证。
-- 不确定时说不确定，并写入 `QUESTIONS.md` 或明确列在交付里。
+- 不确定时说不确定，并写入 `docs/QUESTIONS.md` 或明确列在交付里。
 - 用户允许很长、很细的交接与方案，但不喜欢无意义状态播报。
 - 用户会从截图中指出细微排版问题；看到截图后，先复述你理解到的**几何/视觉问题**，不要凭猜测连续改几版。
 
@@ -932,7 +932,7 @@ git pull --rebase origin arena/019fd4c9-repo
 
 - 用户最新一句明确指令；
 - 用户最新上传的真实图片/证书/视频；
-- `QUESTIONS.md` 中仍未解决的事实；
+- `docs/QUESTIONS.md` 中仍未解决的事实；
 - 本地真实浏览器、真机和外链验证；
 - 用户对最终视觉截图的审美判断。
 
@@ -1138,9 +1138,9 @@ git fetch origin arena/019fd4c9-repo
 git reset --mixed FETCH_HEAD
 
 # 2. 阅读事实与交接
-sed -n '1,240p' HANDOFF.md
+sed -n '1,240p' docs/HANDOFF.md
 sed -n '1,240p' docs/PUBLIC-FACT-REGISTER.md
-sed -n '1,240p' QUESTIONS.md
+sed -n '1,240p' docs/QUESTIONS.md
 
 # 3. 工程验证
 npm install
@@ -1578,7 +1578,7 @@ git diff --name-status HEAD..FETCH_HEAD
 
 以用户当前指令为准。若无新指令，可先跑全站质量检查、整理 Handoff、核远端素材；不要停工式状态播报。
 
-### Q97. 答案写入 QUESTIONS.md？
+### Q97. 答案写入 docs/QUESTIONS.md？
 
 **可记录明确答案**，但不要把“待确认”伪造为答案。Handoff 当前已承载本轮 Q&A。
 
@@ -1641,7 +1641,7 @@ git diff --name-status HEAD..FETCH_HEAD
 
 # 附录 M：2026-08-05 执行单完成记录
 
-本附录记录已执行的用户确认：旁听新增萤火；玉树届次与 20 名志愿者/2025 数据；陕博约 40 名志愿者；公众号 5.3 万+阅读；社友会；刘晗梦指导起点；首页 16 首位轮播；统计/新生背景 opacity 0.32；荣誉翻卡暖金 reveal；SummerFilms 离线/加载失败温柔降级；正式知行片不做包装；GitHub Release 视频托管与 Pages 构建剥离大视频。详见 `QUESTIONS-ARCHIVE-2026-08-05.md`。
+本附录记录已执行的用户确认：旁听新增萤火；玉树届次与 20 名志愿者/2025 数据；陕博约 40 名志愿者；公众号 5.3 万+阅读；社友会；刘晗梦指导起点；首页 16 首位轮播；统计/新生背景 opacity 0.32；荣誉翻卡暖金 reveal；SummerFilms 离线/加载失败温柔降级；正式知行片不做包装；GitHub Release 视频托管与 Pages 构建剥离大视频。详见 `docs/archive/QUESTIONS-ARCHIVE-2026-08-05.md`。
 
 
 ## 素材人工待处理标记（2026-08-05）
@@ -1793,7 +1793,7 @@ Ken Burns 动画（`src/index.css`）：20 秒循环的 CSS `scale + translate`�
 - 125 张图片 PIL verify 0 失败；3 段视频 ffmpeg 解码 0 错误；
 - 跨行精确扫描：所有 `<img>` 有 alt（装饰图 alt=""+aria-hidden）、所有 `target="_blank"` 有
   rel="noopener noreferrer"、所有 `<button>` 有显式 type；
-- 文案口径核对：2026 招新、第十七届玉树、199 社员、2025-2026 年度等与 QUESTIONS.md 确认一致；
+- 文案口径核对：2026 招新、第十七届玉树、199 社员、2025-2026 年度等与 docs/QUESTIONS.md 确认一致；
 - 外链（WPS/微信/抖音/B站）沙箱网络不可达，必须用户真机验证——不得宣称已打开；
 - 提交：`9d81bca`（弃七牛+转码）、`50e4f22`（B站接入+逃生通道+preconnect）。
 

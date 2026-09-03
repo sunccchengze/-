@@ -26,13 +26,18 @@ Yingzai2026
 │   └── videos/                视频（单文件 ≤ 25MiB）
 ├── scripts/                   生成组织架构图、素材校验等自动化脚本
 ├── docs/
+│   ├── README.md                 ★ 文档索引（全部文档分类）
 │   ├── 宣传部/                ← 你在这里（本手册 + 后续部门资料）
 │   ├── IMAGE-NAMING-PLAN-CN.md   素材最终命名表
 │   ├── ASSET-MANIFEST.md         素材目录与替换清单
 │   ├── PUBLIC-FACT-REGISTER.md   对外事实登记册（数字来源锚点）
-│   └── content-source/           公众号推文原文摘录
+│   ├── content-source/           公众号推文原文摘录
+│   └── 原始材料/              社团原始 docx / pdf（年度总结、三折页、答辩材料）
 └── 技能库&准则/                AI SKILL 技能库（一般不用动）
 ```
+
+> 仓库根目录只放工程必需文件，新增文档一律放进 `docs/` 对应分类。
+
 
 **线上地址**：<https://yzaxs-1.pages.dev>（Cloudflare Pages，推送到 `main` 分支自动部署）。
 

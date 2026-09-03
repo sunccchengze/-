@@ -14,7 +14,7 @@
 ## 工程
 - `content.ts` / `config.ts` 分离
 - 组件：Hero, Navigation, TrustBar, Statistics, SummerPractice, MemberVoices, Honors, Departments, FloatingChrome, FlippingQR, SectionHeader, BrandIcons
-- `QUESTIONS.md` · `IMAGE-SLOTS.md` · `PRE-LAUNCH-CHECKLIST.md`
+- `docs/QUESTIONS.md` · `IMAGE-SLOTS.md` · `PRE-LAUNCH-CHECKLIST.md`
 
 ## 构建
 `npm run build` 通过（singlefile dist）

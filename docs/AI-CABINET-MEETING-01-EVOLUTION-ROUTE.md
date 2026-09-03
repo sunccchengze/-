@@ -30,7 +30,7 @@
 | `read_file` | `src/components/Navigation.tsx` | 移动端与转化入口 | 顶部固定导航；桌面显示完整导航和报名；移动端有菜单与报名入口。 |
 | `read_file` | `src/components/Departments.tsx` | 新生选部门成本 | 3 职能、8 项目以切换卡片呈现；发现 `/* brand legend */` 被写成普通 JSX 文本的风险。 |
 | `read_file` | `src/components/JoinCTA.tsx` | 报名闭环 | 报名表与 QQ 群均存在；群号通过翻转交互显示；但最终报名链接/日程仍待临近招新复核。 |
-| `read_file` | `QUESTIONS.md` | 已确认和未确认事项 | 负责人、群号、2026 招新、暑期数据等已更新；社长寄语、链接最终替换、日程仍待确认。 |
+| `read_file` | `docs/QUESTIONS.md` | 已确认和未确认事项 | 负责人、群号、2026 招新、暑期数据等已更新；社长寄语、链接最终替换、日程仍待确认。 |
 | `read_file` | `docs/IMAGE-SLOTS.md` | 实图替换是否可执行 | 已有 IMG-01—52、VID-01 的编号和用途；绝大多数实际素材仍为旧占位或复用图。 |
 | `read_file` | `docs/FRESHMAN-AUDIT.md` | 既有新生审计 | 已明确删除换届流程、内部管理黑话、上一届名单等无关内容。 |
 | `read_file` | `docs/VIEWPORT-QA.md` | 真实设备 QA 情况 | 是待测清单，不是已经完成的浏览器实测证据。 |
@@ -78,7 +78,7 @@
 
 ### 3.1 追问派｜First Principles
 
-**依据**：`App.tsx` 页面顺序、`HeroV3.tsx`、`JoinCTA.tsx`、`QUESTIONS.md`。
+**依据**：`App.tsx` 页面顺序、`HeroV3.tsx`、`JoinCTA.tsx`、`docs/QUESTIONS.md`。
 
 - 追问：新生到底是在“选择网页风格”，还是在“判断一个陌生组织是否值得把大学时间交给它”？
 - 判断：后者才是核心。V1—V5 的选择只解决第一眼风格，不能替代对项目真实性、团队氛围和加入流程的判断。
@@ -90,7 +90,7 @@
 
 ### 3.2 反对派｜Red Team
 
-**依据**：`IMAGE-SLOTS.md`、`QUESTIONS.md`、`Departments.tsx`、外部检索 A。
+**依据**：`IMAGE-SLOTS.md`、`docs/QUESTIONS.md`、`Departments.tsx`、外部检索 A。
 
 - 反对继续优先开发大规模动效、地图或更多首页版本。
 - 攻击点一：最终素材与授权没有接入。特别是萤火、病房和儿童场景，图片一旦不当使用，会比“页面不够酷”严重得多。
