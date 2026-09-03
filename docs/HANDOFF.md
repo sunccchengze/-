@@ -2,8 +2,9 @@
 
 > **用途**：这是给下一位接手本仓库、且没有任何先前聊天记忆的 AI Agent / 开发者的工作记忆迁移文件。它不是简短 README，也不是面向公众的文案。必须先读本文件，再读下列原始事实、素材、代码与记录文件，才能继续工作。
 >
-> **最后更新**：2026-08-20（Asia/Shanghai）
-> **当前工作分支**：`arena/01a01ed2-repo`
+> **最后更新**：2026-09-03（Asia/Shanghai）
+> **当前工作分支**：`arena/01a06694-yingzai2026`（Arena 每个会话会换分支名，接手时先用 `git branch --show-current` 核实）
+> **2026-09-03 结构变更**：仓库根目录已清空散落文件，本文件与 `QUESTIONS.md` 等一律移入 `docs/`；文中所有路径均已同步更新，对照表见 `docs/README.md` 附录。
 > **用户本地仓库**：`D:\yingzai-recruit`
 > **仓库服务对象**：西安交通大学英仔爱心社 2026 招新网站。
 > **最高原则**：不编造、不把推断写成事实、不用“看起来合理”的 AI 文案替代真实组织信息。
@@ -123,7 +124,7 @@
 只能在：
 
 ```text
-arena/019fd4c9-repo
+arena/01a06694-yingzai2026
 ```
 
 工作。不要切换到别的分支；不要 force push。
@@ -131,7 +132,7 @@ arena/019fd4c9-repo
 仓库环境有时 Git 元数据会落后，而工作区保留较新内容。Agent 环境恢复方法：
 
 ```bash
-git fetch origin arena/019fd4c9-repo
+git fetch origin arena/01a06694-yingzai2026
 git reset --mixed FETCH_HEAD
 ```
 
@@ -147,7 +148,7 @@ git reset --hard FETCH_HEAD
 
 ```powershell
 cd D:\yingzai-recruit
-git pull --rebase origin arena/019fd4c9-repo
+git pull --rebase origin arena/01a06694-yingzai2026
 npm install
 npm run dev
 ```
@@ -627,8 +628,8 @@ B站两个 BV 号：页面 + player.bilibili.com 嵌入页双重验证可播放�
 ```powershell
 git add "public/images/首页/首页6.jpg"
 git commit -m "update homepage slide six"
-git pull --rebase origin arena/019fd4c9-repo
-git push origin arena/019fd4c9-repo
+git pull --rebase origin arena/01a06694-yingzai2026
+git push origin arena/01a06694-yingzai2026
 ```
 
 之后 fetch 检查远端 commit 与实际文件。
@@ -830,8 +831,8 @@ public/images/页面背景/统一页面背景.jpg
 ```powershell
 git add "public/images/首页/首页6.jpg"
 git commit -m "update homepage slide six"
-git pull --rebase origin arena/019fd4c9-repo
-git push origin arena/019fd4c9-repo
+git pull --rebase origin arena/01a06694-yingzai2026
+git push origin arena/01a06694-yingzai2026
 ```
 
 ### push 被 fetch-first 拒绝
@@ -839,8 +840,8 @@ git push origin arena/019fd4c9-repo
 这是 Agent 在用户本地提交后又推送了修改时的正常分支分叉。正确顺序：
 
 ```powershell
-git pull --rebase origin arena/019fd4c9-repo
-git push origin arena/019fd4c9-repo
+git pull --rebase origin arena/01a06694-yingzai2026
+git push origin arena/01a06694-yingzai2026
 ```
 
 不要 `--force`。
@@ -857,7 +858,7 @@ schannel: server closed abruptly (missing close_notify)
 
 ```powershell
 git config --global http.version HTTP/1.1
-git pull --rebase origin arena/019fd4c9-repo
+git pull --rebase origin arena/01a06694-yingzai2026
 ```
 
 不要建议关闭 SSL 验证；不要建议 `http.sslVerify false`。
@@ -1134,7 +1135,7 @@ Agent 建好稳定中文路径和 README
 
 ```bash
 # 1. 获取远端真实状态
-git fetch origin arena/019fd4c9-repo
+git fetch origin arena/01a06694-yingzai2026
 git reset --mixed FETCH_HEAD
 
 # 2. 阅读事实与交接
@@ -1159,7 +1160,7 @@ find public/videos -type f | sort
 如果用户说“我已经 push 了”，不要只相信聊天。执行：
 
 ```bash
-git fetch origin arena/019fd4c9-repo
+git fetch origin arena/01a06694-yingzai2026
 git log --oneline -5 FETCH_HEAD
 git diff --name-status HEAD..FETCH_HEAD
 ```
@@ -1222,7 +1223,7 @@ git diff --name-status HEAD..FETCH_HEAD
 
 ### Q11. 本地仓库和远端、使用工具？
 
-**已确认**：本地 `D:\yingzai-recruit` 与远端 `sunccchengze/-` 的 `arena/019fd4c9-repo` 是协作仓库；用户主要在 Windows PowerShell 执行 Git 命令，并使用 VS Code/资源管理器查看文件。
+**已确认**：本地 `D:\yingzai-recruit` 与远端 `sunccchengze/-` 的 `arena/01a06694-yingzai2026` 是协作仓库；用户主要在 Windows PowerShell 执行 Git 命令，并使用 VS Code/资源管理器查看文件。
 
 ### Q12. 用户最信任的预览方式？
 

@@ -16,12 +16,18 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
-  // docs/latest-web-preview.html 是供外部临时预览的构建快照，
-  // 不是 Vite 开发入口；只扫描根 index.html，避免把构建产物当源码依赖解析。
+  // 只把根 index.html 作为依赖预扫描入口。
+  // 仓库里还有大量非站点内容（docs/ 下 100+ 篇 Markdown、技能库&准则/ 的第三方
+  // skill 副本），若让 Vite 自行扫描整个仓库，会把这些目录当源码解析并产生大量
+  // 无效告警；显式指定入口可把扫描范围锁死在站点本身。
   optimizeDeps: {
     entries: ["index.html"],
   },
   server: {
+    host: "0.0.0.0",
+    allowedHosts: true,
+  },
+  preview: {
     host: "0.0.0.0",
     allowedHosts: true,
   },
