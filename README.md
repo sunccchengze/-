@@ -781,6 +781,7 @@ npm run audit:public      # 对外公开信息面审计（防止内部信息外�
 
 | 文档 | 内容 |
 |------|------|
+| `docs/宣传部/README.md` | **宣传部工作手册**（换图/换字/换链接/发布流程） |
 | `docs/ai-agent-guide.md` | 协作 Agent 上手须知 |
 | `docs/ITERATION-LOG.md` | 迭代记录 |
 | `docs/IMAGE-SLOTS.md` · `IMAGE-NAMING-PLAN-CN.md` | 图片编号与命名规范 |
