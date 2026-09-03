@@ -11,8 +11,7 @@
     "validate:assets": "node scripts/validate-assets.mjs",
     "audit:public": "node scripts/audit-public-surface.mjs",
     "org-chart": "node scripts/build-org-chart.mjs",
-    "gov-chart": "node scripts/build-gov-chart.mjs",
-    "charts": "npm run org-chart && npm run gov-chart"
+    "charts": "npm run org-chart"
   },
   "dependencies": {
     "clsx": "2.1.1",

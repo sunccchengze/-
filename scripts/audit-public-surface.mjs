@@ -45,11 +45,17 @@ for (const anchor of new Set(anchors)) {
 }
 
 const assetRefs = new Set([...text.matchAll(/["'](\/images\/[^"']+)["']/g)].map((match) => match[1]));
+// 该图仅在 README.md 中展示（与网页版 治理架构图.png 为两张不同的竖版候选，均已投入使用）。
+const intentionallyUnreferenced = new Set([
+  "/images/架构图/治理架构图-方卡版.png",
+]);
 const imageFiles = readFiles(path.join(root, "public", "images"))
   .filter((file) => /\.(jpg|jpeg|png|webp)$/i.test(file))
   .map((file) => `/images/${path.relative(path.join(root, "public", "images"), file).split(path.sep).join("/")}`);
 for (const image of imageFiles) {
-  if (!assetRefs.has(image)) violations.push(`unreferenced public image ${image}`);
+  if (!assetRefs.has(image) && !intentionallyUnreferenced.has(image)) {
+    violations.push(`unreferenced public image ${image}`);
+  }
 }
 
 for (const file of files) {

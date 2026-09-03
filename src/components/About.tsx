@@ -233,14 +233,15 @@ export function About() {
               以项目制为主、企业体制为辅，参照公司垂直管理模式
             </p>
           </figcaption>
+          {/* 竖版长图（约 2:3）：限制最大宽度并水平居中 */}
           <img
             src="/images/架构图/治理架构图.png"
             alt="英仔爱心社治理架构：仲英书院指导，社长团为决策核心，团支部与社友会协同，下辖 3 个职能部门与 8 个项目部门"
-            width={1901}
-            height={1037}
+            width={848}
+            height={1264}
             loading="lazy"
             decoding="async"
-            className="h-auto w-full rounded-2xl"
+            className="mx-auto block h-auto w-full max-w-[560px] rounded-2xl"
           />
         </motion.figure>
       </div>
