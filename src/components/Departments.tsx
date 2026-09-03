@@ -6,6 +6,25 @@ import { IMG_第6页背景 } from "../config";
 import { departmentFinder, departmentsIntro, functionalDepartments, projectDepartments, skillRoutes, type Department } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
+/**
+ * 助学线 / 敬老线缩略图。
+ * 加载失败时静默收起（不留破图占位），与 SummerFilms / Honors 的降级口径一致。
+ */
+function LegendImage({ src, name }: { src: string; name: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) return null;
+  return (
+    <img
+      src={src}
+      alt={`${name}活动照片`}
+      loading="lazy"
+      decoding="async"
+      onError={() => setFailed(true)}
+      className="h-[72px] w-[72px] shrink-0 rounded-xl object-cover"
+    />
+  );
+}
+
 function DepartmentCard({
   department,
   index,
@@ -285,10 +304,13 @@ export function Departments() {
           {departmentsIntro.legend.map((item) => (
             <div
               key={item.name}
-              className="rounded-2xl border border-rouge/10 bg-white/70 px-4 py-3 text-left backdrop-blur-sm"
+              className="flex items-center gap-3 rounded-2xl border border-rouge/10 bg-white/70 px-4 py-3 text-left backdrop-blur-sm"
             >
-              <p className="font-serif-cn text-sm font-bold text-rouge">{item.name}</p>
-              <p className="mt-1 text-xs leading-5 text-muted">{item.meaning}</p>
+              <LegendImage src={item.image} name={item.name} />
+              <div>
+                <p className="font-serif-cn text-sm font-bold text-rouge">{item.name}</p>
+                <p className="mt-1 text-xs leading-5 text-muted">{item.meaning}</p>
+              </div>
             </div>
           ))}
         </div>

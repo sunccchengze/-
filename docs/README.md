@@ -130,5 +130,13 @@
 | `英仔爱心社星级答辩2026(1).pdf` | `docs/原始材料/2026星级社团答辩材料.pdf` |
 | `英仔爱心社年度总结材料.docx` | `docs/原始材料/2025-2026年度总结材料.docx` |
 | `eb1ee7fda584f03c2281b7b351e1d559.txt` | **已删除**（内容仅一行 git SHA，误提交产物，全仓库无引用） |
+| `public/qr-group.svg` · `public/qr-registration.svg` | **已删除**（孤儿文件：`src/`、`index.html`、`scripts/` 零引用，生产包内 0 次出现；站点实际用的是 `/images/招新/报名二维码.png` 与 `招新群二维码.png`） |
+
+同批还做了三件事：
+
+- `src/config.ts` 的 `IMG_大手拉小手` / `IMG_青春伴夕阳` 此前无人 import，现已接入「找到属于你的位置」区块的助学线 / 敬老线说明卡（`src/components/Departments.tsx`），两张图正式生效，生产包素材引用数 138 → 140。
+- `docs/PREVIEW-URLS.md` 与 `docs/QUESTIONS.md` 里作废的 Arena 分支预览地址、commit 快照地址全部清除，只保留唯一在用的 <https://yzaxs-1.pages.dev>。
+- `docs/ASSET-MANIFEST.md` §3 更正两处错误：`拾辉部` 实际是 `.png` 不是 `.jpg`；「两张项目线图被 `?preview=hero` 引用」的说法不成立（`HeroV1`—`HeroV5` 只用 `IMG_LOGO`）。
+
 
 > 三个大文件的 `(1)(1)` 是浏览器重复下载留下的后缀，一并清掉了。`技能库&准则/` 按原样保留在仓库根，未做改动。

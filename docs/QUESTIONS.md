@@ -1,12 +1,3 @@
-## 预览（勿 merge main）
-
-**请看：** https://arena-019fbe18-repo.yzaxs-1.pages.dev  
-（生产 https://yzaxs-1.pages.dev 仍是 main 旧版，属正常）
-
-详见 `docs/PREVIEW-URLS.md`
-
----
-
 # 待确认问题清单 docs/QUESTIONS.md
 
 > 更新：2026-08-02 · 已根据你的答复落地一批修改  
