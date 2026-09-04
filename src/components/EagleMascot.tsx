@@ -178,7 +178,7 @@ export function EagleMascot() {
 
   return (
     <motion.aside
-      className={`eagle-mascot fixed bottom-5 right-3 z-40 flex items-end gap-2 sm:bottom-7 sm:right-5 ${dragging ? "cursor-grabbing" : ""}`}
+      className={`eagle-mascot fixed bottom-3 right-2 z-40 flex items-end gap-1.5 sm:bottom-5 sm:right-3 ${dragging ? "cursor-grabbing" : ""}`}
       aria-label="英仔小鹰引导员"
       drag
       dragControls={dragControls}
@@ -197,7 +197,7 @@ export function EagleMascot() {
       <AnimatePresence initial={false}>
         {open ? (
           <motion.div
-            className="eagle-speech relative max-w-[230px] rounded-2xl border border-rouge/15 bg-white/95 px-4 py-3 pr-9 text-sm leading-6 text-ink shadow-xl shadow-rouge/15 backdrop-blur-md"
+            className="eagle-speech relative max-w-[200px] rounded-2xl border border-rouge/15 bg-white/95 px-3.5 py-2.5 pr-8 font-serif-cn text-sm leading-6 text-ink shadow-xl shadow-rouge/15 backdrop-blur-md"
             initial={{ opacity: 0, x: 12, scale: 0.96 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 12, scale: 0.96 }}
@@ -265,17 +265,17 @@ export function EagleMascot() {
         onClick={() => {
           if (!initiatedDrag.current && !dragging) setOpen((value) => !value);
         }}
-        className="focus-ring eagle-pet relative flex h-20 w-16 shrink-0 cursor-grab items-end justify-center rounded-[28px] bg-white/10 p-0 text-left active:cursor-grabbing sm:h-28 sm:w-24"
+        className="focus-ring eagle-pet relative flex h-14 w-12 shrink-0 cursor-grab items-end justify-center rounded-[20px] bg-white/10 p-0 text-left active:cursor-grabbing sm:h-[72px] sm:w-[60px]"
         aria-expanded={open}
         aria-label={open ? "收起英仔小鹰" : "打开英仔小鹰对话"}
       >
         <AnimatePresence mode="wait" initial={false}>
-          <motion.img key={pose} src={eagleImages[pose]} alt="" className="eagle-pet-image h-[108px] max-w-[150px] object-contain sm:h-[150px] sm:max-w-[190px]" initial={{ opacity: 0, x: pose === "side" || pose === "fly" ? -8 : 0, scale: 0.96 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: 5, scale: 0.96 }} transition={{ duration: 0.22 }} />
+          <motion.img key={pose} src={eagleImages[pose]} alt="" className="eagle-pet-image h-[68px] max-w-[92px] object-contain sm:h-[80px] sm:max-w-[108px]" initial={{ opacity: 0, x: pose === "side" || pose === "fly" ? -8 : 0, scale: 0.96 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: 5, scale: 0.96 }} transition={{ duration: 0.22 }} />
         </AnimatePresence>
         {!open ? (
-          <span className="absolute -left-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-rouge text-white shadow-md shadow-rouge/30" aria-hidden="true"><MessageCircle className="h-3.5 w-3.5" /></span>
+          <span className="absolute -left-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-rouge text-white shadow-md shadow-rouge/30" aria-hidden="true"><MessageCircle className="h-3 w-3" /></span>
         ) : (
-          <span className="absolute -left-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-rouge shadow-sm" aria-hidden="true"><ChevronDown className="h-3.5 w-3.5" /></span>
+          <span className="absolute -left-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-white/90 text-rouge shadow-sm" aria-hidden="true"><ChevronDown className="h-2.5 w-2.5" /></span>
         )}
       </button>
     </motion.aside>
