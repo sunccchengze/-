@@ -68,15 +68,17 @@ export const brand = {
   president: "王晗宇",
 };
 
+/** 顶部导航（桌面端 + 移动端共用）。
+ * 移动端菜单展开时,每项的 `desc` 会作为副标题显示在"独立菜单页"上。 */
 export const navLinks = [
-  { label: "关于我们", href: "#about" },
-  { label: "这一年", href: "#impact" },
-  { label: "暑期实践", href: "#summer" },
-  { label: "荣誉", href: "#honors" },
-  { label: "团队", href: "#team" },
-  { label: "部门", href: "#departments" },
-  { label: "加入", href: "#join" },
-  { label: "FAQ", href: "#faq" },
+  { label: "关于我们", href: "#about", desc: "社团缘起 · 价值观 · 责任清单" },
+  { label: "这一年", href: "#impact", desc: "2025—2026 数据与足迹" },
+  { label: "暑期实践", href: "#summer", desc: "玉树 · 知行秦川 · 秦岭" },
+  { label: "荣誉", href: "#honors", desc: "校级五星 · 历年表彰" },
+  { label: "团队", href: "#team", desc: "社长团 · 指导老师" },
+  { label: "部门", href: "#departments", desc: "3 职能 + 8 项目部门" },
+  { label: "加入", href: "#join", desc: "立即报名 · 招新时间线" },
+  { label: "FAQ", href: "#faq", desc: "新生高频疑问 12 答" },
 ];
 
 /* ───────── Hero ───────── */
