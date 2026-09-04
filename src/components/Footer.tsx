@@ -91,8 +91,8 @@ export function Footer() {
             <SunChengzeAvatarCard />
           </div>
           <div>
-            <h3 className="mb-5 font-medium text-white">快速链接</h3>
-            <ul className="space-y-3 text-sm text-white/80">
+            <h3 className="mb-5 text-center font-medium text-white">快速链接</h3>
+            <ul className="space-y-3 text-center text-sm text-white/80">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a className="footer-link" href={link.href}>

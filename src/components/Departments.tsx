@@ -3,7 +3,7 @@ import { useLenis } from "lenis/react";
 import { ArrowRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { IMG_第6页背景 } from "../config";
-import { departmentFinder, departmentsIntro, functionalDepartments, projectDepartments, skillRoutes, type Department, academyEndorsement } from "../content";
+import { departmentFinder, departmentsIntro, functionalDepartments, projectDepartments, skillRoutes, type Department } from "../content";
 import { SectionHeader } from "./SectionHeader";
 
 function DepartmentCard({
@@ -293,60 +293,10 @@ export function Departments() {
           ))}
         </div>
 
-        {/* ───────── 4 书院领航通道（VIRAL-10） ───────── */}
-        <div className="mx-auto mt-12 max-w-5xl">
-          <div className="text-center">
-            <p className="font-serif-cn text-base font-bold text-ink md:text-lg">
-              🏷️ 看看我所在书院的直系学长学姐在哪
-            </p>
-            <p className="mt-2 text-sm leading-6 text-muted">
-              4 大书院 · 历年队长 / 部长盲盒寄语，找到你那座书院熟悉的入口
-            </p>
-          </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {Object.entries(academyEndorsement).map(([key, item]) => {
-              const initial = item.title.charAt(0);
-              const isPlaceholder = item.author.startsWith("待定");
-              return (
-                <div
-                  key={key}
-                  className="flex h-full flex-col rounded-2xl border border-gold-soft/30 bg-white/85 p-5 text-left shadow-sm backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-rouge/35 hover:shadow-md"
-                >
-                  <div className="flex items-center gap-3">
-                    {item.avatar ? (
-                      <img
-                        src={item.avatar}
-                        alt={`${item.title}寄语人头像`}
-                        loading="lazy"
-                        className="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-gold-soft/50"
-                      />
-                    ) : (
-                      <div
-                        aria-hidden="true"
-                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-warm-gradient font-serif-cn text-lg font-bold text-white ring-2 ring-gold-soft/50"
-                      >
-                        {initial}
-                      </div>
-                    )}
-                    <div className="min-w-0 flex-1">
-                      <p className="font-serif-cn text-base font-bold text-rouge-deep">{item.title}</p>
-                    </div>
-                  </div>
-                  <p className="mt-4 flex-grow font-serif-cn text-sm italic leading-7 text-ink/85">
-                    「{item.quote}」
-                  </p>
-                  <p
-                    className={`mt-3 text-xs font-medium leading-5 ${
-                      isPlaceholder ? "text-muted/60" : "text-rouge"
-                    }`}
-                  >
-                    {item.author}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        {/* ───────── 4 书院领航通道（VIRAL-10）已移除：经 2026-09-04 复审决定。
+            4 书院卡片（仲英/彭康/文治/崇实）的"待定"占位内容与品牌一致性
+            不足以承担独立模块。8 书院归属仍由下方"全校各书院青年共同体"段落覆盖。 */}
+
         {/* 三个卡片纵向均匀分布 (Evenly distributed vertically with gap-6 / 24px spacing) */}
         <div className="mx-auto mt-12 flex max-w-4xl flex-col gap-6">
           <div className="rounded-2xl border border-gold-soft/40 bg-white/85 px-6 py-5 text-left shadow-sm">
