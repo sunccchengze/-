@@ -519,6 +519,47 @@ export const honorVault = [
   { level: "个人荣誉", title: "2025年仲英书院“宣传先进个人”", detail: "曹靓靓同学（英仔爱心社副社）", image: "/images/荣誉/荣誉27.jpg" },
 ] as const;
 
+/* ───────── 4 书院领航通道（VIRAL-10） ───────── */
+
+export type AcademyEndorsement = {
+  title: string;
+  quote: string;
+  author: string;
+  /** 头像路径；null 时渲染首字占位（避免 missing image / 避免 emoji） */
+  avatar: string | null;
+};
+
+/**
+ * 4 大书院专属领航通道：仲英（指导单位）、彭康（孙承泽所在）、文治、崇实。
+ * 头像字段：仲英有孙承泽头像 `/images/头像.jpg`；其他 3 个书院先留空，待定 → 用首字占位。
+ */
+export const academyEndorsement = {
+  仲英: {
+    title: "仲英书院 · 指导单位",
+    quote: "英仔在仲英，是从一株苗到一棵树的过程。",
+    author: "孙承泽 · 2026 宣传部部长",
+    avatar: "/images/头像.jpg",
+  },
+  彭康: {
+    title: "彭康书院 · 工程担当",
+    quote: "工科生的严谨，遇上公益的温度，会怎样？",
+    author: "待定 · 彭康书院历届学长",
+    avatar: null,
+  },
+  文治: {
+    title: "文治书院 · 人文关怀",
+    quote: "去病房陪孩子的那一下午，比任何一门课都让我安静下来。",
+    author: "待定 · 文治书院历届学长",
+    avatar: null,
+  },
+  崇实: {
+    title: "崇实书院 · 踏实奉献",
+    quote: "公益不是轰轰烈烈，是日复一日的「我来了」。",
+    author: "待定 · 崇实书院历届学长",
+    avatar: null,
+  },
+} as const satisfies Record<string, AcademyEndorsement>;
+
 /* ───────── Departments ───────── */
 
 export type Department = {

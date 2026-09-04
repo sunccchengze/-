@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { HERO_V2PRO_SLIDES, IMG_LOGO, LINK_报名 as joinLink } from "../config";
 import { brand, hero } from "../content";
 
+/** VIRAL-05：3 秒后自动浮现的高燃金句 */
+const VIRAL_05_SLOGAN =
+  "从交大北门启程，跨越三千三百公里直达雪域高原；这是一批普通大学生用 17 年连续不间断的真实行动，写在中国大西北大地上最「燃」的公益誓言。";
+
 /**
  * V2 Pro：正式招新首页候选。
  * 保留 V2 的左侧叙事 / 右侧影像构图，融入原版的轮播、Logo、时间与滚动引导。
@@ -12,11 +16,20 @@ import { brand, hero } from "../content";
 export function HeroV2Pro() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
+  const [showSlogan, setShowSlogan] = useState(false);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isPhone = window.matchMedia("(max-width: 639px)").matches;
     const timer = window.setTimeout(() => setShowIntro(false), reduce ? 0 : isPhone ? 650 : 1500);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  // VIRAL-05：3 秒后自动浮现高燃金句（减少动效时直接不显示）
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const timer = window.setTimeout(() => setShowSlogan(true), 3000);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -182,11 +195,27 @@ export function HeroV2Pro() {
             {brand.tagline}
           </motion.p>
 
+          {/* VIRAL-05：3 秒后自动浮现高燃金句 */}
+          <AnimatePresence>
+            {showSlogan && (
+              <motion.p
+                className="mt-4 max-w-xl font-serif-cn text-[15px] leading-7 text-rose-soft/95 sm:text-base sm:leading-8"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                aria-label="VIRAL-05 高燃金句"
+              >
+                {VIRAL_05_SLOGAN}
+              </motion.p>
+            )}
+          </AnimatePresence>
+
           <motion.p
             className="mt-6 max-w-xl font-serif-cn text-base leading-8 text-white/88 sm:text-lg"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.58 }}
+            transition={{ delay: 0.36, duration: 0.58 }}
           >
             {hero.subtitle}
           </motion.p>
@@ -212,11 +241,34 @@ export function HeroV2Pro() {
             ))}
           </motion.div>
 
+          {/* VIRAL-01：CTA 之上·卷轴式横幅 */}
+          <motion.div
+            className="mt-9 overflow-hidden rounded-xl border border-gold-soft/40 bg-gradient-to-r from-black/55 via-black/30 to-black/55 backdrop-blur-md"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.42, duration: 0.65 }}
+            aria-label="VIRAL-01 英仔身份卷轴"
+          >
+            <div className="flex items-center gap-3 px-4 py-3 sm:gap-4 sm:px-5 sm:py-3.5">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold-soft to-rose-soft text-white shadow-lg shadow-black/30 sm:h-10 sm:w-10">
+                <span aria-hidden className="text-base font-bold">★</span>
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="font-serif-cn text-[13px] font-bold tracking-[0.14em] text-[#f6e5ba] sm:text-[15px]">
+                  西安交通大学校级五星公益社团
+                </p>
+                <p className="mt-0.5 font-serif-cn text-[11px] tracking-[0.14em] text-white/72 sm:text-[12px]">
+                  全国唯一由非唐奖生组成的唐仲英爱心社 · 连续 17 届志愿薪火
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
           <motion.div
             className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.46, duration: 0.58 }}
+            transition={{ delay: 0.50, duration: 0.58 }}
           >
             <a href={joinLink} target="_blank" rel="noopener noreferrer" className="btn-white px-8 py-4 text-base">
               {hero.primaryCta}
