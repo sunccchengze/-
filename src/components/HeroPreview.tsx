@@ -2,13 +2,13 @@
  * 首页预览页面 - 临时展示5个版本供选择
  */
 import { useState } from "react";
-import { Hero } from "./Hero";
-import { HeroV1 } from "./HeroV1";
-import { HeroV2 } from "./HeroV2";
+import { Hero } from "./archive/Hero";
+import { HeroV1 } from "./archive/HeroV1";
+import { HeroV2 } from "./archive/HeroV2";
 import { HeroV2Pro } from "./HeroV2Pro";
 import { HeroV3 } from "./HeroV3";
-import { HeroV4 } from "./HeroV4";
-import { HeroV5 } from "./HeroV5";
+import { HeroV4 } from "./archive/HeroV4";
+import { HeroV5 } from "./archive/HeroV5";
 
 const versions = [
   { id: "original", name: "原版", desc: "轮播背景+悬浮蒙版" },

@@ -4,8 +4,8 @@
  */
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { LINK_报名 as joinLink, IMG_LOGO } from "../config";
-import { brand, hero } from "../content";
+import { LINK_报名 as joinLink, IMG_LOGO } from "../../config";
+import { brand, hero } from "../../content";
 
 export function HeroV4() {
   return (

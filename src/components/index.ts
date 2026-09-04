@@ -1,5 +1,6 @@
 export { Navigation } from "./Navigation";
-export { Hero } from "./Hero";
+// Hero 旧版（V1/V2/V4/V5）已归档到 ./archive，仅 HeroPreview 在内部使用
+// HeroV2Pro 也不再走 barrel —— App.tsx 直接 import
 export { TrustBar } from "./TrustBar";
 export { About } from "./About";
 export { NewcomerPath } from "./NewcomerPath";
