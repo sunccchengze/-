@@ -16,6 +16,7 @@ import {
 } from "./components";
 import { HeroPreview } from "./components/HeroPreview";
 import { HeroV2Pro } from "./components/HeroV2Pro";
+import { YztiLauncher } from "./components/YztiTest";
 
 /**
  * 方案 B：对首屏以下交互较重、包含大量大图/弹窗/视频背景的模块进行 React.lazy 懒加载与 Suspense 分割。
@@ -88,6 +89,7 @@ export default function App() {
       </main>
       <Footer />
       <EagleMascot />
+      <YztiLauncher />
     </>
   );
 }

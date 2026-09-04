@@ -928,3 +928,222 @@ export const footer = {
   contact: "指导单位：仲英书院 · 指导老师刘晗梦 · 欢迎公众号留言",
   guidance: "在服务中成长，在陪伴里遇见更好的自己",
 };
+
+/* ───────── YZTI 英仔公益人格测试 ───────── */
+/**
+ * 4 维公益人格测试 —— 借鉴 SBTI 调酒 + 霍格沃茨分院帽的仪式感。
+ * 5 题对应 5 个维度字母（E/N/F/I/P），每题 3 选项各计 1 分给一个学院；
+ * 5 题后取累计最高分的学院作为结果。
+ */
+export type AcademyId = "eagle" | "sun" | "plateau" | "flame";
+
+export type YztiOption = {
+  /** 选项字母：A / B / C */
+  letter: "A" | "B" | "C";
+  /** 选项正文（直白、不 AI 套话） */
+  text: string;
+  /** 对应维度字母：E/N/F/I/P */
+  dimension: "E" | "N" | "F" | "I" | "P";
+  /** 该选项贡献分数的学院 */
+  academy: AcademyId;
+};
+
+export type YztiQuestion = {
+  id: number;
+  /** 维度中文名：行动 / 策划 / 陪伴 / 单兵 / 长期 */
+  dimensionLabel: string;
+  /** 维度字母：E/N/F/I/P */
+  dimension: "E" | "N" | "F" | "I" | "P";
+  /** 题目（小标题） */
+  prompt: string;
+  /** 题目补充（场景） */
+  context: string;
+  options: [YztiOption, YztiOption, YztiOption];
+};
+
+export const yztiQuestions: YztiQuestion[] = [
+  {
+    id: 1,
+    dimensionLabel: "行动 vs 观察",
+    dimension: "E",
+    prompt: "社里打算新开一个长期项目，第一周你最想做什么？",
+    context: "没有标准答案，选你下意识会做的那个。",
+    options: [
+      { letter: "A", text: "先冲到现场看一眼，看看能做什么", dimension: "E", academy: "plateau" },
+      { letter: "B", text: "先翻翻往届资料，调研类似项目怎么做的", dimension: "N", academy: "eagle" },
+      { letter: "C", text: "先和伙伴们聊聊，听听大家想解决什么", dimension: "F", academy: "sun" },
+    ],
+  },
+  {
+    id: 2,
+    dimensionLabel: "策划 vs 落地",
+    dimension: "N",
+    prompt: "一次暑期实践前两个月，你最愿意花时间在哪？",
+    context: "",
+    options: [
+      { letter: "A", text: "写方案：时间线、预算、应急预案、谁负责哪块", dimension: "N", academy: "eagle" },
+      { letter: "B", text: "把物资打包好、把联系人都敲定，到了直接干", dimension: "E", academy: "plateau" },
+      { letter: "C", text: "整理课程讲义、设计互动环节、试讲一遍", dimension: "F", academy: "flame" },
+    ],
+  },
+  {
+    id: 3,
+    dimensionLabel: "陪伴 vs 教学",
+    dimension: "F",
+    prompt: "面对一个不太敢说话的小孩，你本能会怎么做？",
+    context: "",
+    options: [
+      { letter: "A", text: "先不说什么，搬个小凳子坐在他旁边，等他先开口", dimension: "F", academy: "sun" },
+      { letter: "B", text: "拿出一道有意思的小题，看他愿不愿意一起做", dimension: "F", academy: "flame" },
+      { letter: "C", text: "直接带他玩起来——踢毽子/折飞机/操场跑一圈", dimension: "E", academy: "plateau" },
+    ],
+  },
+  {
+    id: 4,
+    dimensionLabel: "单兵 vs 团队",
+    dimension: "I",
+    prompt: "部门例会要分一个活儿，你更倾向接哪种？",
+    context: "",
+    options: [
+      { letter: "A", text: "一人独立完成，比如写一份讲稿、剪一段视频", dimension: "I", academy: "flame" },
+      { letter: "B", text: "和两三个搭档一起，轮流补位、互相 cover", dimension: "I", academy: "sun" },
+      { letter: "C", text: "我来统筹，把任务拆成小块，分给合适的人", dimension: "N", academy: "eagle" },
+    ],
+  },
+  {
+    id: 5,
+    dimensionLabel: "长期 vs 短期",
+    dimension: "P",
+    prompt: "毕业后回头看，你最希望自己留下的是？",
+    context: "",
+    options: [
+      { letter: "A", text: "一个被一届届学弟学妹接着做的长期项目", dimension: "P", academy: "eagle" },
+      { letter: "B", text: "几次说走就走、立刻能帮到人的短期活动", dimension: "E", academy: "plateau" },
+      { letter: "C", text: "一个和某个孩子、某位老人固定见面的约定", dimension: "F", academy: "sun" },
+    ],
+  },
+];
+
+export type YztiAcademy = {
+  id: AcademyId;
+  /** 大图标（emoji） */
+  emoji: string;
+  /** 学院中文名 */
+  name: string;
+  /** 副标题：短关键词 */
+  keywords: string;
+  /** 学院色（Tailwind gradient） */
+  gradient: string;
+  /** 学院色（CSS background 串，用于酒保调酒壶 / 光柱） */
+  color: string;
+  /** 鸡尾酒名 */
+  cocktail: string;
+  /** 鸡尾酒风味描述（不是 AI 套话） */
+  cocktailNote: string;
+  /** 帽子大喊的台词 */
+  hatShout: string;
+  /** 一句话描述这类型的人（无 AI 套话） */
+  persona: string;
+  /** 详细长描述（不超过 80 字） */
+  description: string;
+  /** 推荐部门（与 content.ts 中部门名一致） */
+  departments: string[];
+  /** 部门一句话理由 */
+  departmentReasons: { name: string; reason: string }[];
+  /** 分院帽的「思考气泡」 */
+  thoughtBubbles: string[];
+};
+
+export const yztiAcademies: Record<AcademyId, YztiAcademy> = {
+  eagle: {
+    id: "eagle",
+    emoji: "🦅",
+    name: "雪原领航者",
+    keywords: "长期 / 策划 / 制度",
+    gradient: "from-cyan-500 to-blue-600",
+    color: "linear-gradient(135deg, #06b6d4 0%, #2563eb 100%)",
+    cocktail: "极地长夜",
+    cocktailNote: "冰蓝上层，薄荷凉意收尾——像高原上规划整条线路的那位。",
+    hatShout: "雪原领航者学院！",
+    persona: "想清楚再走、走得很远的人。",
+    description: "你习惯先把事情看明白、写方案、把未来的岔路标出来。英仔里这条线落在「大手拉小手」助学线和制度线上：启梦、拾辉做一年又一年的长程陪伴,常务部把全社的章程、财务、季刊理顺。",
+    departments: ["启梦部", "拾辉部", "常务部"],
+    departmentReasons: [
+      { name: "启梦部", reason: "九峰线上助学 + 暑期夏令营,一年又一年" },
+      { name: "拾辉部", reason: "文姬 / 彬州助学 + 大学游,长期陪伴" },
+      { name: "常务部", reason: "章程 / 财务 / 资料归档,做制度的人" },
+    ],
+    thoughtBubbles: ["嗯…想得很远", "啊…这位心里有数", "是时候了——"],
+  },
+  sun: {
+    id: "sun",
+    emoji: "🌟",
+    name: "微光小太阳",
+    keywords: "共情 / 陪伴 / 临在",
+    gradient: "from-amber-400 to-orange-500",
+    color: "linear-gradient(135deg, #fbbf24 0%, #f97316 100%)",
+    cocktail: "午后晒太阳",
+    cocktailNote: "暖橙混蜂蜜，最朴素也最暖——病房里、护理院里那种不走的温柔。",
+    hatShout: "微光小太阳学院！",
+    persona: "先陪一会儿，关系熟了再聊的人。",
+    description: "你不急着产出什么：在病房陪孩子画一张画、在护理院陪奶奶说半小时话，本身就是答案。萤火部、向日葵、常青藤都在做这件事;如果你想把这份温度也带到新朋友面前,交流部负责招新、社团文化节与对外文化交流,刚好接住你。",
+    departments: ["萤火部", "向日葵", "常青藤", "交流部"],
+    departmentReasons: [
+      { name: "萤火部", reason: "病房、特教与社区里的微光陪伴" },
+      { name: "向日葵", reason: "社区与老年大学里的青春温度" },
+      { name: "常青藤", reason: "护理院与公寓里的日常守护" },
+      { name: "交流部", reason: "招新 / 社团文化节 / 对外文化交流" },
+    ],
+    thoughtBubbles: ["嗯…很温柔", "啊…她/他会留下来的", "是时候了——"],
+  },
+  plateau: {
+    id: "plateau",
+    emoji: "🏔️",
+    name: "高原行动派",
+    keywords: "落地 / 户外 / 现场",
+    gradient: "from-slate-700 to-zinc-900",
+    color: "linear-gradient(135deg, #334155 0%, #18181b 100%)",
+    cocktail: "高原烈风",
+    cocktailNote: "藏青底色，辛辣收尾——海拔四千米也能把事情办成的那种冲劲。",
+    hatShout: "高原行动派学院！",
+    persona: "说走就走、到了就干、收队还能复盘的人。",
+    description: "你不怕条件差,目标是把它解决。心项目子午峪净山、净滩、回收漂流——你的脚印会直接出现在现场,事办完才算完。如果你想记录下这些瞬间,宣传部会是你最自然的第二落点。",
+    departments: ["心项目", "宣传部"],
+    departmentReasons: [
+      { name: "心项目", reason: "子午峪净山、净滩、回收漂流,用脚去行动" },
+      { name: "宣传部", reason: "海报 / 公众号 / 影像,把现场记录给所有人看" },
+    ],
+    thoughtBubbles: ["嗯…很能扛", "啊…这位到现场就稳", "是时候了——"],
+  },
+  flame: {
+    id: "flame",
+    emoji: "📚",
+    name: "薪火讲解员",
+    keywords: "教学 / 单兵 / 知识传递",
+    gradient: "from-rose-600 to-rouge-deep",
+    color: "linear-gradient(135deg, #e11d48 0%, #8E3F3D 100%)",
+    cocktail: "长安灯火",
+    cocktailNote: "朱红暖光，桂花与茶香——展厅里给陌生人讲明白一段历史的那种笃定。",
+    hatShout: "薪火讲解员学院！",
+    persona: "愿意开口、能把一件事讲明白的人。",
+    description: "你不害怕一个人面对一群人：展厅里给陌生游客讲国宝、校园里把传统文化讲给同龄人——你把知识翻译成别人听得懂的话。",
+    departments: ["陕博部", "启明星"],
+    departmentReasons: [
+      { name: "陕博部", reason: "在陕历博把文物讲给更多人听" },
+      { name: "启明星", reason: "传统文化进校园、启明寻洛,把文化讲给同龄人" },
+    ],
+    thoughtBubbles: ["嗯…很会讲", "啊…这位一开口就不一样", "是时候了——"],
+  },
+};
+
+/** 调酒壶的 5 种原料颜色（按 5 题顺序），与最终结果色对齐 */
+export const yztiIngredientColors = [
+  "#FDE68A", // 蜂蜜色
+  "#FCA5A5", // 玫瑰色
+  "#A7F3D0", // 薄荷色
+  "#93C5FD", // 冰蓝
+  "#C4B5FD", // 紫罗兰
+] as const;
+
+/** localStorage key */
+export const YZTI_STORAGE_KEY = "yingzai_yzti_result";
