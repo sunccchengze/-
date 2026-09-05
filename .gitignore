@@ -141,3 +141,8 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# 私人留任材料（孙承泽/王荣源文档，二进制、不入 git）
+docs/宣传部/*.docx
+docs/宣传部/*留任材料*.docx
+docs/宣传部/*留部材料*.docx
